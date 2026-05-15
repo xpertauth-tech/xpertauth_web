@@ -100,15 +100,34 @@ async function getRagContext(query: string): Promise<{ context: string; hasResul
       }),
       supabase.rpc("match_lex_documentos_tipo", {
         query_embedding: embedding,
-        match_threshold: 0.50, // umbral ligeramente más bajo para paralelos — son semánticamente más cercanos
+        match_threshold: 0.50,
         match_count: 4,
         p_tipo: "paralelo",
       }),
     ]);
 
-    const oficiales = resOficial.data ?? [];
-    const paralelos = resParalelo.data ?? [];
-    const todos = [...paralelos, ...oficiales]; // paralelos primero para que LEX los vea antes
+    // Log explícito de errores para diagnóstico
+    if (resOficial.error) console.error("[RAG] Error RPC oficial:", JSON.stringify(resOficial.error));
+    if (resParalelo.error) console.error("[RAG] Error RPC paralelo:", JSON.stringify(resParalelo.error));
+
+    let oficiales = resOficial.data ?? [];
+    let paralelos = resParalelo.data ?? [];
+
+    // Fallback: si la función nueva falla, usar la original
+    if (resOficial.error || resParalelo.error) {
+      console.warn("[RAG] Fallback a match_lex_documentos original");
+      const { data: fallbackData, error: fallbackError } = await supabase.rpc("match_lex_documentos", {
+        query_embedding: embedding,
+        match_threshold: 0.50,
+        match_count: 8,
+      });
+      if (fallbackError) console.error("[RAG] Error fallback:", JSON.stringify(fallbackError));
+      oficiales = fallbackData ?? [];
+      paralelos = [];
+    }
+
+    console.log(`[RAG] Recuperados: ${oficiales.length} oficiales + ${paralelos.length} paralelos`);
+    const todos = [...paralelos, ...oficiales];
 
     if (todos.length === 0) {
       return { context: "SIN_FRAGMENTOS", hasResults: false };
@@ -312,8 +331,10 @@ Estos datos pueden ser correctos o incorrectamente recordados por Claude. Sin fr
 **TEST ANTES DE ESCRIBIR CUALQUIER DATO CONCRETO:**
 Antes de escribir cualquier hora, PK, dimensión o límite numérico, hazte esta pregunta:
 "¿Aparece este dato en alguno de los fragmentos RAG que tengo en contexto ahora mismo?"
-Si la respuesta es SÍ → úsalo y cita el fragmento.
+Si la respuesta es SÍ → úsalo. Cita de dónde viene (norma o documento).
 Si la respuesta es NO → no lo escribas. Aplica Nivel 2 o Nivel 3.
+
+**IMPORTANTE:** Si tienes fragmentos relevantes en contexto, ÚSALOS. No derives al buscador SCT cuando tienes la respuesta delante. Derivar cuando tienes el dato es un error igual de grave que inventar cuando no lo tienes.
 
 ## VALIDACIÓN DE CATEGORÍA — OBLIGATORIA ANTES DE USAR FRAGMENTOS
 
@@ -411,23 +432,24 @@ Ejemplos incorrectos (NUNCA hagas esto):
 
 ## REGLA DE CITACIÓN — OBLIGATORIA PARA CADA DATO (B2b)
 
-**Cada dato concreto que des en tu respuesta debe ir acompañado de su fuente exacta.**
+**Cada dato concreto que des debe venir literalmente de los fragmentos RAG que tienes en contexto.**
 
-No basta con mencionar la norma al inicio y luego dar datos sueltos. Cada dato lleva su cita:
+La forma más simple de verificarlo: si puedes copiar el dato directamente del texto de un fragmento que aparece en [BASE NORMATIVA], es válido. Si lo estás escribiendo de memoria sin verlo en ningún fragmento, no lo escribas.
 
-✅ CORRECTO:
-"Según el archivo `restriccions-mides-pes-carreteres.pdf` (ISP/300/2026), el túnel del Cadí tiene restricción para mercancías peligrosas viernes desde las 14h hasta domingo a las 24h."
-"La ISP/300/2026 (Anexo C) establece una exención nocturna 23:00-06:00h en el túnel del Cadí para determinadas categorías ADR."
+✅ CORRECTO — el fragmento dice "viernes desde les 14h fins diumenge a les 24h" y tú escribes:
+"Según el documento SCT (restriccions-mides-pes-carreteres), el túnel del Cadí tiene restricción para mercancías peligrosas viernes desde las 14h hasta domingo a las 24h."
 
-❌ INCORRECTO:
-"El túnel del Cadí tiene restricción viernes desde las 14h hasta domingo a las 24h." — sin citar de dónde viene ese dato.
-"La normativa establece exenciones horarias nocturnas." — sin citar qué norma ni qué artículo.
+✅ CORRECTO — citar la norma cuando el fragmento la menciona:
+"La ISP/300/2026 establece una exención nocturna 23:00-06:00h en el túnel del Cadí para determinadas categorías ADR."
+
+❌ INCORRECTO — escribir datos que no aparecen en ningún fragmento del contexto actual:
+"La restricción es de 16:00 a 24:00h" — si ese dato no está en ningún fragmento visible.
 
 **Regla de fragmentos múltiples:**
-Cuando usas datos de más de un fragmento, identifica claramente qué dato viene de qué fuente. No mezcles datos de fragmentos distintos en una misma frase como si fueran una sola respuesta coherente. Si un dato viene del `restriccions-mides-pes-carreteres.pdf` y otro de la ISP/300/2026, son dos afirmaciones separadas con dos fuentes separadas.
+Cuando usas datos de más de un fragmento, identifica brevemente de dónde viene cada dato. No mezcles datos de fuentes distintas en una misma frase sin distinguirlos.
 
-**Si no puedes citar la fuente exacta de un dato, no lo incluyas.**
-Esta regla actúa como filtro automático: si tienes el dato pero no recuerdas de qué fragmento viene, es señal de que puede ser conocimiento propio de Claude disfrazado de RAG. En ese caso, omite el dato y aplica Nivel 2.
+**Si tienes el dato en el fragmento pero no recuerdas el nombre exacto del archivo:**
+Cita el contenido del fragmento y menciona "según la normativa SCT" o "según la documentación de la DGT". No bloquees la respuesta por no saber el nombre exacto del archivo — lo importante es que el dato está en el fragmento.
 
 ## AUTORIDAD TÉCNICA — HABLA COMO EXPERTO (B3)
 
