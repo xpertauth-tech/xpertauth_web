@@ -89,33 +89,42 @@ async function getRagContext(query: string): Promise<{ context: string; hasResul
     });
     const embedding = embeddingRes.data[0].embedding;
 
-    const { data, error } = await supabase.rpc("match_lex_documentos", {
-      query_embedding: embedding,
-      match_threshold: 0.55,  // CAMBIO: bajado de 0.75 a 0.65 para recuperar más fragmentos relevantes
-      match_count: 8,         // CAMBIO: subido de 6 a 8 fragmentos
-    });
+    // Recuperación híbrida: 5 fragmentos oficiales + 4 paralelos en paralelo
+    // Garantiza que siempre lleguen paralelos relevantes aunque compitan con oficiales
+    const [resOficial, resParalelo] = await Promise.all([
+      supabase.rpc("match_lex_documentos_tipo", {
+        query_embedding: embedding,
+        match_threshold: 0.55,
+        match_count: 5,
+        p_tipo: "oficial",
+      }),
+      supabase.rpc("match_lex_documentos_tipo", {
+        query_embedding: embedding,
+        match_threshold: 0.50, // umbral ligeramente más bajo para paralelos — son semánticamente más cercanos
+        match_count: 4,
+        p_tipo: "paralelo",
+      }),
+    ]);
 
-    if (error || !data || data.length === 0) {
-      return {
-        context: "SIN_FRAGMENTOS",  // CAMBIO: señal explícita para el system prompt
-        hasResults: false,
-      };
+    const oficiales = resOficial.data ?? [];
+    const paralelos = resParalelo.data ?? [];
+    const todos = [...paralelos, ...oficiales]; // paralelos primero para que LEX los vea antes
+
+    if (todos.length === 0) {
+      return { context: "SIN_FRAGMENTOS", hasResults: false };
     }
 
     return {
-      context: data
-        .map((doc: { contenido: string; fuente: string; bloque: string; archivo: string | null }, i: number) =>
-          `[Fragmento ${i + 1}] Fuente: ${doc.fuente} | Bloque: ${doc.bloque} | Archivo: ${doc.archivo ?? "—"}\n${doc.contenido}`
+      context: todos
+        .map((doc: { contenido: string; fuente: string; bloque: string; archivo: string | null; similarity: number }, i: number) =>
+          `[Fragmento ${i + 1}] Fuente: ${doc.fuente || "SCT/DGT"} | Bloque: ${doc.bloque} | Archivo: ${doc.archivo ?? "—"} | Similitud: ${doc.similarity?.toFixed(3)}\n${doc.contenido}`
         )
         .join("\n\n---\n\n"),
       hasResults: true,
     };
   } catch (err) {
     console.error("[RAG] Error:", err);
-    return {
-      context: "SIN_FRAGMENTOS",
-      hasResults: false,
-    };
+    return { context: "SIN_FRAGMENTOS", hasResults: false };
   }
 }
 
