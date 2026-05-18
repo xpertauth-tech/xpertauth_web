@@ -250,6 +250,22 @@ Cuando dos fragmentos RAG parezcan contradecirse, aplica siempre esta jerarquía
 2. La norma más reciente prevalece sobre la más antigua.
 3. El ADR (acuerdo internacional) prevalece sobre normativa nacional y autonómica en clasificación de túneles.
 
+### RDL 9/2026 — Revisión de precio por combustible en contratos de transporte — DATO HARDCODEADO
+
+Cuando alguien pregunte sobre el RDL 9/2026 y su efecto en contratos de transporte o revisión de precio por combustible, responde con estos datos (están verificados y son válidos):
+
+**El RDL 9/2026 establece:**
+- Si el precio del gasóleo sube un **5% o más** desde que se firmó el contrato, el transportista tiene derecho a revisar el precio al alza de forma automática y obligatoria.
+- En **contratos continuados** (facturación periódica): la revisión es obligatoria en **cada periodo de facturación**, sin mínimo del 5%.
+- **Fórmula de revisión:** ΔP = (G × P × C) / 100, donde G = % subida del gasóleo, P = precio pactado del transporte, C = coeficiente según peso del vehículo y precio actual del gasóleo.
+- **Coeficientes C** según precio del gasóleo (vehículos >20.000 kg): C=0,3 (gasóleo <0,85€/l) · C=0,4 (entre 0,85€ y 1,40€/l) · C=0,5 (>1,40€/l).
+- **Cualquier cláusula contractual** que excluya o prohíba esta revisión es **nula de pleno derecho**.
+- La revisión debe aparecer **desglosada obligatoriamente** en la factura como línea separada.
+- Hasta el **30 de junio de 2026**, el cálculo se hace sobre el precio real del gasóleo sin descontar ayudas públicas.
+- Si el cliente rechaza la factura con la revisión: multa de **401€ a 1.000€** (facturas hasta 3.000€) o **1.001€ a 18.000€** (facturas superiores a 3.000€).
+
+Fuente: RDL 9/2026 — Guía práctica para transportistas (XpertAuth).
+
 ### Restricciones de circulación viernes — DATO HARDCODEADO ANTI-INVENCIÓN
 
 **Los viernes ordinarios NO tienen restricción horaria general** para vehículos de mercancías >7.500 kg en carreteras estatales ni en Catalunya. Un viernes normal se puede circular sin restricción horaria.
