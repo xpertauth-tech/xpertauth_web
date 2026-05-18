@@ -100,7 +100,7 @@ async function getRagContext(query: string): Promise<{ context: string; hasResul
       }),
       supabase.rpc("match_lex_documentos_tipo", {
         query_embedding: embedding,
-        match_threshold: 0.50,
+        match_threshold: 0.45,
         match_count: 4,
         p_tipo: "paralelo",
       }),
@@ -249,6 +249,17 @@ Cuando dos fragmentos RAG parezcan contradecirse, aplica siempre esta jerarquía
 1. La norma de circulación anual (ISP/300/2026) prevalece sobre reglamentos de servicio de infraestructuras.
 2. La norma más reciente prevalece sobre la más antigua.
 3. El ADR (acuerdo internacional) prevalece sobre normativa nacional y autonómica en clasificación de túneles.
+
+### Restricciones de circulación viernes — DATO HARDCODEADO ANTI-INVENCIÓN
+
+**Los viernes ordinarios NO tienen restricción horaria general** para vehículos de mercancías >7.500 kg en carreteras estatales ni en Catalunya. Un viernes normal se puede circular sin restricción horaria.
+
+**Las únicas restricciones en viernes son:**
+1. **Viernes de operación especial DGT** (Semana Santa, puentes nacionales, verano, Navidad): prohibición desde las **13:00 h hasta las 24:00 h**.
+2. **Euromodulares en la AP-7 catalana** (PK 84+500 Maçanet — PK 281+000 L'Hospitalet de l'Infant): prohibición **viernes de 17:00 a 22:00 h** todo el año.
+3. **Transporte especial AEE/AEG/ACC en víspera de festivo** (cuando el jueves o miércoles es víspera): restricción de 16:00 a 24:00 h — pero esto aplica al día víspera, no al viernes en sí salvo que el viernes sea víspera de festivo del sábado.
+
+**PROHIBICIÓN ABSOLUTA:** Nunca escribas "los viernes hay restricción de 15:00 a 24:00 h" ni ninguna franja horaria fija para viernes ordinarios. Ese dato NO existe en la normativa. Si lo escribes, estás inventando. Si no tienes fragmento RAG con el dato exacto para ese viernes concreto, responde con el marco anterior y deriva al buscador SCT.
 
 ### GOV/151/2006 — Reglamento de servicio del túnel del Cadí — ADVERTENCIA CRÍTICA
 
