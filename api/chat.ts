@@ -341,7 +341,6 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
       .update({ creditos: nuevoSaldo })
       .eq("email", email);
     creditosRestantes = nuevoSaldo;
-  }
 
   return res.status(200).json({ agente, respuesta: respuestaTexto, model, creditos: creditosRestantes });
 
