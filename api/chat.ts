@@ -264,14 +264,33 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
     const { messages, email, esAutenticado } = parsed.data;
 
     // Control de límite para visitantes
-    let limitAlcanzado = false;
-    if (!esAutenticado && email) {
-      const { permitido } = await verificarLimite(email);
-      if (!permitido) {
+  let limitAlcanzado = false;
+  let creditosRestantes: number | null = null;
+
+  if (esAutenticado && email) {
+    // Usuario autenticado — sistema de créditos
+    const { data: perfil } = await supabase
+      .from("perfiles")
+      .select("creditos, plan")
+      .eq("email", email)
+      .single();
+    if (perfil) {
+      if (perfil.creditos === -1) {
+        creditosRestantes = -1;
+      } else if (perfil.creditos <= 0) {
         limitAlcanzado = true;
       } else {
-        await registrarSesion(email, "pendiente");
+        creditosRestantes = perfil.creditos;
       }
+    }
+  } else if (!esAutenticado && email) {
+    const { permitido } = await verificarLimite(email);
+    if (!permitido) {
+      limitAlcanzado = true;
+    } else {
+      await registrarSesion(email, "pendiente");
+    }
+  }
     }
 
     // Detectar agente
@@ -312,7 +331,19 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
     const respuestaTexto =
       response.content[0].type === "text" ? response.content[0].text : "";
 
-    return res.status(200).json({ agente, respuesta: respuestaTexto, model });
+
+  // Descontar créditos si usuario autenticado con créditos finitos
+  if (esAutenticado && email && creditosRestantes !== null && creditosRestantes > 0) {
+    const coste = agente === "LEX" ? 5 : 2;
+    const nuevoSaldo = Math.max(0, creditosRestantes - coste);
+    await supabase
+      .from("perfiles")
+      .update({ creditos: nuevoSaldo })
+      .eq("email", email);
+    creditosRestantes = nuevoSaldo;
+  }
+
+  return res.status(200).json({ agente, respuesta: respuestaTexto, model, creditos: creditosRestantes });
 
   } catch (error) {
     console.error("[/api/chat] Error:", error);
