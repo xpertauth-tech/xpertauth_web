@@ -83,6 +83,7 @@ export default function Socios() {
       setFormState("error");
       setErrorMsg(t("formError"));
     } else {
+      fetch("/api/notify-socio", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ nombre: form.nombre, email: form.email, telefono: form.telefono, empresa: form.empresa, tipo_socio: form.tipo_socio, mensaje: form.mensaje }) }).catch(console.error);
       setFormState("success");
     }
   };
