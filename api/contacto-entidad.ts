@@ -56,7 +56,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
 
     // ── Email de aviso a José Luis ────────────────────────────────────────────
     await resend.emails.send({
-      from: "XpertAuth <info@xpertauth.com>",
+      from: "XpertAuth <noreply@mail.xpertauth.com>",
       to: "info@xpertauth.com",
       subject: `🏛️ Nueva entidad interesada — ${empresa || nombre}`,
       html: `
