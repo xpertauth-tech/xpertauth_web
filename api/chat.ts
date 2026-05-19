@@ -263,29 +263,9 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
 
     const { messages, email, esAutenticado } = parsed.data;
 
-    // Control de límite
+    // Control de límite para visitantes
     let limitAlcanzado = false;
-    let creditosRestantes: number | null = null;
-
-    if (esAutenticado && email) {
-      // Usuario autenticado — sistema de créditos
-      const { data: perfil } = await supabase
-        .from("perfiles")
-        .select("creditos, plan")
-        .eq("email", email)
-        .single();
-
-      if (perfil) {
-        if (perfil.creditos === -1) {
-          creditosRestantes = -1;
-        } else if (perfil.creditos <= 0) {
-          limitAlcanzado = true;
-        } else {
-          creditosRestantes = perfil.creditos;
-        }
-      }
-    } else if (!esAutenticado && email) {
-      // Visitante anónimo — límite de 3 sesiones/mes
+    if (!esAutenticado && email) {
       const { permitido } = await verificarLimite(email);
       if (!permitido) {
         limitAlcanzado = true;
@@ -315,7 +295,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
     }
 
     if (limitAlcanzado) {
-      systemPrompt += "\n\n[CONTEXTO INTERNO: Este visitante ha alcanzado su límite de consultas. Responde la consulta normalmente y añade al final el mensaje de límite con el botón BOTON_SOCIO.]";
+      systemPrompt += "\n\n[CONTEXTO INTERNO: Este visitante ha alcanzado su límite de 3 consultas gratuitas este mes. Responde la consulta normalmente y añade al final el mensaje de límite con el botón BOTON_SOCIO.]";
     }
 
     // Llamar a Claude API
@@ -332,18 +312,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
     const respuestaTexto =
       response.content[0].type === "text" ? response.content[0].text : "";
 
-    // Descontar créditos si usuario autenticado con créditos finitos
-    if (esAutenticado && email && creditosRestantes !== null && creditosRestantes > 0) {
-      const coste = agente === "LEX" ? 5 : 2;
-      const nuevoSaldo = Math.max(0, creditosRestantes - coste);
-      await supabase
-        .from("perfiles")
-        .update({ creditos: nuevoSaldo })
-        .eq("email", email);
-      creditosRestantes = nuevoSaldo;
-    }
-
-    return res.status(200).json({ agente, respuesta: respuestaTexto, model, creditos: creditosRestantes });
+    return res.status(200).json({ agente, respuesta: respuestaTexto, model });
 
   } catch (error) {
     console.error("[/api/chat] Error:", error);
