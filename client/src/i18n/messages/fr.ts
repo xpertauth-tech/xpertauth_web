@@ -342,7 +342,6 @@ const fr = {
       desc: "Pour les professionnels du secteur qui veulent de vraies réponses.",
       items: [
         "30 consultations LEX par mois, gratuites",
-        "Accès complet pendant la bêta",
         "Webinaires exclusifs et accès anticipé",
         "Votre avis aide à améliorer LEX",
       ],
