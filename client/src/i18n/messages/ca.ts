@@ -342,7 +342,6 @@ const ca = {
       desc: "Per a professionals del sector que volen respostes reals.",
       items: [
         "30 consultes LEX al mes, gratis",
-        "Accés complet durant la beta",
         "Webinars exclusius i accés anticipat",
         "La teva opinió ajuda a millorar LEX",
       ],
