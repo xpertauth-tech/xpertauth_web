@@ -87,7 +87,7 @@ function incrementarConsultas(email: string) {
   } catch {}
 }
 
-const LIMITE = 3;
+const LIMITE = 5;
 const LIMITE_MENSAJES_SESION = 6;
 
 // ─── Parser de botones contextuales ─────────────────────────────────────────
@@ -391,6 +391,11 @@ export default function AgentChat({
       if (!esAutenticado) {
         incrementarConsultas(email);
         setMensajesSesion((n) => n + 1);
+        // Comprobar límite tras esta respuesta
+        const consultasTras = getConsultas(email);
+        if (consultasTras >= LIMITE) {
+          onLimiteAlcanzado();
+        }
       }
     } catch (err) {
       setMensajes((prev) => [
