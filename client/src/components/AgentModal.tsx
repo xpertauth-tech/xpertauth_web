@@ -34,7 +34,7 @@ const AGENTE_CONFIG: Record<Agente, {
     emoji: "⚖️",
     tagline: "Especialista en normativa de transporte especial",
     descripcion:
-      "LEX responde consultas sobre permisos de circulación, autorizaciones especiales, normativa DGT y SCT Catalunya, restricciones, vehículos de acompañamiento y mucho más. Basado en una base normativa de más de 16.000 fragmentos actualizados.",
+      "LEX responde consultas sobre permisos de circulación, autorizaciones especiales, normativa DGT y SCT Catalunya, restricciones, vehículos de acompañamiento y mucho más. Basado en una base normativa de más de 9.500 fragmentos actualizados.",
     placeholder: "Tu nombre",
     ctaLabel: "Consultar con LEX",
   },
@@ -92,7 +92,7 @@ function getConsultasEsteMes(email: string): number {
   }
 }
 
-const LIMITE_CONSULTAS = 3;
+const LIMITE_CONSULTAS = 5;
 
 // ─── Componente ──────────────────────────────────────────────────────────────
 
@@ -194,17 +194,20 @@ export default function AgentModal({ agente, onConfirm, onClose }: AgentModalPro
           {limiteAlcanzado ? (
             <div className="text-center py-2">
               <p className="text-white/80 text-sm mb-2">
-                Has usado tus <strong className="text-white">3 consultas gratuitas</strong> de este mes.
+                Has usado tus <strong className="text-white">5 consultas de prueba</strong>.
               </p>
               <p className="text-white/60 text-sm mb-6">
-                Hazte socio de XpertAuth para acceder sin límites a {agente} y al resto del equipo.
+                Regístrate gratis como beta tester y obtén <strong className="text-white">30 consultas al mes</strong>, sin coste y sin compromiso.
+              </p>
+              <p className="text-white/40 text-xs mb-6">
+                XpertAuth está en fase de validación abierta hasta el 30 de septiembre de 2026.
               </p>
               <a
                 href="/es/socios"
                 className="block w-full text-center py-3 rounded-xl font-semibold text-white transition-opacity hover:opacity-90"
                 style={{ backgroundColor: config.color }}
               >
-                Hazte socio
+                Registrarme gratis
               </a>
               <button
                 onClick={onClose}
@@ -314,7 +317,7 @@ export default function AgentModal({ agente, onConfirm, onClose }: AgentModalPro
               {/* Nota gratuita */}
               <div className="mt-4 flex items-center justify-center gap-1.5 text-white/35 text-xs">
                 <Shield size={12} />
-                <span>3 consultas gratuitas al mes · Sin tarjeta</span>
+                <span>5 consultas de prueba · Regístrate gratis para obtener 30 al mes</span>
               </div>
             </>
           )}
