@@ -214,7 +214,7 @@ function Burbuja({
                   }
             }
           >
-            {textoLimpio}
+            {esAsistente ? renderMarkdown(textoLimpio) : textoLimpio}
           </div>
         )}
 
