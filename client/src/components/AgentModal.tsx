@@ -92,7 +92,7 @@ function getConsultasEsteMes(email: string): number {
   }
 }
 
-const LIMITE_CONSULTAS = 5;
+const LIMITE_CONSULTAS = 3;
 
 // ─── Componente ──────────────────────────────────────────────────────────────
 
@@ -194,20 +194,17 @@ export default function AgentModal({ agente, onConfirm, onClose }: AgentModalPro
           {limiteAlcanzado ? (
             <div className="text-center py-2">
               <p className="text-white/80 text-sm mb-2">
-                Has usado tus <strong className="text-white">5 consultas gratuitas</strong> de este mes.
+                Has usado tus <strong className="text-white">3 consultas gratuitas</strong> de este mes.
               </p>
-              <p className="text-white/60 text-sm mb-2">
-                XpertAuth está en proceso de constitución. Regístrate en nuestra lista de espera y accede a muchas más consultas mientras tanto.
-              </p>
-              <p className="text-white/40 text-xs mb-6">
-                Cuando la asociación esté constituida, serás el primero en saberlo.
+              <p className="text-white/60 text-sm mb-6">
+                Hazte socio de XpertAuth para acceder sin límites a {agente} y al resto del equipo.
               </p>
               <a
                 href="/es/socios"
                 className="block w-full text-center py-3 rounded-xl font-semibold text-white transition-opacity hover:opacity-90"
                 style={{ backgroundColor: config.color }}
               >
-                Unirme a la lista de espera
+                Hazte socio
               </a>
               <button
                 onClick={onClose}
@@ -284,7 +281,7 @@ export default function AgentModal({ agente, onConfirm, onClose }: AgentModalPro
                   <span className="text-white/50 text-xs leading-relaxed group-hover:text-white/70 transition-colors">
                     Acepto la{" "}
                     <a
-                      href="/es/politica-de-privacidad"
+                      href="/es/privacidad"
                       target="_blank"
                       rel="noopener noreferrer"
                       className="underline hover:text-white transition-colors"
@@ -317,7 +314,7 @@ export default function AgentModal({ agente, onConfirm, onClose }: AgentModalPro
               {/* Nota gratuita */}
               <div className="mt-4 flex items-center justify-center gap-1.5 text-white/35 text-xs">
                 <Shield size={12} />
-                <span>5 consultas gratuitas · Más si te registras · Sin tarjeta</span>
+                <span>3 consultas gratuitas al mes · Sin tarjeta</span>
               </div>
             </>
           )}

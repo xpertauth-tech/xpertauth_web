@@ -64,6 +64,30 @@ const AGENTE_CONFIG: Record<Agente, {
   },
 };
 
+// ─── Helpers localStorage (contador de consultas) ─────────────────────────────
+
+function getConsultasKey(email: string) {
+  const d = new Date();
+  return `xpertauth_consultas_${email}_${d.getFullYear()}_${d.getMonth()}`;
+}
+
+function getConsultas(email: string): number {
+  try {
+    return parseInt(localStorage.getItem(getConsultasKey(email)) || "0", 10);
+  } catch {
+    return 0;
+  }
+}
+
+function incrementarConsultas(email: string) {
+  try {
+    const key = getConsultasKey(email);
+    const actual = parseInt(localStorage.getItem(key) || "0", 10);
+    localStorage.setItem(key, String(actual + 1));
+  } catch {}
+}
+
+const LIMITE = 3;
 const LIMITE_MENSAJES_SESION = 6;
 
 // ─── Parser de botones contextuales ─────────────────────────────────────────
@@ -78,9 +102,9 @@ function parsearBotones(texto: string): { textoLimpio: string; botones: BotonCon
   const botones: BotonContextual[] = [];
   let textoLimpio = texto;
 
-  // [BOTON_SCT:Label:URL] — la URL puede contener ':' (https://)
+  // [BOTON_SCT:Label:URL]
   textoLimpio = textoLimpio.replace(
-    /\[BOTON_SCT:([^:]+):(https?:\/\/[^\]]+)\]/g,
+    /\[BOTON_SCT:([^:]+):([^\]]+)\]/g,
     (_, label, url) => {
       botones.push({ tipo: "SCT", label: label.trim(), url: url.trim() });
       return "";
@@ -106,86 +130,6 @@ function parsearBotones(texto: string): { textoLimpio: string; botones: BotonCon
   );
 
   return { textoLimpio: textoLimpio.trim(), botones };
-}
-
-// ─── Renderer Markdown ligero ────────────────────────────────────────────────
-
-function renderMarkdown(texto: string): React.ReactNode[] {
-  const lineas = texto.split("\n");
-  const nodos: React.ReactNode[] = [];
-  let i = 0;
-
-  while (i < lineas.length) {
-    const linea = lineas[i];
-
-    // Título H2 (##)
-    if (linea.startsWith("## ")) {
-      nodos.push(
-        <p key={i} className="font-bold text-white mt-3 mb-1" style={{ fontSize: "0.82rem", letterSpacing: "0.01em" }}>
-          {linea.replace(/^## /, "")}
-        </p>
-      );
-    }
-    // Título H3 (###)
-    else if (linea.startsWith("### ")) {
-      nodos.push(
-        <p key={i} className="font-semibold mt-2 mb-0.5" style={{ fontSize: "0.78rem", color: "rgba(255,255,255,0.75)" }}>
-          {linea.replace(/^### /, "")}
-        </p>
-      );
-    }
-    // Lista (- o *)
-    else if (/^[-*] /.test(linea)) {
-      nodos.push(
-        <div key={i} className="flex gap-2 my-0.5">
-          <span className="flex-shrink-0 mt-1.5 w-1 h-1 rounded-full bg-white/40" />
-          <span className="text-sm leading-relaxed" style={{ color: "rgba(255,255,255,0.85)" }}>
-            {parsearInline(linea.replace(/^[-*] /, ""))}
-          </span>
-        </div>
-      );
-    }
-    // Lista numerada (1. 2. etc)
-    else if (/^\d+\. /.test(linea)) {
-      const num = linea.match(/^(\d+)\. /)?.[1];
-      nodos.push(
-        <div key={i} className="flex gap-2 my-0.5">
-          <span className="flex-shrink-0 text-xs font-medium" style={{ color: "rgba(255,255,255,0.40)", minWidth: "1rem" }}>{num}.</span>
-          <span className="text-sm leading-relaxed" style={{ color: "rgba(255,255,255,0.85)" }}>
-            {parsearInline(linea.replace(/^\d+\. /, ""))}
-          </span>
-        </div>
-      );
-    }
-    // Línea en blanco
-    else if (linea.trim() === "") {
-      nodos.push(<div key={i} className="h-1.5" />);
-    }
-    // Párrafo normal
-    else {
-      nodos.push(
-        <p key={i} className="text-sm leading-relaxed" style={{ color: "rgba(255,255,255,0.88)" }}>
-          {parsearInline(linea)}
-        </p>
-      );
-    }
-    i++;
-  }
-  return nodos;
-}
-
-// Parsea negrita e itálica inline
-function parsearInline(texto: string): React.ReactNode {
-  const partes = texto.split(/(\*\*[^*]+\*\*|\*[^*]+\*)/g);
-  return partes.map((parte, i) => {
-    if (parte.startsWith("**") && parte.endsWith("**")) {
-      return <strong key={i} className="font-semibold text-white">{parte.slice(2, -2)}</strong>;
-    }
-    if (parte.startsWith("*") && parte.endsWith("*")) {
-      return <em key={i} className="italic">{parte.slice(1, -1)}</em>;
-    }
-    return parte;
-  });
 }
 
 // ─── Subcomponente: burbuja de mensaje ───────────────────────────────────────
@@ -216,7 +160,7 @@ function Burbuja({
         {/* Burbuja texto */}
         {textoLimpio && (
           <div
-            className="px-4 py-3 rounded-2xl text-sm leading-relaxed"
+            className="px-4 py-3 rounded-2xl text-sm leading-relaxed whitespace-pre-wrap"
             style={
               esAsistente
                 ? {
@@ -231,7 +175,7 @@ function Burbuja({
                   }
             }
           >
-            {esAsistente ? renderMarkdown(textoLimpio) : textoLimpio}
+            {textoLimpio}
           </div>
         )}
 
@@ -318,7 +262,6 @@ export default function AgentChat({
   const [input, setInput] = useState("");
   const [cargando, setCargando] = useState(false);
   const [mensajesSesion, setMensajesSesion] = useState(0);
-  const [creditosRestantes, setCreditosRestantes] = useState<number | null>(null);
   const bottomRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLTextAreaElement>(null);
 
@@ -343,14 +286,21 @@ export default function AgentChat({
     bottomRef.current?.scrollIntoView({ behavior: "smooth" });
   }, [mensajes, cargando]);
 
-
-
   async function enviar() {
     const texto = input.trim();
     if (!texto || cargando) return;
 
-    // Comprobar límite de mensajes por sesión (solo visitantes anónimos sin email)
-    if (!esAutenticado && !email && mensajesSesion >= LIMITE_MENSAJES_SESION) {
+    // Comprobar límite visitante
+    if (!esAutenticado) {
+      const consultas = getConsultas(email);
+      if (consultas >= LIMITE) {
+        onLimiteAlcanzado();
+        return;
+      }
+    }
+
+    // Comprobar límite de mensajes por sesión (visitantes)
+    if (!esAutenticado && mensajesSesion >= LIMITE_MENSAJES_SESION) {
       setMensajes((prev) => [
         ...prev,
         {
@@ -380,17 +330,10 @@ export default function AgentChat({
             role: m.role,
             content: m.content,
           })),
-          email,
+          email: esAutenticado ? undefined : email,
           esAutenticado,
-          agenteForzado: agente, // el agente seleccionado al abrir el chat tiene prioridad
         }),
       });
-
-      // Sin créditos: abrir pantalla de límite
-      if (res.status === 402) {
-        onLimiteAlcanzado();
-        return;
-      }
 
       if (!res.ok) throw new Error(`HTTP ${res.status}`);
 
@@ -405,17 +348,9 @@ export default function AgentChat({
         },
       ]);
 
-      // Actualizar créditos restantes desde el backend
-      if (data.creditos !== undefined && data.creditos !== null) {
-        const nuevosCreditos = data.creditos === -1 ? null : data.creditos;
-        setCreditosRestantes(nuevosCreditos);
-        // Notificar a la navbar
-        if (nuevosCreditos !== null) {
-          window.dispatchEvent(new CustomEvent("xpertauth:creditos", { detail: { creditos: nuevosCreditos } }));
-        }
-      }
-
-      if (!esAutenticado && !email) {
+      // Incrementar contador solo para visitantes
+      if (!esAutenticado) {
+        incrementarConsultas(email);
         setMensajesSesion((n) => n + 1);
       }
     } catch (err) {
@@ -447,7 +382,9 @@ export default function AgentChat({
     e.target.style.height = Math.min(e.target.scrollHeight, 120) + "px";
   }
 
-
+  const consultasRestantes = esAutenticado
+    ? null
+    : LIMITE - getConsultas(email);
 
   return (
     <>
@@ -495,10 +432,10 @@ export default function AgentChat({
             </p>
           </div>
 
-          {/* Créditos restantes */}
-          {!esAutenticado && creditosRestantes !== null && (
+          {/* Consultas restantes (solo visitantes) */}
+          {!esAutenticado && consultasRestantes !== null && (
             <span className="text-xs text-white/30 flex-shrink-0">
-              {creditosRestantes} crédito{creditosRestantes !== 1 ? "s" : ""}
+              {consultasRestantes} consulta{consultasRestantes !== 1 ? "s" : ""} restante{consultasRestantes !== 1 ? "s" : ""}
             </span>
           )}
 
@@ -581,8 +518,6 @@ export default function AgentChat({
           <p className="text-center text-white/20 text-xs mt-2">
             {esAutenticado
               ? "Acceso ilimitado como socio · XpertAuth"
-              : creditosRestantes !== null
-              ? `Te quedan ${creditosRestantes} créditos · XpertAuth`
               : "Shift+Enter para nueva línea · Enter para enviar"}
           </p>
         </div>
