@@ -134,6 +134,45 @@ function parsearBotones(texto: string): { textoLimpio: string; botones: BotonCon
 
 // ─── Subcomponente: burbuja de mensaje ───────────────────────────────────────
 
+
+function renderMarkdown(texto: string): React.ReactNode[] {
+  const lineas = texto.split("\n");
+  const nodos: React.ReactNode[] = [];
+  let i = 0;
+  while (i < lineas.length) {
+    const linea = lineas[i];
+    if (linea.startsWith("## ")) {
+      nodos.push(<p key={i} className="font-bold text-white mt-3 mb-1" style={{ fontSize: "0.82rem" }}>{linea.replace(/^## /, "")}</p>);
+    } else if (linea.startsWith("### ")) {
+      nodos.push(<p key={i} className="font-semibold mt-2 mb-0.5" style={{ fontSize: "0.78rem", color: "rgba(255,255,255,0.75)" }}>{linea.replace(/^### /, "")}</p>);
+    } else if (/^[-*] /.test(linea)) {
+      nodos.push(<div key={i} className="flex gap-2 my-0.5"><span className="flex-shrink-0 mt-1.5 w-1 h-1 rounded-full bg-white/40" /><span className="text-sm leading-relaxed" style={{ color: "rgba(255,255,255,0.85)" }}>{parsearInline(linea.replace(/^[-*] /, ""))}</span></div>);
+    } else if (/^\d+\. /.test(linea)) {
+      const num = linea.match(/^(\d+)\. /)?.[1];
+      nodos.push(<div key={i} className="flex gap-2 my-0.5"><span className="flex-shrink-0 text-xs font-medium" style={{ color: "rgba(255,255,255,0.40)", minWidth: "1rem" }}>{num}.</span><span className="text-sm leading-relaxed" style={{ color: "rgba(255,255,255,0.85)" }}>{parsearInline(linea.replace(/^\d+\. /, ""))}</span></div>);
+    } else if (linea.trim() === "") {
+      nodos.push(<div key={i} className="h-1.5" />);
+    } else {
+      nodos.push(<p key={i} className="text-sm leading-relaxed" style={{ color: "rgba(255,255,255,0.88)" }}>{parsearInline(linea)}</p>);
+    }
+    i++;
+  }
+  return nodos;
+}
+
+function parsearInline(texto: string): React.ReactNode {
+  const partes = texto.split(/(\*\*[^*]+\*\*|\*[^*]+\*)/g);
+  return partes.map((parte, i) => {
+    if (parte.startsWith("**") && parte.endsWith("**")) {
+      return <strong key={i} className="font-semibold text-white">{parte.slice(2, -2)}</strong>;
+    }
+    if (parte.startsWith("*") && parte.endsWith("*")) {
+      return <em key={i} className="italic">{parte.slice(1, -1)}</em>;
+    }
+    return parte;
+  });
+}
+
 function Burbuja({
   mensaje,
   config,
@@ -160,7 +199,7 @@ function Burbuja({
         {/* Burbuja texto */}
         {textoLimpio && (
           <div
-            className="px-4 py-3 rounded-2xl text-sm leading-relaxed whitespace-pre-wrap"
+            className="px-4 py-3 rounded-2xl text-sm leading-relaxed"
             style={
               esAsistente
                 ? {
