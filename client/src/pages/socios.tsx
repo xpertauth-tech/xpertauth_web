@@ -145,7 +145,7 @@ export default function Socios() {
 
       {/* Planes */}
       <section className="pb-20 px-4 sm:px-6 lg:px-8">
-        <div className="max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-6">
+        <div className="max-w-3xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-6">
           {PLANES.map((plan: any, i: number) => (
             <motion.div
               key={plan.id}

@@ -342,7 +342,7 @@ const es = {
       desc: "Para profesionales del sector que quieren respuestas reales.",
       items: [
         "30 consultas LEX al mes, gratis",
-        "Acceso completo durante la beta",
+        "30 consultas LEX al mes durante la beta",
         "Webinars exclusivos y acceso anticipado",
         "Tu opinión ayuda a mejorar LEX",
       ],
