@@ -87,8 +87,7 @@ function incrementarConsultas(email: string) {
   } catch {}
 }
 
-const LIMITE = 3;
-const LIMITE_MENSAJES_SESION = 6;
+const LIMITE = 5;
 
 // ─── Parser de botones contextuales ─────────────────────────────────────────
 
@@ -131,8 +130,46 @@ function parsearBotones(texto: string): { textoLimpio: string; botones: BotonCon
 
   return { textoLimpio: textoLimpio.trim(), botones };
 }
-
 // ─── Subcomponente: burbuja de mensaje ───────────────────────────────────────
+
+
+function renderMarkdown(texto: string): React.ReactNode[] {
+  const lineas = texto.split("\n");
+  const nodos: React.ReactNode[] = [];
+  let i = 0;
+  while (i < lineas.length) {
+    const linea = lineas[i];
+    if (linea.startsWith("## ")) {
+      nodos.push(<p key={i} className="font-bold text-white mt-3 mb-1" style={{ fontSize: "0.82rem" }}>{linea.replace(/^## /, "")}</p>);
+    } else if (linea.startsWith("### ")) {
+      nodos.push(<p key={i} className="font-semibold mt-2 mb-0.5" style={{ fontSize: "0.78rem", color: "rgba(255,255,255,0.75)" }}>{linea.replace(/^### /, "")}</p>);
+    } else if (/^[-*] /.test(linea)) {
+      nodos.push(<div key={i} className="flex gap-2 my-0.5"><span className="flex-shrink-0 mt-1.5 w-1 h-1 rounded-full bg-white/40" /><span className="text-sm leading-relaxed" style={{ color: "rgba(255,255,255,0.85)" }}>{parsearInline(linea.replace(/^[-*] /, ""))}</span></div>);
+    } else if (/^\d+\. /.test(linea)) {
+      const num = linea.match(/^(\d+)\. /)?.[1];
+      nodos.push(<div key={i} className="flex gap-2 my-0.5"><span className="flex-shrink-0 text-xs font-medium" style={{ color: "rgba(255,255,255,0.40)", minWidth: "1rem" }}>{num}.</span><span className="text-sm leading-relaxed" style={{ color: "rgba(255,255,255,0.85)" }}>{parsearInline(linea.replace(/^\d+\. /, ""))}</span></div>);
+    } else if (linea.trim() === "") {
+      nodos.push(<div key={i} className="h-1.5" />);
+    } else {
+      nodos.push(<p key={i} className="text-sm leading-relaxed" style={{ color: "rgba(255,255,255,0.88)" }}>{parsearInline(linea)}</p>);
+    }
+    i++;
+  }
+  return nodos;
+}
+
+function parsearInline(texto: string): React.ReactNode {
+  const partes = texto.split(/(\*\*[^*]+\*\*|\*[^*]+\*)/g);
+  return partes.map((parte, i) => {
+    if (parte.startsWith("**") && parte.endsWith("**")) {
+      return <strong key={i} className="font-semibold text-white">{parte.slice(2, -2)}</strong>;
+    }
+    if (parte.startsWith("*") && parte.endsWith("*")) {
+      return <em key={i} className="italic">{parte.slice(1, -1)}</em>;
+    }
+    return parte;
+  });
+}
 
 function Burbuja({
   mensaje,
@@ -160,7 +197,7 @@ function Burbuja({
         {/* Burbuja texto */}
         {textoLimpio && (
           <div
-            className="px-4 py-3 rounded-2xl text-sm leading-relaxed whitespace-pre-wrap"
+            className="px-4 py-3 rounded-2xl text-sm leading-relaxed"
             style={
               esAsistente
                 ? {
@@ -175,7 +212,7 @@ function Burbuja({
                   }
             }
           >
-            {textoLimpio}
+            {esAsistente ? renderMarkdown(textoLimpio) : textoLimpio}
           </div>
         )}
 
@@ -185,7 +222,7 @@ function Burbuja({
             {botones.map((btn, i) => {
               if (btn.tipo === "SCT" && btn.url) {
                 return (
-                  <a
+                  
                     key={i}
                     href={btn.url}
                     target="_blank"
@@ -197,16 +234,17 @@ function Burbuja({
                       color: "#4D9FEC",
                     }}
                   >
-                    <ExternalLink size={11} />
+                    <ExternalLink size={12} />
                     {btn.label}
                   </a>
                 );
               }
+
               if (btn.tipo === "CITA") {
                 return (
-                  <a
+                  
                     key={i}
-                    href="/es/socios#contacto"
+                    href="mailto:joseluis@xpertauth.com?subject=Solicitud%20de%20cita"
                     className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium transition-opacity hover:opacity-80"
                     style={{
                       backgroundColor: "rgba(232,98,10,0.15)",
@@ -214,28 +252,30 @@ function Burbuja({
                       color: "#E8620A",
                     }}
                   >
-                    <Calendar size={11} />
+                    <Calendar size={12} />
                     {btn.label}
                   </a>
                 );
               }
+
               if (btn.tipo === "SOCIO") {
                 return (
-                  <a
+                  
                     key={i}
                     href="/es/socios"
                     className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium transition-opacity hover:opacity-80"
                     style={{
-                      backgroundColor: "rgba(27,79,216,0.15)",
-                      border: "1px solid rgba(27,79,216,0.35)",
-                      color: "#1B4FD8",
+                      backgroundColor: "rgba(77,159,236,0.15)",
+                      border: "1px solid rgba(77,159,236,0.35)",
+                      color: "#4D9FEC",
                     }}
                   >
-                    <Users size={11} />
+                    <Users size={12} />
                     {btn.label}
                   </a>
                 );
               }
+
               return null;
             })}
           </div>
@@ -257,67 +297,58 @@ export default function AgentChat({
   onLimiteAlcanzado,
 }: AgentChatProps) {
   const config = AGENTE_CONFIG[agente];
-
-  const [mensajes, setMensajes] = useState<Mensaje[]>([]);
+  const [mensajes, setMensajes] = useState<Mensaje[]>([
+    {
+      role: "assistant",
+      content: config.mensajeBienvenida,
+      agente,
+    },
+  ]);
   const [input, setInput] = useState("");
   const [cargando, setCargando] = useState(false);
-  const [mensajesSesion, setMensajesSesion] = useState(0);
+
   const bottomRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLTextAreaElement>(null);
 
-  // Inicializar con mensaje de bienvenida al abrir
+  // Scroll automático al último mensaje
   useEffect(() => {
     if (abierto) {
-      setMensajes([
-        {
-          role: "assistant",
-          content: config.mensajeBienvenida,
-          agente,
-        },
-      ]);
-      setMensajesSesion(0);
-      setInput("");
-      setTimeout(() => inputRef.current?.focus(), 300);
+      bottomRef.current?.scrollIntoView({ behavior: "smooth" });
+      setTimeout(() => inputRef.current?.focus(), 200);
     }
-  }, [abierto, agente]);
+  }, [mensajes, abierto]);
 
-  // Scroll al último mensaje
+  // Reset al cambiar de agente
   useEffect(() => {
-    bottomRef.current?.scrollIntoView({ behavior: "smooth" });
-  }, [mensajes, cargando]);
+    setMensajes([
+      {
+        role: "assistant",
+        content: config.mensajeBienvenida,
+        agente,
+      },
+    ]);
+    setInput("");
+  }, [agente]);
 
   async function enviar() {
     const texto = input.trim();
     if (!texto || cargando) return;
 
-    // Comprobar límite visitante
+    // Comprobar límite de consultas (visitantes)
     if (!esAutenticado) {
-      const consultas = getConsultas(email);
-      if (consultas >= LIMITE) {
+      const consultasPrevias = getConsultas(email);
+      if (consultasPrevias >= LIMITE) {
         onLimiteAlcanzado();
         return;
       }
-    }
-
-    // Comprobar límite de mensajes por sesión (visitantes)
-    if (!esAutenticado && mensajesSesion >= LIMITE_MENSAJES_SESION) {
-      setMensajes((prev) => [
-        ...prev,
-        {
-          role: "assistant",
-          content:
-            "Has alcanzado el límite de esta sesión. [BOTON_SOCIO:Hazte socio para continuar sin límites]",
-          agente,
-        },
-      ]);
-      return;
     }
 
     const nuevosMensajes: Mensaje[] = [
       ...mensajes,
       { role: "user", content: texto },
     ];
-    setMensajes(nuevosMensajes);
+
+  setMensajes(nuevosMensajes);
     setInput("");
     setCargando(true);
 
@@ -330,6 +361,7 @@ export default function AgentChat({
             role: m.role,
             content: m.content,
           })),
+          agente,
           email: esAutenticado ? undefined : email,
           esAutenticado,
         }),
@@ -351,7 +383,11 @@ export default function AgentChat({
       // Incrementar contador solo para visitantes
       if (!esAutenticado) {
         incrementarConsultas(email);
-        setMensajesSesion((n) => n + 1);
+        // Comprobar límite tras esta respuesta
+        const consultasTras = getConsultas(email);
+        if (consultasTras >= LIMITE) {
+          onLimiteAlcanzado();
+        }
       }
     } catch (err) {
       setMensajes((prev) => [
