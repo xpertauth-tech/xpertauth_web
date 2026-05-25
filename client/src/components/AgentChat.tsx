@@ -306,6 +306,12 @@ export default function AgentChat({
   ]);
   const [input, setInput] = useState("");
   const [cargando, setCargando] = useState(false);
+  const [limiteAlcanzado, setLimiteAlcanzado] = useState(false);
+
+  // Email corporativo: sin límite nunca
+  const EMAIL_CORPORATIVO = "eche.jose@gmail.com";
+  const esCorporativo = email === EMAIL_CORPORATIVO;
+  const sinLimite = esAutenticado || esCorporativo;
 
   const bottomRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLTextAreaElement>(null);
@@ -371,13 +377,12 @@ export default function AgentChat({
         },
       ]);
 
-      // Incrementar contador solo para visitantes
-      if (!esAutenticado) {
+      // Incrementar contador solo para visitantes sin límite especial
+      if (!sinLimite) {
         incrementarConsultas(email);
-        // Comprobar límite tras esta respuesta
         const consultasTras = getConsultas(email);
         if (consultasTras >= LIMITE) {
-          onLimiteAlcanzado();
+          setLimiteAlcanzado(true); // aviso inline — modal al escribir siguiente
         }
       }
     } catch (err) {
@@ -404,12 +409,17 @@ export default function AgentChat({
 
   // Altura dinámica del textarea
   function handleInput(e: React.ChangeEvent<HTMLTextAreaElement>) {
+    if (limiteAlcanzado) {
+      e.preventDefault();
+      onLimiteAlcanzado(); // modal al primer keystroke
+      return;
+    }
     setInput(e.target.value);
     e.target.style.height = "auto";
     e.target.style.height = Math.min(e.target.scrollHeight, 120) + "px";
   }
 
-  const consultasRestantes = esAutenticado
+  const consultasRestantes = sinLimite
     ? null
     : LIMITE - getConsultas(email);
 
@@ -501,6 +511,29 @@ export default function AgentChat({
             </div>
           )}
 
+          {/* Aviso inline de límite alcanzado */}
+          {limiteAlcanzado && (
+            <div
+              className="mx-2 px-4 py-3 rounded-xl text-center text-sm"
+              style={{
+                backgroundColor: "rgba(27,79,216,0.12)",
+                border: "1px solid rgba(27,79,216,0.30)",
+                color: "rgba(255,255,255,0.70)",
+              }}
+            >
+              Has usado tus <strong style={{ color: "#fff" }}>5 consultas de prueba</strong>.
+              Regístrate gratis y obtén <strong style={{ color: "#fff" }}>30 consultas al mes</strong>.
+              <br />
+              <button
+                onClick={onLimiteAlcanzado}
+                className="mt-2 px-4 py-1.5 rounded-lg text-xs font-semibold transition-opacity hover:opacity-80"
+                style={{ backgroundColor: "#1B4FD8", color: "#fff" }}
+              >
+                Registrarme gratis
+              </button>
+            </div>
+          )}
+
           <div ref={bottomRef} />
         </div>
 
@@ -523,7 +556,7 @@ export default function AgentChat({
               onChange={handleInput}
               onKeyDown={handleKeyDown}
               placeholder={config.placeholder}
-              disabled={cargando}
+              disabled={cargando || limiteAlcanzado}
               className="flex-1 bg-transparent text-white text-sm placeholder-white/30 outline-none resize-none leading-relaxed py-1"
               style={{ maxHeight: 120 }}
             />
@@ -543,8 +576,8 @@ export default function AgentChat({
 
           {/* Nota pie */}
           <p className="text-center text-white/20 text-xs mt-2">
-            {esAutenticado
-              ? "Acceso ilimitado como socio · XpertAuth"
+            {sinLimite
+              ? "Acceso ilimitado · XpertAuth"
               : "Shift+Enter para nueva línea · Enter para enviar"}
           </p>
         </div>
