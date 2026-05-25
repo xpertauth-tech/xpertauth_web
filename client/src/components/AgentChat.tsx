@@ -128,6 +128,24 @@ function parsearBotones(texto: string): { textoLimpio: string; botones: BotonCon
     }
   );
 
+  // Links markdown estándar [Label](URL) → botón SCT
+  textoLimpio = textoLimpio.replace(
+    /\[([^\]]+)\]\((https?:\/\/[^)]+)\)/g,
+    (_, label, url) => {
+      botones.push({ tipo: "SCT", label: label.trim(), url: url.trim() });
+      return "";
+    }
+  );
+
+  // Links mailto [Label](mailto:...) → botón CITA
+  textoLimpio = textoLimpio.replace(
+    /\[([^\]]+)\]\((mailto:[^)]+)\)/g,
+    (_, label) => {
+      botones.push({ tipo: "CITA", label: label.trim() });
+      return "";
+    }
+  );
+
   return { textoLimpio: textoLimpio.trim(), botones };
 }
 // ─── Subcomponente: burbuja de mensaje ───────────────────────────────────────
