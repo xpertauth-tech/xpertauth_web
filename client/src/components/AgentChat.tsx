@@ -334,15 +334,6 @@ export default function AgentChat({
     const texto = input.trim();
     if (!texto || cargando) return;
 
-    // Comprobar límite de consultas (visitantes)
-    if (!esAutenticado) {
-      const consultasPrevias = getConsultas(email);
-      if (consultasPrevias >= LIMITE) {
-        onLimiteAlcanzado();
-        return;
-      }
-    }
-
     const nuevosMensajes: Mensaje[] = [
       ...mensajes,
       { role: "user", content: texto },
