@@ -395,12 +395,20 @@ export default function AgentChat({
         },
       ]);
 
-      // Incrementar contador solo para visitantes sin límite especial
+      // Gestión de límite
       if (!sinLimite) {
-        incrementarConsultas(email);
-        const consultasTras = getConsultas(email);
-        if (consultasTras >= LIMITE) {
-          setLimiteAlcanzado(true); // aviso inline — modal al escribir siguiente
+        if (esAutenticado) {
+          // Registrados: el backend controla el límite y lo señala
+          if (data.limitAlcanzado) {
+            setLimiteAlcanzado(true);
+          }
+        } else {
+          // Anónimos: localStorage
+          incrementarConsultas(email);
+          const consultasTras = getConsultas(email);
+          if (consultasTras >= LIMITE) {
+            setLimiteAlcanzado(true);
+          }
         }
       }
     } catch (err) {
@@ -539,16 +547,28 @@ export default function AgentChat({
                 color: "rgba(255,255,255,0.70)",
               }}
             >
-              Has usado tus <strong style={{ color: "#fff" }}>5 consultas de prueba</strong>.
-              Regístrate gratis y obtén <strong style={{ color: "#fff" }}>30 consultas al mes</strong>.
-              <br />
-              <button
-                onClick={onLimiteAlcanzado}
-                className="mt-2 px-4 py-1.5 rounded-lg text-xs font-semibold transition-opacity hover:opacity-80"
-                style={{ backgroundColor: "#1B4FD8", color: "#fff" }}
-              >
-                Registrarme gratis
-              </button>
+              {esAutenticado ? (
+                <>
+                  Has usado tus <strong style={{ color: "#fff" }}>30 consultas de este mes</strong>.
+                  <br />
+                  <span style={{ color: "rgba(255,255,255,0.50)", fontSize: "0.75rem" }}>
+                    Tus consultas se restauran el 1 del mes siguiente.
+                  </span>
+                </>
+              ) : (
+                <>
+                  Has usado tus <strong style={{ color: "#fff" }}>5 consultas de prueba</strong>.
+                  Regístrate gratis y obtén <strong style={{ color: "#fff" }}>30 consultas al mes</strong>.
+                  <br />
+                  <button
+                    onClick={onLimiteAlcanzado}
+                    className="mt-2 px-4 py-1.5 rounded-lg text-xs font-semibold transition-opacity hover:opacity-80"
+                    style={{ backgroundColor: "#1B4FD8", color: "#fff" }}
+                  >
+                    Registrarme gratis
+                  </button>
+                </>
+              )}
             </div>
           )}
 
