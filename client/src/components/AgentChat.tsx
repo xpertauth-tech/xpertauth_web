@@ -222,7 +222,7 @@ function Burbuja({
             {botones.map((btn, i) => {
               if (btn.tipo === "SCT" && btn.url) {
                 return (
-                  
+                  <a
                     key={i}
                     href={btn.url}
                     target="_blank"
@@ -242,7 +242,7 @@ function Burbuja({
 
               if (btn.tipo === "CITA") {
                 return (
-                  
+                  <a
                     key={i}
                     href="mailto:joseluis@xpertauth.com?subject=Solicitud%20de%20cita"
                     className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium transition-opacity hover:opacity-80"
@@ -260,7 +260,7 @@ function Burbuja({
 
               if (btn.tipo === "SOCIO") {
                 return (
-                  
+                  <a
                     key={i}
                     href="/es/socios"
                     className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium transition-opacity hover:opacity-80"
