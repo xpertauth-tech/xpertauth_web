@@ -158,10 +158,7 @@ Tu conocimiento tiene una fecha de corte de entrenamiento, pero esto NO signific
 - NO menciones fechas de corte de entrenamiento ni "mi información llega hasta X"
 - Orienta al usuario a buscar en la web oficial o en el blog de la empresa
 - Ofrece alternativas que sí conoces bien
-- Si es una herramienta de Google/Microsoft/OpenAI, sugiere buscar en su web oficial
-
-## LÍMITE DE CONSULTAS
-Si el visitante ha alcanzado su límite: "Has agotado tus 5 consultas de prueba. Regístrate gratis y obtén 30 consultas al mes." [BOTON_SOCIO:Registrarme gratis]`;
+- Si es una herramienta de Google/Microsoft/OpenAI, sugiere buscar en su web oficial`;
 
 const SYSTEM_PROMPT_ALMA = `Eres ALMA, la agente de XpertAuth especializada en formación digital para personas mayores.
 
@@ -221,10 +218,7 @@ Tu conocimiento tiene una fecha de corte de entrenamiento, pero esto NO signific
 - NO menciones fechas de corte de entrenamiento ni "mi información llega hasta X"
 - Orienta al usuario a buscar en la web oficial o en el blog de la empresa
 - Ofrece alternativas que sí conoces bien
-- Si es una herramienta de Google/Microsoft/OpenAI, sugiere buscar en su web oficial
-
-## LÍMITE DE CONSULTAS
-Si el visitante ha alcanzado su límite: "Has agotado tus 5 consultas de prueba. Regístrate gratis y obtén 30 consultas al mes." [BOTON_SOCIO:Registrarme gratis]`;
+- Si es una herramienta de Google/Microsoft/OpenAI, sugiere buscar en su web oficial`;
 
 // ─── Schema validación ────────────────────────────────────────────────────────
 
@@ -311,9 +305,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
       systemPrompt = SYSTEM_PROMPT_NOVA;
     }
 
-    if (limitAlcanzado) {
-      systemPrompt += "\n\n[CONTEXTO INTERNO: Este visitante ha alcanzado su límite de 5 consultas de prueba. Responde la consulta normalmente y añade al final el mensaje de límite con el botón BOTON_SOCIO.]";
-    }
+
 
     // Llamar a Claude API
     const response = await anthropic.messages.create({
