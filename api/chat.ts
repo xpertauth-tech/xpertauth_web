@@ -31,7 +31,7 @@ async function getRagContext(query: string): Promise<string> {
 
     const { data, error } = await supabase.rpc("match_lex_documentos", {
       query_embedding: embedding,
-      match_threshold: 0.75,
+      match_threshold: 0.55,
       match_count: 6,
     });
 
@@ -236,7 +236,11 @@ const chatSchema = z.object({
 
 // ─── Verificar límite ─────────────────────────────────────────────────────────
 
-async function verificarLimite(email: string): Promise<{ permitido: boolean }> {
+const EMAIL_CORPORATIVO = "eche.jose@gmail.com";
+
+async function verificarLimite(email: string, limite: number): Promise<{ permitido: boolean }> {
+  if (email === EMAIL_CORPORATIVO) return { permitido: true };
+
   const inicioMes = new Date();
   inicioMes.setDate(1);
   inicioMes.setHours(0, 0, 0, 0);
@@ -247,7 +251,7 @@ async function verificarLimite(email: string): Promise<{ permitido: boolean }> {
     .eq("email", email)
     .gte("created_at", inicioMes.toISOString());
 
-  return { permitido: (count ?? 0) < 5 };
+  return { permitido: (count ?? 0) < limite };
 }
 
 async function registrarSesion(email: string, agente: string) {
@@ -277,10 +281,11 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
 
     const { messages, agente, email, esAutenticado } = parsed.data;
 
-    // Control de límite para visitantes
+    // Control de límite — 5 para anónimos, 30 para registrados, ilimitado para corporativo
     let limitAlcanzado = false;
-    if (!esAutenticado && email) {
-      const { permitido } = await verificarLimite(email);
+    if (email) {
+      const limite = esAutenticado ? 30 : 5;
+      const { permitido } = await verificarLimite(email, limite);
       if (!permitido) {
         limitAlcanzado = true;
       } else {
@@ -321,7 +326,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
     const respuestaTexto =
       response.content[0].type === "text" ? response.content[0].text : "";
 
-    return res.status(200).json({ agente, respuesta: respuestaTexto, model });
+    return res.status(200).json({ agente, respuesta: respuestaTexto, model, limitAlcanzado });
 
   } catch (error) {
     console.error("[/api/chat] Error:", error);
