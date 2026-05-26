@@ -5,6 +5,7 @@ const fr = {
     formacionSenior: "Formation Senior",
     blog: "Blog",
     hazteSocio: "Rejoignez-nous",
+    entrar: "Se connecter",
   },
   hero: {
     badge: "Association à but non lucratif",
