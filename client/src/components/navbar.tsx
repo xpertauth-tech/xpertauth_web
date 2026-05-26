@@ -139,7 +139,7 @@ export default function Navbar() {
     await supabase.auth.signInWithOAuth({
       provider: "google",
       options: {
-        redirectTo: "https://xpertauth-web.vercel.app/es",
+        redirectTo: "https://xpertauth.com/es",
       },
     });
   };
