@@ -5,6 +5,7 @@ const ca = {
     formacionSenior: "Formació Sènior",
     blog: "Blog",
     hazteSocio: "Fes-te Soci",
+    entrar: "Entrar",
   },
   hero: {
     badge: "Associació sense ànim de lucre",
