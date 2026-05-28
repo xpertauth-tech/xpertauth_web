@@ -151,24 +151,6 @@ function App() {
             <CustomCursor />
             <CookieBanner />
 
-            {/* ── Banner: agentes en mejora ── */}
-            <div
-              className="fixed top-0 left-0 right-0 z-[60] flex items-center justify-center gap-2 px-4 py-2 text-xs"
-              style={{
-                backgroundColor: "rgba(10,14,26,0.96)",
-                borderBottom: "1px solid rgba(27,79,216,0.30)",
-                backdropFilter: "blur(8px)",
-              }}
-            >
-              <span style={{ color: "#1B4FD8", fontSize: "0.7rem" }}>●</span>
-              <span style={{ color: "rgba(255,255,255,0.55)" }}>
-                Estamos perfeccionando el conocimiento de nuestros agentes.{" "}
-              </span>
-              <strong style={{ color: "rgba(255,255,255,0.85)" }}>
-                LEX temporalmente no disponible.
-              </strong>
-            </div>
-
             <Toaster />
             <Router />
 
