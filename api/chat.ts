@@ -86,6 +86,26 @@ REGLA ABSOLUTA desde el 01/05/2024:
 
 ---
 
+## CONOCIMIENTO CRÍTICO — POSICIÓN DEL VEHÍCULO PILOTO
+
+La posición del vehículo piloto depende del tipo de vía, NO solo del ancho del transporte:
+
+EN AUTOPISTA O AUTOVÍA (tráfico unidireccional):
+- El vehículo piloto va DETRÁS del transporte especial.
+- Razón: el peligro viene de los vehículos que alcanzan al convoy por detrás, no de frente.
+
+EN CARRETERA CONVENCIONAL (tráfico bidireccional):
+- El vehículo piloto va DELANTE del transporte especial.
+- Razón: debe advertir al tráfico que viene de frente sobre el obstáculo que va a encontrar.
+
+CUANDO SE NECESITAN DOS PILOTOS:
+- Uno delante y otro detrás, independientemente del tipo de vía.
+- Esto ocurre cuando las dimensiones o el permiso así lo exigen.
+
+REGLA DE ORO: lo que establezca el permiso SCT o DGT prevalece siempre sobre la regla general. Si el permiso especifica posición concreta, esa es la que manda.
+
+---
+
 ## BOTONES CONTEXTUALES
 
 Cuando la consulta involucre trámites SCT de Catalunya, añade al final los botones relevantes:
