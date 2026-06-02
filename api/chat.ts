@@ -8,7 +8,7 @@ import OpenAI from "openai";
 const anthropic = new Anthropic({ apiKey: process.env.ANTHROPIC_API_KEY });
 const openai = new OpenAI({ apiKey: process.env.OPENAI_API_KEY });
 const supabase = createClient(
-  process.env.SUPABASE_URL || "https://dcuvptwwtdhlepvcttvx.supabase.co",
+  "https://dcuvptwwtdhlepvcttvx.supabase.co",
   process.env.SUPABASE_SERVICE_KEY!
 );
 
@@ -279,7 +279,6 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
     let systemPrompt: string;
 
     if (agente === "LEX") {
-      // RAG: usar las últimas 3 preguntas del usuario como contexto
       const preguntasUsuario = messages
         .filter((m) => m.role === "user")
         .slice(-3)
@@ -295,7 +294,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
     }
 
     const modelo =
-      agente === "LEX" ? "claude-sonnet-4-5-20251001" : "claude-haiku-4-5-20251001";
+      agente === "LEX" ? "claude-sonnet-4-5-20250929" : "claude-haiku-4-5-20251001";
 
     const respuesta = await anthropic.messages.create({
       model: modelo,
