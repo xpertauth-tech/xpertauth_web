@@ -334,8 +334,8 @@ export default function AgentChat({
   const bottomRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLTextAreaElement>(null);
 
-  // LEX deshabilitado temporalmente durante refactorización
-  const lexDeshabilitado = agente === "LEX";
+  // LEX habilitado
+  const lexDeshabilitado = false;
 
   // Scroll automático al último mensaje
   useEffect(() => {
@@ -498,8 +498,8 @@ export default function AgentChat({
             </p>
           </div>
 
-          {/* Consultas restantes (solo visitantes, solo cuando no es LEX) */}
-          {!lexDeshabilitado && !esAutenticado && consultasRestantes !== null && (
+          {/* Consultas restantes (solo visitantes) */}
+          {!esAutenticado && consultasRestantes !== null && (
             <span className="text-xs text-white/30 flex-shrink-0">
               {consultasRestantes} consulta{consultasRestantes !== 1 ? "s" : ""} restante{consultasRestantes !== 1 ? "s" : ""}
             </span>
@@ -515,154 +515,113 @@ export default function AgentChat({
           </button>
         </div>
 
-        {/* ── CONTENIDO: pantalla LEX deshabilitado o chat normal ── */}
-        {lexDeshabilitado ? (
-          <div className="flex-1 flex flex-col items-center justify-center px-8 text-center gap-6">
-            {/* Icono */}
+        {/* ── MENSAJES ── */}
+        <div className="flex-1 overflow-y-auto px-4 py-5 space-y-4">
+          {mensajes.map((msg, i) => (
+            <Burbuja key={i} mensaje={msg} config={config} />
+          ))}
+
+          {/* Indicador de escritura */}
+          {cargando && (
+            <div className="flex gap-3 justify-start">
+              <div
+                className="w-8 h-8 rounded-lg flex items-center justify-center text-base flex-shrink-0"
+                style={{ backgroundColor: config.colorBg, border: `1px solid ${config.colorBorder}` }}
+              >
+                {config.emoji}
+              </div>
+              <div
+                className="px-4 py-3 rounded-2xl flex items-center gap-2"
+                style={{ backgroundColor: "rgba(255,255,255,0.06)", borderTopLeftRadius: 4 }}
+              >
+                <Loader2 size={14} className="animate-spin text-white/50" />
+                <span className="text-white/40 text-sm">Pensando…</span>
+              </div>
+            </div>
+          )}
+
+          {/* Aviso inline de límite alcanzado */}
+          {limiteAlcanzado && (
             <div
-              className="w-16 h-16 rounded-2xl flex items-center justify-center text-3xl"
-              style={{ backgroundColor: config.colorBg, border: `1px solid ${config.colorBorder}` }}
-            >
-              ⚖️
-            </div>
-
-            {/* Texto */}
-            <div className="space-y-3">
-              <p className="text-white font-semibold text-base leading-snug">
-                LEX está en proceso de mejora
-              </p>
-              <p className="text-sm leading-relaxed" style={{ color: "rgba(255,255,255,0.50)" }}>
-                Estamos trabajando en el conocimiento de LEX para garantizar respuestas precisas y fiables sobre normativa de transporte especial.
-              </p>
-              <p className="text-xs leading-relaxed" style={{ color: "rgba(255,255,255,0.28)" }}>
-                Vuelve pronto — estará disponible en cuanto alcance el nivel de calidad que mereces.
-              </p>
-            </div>
-
-            {/* Botón cerrar */}
-            <button
-              onClick={onClose}
-              className="px-5 py-2 rounded-lg text-sm font-medium transition-opacity hover:opacity-80"
+              className="mx-2 px-4 py-3 rounded-xl text-center text-sm"
               style={{
-                backgroundColor: "rgba(27,79,216,0.15)",
-                color: "rgba(100,140,230,0.90)",
-                border: "1px solid rgba(27,79,216,0.25)",
+                backgroundColor: "rgba(27,79,216,0.12)",
+                border: "1px solid rgba(27,79,216,0.30)",
+                color: "rgba(255,255,255,0.70)",
               }}
             >
-              Cerrar
+              {esAutenticado ? (
+                <>
+                  Has usado tus <strong style={{ color: "#fff" }}>30 consultas de este mes</strong>.
+                  <br />
+                  <span style={{ color: "rgba(255,255,255,0.50)", fontSize: "0.75rem" }}>
+                    Tus consultas se restauran el 1 del mes siguiente.
+                  </span>
+                </>
+              ) : (
+                <>
+                  Has usado tus <strong style={{ color: "#fff" }}>5 consultas de prueba</strong>.
+                  Regístrate gratis y obtén <strong style={{ color: "#fff" }}>30 consultas al mes</strong>.
+                  <br />
+                  <button
+                    onClick={onLimiteAlcanzado}
+                    className="mt-2 px-4 py-1.5 rounded-lg text-xs font-semibold transition-opacity hover:opacity-80"
+                    style={{ backgroundColor: "#1B4FD8", color: "#fff" }}
+                  >
+                    Registrarme gratis
+                  </button>
+                </>
+              )}
+            </div>
+          )}
+
+          <div ref={bottomRef} />
+        </div>
+
+        {/* ── INPUT ── */}
+        <div
+          className="flex-shrink-0 px-4 py-4"
+          style={{ borderTop: "1px solid rgba(255,255,255,0.07)" }}
+        >
+          <div
+            className="flex items-end gap-2 rounded-xl px-3 py-2"
+            style={{
+              backgroundColor: "rgba(255,255,255,0.05)",
+              border: "1px solid rgba(255,255,255,0.10)",
+            }}
+          >
+            <textarea
+              ref={inputRef}
+              rows={1}
+              value={input}
+              onChange={handleInput}
+              onKeyDown={handleKeyDown}
+              placeholder={config.placeholder}
+              disabled={cargando || limiteAlcanzado}
+              className="flex-1 bg-transparent text-white text-sm placeholder-white/30 outline-none resize-none leading-relaxed py-1"
+              style={{ maxHeight: 120 }}
+            />
+            <button
+              onClick={enviar}
+              disabled={!input.trim() || cargando}
+              className="flex-shrink-0 w-8 h-8 rounded-lg flex items-center justify-center transition-all mb-0.5"
+              style={{
+                backgroundColor: input.trim() && !cargando ? config.color : "rgba(255,255,255,0.08)",
+                opacity: input.trim() && !cargando ? 1 : 0.4,
+              }}
+              aria-label="Enviar"
+            >
+              <Send size={14} className="text-white" style={{ transform: "translateX(1px)" }} />
             </button>
           </div>
-        ) : (
-          <>
-            {/* ── MENSAJES ── */}
-            <div className="flex-1 overflow-y-auto px-4 py-5 space-y-4">
-              {mensajes.map((msg, i) => (
-                <Burbuja key={i} mensaje={msg} config={config} />
-              ))}
 
-              {/* Indicador de escritura */}
-              {cargando && (
-                <div className="flex gap-3 justify-start">
-                  <div
-                    className="w-8 h-8 rounded-lg flex items-center justify-center text-base flex-shrink-0"
-                    style={{ backgroundColor: config.colorBg, border: `1px solid ${config.colorBorder}` }}
-                  >
-                    {config.emoji}
-                  </div>
-                  <div
-                    className="px-4 py-3 rounded-2xl flex items-center gap-2"
-                    style={{ backgroundColor: "rgba(255,255,255,0.06)", borderTopLeftRadius: 4 }}
-                  >
-                    <Loader2 size={14} className="animate-spin text-white/50" />
-                    <span className="text-white/40 text-sm">Pensando…</span>
-                  </div>
-                </div>
-              )}
-
-              {/* Aviso inline de límite alcanzado */}
-              {limiteAlcanzado && (
-                <div
-                  className="mx-2 px-4 py-3 rounded-xl text-center text-sm"
-                  style={{
-                    backgroundColor: "rgba(27,79,216,0.12)",
-                    border: "1px solid rgba(27,79,216,0.30)",
-                    color: "rgba(255,255,255,0.70)",
-                  }}
-                >
-                  {esAutenticado ? (
-                    <>
-                      Has usado tus <strong style={{ color: "#fff" }}>30 consultas de este mes</strong>.
-                      <br />
-                      <span style={{ color: "rgba(255,255,255,0.50)", fontSize: "0.75rem" }}>
-                        Tus consultas se restauran el 1 del mes siguiente.
-                      </span>
-                    </>
-                  ) : (
-                    <>
-                      Has usado tus <strong style={{ color: "#fff" }}>5 consultas de prueba</strong>.
-                      Regístrate gratis y obtén <strong style={{ color: "#fff" }}>30 consultas al mes</strong>.
-                      <br />
-                      <button
-                        onClick={onLimiteAlcanzado}
-                        className="mt-2 px-4 py-1.5 rounded-lg text-xs font-semibold transition-opacity hover:opacity-80"
-                        style={{ backgroundColor: "#1B4FD8", color: "#fff" }}
-                      >
-                        Registrarme gratis
-                      </button>
-                    </>
-                  )}
-                </div>
-              )}
-
-              <div ref={bottomRef} />
-            </div>
-
-            {/* ── INPUT ── */}
-            <div
-              className="flex-shrink-0 px-4 py-4"
-              style={{ borderTop: "1px solid rgba(255,255,255,0.07)" }}
-            >
-              <div
-                className="flex items-end gap-2 rounded-xl px-3 py-2"
-                style={{
-                  backgroundColor: "rgba(255,255,255,0.05)",
-                  border: "1px solid rgba(255,255,255,0.10)",
-                }}
-              >
-                <textarea
-                  ref={inputRef}
-                  rows={1}
-                  value={input}
-                  onChange={handleInput}
-                  onKeyDown={handleKeyDown}
-                  placeholder={config.placeholder}
-                  disabled={cargando || limiteAlcanzado}
-                  className="flex-1 bg-transparent text-white text-sm placeholder-white/30 outline-none resize-none leading-relaxed py-1"
-                  style={{ maxHeight: 120 }}
-                />
-                <button
-                  onClick={enviar}
-                  disabled={!input.trim() || cargando}
-                  className="flex-shrink-0 w-8 h-8 rounded-lg flex items-center justify-center transition-all mb-0.5"
-                  style={{
-                    backgroundColor: input.trim() && !cargando ? config.color : "rgba(255,255,255,0.08)",
-                    opacity: input.trim() && !cargando ? 1 : 0.4,
-                  }}
-                  aria-label="Enviar"
-                >
-                  <Send size={14} className="text-white" style={{ transform: "translateX(1px)" }} />
-                </button>
-              </div>
-
-              {/* Nota pie */}
-              <p className="text-center text-white/20 text-xs mt-2">
-                {sinLimite
-                  ? "Acceso ilimitado · XpertAuth"
-                  : "Shift+Enter para nueva línea · Enter para enviar"}
-              </p>
-            </div>
-          </>
-        )}
+          {/* Nota pie */}
+          <p className="text-center text-white/20 text-xs mt-2">
+            {sinLimite
+              ? "Acceso ilimitado · XpertAuth"
+              : "Shift+Enter para nueva línea · Enter para enviar"}
+          </p>
+        </div>
       </div>
     </>
   );
