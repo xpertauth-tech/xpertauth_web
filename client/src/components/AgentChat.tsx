@@ -18,7 +18,7 @@ interface AgentChatProps {
   email: string;
   esAutenticado: boolean;
   onClose: () => void;
-  onLimiteAlcanzado: () => void; // dispara pantalla de límite en AgentModal
+  onLimiteAlcanzado: () => void;
 }
 
 // ─── Config por agente ───────────────────────────────────────────────────────
@@ -31,6 +31,7 @@ const AGENTE_CONFIG: Record<Agente, {
   tagline: string;
   mensajeBienvenida: string;
   placeholder: string;
+  disclaimer: string;
 }> = {
   LEX: {
     color: "#1B4FD8",
@@ -41,6 +42,7 @@ const AGENTE_CONFIG: Record<Agente, {
     mensajeBienvenida:
       "Hola, soy LEX. Estoy especializado en normativa de transporte especial — permisos de circulación, autorizaciones DGT y SCT Catalunya, restricciones, vehículos de acompañamiento y más.\n\n¿Cuál es tu consulta?",
     placeholder: "Escribe tu consulta normativa…",
+    disclaimer: "LEX es IA y puede cometer errores. Verifica siempre la información antes de actuar.",
   },
   NOVA: {
     color: "#4D9FEC",
@@ -51,6 +53,7 @@ const AGENTE_CONFIG: Record<Agente, {
     mensajeBienvenida:
       "Hola, soy NOVA. Te ayudo a entender qué puede hacer la IA por tu negocio: qué herramientas existen, cómo empezar sin invertir y qué procesos se pueden automatizar según tu sector.\n\n¿En qué puedo ayudarte?",
     placeholder: "Pregúntame sobre IA para tu empresa…",
+    disclaimer: "NOVA es IA y puede cometer errores. Contrasta siempre la información.",
   },
   ALMA: {
     color: "#E8620A",
@@ -61,6 +64,7 @@ const AGENTE_CONFIG: Record<Agente, {
     mensajeBienvenida:
       "Hola, soy ALMA. Estoy aquí para ayudarte con el móvil, WhatsApp, la banca online o cualquier duda sobre tecnología, con calma y sin prisa.\n\nTambién puedo informarte sobre los cursos presenciales gratuitos de XpertAuth en Figueres.\n\n¿Qué necesitas?",
     placeholder: "Escríbeme tu duda…",
+    disclaimer: "ALMA es IA y puede cometer errores. Si tienes dudas, consúltalo con alguien de confianza.",
   },
 };
 
@@ -201,7 +205,6 @@ function Burbuja({
 
   return (
     <div className={`flex gap-3 ${esAsistente ? "justify-start" : "justify-end"}`}>
-      {/* Avatar agente */}
       {esAsistente && (
         <div
           className="flex-shrink-0 w-8 h-8 rounded-lg flex items-center justify-center text-base mt-0.5"
@@ -212,7 +215,6 @@ function Burbuja({
       )}
 
       <div className={`max-w-[82%] space-y-2 ${esAsistente ? "" : "items-end flex flex-col"}`}>
-        {/* Burbuja texto */}
         {textoLimpio && (
           <div
             className="px-4 py-3 rounded-2xl text-sm leading-relaxed"
@@ -234,7 +236,6 @@ function Burbuja({
           </div>
         )}
 
-        {/* Botones contextuales */}
         {botones.length > 0 && (
           <div className="flex flex-wrap gap-2 mt-1">
             {botones.map((btn, i) => {
@@ -326,7 +327,6 @@ export default function AgentChat({
   const [cargando, setCargando] = useState(false);
   const [limiteAlcanzado, setLimiteAlcanzado] = useState(false);
 
-  // Email corporativo: sin límite nunca
   const EMAIL_CORPORATIVO = "eche.jose@gmail.com";
   const esCorporativo = email === EMAIL_CORPORATIVO;
   const sinLimite = esAutenticado || esCorporativo;
@@ -334,10 +334,8 @@ export default function AgentChat({
   const bottomRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLTextAreaElement>(null);
 
-  // LEX habilitado
   const lexDeshabilitado = false;
 
-  // Scroll automático al último mensaje
   useEffect(() => {
     if (abierto) {
       bottomRef.current?.scrollIntoView({ behavior: "smooth" });
@@ -345,7 +343,6 @@ export default function AgentChat({
     }
   }, [mensajes, abierto]);
 
-  // Reset al cambiar de agente
   useEffect(() => {
     setMensajes([
       {
@@ -398,15 +395,12 @@ export default function AgentChat({
         },
       ]);
 
-      // Gestión de límite
       if (!sinLimite) {
         if (esAutenticado) {
-          // Registrados: el backend controla el límite y lo señala
           if (data.limitAlcanzado) {
             setLimiteAlcanzado(true);
           }
         } else {
-          // Anónimos: localStorage
           incrementarConsultas(email);
           const consultasTras = getConsultas(email);
           if (consultasTras >= LIMITE) {
@@ -436,11 +430,10 @@ export default function AgentChat({
     }
   }
 
-  // Altura dinámica del textarea
   function handleInput(e: React.ChangeEvent<HTMLTextAreaElement>) {
     if (limiteAlcanzado) {
       e.preventDefault();
-      onLimiteAlcanzado(); // modal al primer keystroke
+      onLimiteAlcanzado();
       return;
     }
     setInput(e.target.value);
@@ -454,7 +447,6 @@ export default function AgentChat({
 
   return (
     <>
-      {/* Backdrop semitransparente (solo en móvil) */}
       {abierto && (
         <div
           className="fixed inset-0 z-40 md:hidden"
@@ -463,7 +455,6 @@ export default function AgentChat({
         />
       )}
 
-      {/* Panel lateral */}
       <div
         className="fixed top-0 right-0 h-full z-50 flex flex-col shadow-2xl"
         style={{
@@ -482,7 +473,6 @@ export default function AgentChat({
             background: `linear-gradient(135deg, ${config.colorBg} 0%, transparent 100%)`,
           }}
         >
-          {/* Avatar */}
           <div
             className="w-9 h-9 rounded-xl flex items-center justify-center text-lg flex-shrink-0"
             style={{ backgroundColor: config.colorBg, border: `1px solid ${config.colorBorder}` }}
@@ -490,7 +480,6 @@ export default function AgentChat({
             {config.emoji}
           </div>
 
-          {/* Nombre + tagline */}
           <div className="flex-1 min-w-0">
             <p className="text-white font-bold text-sm leading-tight">{agente}</p>
             <p className="text-xs leading-tight truncate" style={{ color: config.color }}>
@@ -498,14 +487,12 @@ export default function AgentChat({
             </p>
           </div>
 
-          {/* Consultas restantes (solo visitantes) */}
           {!esAutenticado && consultasRestantes !== null && (
             <span className="text-xs text-white/30 flex-shrink-0">
               {consultasRestantes} consulta{consultasRestantes !== 1 ? "s" : ""} restante{consultasRestantes !== 1 ? "s" : ""}
             </span>
           )}
 
-          {/* Cerrar */}
           <button
             onClick={onClose}
             className="flex-shrink-0 text-white/40 hover:text-white/80 transition-colors ml-1"
@@ -521,7 +508,6 @@ export default function AgentChat({
             <Burbuja key={i} mensaje={msg} config={config} />
           ))}
 
-          {/* Indicador de escritura */}
           {cargando && (
             <div className="flex gap-3 justify-start">
               <div
@@ -540,7 +526,6 @@ export default function AgentChat({
             </div>
           )}
 
-          {/* Aviso inline de límite alcanzado */}
           {limiteAlcanzado && (
             <div
               className="mx-2 px-4 py-3 rounded-xl text-center text-sm"
@@ -580,7 +565,7 @@ export default function AgentChat({
 
         {/* ── INPUT ── */}
         <div
-          className="flex-shrink-0 px-4 py-4"
+          className="flex-shrink-0 px-4 pb-4 pt-3"
           style={{ borderTop: "1px solid rgba(255,255,255,0.07)" }}
         >
           <div
@@ -615,11 +600,9 @@ export default function AgentChat({
             </button>
           </div>
 
-          {/* Nota pie */}
-          <p className="text-center text-white/20 text-xs mt-2">
-            {sinLimite
-              ? "Acceso ilimitado · XpertAuth"
-              : "Shift+Enter para nueva línea · Enter para enviar"}
+          {/* Disclaimer IA */}
+          <p className="text-center text-white/25 text-xs mt-2 leading-snug px-1">
+            {config.disclaimer}
           </p>
         </div>
       </div>
