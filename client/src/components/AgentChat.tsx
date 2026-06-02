@@ -601,7 +601,7 @@ export default function AgentChat({
           </div>
 
           {/* Disclaimer IA */}
-          <p className="text-center text-white/25 text-xs mt-2 leading-snug px-1">
+          <p className="text-center text-white/50 text-xs mt-2 leading-snug px-1">
             {config.disclaimer}
           </p>
         </div>
