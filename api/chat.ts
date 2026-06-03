@@ -290,9 +290,16 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
     return res.status(405).json({ error: "Method not allowed" });
   }
 
-  const { messages, agente: agenteBody, email, esAutenticado } = req.body as {
+  const {
+    messages,
+    agente: agenteBody,
+    agenteForzado,
+    email,
+    esAutenticado,
+  } = req.body as {
     messages: Mensaje[];
     agente?: Agente;
+    agenteForzado?: Agente;
     email?: string;
     esAutenticado?: boolean;
   };
@@ -301,10 +308,11 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
     return res.status(400).json({ error: "messages requerido" });
   }
 
-  // Determinar agente
+  // Determinar agente: agenteForzado > agente > detección automática
+  const agenteRaw = agenteForzado ?? agenteBody;
   const agente: Agente =
-    agenteBody === "LEX" || agenteBody === "NOVA" || agenteBody === "ALMA"
-      ? agenteBody
+    agenteRaw === "LEX" || agenteRaw === "NOVA" || agenteRaw === "ALMA"
+      ? agenteRaw
       : detectarAgente(messages);
 
   try {
