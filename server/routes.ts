@@ -59,7 +59,7 @@ async function getRagContext(query: string): Promise<string> {
     });
     const embedding = embeddingRes.data[0].embedding;
 
-    const { data, error } = await supabase.rpc("match_lex_documentos", {
+    const { data, error } = await supabase.schema("lex").rpc("match_lex_documentos", {
       query_embedding: embedding,
       match_threshold: 0.55,
       match_count: 10,
@@ -260,7 +260,7 @@ async function verificarLimite(email: string): Promise<{ permitido: boolean; tot
 
 // ---------- Registrar sesión ----------
 async function registrarSesion(email: string, agente: string) {
-  await supabase.from("agent_sessions").insert({
+  await supabase.schema("web").from("agent_sessions").insert({
     email,
     nombre: email.split("@")[0],
     topic: agente,
