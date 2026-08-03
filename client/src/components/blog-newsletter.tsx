@@ -3,7 +3,7 @@ import { motion } from "framer-motion";
 import { FileText, Mail, ArrowRight, Calendar, Loader2, CheckCircle } from "lucide-react";
 import { useTranslations } from "@/i18n/context";
 
-const SUPABASE_URL = "https://dcuvptwwtdhlepvcttvx.supabase.co";
+const SUPABASE_URL = import.meta.env.VITE_SUPABASE_URL;
 
 const gradientStyle: React.CSSProperties = {
   background: "linear-gradient(135deg,#ffffff 0%,#4D9FEC 40%,#1B4FD8 70%,#ffffff 100%)",
@@ -24,6 +24,7 @@ async function fetchPosts() {
       headers: {
         apikey: key,
         Authorization: `Bearer ${key}`,
+        "Accept-Profile": "web",
       },
     }
   );
@@ -40,6 +41,7 @@ async function fetchNewsletters() {
       headers: {
         apikey: key,
         Authorization: `Bearer ${key}`,
+        "Accept-Profile": "web",
       },
     }
   );
@@ -68,7 +70,7 @@ function BlogSignupInline() {
     try {
       const check = await fetch(
         `${SUPABASE_URL}/rest/v1/suscriptores?email=eq.${encodeURIComponent(email)}&canal=eq.blog&select=id`,
-        { headers: { apikey: key, Authorization: `Bearer ${key}` } }
+        { headers: { apikey: key, Authorization: `Bearer ${key}`, "Accept-Profile": "web" } }
       );
       const existing = await check.json();
       if (existing.length > 0) { setStatus("duplicate"); return; }
@@ -79,6 +81,7 @@ function BlogSignupInline() {
           "Content-Type": "application/json",
           apikey: key,
           Authorization: `Bearer ${key}`,
+          "Content-Profile": "web",
           Prefer: "return=minimal",
         },
         body: JSON.stringify({ email, canal: "blog" }),
@@ -141,7 +144,7 @@ function NewsletterSignupInline() {
     try {
       const check = await fetch(
         `${SUPABASE_URL}/rest/v1/suscriptores?email=eq.${encodeURIComponent(email)}&canal=eq.newsletter&select=id`,
-        { headers: { apikey: key, Authorization: `Bearer ${key}` } }
+        { headers: { apikey: key, Authorization: `Bearer ${key}`, "Accept-Profile": "web" } }
       );
       const existing = await check.json();
       if (existing.length > 0) { setStatus("duplicate"); return; }
@@ -152,6 +155,7 @@ function NewsletterSignupInline() {
           "Content-Type": "application/json",
           apikey: key,
           Authorization: `Bearer ${key}`,
+          "Content-Profile": "web",
           Prefer: "return=minimal",
         },
         body: JSON.stringify({ email, canal: "newsletter" }),
