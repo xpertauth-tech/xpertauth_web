@@ -170,6 +170,7 @@ export default function Newsletter() {
           headers: {
             apikey: SUPABASE_ANON_KEY,
             Authorization: "Bearer " + SUPABASE_ANON_KEY,
+            "Accept-Profile": "web",
           },
         });
         const data = await res.json();
@@ -195,6 +196,7 @@ export default function Newsletter() {
           apikey: SUPABASE_ANON_KEY,
           Authorization: "Bearer " + SUPABASE_ANON_KEY,
           "Content-Type": "application/json",
+          "Content-Profile": "web",
           Prefer: "return=minimal",
         },
         body: JSON.stringify({ email, canal: "newsletter" }),
