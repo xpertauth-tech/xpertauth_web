@@ -4,6 +4,7 @@ import Navbar from "@/components/navbar";
 import Footer from "@/components/footer";
 import ContactModal from "@/components/ContactModal";
 
+// Rebuild forzado 2026-08-03: recoger variables de entorno actualizadas (Supabase Helsinki)
 const PAGE_SIZE = 10;
 
 interface Post {
