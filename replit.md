@@ -75,7 +75,7 @@ Single-page landing site with 11 sections:
 - `client/src/components/footer.tsx` - Footer
 
 ## Supabase Storage
-- **Project URL**: `https://dcuvptwwtdhlepvcttvx.supabase.co`
+- **Project URL**: `https://supabase.xpertauth.com`
 - **Bucket**: `web-images` (public)
 - **Logo**: `logo/logo_xpertauth_icon_v1.png`
 - **How It Works images**: `como-funciona/paso{1-4}_*_v1.webp`
