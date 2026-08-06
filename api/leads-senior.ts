@@ -5,7 +5,8 @@ import { z } from "zod";
 
 const supabase = createClient(
   process.env.VITE_SUPABASE_URL!,
-  process.env.SUPABASE_SERVICE_KEY!
+  process.env.SUPABASE_SERVICE_KEY!,
+  { db: { schema: "web" } }
 );
 
 const resend = new Resend(process.env.RESEND_API_KEY);
@@ -76,7 +77,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
               </tr>
             </table>
             <div style="margin-top: 24px;">
-              <a href="https://supabase.com/dashboard/project/dcuvptwwtdhlepvcttvx/editor/36867"
+              <a href="https://supabase.xpertauth.com/project/default/editor"
                 style="background: #E8620A; color: white; padding: 12px 24px; border-radius: 8px; text-decoration: none; font-weight: 600; display: inline-block;">
                 Ver en Supabase →
               </a>

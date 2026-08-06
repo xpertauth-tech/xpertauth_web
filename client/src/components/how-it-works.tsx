@@ -2,7 +2,7 @@ import { useRef, useEffect, useState, useCallback } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useTranslations } from "@/i18n/context";
 
-const SUPABASE_BASE = "https://dcuvptwwtdhlepvcttvx.supabase.co/storage/v1/object/public/web-images";
+const SUPABASE_BASE = "https://supabase.xpertauth.com/storage/v1/object/public/web-images";
 
 const stepImages = [
   `${SUPABASE_BASE}/como-funciona/paso1_registro_v1.webp`,

@@ -254,7 +254,7 @@ const translations = {
 
 // ─── PLACEHOLDER foto ─────────────────────────────────────────────────────────
 const FOTO_URL =
-  "https://dcuvptwwtdhlepvcttvx.supabase.co/storage/v1/object/public/web-images/equipo/jose-luis_foto_v1.webp";
+  "https://supabase.xpertauth.com/storage/v1/object/public/web-images/equipo/jose-luis_foto_v1.webp";
 
 // ─── COLORES TARJETAS POR SLOT ────────────────────────────────────────────────
 const SLOT_BG = [

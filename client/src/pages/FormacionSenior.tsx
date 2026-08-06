@@ -1101,7 +1101,7 @@ export default function FormacionSenior() {
               </p>
               <div style={{ display: "flex", alignItems: "center", gap: 14 }}>
                 <img
-                  src="https://dcuvptwwtdhlepvcttvx.supabase.co/storage/v1/object/public/web-images/equipo/jose-luis_foto_v1.webp"
+                  src="https://supabase.xpertauth.com/storage/v1/object/public/web-images/equipo/jose-luis_foto_v1.webp"
                   alt="José Luis"
                   style={{
                     width: 44, height: 44, borderRadius: "50%",

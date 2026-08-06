@@ -64,7 +64,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
               </tr>
             </table>
             <div style="margin-top: 24px;">
-              <a href="https://supabase.com/dashboard/project/dcuvptwwtdhlepvcttvx/editor/socios"
+              <a href="https://supabase.xpertauth.com/project/default/editor"
                 style="background: #1B4FD8; color: white; padding: 12px 24px; border-radius: 8px; text-decoration: none; font-weight: 600; display: inline-block;">
                 Ver en Supabase →
               </a>

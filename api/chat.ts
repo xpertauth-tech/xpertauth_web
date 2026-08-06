@@ -8,7 +8,7 @@ import OpenAI from "openai";
 const anthropic = new Anthropic({ apiKey: process.env.ANTHROPIC_API_KEY });
 const openai = new OpenAI({ apiKey: process.env.OPENAI_API_KEY });
 const supabase = createClient(
-  "https://dcuvptwwtdhlepvcttvx.supabase.co",
+  process.env.VITE_SUPABASE_URL!,
   process.env.SUPABASE_SERVICE_KEY!
 );
 
@@ -279,7 +279,7 @@ async function recuperarFragmentos(pregunta: string): Promise<string> {
     });
     const embedding = embeddingRes.data[0].embedding;
 
-    const { data, error } = await supabase.rpc("match_lex_documentos", {
+    const { data, error } = await supabase.schema("lex").rpc("match_lex_documentos", {
       query_embedding: embedding,
       match_threshold: 0.55,
       match_count: 10,

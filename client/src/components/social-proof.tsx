@@ -1,7 +1,7 @@
 import { motion } from "framer-motion";
 import { useTranslations } from "@/i18n/context";
 
-const SUPABASE_BASE = "https://dcuvptwwtdhlepvcttvx.supabase.co/storage/v1/object/public/web-images";
+const SUPABASE_BASE = "https://supabase.xpertauth.com/storage/v1/object/public/web-images";
 
 const testimonialBgs = [
   `${SUPABASE_BASE}/testimonials/carlos_bg_v1.webp`,

@@ -2,7 +2,7 @@ import { motion } from "framer-motion";
 import { useI18n } from "@/i18n/context";
 import { useAgent } from "@/App";
 
-const SUPABASE_BASE = "https://dcuvptwwtdhlepvcttvx.supabase.co/storage/v1/object/public/web-images";
+const SUPABASE_BASE = "https://supabase.xpertauth.com/storage/v1/object/public/web-images";
 const JOSE_LUIS_PHOTO = `${SUPABASE_BASE}/equipo/jose-luis_foto_v1.webp`;
 const LEX_AVATAR = `${SUPABASE_BASE}/equipo/lex_avatar_v1.webp`;
 const NOVA_AVATAR = `${SUPABASE_BASE}/equipo/nova_avatar_v1.webp`;

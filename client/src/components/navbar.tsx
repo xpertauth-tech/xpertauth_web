@@ -6,7 +6,7 @@ import { useLocation } from "wouter";
 import LocaleSwitcher from "./locale-switcher";
 import { createClient } from "@supabase/supabase-js";
 
-const LOGO_URL = "https://dcuvptwwtdhlepvcttvx.supabase.co/storage/v1/object/public/web-images/logo/logo_xpertauth_icon_v1.png";
+const LOGO_URL = "https://supabase.xpertauth.com/storage/v1/object/public/web-images/logo/logo_xpertauth_icon_v1.png";
 
 const supabase = createClient(
   import.meta.env.VITE_SUPABASE_URL,

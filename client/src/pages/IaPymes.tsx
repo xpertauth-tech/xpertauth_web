@@ -454,7 +454,7 @@ const toolLogos: Record<string, ToolConfig> = {
   Sage:       { renderIcon: () => (
     <span style={{ color: "white", fontWeight: 700, fontSize: 13, letterSpacing: "-0.5px", opacity: 0.9, fontFamily: "Arial, sans-serif" }}>sage</span>
   ), bg: "rgba(0,180,100,0.15)", border: "rgba(0,180,100,0.4)" },
-  IA:         { url: "https://dcuvptwwtdhlepvcttvx.supabase.co/storage/v1/object/public/web-images/logo/logo_xpertauth_icon_v1.png", bg: "rgba(139,92,246,0.15)", border: "rgba(139,92,246,0.4)" },
+  IA:         { url: "https://supabase.xpertauth.com/storage/v1/object/public/web-images/logo/logo_xpertauth_icon_v1.png", bg: "rgba(139,92,246,0.15)", border: "rgba(139,92,246,0.4)" },
 };
 
 // ─── Flecha animada con pulso de flujo ───────────────────────────────────────

@@ -3,7 +3,7 @@ import { motion } from "framer-motion";
 import { Heart, Users, MapPin, Clock, Smartphone } from "lucide-react";
 import { useTranslations } from "@/i18n/context";
 
-const SUPABASE_BASE = "https://dcuvptwwtdhlepvcttvx.supabase.co/storage/v1/object/public/web-images";
+const SUPABASE_BASE = "https://supabase.xpertauth.com/storage/v1/object/public/web-images";
 
 const featureIcons = [Users, MapPin, Clock, Smartphone];
 
