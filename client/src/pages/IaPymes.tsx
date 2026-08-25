@@ -62,68 +62,69 @@ const casosUsoByLocale: Record<string, CasoUso[]> = {
   es: [
     {
       num: "01",
-      titulo: "Clasificar emails y registrar incidencias",
-      descripcion: "Cada email de cliente se clasifica por tipo automaticamente. Las incidencias se registran en Sheets y se confirma la recepcion al cliente sin intervenir.",
+      titulo: "Alerta de caducidad de permisos y documentacion",
+      descripcion: "Cada permiso (AE/AEG/AET), seguro y certificado tiene su fecha de caducidad en Sheets. 30 dias antes del vencimiento se envia un aviso automatico por WhatsApp y email para renovarlo a tiempo.",
       herramientas: [
-        { nombre: "Gmail", color: "#EA4335" },
         { nombre: "Sheets", color: "#34A853" },
+        { nombre: "WhatsApp", color: "#25D366" },
         { nombre: "Gmail", color: "#EA4335" },
       ],
-      transporte: false,
+      transporte: true,
     },
     {
       num: "02",
-      titulo: "Nuevo lead entra solo en CRM con bienvenida",
-      descripcion: "El formulario web crea el contacto en tu CRM y dispara un email de bienvenida personalizado. Sin tocar nada.",
+      titulo: "Generacion automatica del expediente de permiso especial",
+      descripcion: "Se rellena un formulario con los datos del vehiculo y la carga. La IA genera el borrador del expediente con los documentos necesarios y lo deja listo en Drive para enviarlo a DGT o SCT.",
       herramientas: [
         { nombre: "Formulario", color: "#7B68EE" },
-        { nombre: "HubSpot", color: "#FF6B35" },
-        { nombre: "Gmail", color: "#EA4335" },
+        { nombre: "IA", color: "#8B5CF6" },
+        { nombre: "Drive", color: "#4285F4" },
       ],
-      transporte: false,
+      transporte: true,
     },
     {
       num: "03",
-      titulo: "Mensaje de cliente genera tarea al equipo",
-      descripcion: "Un mensaje de cliente en WhatsApp crea automaticamente una tarea en Notion y notifica al responsable en Slack.",
-      herramientas: [
-        { nombre: "WhatsApp", color: "#25D366" },
-        { nombre: "Notion", color: "#888888" },
-        { nombre: "Slack", color: "#4A154B" },
-      ],
-      transporte: false,
-    },
-    {
-      num: "04",
-      titulo: "Extrae datos de facturas a tu hoja de costes",
-      descripcion: "Subes la factura PDF a Drive. La IA extrae importe, proveedor y fecha. Los datos se vuelcan solos en tu hoja de contabilidad.",
+      titulo: "Verificacion de documentacion ADR antes de la salida",
+      descripcion: "Se sube la ficha de seguridad ADR de la mercancia peligrosa a Drive. La IA extrae la clase y el codigo UN, y comprueba en Sheets que el vehiculo tiene la homologacion correspondiente antes de autorizar la salida.",
       herramientas: [
         { nombre: "Drive", color: "#4285F4" },
         { nombre: "IA", color: "#8B5CF6" },
         { nombre: "Sheets", color: "#34A853" },
       ],
-      transporte: false,
+      transporte: true,
+    },
+    {
+      num: "04",
+      titulo: "Checklist de avisos obligatorios segun itinerario",
+      descripcion: "Al planificar una ruta con cargas de grandes dimensiones, la IA genera el checklist de avisos obligatorios (Guardia Civil, ayuntamientos afectados) segun el itinerario y recuerda cuando enviarlos.",
+      herramientas: [
+        { nombre: "Calendar", color: "#4285F4" },
+        { nombre: "Sheets", color: "#34A853" },
+        { nombre: "WhatsApp", color: "#25D366" },
+      ],
+      transporte: true,
     },
     {
       num: "05",
-      titulo: "Recordatorio automatico de cita al cliente",
-      descripcion: "Creas el evento en Calendar. 24h antes el cliente recibe automaticamente un WhatsApp con la confirmacion y los detalles.",
+      titulo: "Seguimiento de flota: incidencias en tiempo real",
+      descripcion: "Un conductor reporta una incidencia por WhatsApp (averia, retraso, control). Se registra automaticamente en la hoja de seguimiento de flota y se notifica al responsable en Slack.",
       herramientas: [
-        { nombre: "Calendar", color: "#4285F4" },
         { nombre: "WhatsApp", color: "#25D366" },
+        { nombre: "Sheets", color: "#34A853" },
+        { nombre: "Slack", color: "#4A154B" },
       ],
-      transporte: false,
+      transporte: true,
     },
     {
       num: "06",
-      titulo: "Informe semanal de ventas sin tocarlo",
-      descripcion: "Cada lunes a las 8h se genera el informe de ventas de la semana anterior y se envia automaticamente a los responsables.",
+      titulo: "Expedientes abiertos con SCT y DGT",
+      descripcion: "Cada notificacion de la Seccion de Coordinacion de Transportes o de la DGT se registra automaticamente como expediente en Notion con su plazo de respuesta, para que ninguna fecha limite se pase por alto.",
       herramientas: [
+        { nombre: "Email", color: "#EA4335" },
+        { nombre: "Notion", color: "#888888" },
         { nombre: "Sheets", color: "#34A853" },
-        { nombre: "PDF", color: "#F72585" },
-        { nombre: "Gmail", color: "#EA4335" },
       ],
-      transporte: false,
+      transporte: true,
     },
     {
       num: "07",
@@ -152,68 +153,69 @@ const casosUsoByLocale: Record<string, CasoUso[]> = {
   ca: [
     {
       num: "01",
-      titulo: "Classificar emails i registrar incidencies",
-      descripcion: "Cada email de client es classifica per tipus automaticament. Les incidencies es registren a Sheets i es confirma la recepcio al client sense intervenir.",
+      titulo: "Alerta de caducitat de permisos i documentacio",
+      descripcion: "Cada permis (AE/AEG/AET), asseguranca i certificat te la seva data de caducitat a Sheets. 30 dies abans del venciment s'envia un avis automatic per WhatsApp i email per renovar-lo a temps.",
       herramientas: [
-        { nombre: "Gmail", color: "#EA4335" },
         { nombre: "Sheets", color: "#34A853" },
+        { nombre: "WhatsApp", color: "#25D366" },
         { nombre: "Gmail", color: "#EA4335" },
       ],
-      transporte: false,
+      transporte: true,
     },
     {
       num: "02",
-      titulo: "Nou lead entra sol al CRM amb benvinguda",
-      descripcion: "El formulari web crea el contacte al teu CRM i dispara un email de benvinguda personalitzat. Sense tocar res.",
+      titulo: "Generacio automatica de l'expedient de permis especial",
+      descripcion: "S'emplena un formulari amb les dades del vehicle i la carrega. La IA genera l'esborrany de l'expedient amb els documents necessaris i el deixa llest a Drive per enviar-lo a DGT o SCT.",
       herramientas: [
         { nombre: "Formulario", color: "#7B68EE" },
-        { nombre: "HubSpot", color: "#FF6B35" },
-        { nombre: "Gmail", color: "#EA4335" },
+        { nombre: "IA", color: "#8B5CF6" },
+        { nombre: "Drive", color: "#4285F4" },
       ],
-      transporte: false,
+      transporte: true,
     },
     {
       num: "03",
-      titulo: "Missatge de client genera tasca a l'equip",
-      descripcion: "Un missatge de client a WhatsApp crea automaticament una tasca a Notion i notifica el responsable a Slack.",
-      herramientas: [
-        { nombre: "WhatsApp", color: "#25D366" },
-        { nombre: "Notion", color: "#888888" },
-        { nombre: "Slack", color: "#4A154B" },
-      ],
-      transporte: false,
-    },
-    {
-      num: "04",
-      titulo: "Extreu dades de factures al full de costos",
-      descripcion: "Puges la factura PDF a Drive. La IA extreu import, proveidora i data. Les dades s'aboquen soles al teu full de comptabilitat.",
+      titulo: "Verificacio de documentacio ADR abans de la sortida",
+      descripcion: "Es puja la fitxa de seguretat ADR de la mercaderia perillosa a Drive. La IA extreu la classe i el codi UN, i comprova a Sheets que el vehicle te l'homologacio corresponent abans d'autoritzar la sortida.",
       herramientas: [
         { nombre: "Drive", color: "#4285F4" },
         { nombre: "IA", color: "#8B5CF6" },
         { nombre: "Sheets", color: "#34A853" },
       ],
-      transporte: false,
+      transporte: true,
+    },
+    {
+      num: "04",
+      titulo: "Checklist d'avisos obligatoris segons l'itinerari",
+      descripcion: "En planificar una ruta amb carregues de grans dimensions, la IA genera el checklist d'avisos obligatoris (Guardia Civil, ajuntaments afectats) segons l'itinerari i recorda quan enviar-los.",
+      herramientas: [
+        { nombre: "Calendar", color: "#4285F4" },
+        { nombre: "Sheets", color: "#34A853" },
+        { nombre: "WhatsApp", color: "#25D366" },
+      ],
+      transporte: true,
     },
     {
       num: "05",
-      titulo: "Recordatori automatic de cita al client",
-      descripcion: "Crees l'event a Calendar. 24h abans el client rep automaticament un WhatsApp amb la confirmacio i els detalls.",
+      titulo: "Seguiment de flota: incidencies en temps real",
+      descripcion: "Un conductor reporta una incidencia per WhatsApp (averia, retard, control). Es registra automaticament al full de seguiment de flota i es notifica al responsable a Slack.",
       herramientas: [
-        { nombre: "Calendar", color: "#4285F4" },
         { nombre: "WhatsApp", color: "#25D366" },
+        { nombre: "Sheets", color: "#34A853" },
+        { nombre: "Slack", color: "#4A154B" },
       ],
-      transporte: false,
+      transporte: true,
     },
     {
       num: "06",
-      titulo: "Informe setmanal de vendes sense tocar-lo",
-      descripcion: "Cada dilluns a les 8h es genera l'informe de vendes de la setmana anterior i s'envia automaticament als responsables.",
+      titulo: "Expedients oberts amb SCT i DGT",
+      descripcion: "Cada notificacio de la Seccio de Coordinacio de Transports o de la DGT es registra automaticament com a expedient a Notion amb el seu termini de resposta, perque cap data limit passi per alt.",
       herramientas: [
+        { nombre: "Email", color: "#EA4335" },
+        { nombre: "Notion", color: "#888888" },
         { nombre: "Sheets", color: "#34A853" },
-        { nombre: "PDF", color: "#F72585" },
-        { nombre: "Gmail", color: "#EA4335" },
       ],
-      transporte: false,
+      transporte: true,
     },
     {
       num: "07",
@@ -242,68 +244,69 @@ const casosUsoByLocale: Record<string, CasoUso[]> = {
   en: [
     {
       num: "01",
-      titulo: "Classify emails and log incidents",
-      descripcion: "Every customer email is classified by type automatically. Incidents are logged in Sheets and the customer receives a confirmation without anyone intervening.",
+      titulo: "Permit and document expiry alerts",
+      descripcion: "Every permit (AE/AEG/AET), insurance policy and certificate has its expiry date logged in Sheets. 30 days before it expires, an automatic reminder is sent via WhatsApp and email so it gets renewed on time.",
       herramientas: [
-        { nombre: "Gmail", color: "#EA4335" },
         { nombre: "Sheets", color: "#34A853" },
+        { nombre: "WhatsApp", color: "#25D366" },
         { nombre: "Gmail", color: "#EA4335" },
       ],
-      transporte: false,
+      transporte: true,
     },
     {
       num: "02",
-      titulo: "New lead enters CRM alone with welcome email",
-      descripcion: "The web form creates the contact in your CRM and triggers a personalised welcome email. No manual input needed.",
+      titulo: "Automatic special permit application file generation",
+      descripcion: "A form is filled in with the vehicle and load details. AI drafts the application file with the required documents and leaves it ready in Drive to send to DGT or SCT.",
       herramientas: [
         { nombre: "Formulario", color: "#7B68EE" },
-        { nombre: "HubSpot", color: "#FF6B35" },
-        { nombre: "Gmail", color: "#EA4335" },
+        { nombre: "IA", color: "#8B5CF6" },
+        { nombre: "Drive", color: "#4285F4" },
       ],
-      transporte: false,
+      transporte: true,
     },
     {
       num: "03",
-      titulo: "Customer message creates team task",
-      descripcion: "A customer WhatsApp message automatically creates a task in Notion and notifies the responsible person in Slack.",
-      herramientas: [
-        { nombre: "WhatsApp", color: "#25D366" },
-        { nombre: "Notion", color: "#888888" },
-        { nombre: "Slack", color: "#4A154B" },
-      ],
-      transporte: false,
-    },
-    {
-      num: "04",
-      titulo: "Extract invoice data to your cost sheet",
-      descripcion: "Upload the PDF invoice to Drive. AI extracts amount, supplier and date. The data flows automatically into your accounting spreadsheet.",
+      titulo: "ADR documentation check before departure",
+      descripcion: "The ADR safety data sheet for the dangerous goods is uploaded to Drive. AI extracts the hazard class and UN code, and checks in Sheets that the vehicle has the matching approval before departure is authorised.",
       herramientas: [
         { nombre: "Drive", color: "#4285F4" },
         { nombre: "IA", color: "#8B5CF6" },
         { nombre: "Sheets", color: "#34A853" },
       ],
-      transporte: false,
+      transporte: true,
+    },
+    {
+      num: "04",
+      titulo: "Mandatory notice checklist based on the route",
+      descripcion: "When planning a route for oversized loads, AI generates the checklist of mandatory notices (Guardia Civil, affected town councils) based on the itinerary and reminds you when to send them.",
+      herramientas: [
+        { nombre: "Calendar", color: "#4285F4" },
+        { nombre: "Sheets", color: "#34A853" },
+        { nombre: "WhatsApp", color: "#25D366" },
+      ],
+      transporte: true,
     },
     {
       num: "05",
-      titulo: "Automatic appointment reminder to customer",
-      descripcion: "You create the event in Calendar. 24h before, the customer automatically receives a WhatsApp with the confirmation and details.",
+      titulo: "Fleet tracking: real-time incidents",
+      descripcion: "A driver reports an incident via WhatsApp (breakdown, delay, checkpoint). It's automatically logged in the fleet tracking sheet and the person in charge is notified on Slack.",
       herramientas: [
-        { nombre: "Calendar", color: "#4285F4" },
         { nombre: "WhatsApp", color: "#25D366" },
+        { nombre: "Sheets", color: "#34A853" },
+        { nombre: "Slack", color: "#4A154B" },
       ],
-      transporte: false,
+      transporte: true,
     },
     {
       num: "06",
-      titulo: "Weekly sales report without touching it",
-      descripcion: "Every Monday at 8am the previous week's sales report is generated and automatically sent to the relevant people.",
+      titulo: "Open files with SCT and DGT",
+      descripcion: "Every notice from the Transport Coordination Section or the DGT is automatically logged as a case file in Notion with its response deadline, so no deadline is ever missed.",
       herramientas: [
+        { nombre: "Email", color: "#EA4335" },
+        { nombre: "Notion", color: "#888888" },
         { nombre: "Sheets", color: "#34A853" },
-        { nombre: "PDF", color: "#F72585" },
-        { nombre: "Gmail", color: "#EA4335" },
       ],
-      transporte: false,
+      transporte: true,
     },
     {
       num: "07",
@@ -332,68 +335,69 @@ const casosUsoByLocale: Record<string, CasoUso[]> = {
   fr: [
     {
       num: "01",
-      titulo: "Classer les emails et enregistrer les incidents",
-      descripcion: "Chaque email client est classe par type automatiquement. Les incidents sont enregistres dans Sheets et la reception est confirmee au client sans intervention.",
+      titulo: "Alerte d'expiration des permis et de la documentation",
+      descripcion: "Chaque permis (AE/AEG/AET), assurance et certificat a sa date d'expiration enregistree dans Sheets. 30 jours avant l'echeance, un rappel automatique est envoye par WhatsApp et email pour le renouveler a temps.",
       herramientas: [
-        { nombre: "Gmail", color: "#EA4335" },
         { nombre: "Sheets", color: "#34A853" },
+        { nombre: "WhatsApp", color: "#25D366" },
         { nombre: "Gmail", color: "#EA4335" },
       ],
-      transporte: false,
+      transporte: true,
     },
     {
       num: "02",
-      titulo: "Nouveau lead entre seul dans le CRM avec accueil",
-      descripcion: "Le formulaire web cree le contact dans votre CRM et declenche un email de bienvenue personnalise. Sans rien toucher.",
+      titulo: "Generation automatique du dossier de permis special",
+      descripcion: "Un formulaire est rempli avec les donnees du vehicule et du chargement. L'IA genere le brouillon du dossier avec les documents necessaires et le laisse pret dans Drive pour l'envoyer a la DGT ou au SCT.",
       herramientas: [
         { nombre: "Formulario", color: "#7B68EE" },
-        { nombre: "HubSpot", color: "#FF6B35" },
-        { nombre: "Gmail", color: "#EA4335" },
+        { nombre: "IA", color: "#8B5CF6" },
+        { nombre: "Drive", color: "#4285F4" },
       ],
-      transporte: false,
+      transporte: true,
     },
     {
       num: "03",
-      titulo: "Message client genere une tache pour l'equipe",
-      descripcion: "Un message client sur WhatsApp cree automatiquement une tache dans Notion et notifie le responsable sur Slack.",
-      herramientas: [
-        { nombre: "WhatsApp", color: "#25D366" },
-        { nombre: "Notion", color: "#888888" },
-        { nombre: "Slack", color: "#4A154B" },
-      ],
-      transporte: false,
-    },
-    {
-      num: "04",
-      titulo: "Extraire les donnees de factures vers votre feuille de couts",
-      descripcion: "Vous deposez la facture PDF dans Drive. L'IA extrait le montant, le fournisseur et la date. Les donnees se versent seules dans votre feuille de comptabilite.",
+      titulo: "Verification de la documentation ADR avant le depart",
+      descripcion: "La fiche de securite ADR de la marchandise dangereuse est deposee dans Drive. L'IA extrait la classe et le code UN, et verifie dans Sheets que le vehicule a l'homologation correspondante avant d'autoriser le depart.",
       herramientas: [
         { nombre: "Drive", color: "#4285F4" },
         { nombre: "IA", color: "#8B5CF6" },
         { nombre: "Sheets", color: "#34A853" },
       ],
-      transporte: false,
+      transporte: true,
+    },
+    {
+      num: "04",
+      titulo: "Checklist des avis obligatoires selon l'itineraire",
+      descripcion: "Lors de la planification d'un itineraire pour des charges de grandes dimensions, l'IA genere la checklist des avis obligatoires (Guardia Civil, mairies concernees) selon l'itineraire et rappelle quand les envoyer.",
+      herramientas: [
+        { nombre: "Calendar", color: "#4285F4" },
+        { nombre: "Sheets", color: "#34A853" },
+        { nombre: "WhatsApp", color: "#25D366" },
+      ],
+      transporte: true,
     },
     {
       num: "05",
-      titulo: "Rappel automatique de rendez-vous au client",
-      descripcion: "Vous creez l'evenement dans Calendar. 24h avant, le client recoit automatiquement un WhatsApp avec la confirmation et les details.",
+      titulo: "Suivi de flotte: incidents en temps reel",
+      descripcion: "Un chauffeur signale un incident par WhatsApp (panne, retard, controle). Il est enregistre automatiquement dans la feuille de suivi de flotte et le responsable est notifie sur Slack.",
       herramientas: [
-        { nombre: "Calendar", color: "#4285F4" },
         { nombre: "WhatsApp", color: "#25D366" },
+        { nombre: "Sheets", color: "#34A853" },
+        { nombre: "Slack", color: "#4A154B" },
       ],
-      transporte: false,
+      transporte: true,
     },
     {
       num: "06",
-      titulo: "Rapport hebdomadaire des ventes sans y toucher",
-      descripcion: "Chaque lundi a 8h le rapport des ventes de la semaine precedente est genere et envoye automatiquement aux responsables.",
+      titulo: "Dossiers ouverts avec le SCT et la DGT",
+      descripcion: "Chaque notification de la Section de Coordination des Transports ou de la DGT est enregistree automatiquement comme dossier dans Notion avec son delai de reponse, pour qu'aucune echeance ne soit manquee.",
       herramientas: [
+        { nombre: "Email", color: "#EA4335" },
+        { nombre: "Notion", color: "#888888" },
         { nombre: "Sheets", color: "#34A853" },
-        { nombre: "PDF", color: "#F72585" },
-        { nombre: "Gmail", color: "#EA4335" },
       ],
-      transporte: false,
+      transporte: true,
     },
     {
       num: "07",
@@ -536,9 +540,8 @@ function ToolIcon({ nombre }: { nombre: string }) {
     </div>
   );
 }
-function CasoFlipCard({ caso, labelTransporte, labelGirar, labelVolver }: {
+function CasoFlipCard({ caso, labelGirar, labelVolver }: {
   caso: CasoUso;
-  labelTransporte: string;
   labelGirar: string;
   labelVolver: string;
 }) {
@@ -577,11 +580,6 @@ function CasoFlipCard({ caso, labelTransporte, labelGirar, labelVolver }: {
           <div className="flex items-center justify-between mb-4">
             <div className="flex items-center gap-2">
               <span className="text-[#4D9FEC] text-xs font-bold tracking-widest font-mono">{caso.num}</span>
-              {caso.transporte && (
-                <span className="text-xs font-semibold px-2 py-0.5 rounded bg-[#4D9FEC]/20 text-[#4D9FEC]">
-                  {labelTransporte}
-                </span>
-              )}
             </div>
             {/* Indicador de giro */}
             <div className="flex items-center gap-1 opacity-40">
@@ -1084,7 +1082,6 @@ export default function IaPymes() {
               <RevealDiv key={i} delay={i * 60}>
                 <CasoFlipCard
                   caso={caso}
-                  labelTransporte={t.labelTransporte}
                   labelGirar={t.labelGirar}
                   labelVolver={t.labelVolver}
                 />
