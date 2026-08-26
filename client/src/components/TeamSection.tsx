@@ -7,6 +7,7 @@ const JOSE_LUIS_PHOTO = `${SUPABASE_BASE}/equipo/jose-luis_foto_v1.webp`;
 const LEX_AVATAR = `${SUPABASE_BASE}/equipo/lex_avatar_v1.webp`;
 const NOVA_AVATAR = `${SUPABASE_BASE}/equipo/nova_avatar_v1.webp`;
 const ALMA_AVATAR = `${SUPABASE_BASE}/equipo/alma_avatar_v1.webp`;
+const SOCIAL_URL = "https://social.xpertauth.com";
 
 const gradientStyle: React.CSSProperties = {
   background: "linear-gradient(135deg,#ffffff 0%,#4D9FEC 40%,#1B4FD8 70%,#ffffff 100%)",
@@ -116,25 +117,25 @@ const teamMembers = [
     name: "ALMA",
     photo: ALMA_AVATAR,
     role: {
-      es: "Agente IA · Formación Senior",
-      ca: "Agent IA · Formació Sènior",
-      en: "AI Agent · Senior Training",
-      fr: "Agent IA · Formation Senior",
+      es: "Formación digital para mayores",
+      ca: "Formació digital per a la gent gran",
+      en: "Digital training for seniors",
+      fr: "Formation numérique pour les seniors",
     },
     description: {
-      es: "Paciente, cálida, sin jerga. Acompaña a personas mayores en su camino hacia la tecnología.",
-      ca: "Pacient, càlida, sense argot. Acompanya persones grans en el seu camí cap a la tecnologia.",
-      en: "Patient, warm, no jargon. Guides seniors on their journey towards technology.",
-      fr: "Patiente, chaleureuse, sans jargon. Accompagne les seniors dans leur chemin vers la technologie.",
+      es: "Ayudamos a personas de 60+ a perder el miedo a la tecnología, sin jerga y a su ritmo. Esta formación tiene ahora su propio espacio, separado del transporte especial.",
+      ca: "Ajudem a persones de 60+ a perdre la por a la tecnologia, sense argot i al seu ritme. Aquesta formació té ara el seu propi espai, separat del transport especial.",
+      en: "We help people 60+ overcome their fear of technology, no jargon, at their own pace. This training now has its own space, separate from special transport.",
+      fr: "Nous aidons les personnes de 60 ans et plus à vaincre leur peur de la technologie, sans jargon et à leur rythme. Cette formation a désormais son propre espace, distinct du transport spécial.",
     },
     cta: {
-      es: "Pregunta al agente",
-      ca: "Pregunta a l'agent",
-      en: "Ask the agent",
-      fr: "Interroger l'agent",
+      es: "→ Descúbrela en XpertAuth.Social",
+      ca: "→ Descobreix-la a XpertAuth.Social",
+      en: "→ Discover it at XpertAuth.Social",
+      fr: "→ Découvrez-la sur XpertAuth.Social",
     },
-    ctaHref: null as null,
-    agente: "ALMA" as const,
+    ctaHref: SOCIAL_URL,
+    agente: null as null,
     isHuman: false,
     accentColor: "border-ember/30",
     numberColor: "text-ember",
@@ -206,6 +207,8 @@ export default function TeamSection() {
   function handleCta(member: (typeof teamMembers)[0]) {
     if (member.agente) {
       abrirAgente(member.agente);
+    } else if (member.ctaHref?.startsWith("http")) {
+      window.open(member.ctaHref, "_blank", "noopener,noreferrer");
     } else {
       window.location.href = `/${locale}${member.ctaHref}`;
     }

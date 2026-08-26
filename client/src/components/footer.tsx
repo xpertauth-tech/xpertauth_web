@@ -3,6 +3,8 @@ import { SiLinkedin, SiInstagram } from "react-icons/si";
 import { useTranslations } from "@/i18n/context";
 import { useLocation } from "wouter";
 
+const SOCIAL_URL = "https://social.xpertauth.com";
+
 export default function Footer() {
   const { messages, locale } = useTranslations("footer");
   const [, navigate] = useLocation();
@@ -165,6 +167,19 @@ export default function Footer() {
             </p>
           </div>
 
+        </div>
+
+        {/* Cross-link a XpertAuth.Social */}
+        <div className="py-6 text-center border-b border-white/[0.06]">
+          <a
+            href={SOCIAL_URL}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-white/60 text-sm hover:text-arctic transition-colors"
+            data-testid="link-footer-xpertauth-social"
+          >
+            {m.crossLink}
+          </a>
         </div>
 
         {/* Barra inferior */}
