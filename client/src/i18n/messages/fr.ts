@@ -8,11 +8,11 @@ const fr = {
     entrar: "Se connecter",
   },
   hero: {
-    badge: "Association à but non lucratif",
+    badge: "Spécialistes du transport spécial · Association en cours d'étude de constitution",
     title1: "Nous forgeons l'autorité numérique.",
     title2: "Expertise professionnelle propulsée par l'IA.",
     subtitle: "Chez XpertAuth nous n'accumulons pas des services. Nous résolvons des problèmes. Transport spécial, formation en IA et alphabétisation numérique pour les seniors.",
-    cta1: "Rejoignez-nous",
+    cta1: "Découvrez le projet",
     cta2: "Découvrir les services",
   },
   services: {

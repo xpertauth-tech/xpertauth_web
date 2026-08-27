@@ -129,10 +129,10 @@ const teamMembers = [
       fr: "Nous aidons les personnes de 60 ans et plus à vaincre leur peur de la technologie, sans jargon et à leur rythme. Cette formation a désormais son propre espace, distinct du transport spécial.",
     },
     cta: {
-      es: "→ Descúbrela en XpertAuth.Social",
-      ca: "→ Descobreix-la a XpertAuth.Social",
-      en: "→ Discover it at XpertAuth.Social",
-      fr: "→ Découvrez-la sur XpertAuth.Social",
+      es: "Descúbrela en XpertAuth.Social",
+      ca: "Descobreix-la a XpertAuth.Social",
+      en: "Discover it at XpertAuth.Social",
+      fr: "Découvrez-la sur XpertAuth.Social",
     },
     ctaHref: SOCIAL_URL,
     agente: null as null,
@@ -275,7 +275,7 @@ export default function TeamSection() {
 
               <button
                 onClick={() => handleCta(member)}
-                className={`w-full py-2.5 rounded-md text-sm font-semibold transition-all duration-200 ${member.ctaStyle}`}
+                className={`w-full py-2.5 rounded-md text-sm font-semibold text-center transition-all duration-200 ${member.ctaStyle}`}
                 data-testid={`button-team-${member.id}`}
               >
                 {member.cta[lang]}
