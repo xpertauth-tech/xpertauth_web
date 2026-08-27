@@ -19,7 +19,7 @@ async function fetchPosts() {
   const now = new Date().toISOString();
   // Solo posts con published_at <= ahora, ordenados por published_at desc
   const res = await fetch(
-    `${SUPABASE_URL}/rest/v1/posts?select=id,title,excerpt,slug,published_at&is_published=eq.true&published_at=not.is.null&published_at=lte.${now}&order=published_at.desc&limit=2`,
+    `${SUPABASE_URL}/rest/v1/posts?select=id,title,excerpt,slug,published_at&published_at=not.is.null&published_at=lte.${now}&order=published_at.desc&limit=2`,
     {
       headers: {
         apikey: key,
@@ -217,7 +217,7 @@ function SkeletonCard() {
 }
 
 export default function BlogNewsletter() {
-  const { messages, locale } = useTranslations("blog");
+  const { messages } = useTranslations("blog");
   const m = messages as any;
 
   const [posts, setPosts] = useState<any[]>([]);
@@ -266,7 +266,7 @@ export default function BlogNewsletter() {
                   Transporte & IA
                 </span>
               </div>
-              <a href={`/${locale}/blog`} className="text-arctic text-xs font-medium hover:underline flex items-center gap-1">
+              <a href="/es/blog" className="text-arctic text-xs font-medium hover:underline flex items-center gap-1">
                 Ver todos <ArrowRight className="w-3 h-3" />
               </a>
             </div>
@@ -280,7 +280,7 @@ export default function BlogNewsletter() {
                 posts.map((post, i) => (
                   <motion.a
                     key={post.id}
-                    href={`/${locale}/blog/${post.slug}`}
+                    href={`/es/blog/${post.slug}`}
                     initial={{ opacity: 0, y: 15 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
@@ -321,7 +321,7 @@ export default function BlogNewsletter() {
                   Formación Senior
                 </span>
               </div>
-              <a href={`/${locale}/newsletter`} className="text-ember text-xs font-medium hover:underline flex items-center gap-1">
+              <a href="/es/newsletter" className="text-ember text-xs font-medium hover:underline flex items-center gap-1">
                 Ver todas <ArrowRight className="w-3 h-3" />
               </a>
             </div>
@@ -335,7 +335,7 @@ export default function BlogNewsletter() {
                 newsletters.map((nl, i) => (
                   <motion.a
                     key={nl.id}
-                    href={`/${locale}/newsletter/${nl.concept_id}`}
+                    href={`/es/newsletter/${nl.concept_id}`}
                     initial={{ opacity: 0, y: 15 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
