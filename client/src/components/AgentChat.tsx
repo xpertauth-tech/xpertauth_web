@@ -1,9 +1,9 @@
 import { useState, useEffect, useRef } from "react";
-import { X, Send, Loader2, ExternalLink, Calendar, Users } from "lucide-react";
+import { X, Send, Loader2, ExternalLink, Calendar } from "lucide-react";
 
 // ─── Tipos ───────────────────────────────────────────────────────────────────
 
-type Agente = "LEX" | "NOVA" | "ALMA";
+type Agente = "LEX" | "NOVA";
 
 interface Mensaje {
   role: "user" | "assistant";
@@ -55,17 +55,6 @@ const AGENTE_CONFIG: Record<Agente, {
     placeholder: "Pregúntame sobre IA para tu empresa…",
     disclaimer: "NOVA es IA y puede cometer errores. Contrasta siempre la información.",
   },
-  ALMA: {
-    color: "#E8620A",
-    colorBg: "rgba(232,98,10,0.10)",
-    colorBorder: "rgba(232,98,10,0.25)",
-    emoji: "🌱",
-    tagline: "Formación digital para personas mayores",
-    mensajeBienvenida:
-      "Hola, soy ALMA. Estoy aquí para ayudarte con el móvil, WhatsApp, la banca online o cualquier duda sobre tecnología, con calma y sin prisa.\n\nTambién puedo informarte sobre los cursos presenciales gratuitos de XpertAuth en Figueres.\n\n¿Qué necesitas?",
-    placeholder: "Escríbeme tu duda…",
-    disclaimer: "ALMA es IA y puede cometer errores. Si tienes dudas, consúltalo con alguien de confianza.",
-  },
 };
 
 // ─── Helpers localStorage (contador de consultas) ─────────────────────────────
@@ -96,7 +85,7 @@ const LIMITE = 5;
 // ─── Parser de botones contextuales ─────────────────────────────────────────
 
 interface BotonContextual {
-  tipo: "SCT" | "CITA" | "SOCIO";
+  tipo: "SCT" | "CITA";
   label: string;
   url?: string;
 }
@@ -123,14 +112,8 @@ function parsearBotones(texto: string): { textoLimpio: string; botones: BotonCon
     }
   );
 
-  // [BOTON_SOCIO:Label]
-  textoLimpio = textoLimpio.replace(
-    /\[BOTON_SOCIO:([^\]]+)\]/g,
-    (_, label) => {
-      botones.push({ tipo: "SOCIO", label: label.trim() });
-      return "";
-    }
-  );
+  // [BOTON_SOCIO:Label] — esta web no ofrece alta de socios; se elimina el tag sin renderizar botón.
+  textoLimpio = textoLimpio.replace(/\[BOTON_SOCIO:[^\]]+\]/g, "");
 
   // Links markdown estándar [Label](URL) → botón SCT
   textoLimpio = textoLimpio.replace(
@@ -277,24 +260,6 @@ function Burbuja({
                 );
               }
 
-              if (btn.tipo === "SOCIO") {
-                return (
-                  <a
-                    key={i}
-                    href="/es/socios"
-                    className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium transition-opacity hover:opacity-80"
-                    style={{
-                      backgroundColor: "rgba(77,159,236,0.15)",
-                      border: "1px solid rgba(77,159,236,0.35)",
-                      color: "#4D9FEC",
-                    }}
-                  >
-                    <Users size={12} />
-                    {btn.label}
-                  </a>
-                );
-              }
-
               return null;
             })}
           </div>
@@ -391,7 +356,8 @@ export default function AgentChat({
         {
           role: "assistant",
           content: data.respuesta,
-          agente: data.agente as Agente,
+          // El backend aún puede enrutar a otros agentes; si no es LEX/NOVA, mantenemos el actual.
+          agente: data.agente === "LEX" || data.agente === "NOVA" ? data.agente : agente,
         },
       ]);
 

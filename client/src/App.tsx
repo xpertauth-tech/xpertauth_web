@@ -12,7 +12,6 @@ import AgentModal from "@/components/AgentModal";
 import AgentChat from "@/components/AgentChat";
 import { useEffect, useState, createContext, useContext } from "react";
 import { createClient } from "@supabase/supabase-js";
-import Socios from "@/pages/socios";
 import SobreNosotros from "@/pages/SobreNosotros";
 import TransporteEspecial from "@/pages/TransporteEspecial";
 import IaPymes from "@/pages/IaPymes";
@@ -34,7 +33,7 @@ const supabase = createClient(
 
 // ─── Contexto del agente (accesible desde cualquier componente) ───────────────
 
-type Agente = "LEX" | "NOVA" | "ALMA";
+type Agente = "LEX" | "NOVA";
 
 interface AgentContextType {
   abrirAgente: (agente: Agente) => void;
@@ -70,7 +69,6 @@ function Router() {
       <Route path="/:locale/servicios/ia-pymes" component={IaPymes} />
       <Route path="/:locale/servicios/transporte-especial" component={TransporteEspecial} />
       <Route path="/:locale/sobre-nosotros" component={SobreNosotros} />
-      <Route path="/:locale/socios" component={Socios} />
       <Route path="/:locale/blog/:slug" component={BlogPost} />
       <Route path="/:locale/blog" component={Blog} />
       <Route path="/:locale/newsletter/:concept_id" component={NewsletterPost} />

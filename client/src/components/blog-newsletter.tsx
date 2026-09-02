@@ -317,9 +317,6 @@ export default function BlogNewsletter() {
               <div className="flex items-center gap-2">
                 <Mail className="w-5 h-5 text-ember" />
                 <h3 className="font-heading font-semibold text-pure text-lg">{m.newsletterTitle}</h3>
-                <span className="px-2 py-0.5 bg-ember/15 text-ember text-xs font-bold rounded-full">
-                  Formación Senior
-                </span>
               </div>
               <a href="/es/newsletter" className="text-ember text-xs font-medium hover:underline flex items-center gap-1">
                 Ver todas <ArrowRight className="w-3 h-3" />

@@ -752,7 +752,7 @@ function ServiceCard({
 // ─── Textos por idioma ────────────────────────────────────────────────────────
 const texts: Record<string, {
   heroTitle1: string; heroTitle2: string; heroSubtitle: string;
-  heroCtaSocio: string; heroCtaContacto: string;
+  heroCtaProyecto: string; heroCtaContacto: string;
   serviciosLabel: string; serviciosTitle: string; serviciosSubtitle: string;
   servicios: { num: string; title: string; subtitle: string; problema: string; solucion: string; badge: string }[];
   labelProblema: string; labelSolucion: string;
@@ -760,13 +760,13 @@ const texts: Record<string, {
   labelTransporte: string; labelGirar: string; labelVolver: string;
   novaLabel: string; novaTitle: string; novaBody: string; novaBtn: string;
   novaPreguntas: string[];
-  ctaTitle: string; ctaSubtitle: string; ctaSocio: string; ctaContacto: string;
+  ctaTitle: string; ctaSubtitle: string; ctaProyecto: string; ctaContacto: string;
 }> = {
   es: {
     heroTitle1: "La IA no es solo para",
     heroTitle2: "grandes empresas.",
     heroSubtitle: "Automatizamos tus procesos, formamos a tu equipo y resolvemos los cuellos de botella reales de tu negocio. Sin vender tecnologia. Sin humo.",
-    heroCtaSocio: "Hazte socio",
+    heroCtaProyecto: "Conoce el proyecto",
     heroCtaContacto: "Contacta con nosotros",
     serviciosLabel: "Lo que hacemos",
     serviciosTitle: "No vendemos soluciones. Resolvemos problemas.",
@@ -816,14 +816,14 @@ const texts: Record<string, {
     ],
     ctaTitle: "Da el primer paso.",
     ctaSubtitle: "La auditoria es gratuita. Sin compromiso. Sin presion.",
-    ctaSocio: "Hazte socio",
+    ctaProyecto: "Conoce el proyecto",
     ctaContacto: "Contacta con nosotros",
   },
   ca: {
     heroTitle1: "La IA no es només",
     heroTitle2: "per a grans empreses.",
     heroSubtitle: "Automatitzem els teus processos, formem el teu equip i resolem els colls d'ampolla reals del teu negoci. Sense vendre tecnologia. Sense fum.",
-    heroCtaSocio: "Fes-te soci",
+    heroCtaProyecto: "Coneix el projecte",
     heroCtaContacto: "Contacta amb nosaltres",
     serviciosLabel: "El que fem",
     serviciosTitle: "No venem solucions. Resolem problemes.",
@@ -873,14 +873,14 @@ const texts: Record<string, {
     ],
     ctaTitle: "Fes el primer pas.",
     ctaSubtitle: "L'auditoria es gratuita. Sense compromis. Sense pressio.",
-    ctaSocio: "Fes-te soci",
+    ctaProyecto: "Coneix el projecte",
     ctaContacto: "Contacta amb nosaltres",
   },
   en: {
     heroTitle1: "AI is not just for",
     heroTitle2: "big companies.",
     heroSubtitle: "We automate your processes, train your team and solve the real bottlenecks in your business. No technology sales pitch. No hype.",
-    heroCtaSocio: "Become a member",
+    heroCtaProyecto: "About the project",
     heroCtaContacto: "Contact us",
     serviciosLabel: "What we do",
     serviciosTitle: "We don't sell solutions. We solve problems.",
@@ -930,14 +930,14 @@ const texts: Record<string, {
     ],
     ctaTitle: "Take the first step.",
     ctaSubtitle: "The audit is free. No commitment. No pressure.",
-    ctaSocio: "Become a member",
+    ctaProyecto: "About the project",
     ctaContacto: "Contact us",
   },
   fr: {
     heroTitle1: "L'IA n'est pas reservee aux",
     heroTitle2: "grandes entreprises.",
     heroSubtitle: "Nous automatisons vos processus, formons votre equipe et resolvons les vrais goulots d'etranglement de votre activite. Sans vendre de technologie. Sans enfumage.",
-    heroCtaSocio: "Devenir membre",
+    heroCtaProyecto: "Découvrir le projet",
     heroCtaContacto: "Nous contacter",
     serviciosLabel: "Ce que nous faisons",
     serviciosTitle: "Nous ne vendons pas de solutions. Nous resolvons des problemes.",
@@ -987,7 +987,7 @@ const texts: Record<string, {
     ],
     ctaTitle: "Faites le premier pas.",
     ctaSubtitle: "L'audit est gratuit. Sans engagement. Sans pression.",
-    ctaSocio: "Devenir membre",
+    ctaProyecto: "Découvrir le projet",
     ctaContacto: "Nous contacter",
   },
 };
@@ -999,7 +999,7 @@ export default function IaPymes() {
   const t = texts[locale] || texts.es;
   const { abrirAgente } = useAgent();
   const [contactOpen, setContactOpen] = useState(false);
-  const rutaSocios = "/" + locale + "/socios";
+  const rutaProyecto = "/" + locale + "/sobre-nosotros";
 
   useEffect(() => { window.scrollTo(0, 0); }, []);
 
@@ -1034,10 +1034,10 @@ export default function IaPymes() {
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <button
-              onClick={() => window.location.href = rutaSocios}
+              onClick={() => window.location.href = rutaProyecto}
               className="px-7 py-3.5 bg-[#1B4FD8] hover:bg-[#1B4FD8]/90 text-white font-semibold rounded-lg transition-all duration-200"
             >
-              {t.heroCtaSocio}
+              {t.heroCtaProyecto}
             </button>
             <button
               onClick={() => setContactOpen(true)}
@@ -1149,10 +1149,10 @@ export default function IaPymes() {
           <p className="text-white/60 text-lg mb-10 max-w-xl mx-auto">{t.ctaSubtitle}</p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <button
-              onClick={() => window.location.href = rutaSocios}
+              onClick={() => window.location.href = rutaProyecto}
               className="px-7 py-3.5 bg-[#1B4FD8] hover:bg-[#1B4FD8]/90 text-white font-semibold rounded-lg transition-all duration-200"
             >
-              {t.ctaSocio}
+              {t.ctaProyecto}
             </button>
             <button
               onClick={() => setContactOpen(true)}

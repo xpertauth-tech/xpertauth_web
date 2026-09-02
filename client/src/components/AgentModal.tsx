@@ -3,7 +3,7 @@ import { X, Shield } from "lucide-react";
 
 // ─── Tipos ───────────────────────────────────────────────────────────────────
 
-type Agente = "LEX" | "NOVA" | "ALMA";
+type Agente = "LEX" | "NOVA";
 
 interface AgentModalProps {
   agente: Agente | null;           // null = modal cerrado
@@ -50,19 +50,6 @@ const AGENTE_CONFIG: Record<Agente, {
       "NOVA te ayuda a entender qué puede hacer la IA por tu negocio, qué herramientas existen, cómo empezar sin invertir y qué procesos se automatizan bien según tu sector. Sin humo, sin promesas vacías.",
     placeholder: "Tu nombre",
     ctaLabel: "Consultar con NOVA",
-  },
-  ALMA: {
-    color: "#E8620A",
-    colorBg: "rgba(232,98,10,0.08)",
-    colorBorder: "rgba(232,98,10,0.25)",
-    colorBtn: "#E8620A",
-    colorBtnHover: "#c9530a",
-    emoji: "🌱",
-    tagline: "Especialista en formación digital para personas mayores",
-    descripcion:
-      "ALMA ayuda a personas mayores (o a sus familiares) a entender y usar el móvil, WhatsApp, la banca online y la tecnología del día a día, con calma y sin jerga. También informa sobre los cursos presenciales gratuitos de XpertAuth en Figueres.",
-    placeholder: "Tu nombre o el de tu familiar",
-    ctaLabel: "Hablar con ALMA",
   },
 };
 
@@ -203,11 +190,11 @@ export default function AgentModal({ agente, onConfirm, onClose }: AgentModalPro
                 XpertAuth está en fase de validación abierta hasta el 30 de septiembre de 2026.
               </p>
               <a
-                href="/es/socios"
+                href="/es/sobre-nosotros"
                 className="block w-full text-center py-3 rounded-xl font-semibold text-white transition-opacity hover:opacity-90"
                 style={{ backgroundColor: config.color }}
               >
-                Registrarme gratis
+                Conoce el proyecto
               </a>
               <button
                 onClick={onClose}

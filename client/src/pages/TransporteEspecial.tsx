@@ -21,7 +21,7 @@ const texts: Record<string, {
   badge: string;
   heroTitle: string;
   heroSubtitle: string;
-  ctaSocio: string;
+  ctaProyecto: string;
   ctaContacta: string;
   ctaAgendar: string;
   servicesLabel: string;
@@ -51,7 +51,7 @@ const texts: Record<string, {
     badge: "Servicios · Transporte Especial",
     heroTitle: "30 años acompañando cargas excepcionales.",
     heroSubtitle: "Consultas normativas DGT y SCT. Asesoría en permisos AE, AEG y AET. Apoyo en la planificación de itinerarios. Sin sorpresas legales.",
-    ctaSocio: "Hazte socio",
+    ctaProyecto: "Conoce el proyecto",
     ctaContacta: "Contacta con nosotros",
     ctaAgendar: "Agendar cita gratuita",
     servicesLabel: "Lo que hacemos",
@@ -87,13 +87,13 @@ const texts: Record<string, {
       "¿Qué documentación necesito para un AET en Catalunya?",
     ],
     ctaTitle: "¿Tienes una carga que gestionar?",
-    ctaSubtitle: "Hazte socio y accede a LEX sin límites. O contáctanos directamente y te orientamos sin compromiso.",
+    ctaSubtitle: "Conoce el proyecto o contáctanos directamente y te orientamos sin compromiso.",
   },
   ca: {
     badge: "Serveis · Transport Especial",
     heroTitle: "30 anys acompanyant càrregues excepcionals.",
     heroSubtitle: "Consultes normatives DGT i SCT. Assessoria en permisos AE, AEG i AET. Suport en la planificació d'itineraris. Sense sorpreses legals.",
-    ctaSocio: "Fes-te soci",
+    ctaProyecto: "Coneix el projecte",
     ctaContacta: "Contacta amb nosaltres",
     ctaAgendar: "Agenda una cita gratuïta",
     servicesLabel: "El que fem",
@@ -129,13 +129,13 @@ const texts: Record<string, {
       "Quina documentació necessito per a un AET a Catalunya?",
     ],
     ctaTitle: "Tens una càrrega que gestionar?",
-    ctaSubtitle: "Fes-te soci i accedeix a LEX sense límits. O contacta'ns directament i t'orientem sense compromís.",
+    ctaSubtitle: "Coneix el projecte o contacta'ns directament i t'orientem sense compromís.",
   },
   en: {
     badge: "Services · Special Transport",
     heroTitle: "30 years supporting exceptional loads.",
     heroSubtitle: "DGT and SCT regulatory advice. Guidance on AE, AEG and AET permits. Support in route planning. No legal surprises.",
-    ctaSocio: "Become a member",
+    ctaProyecto: "About the project",
     ctaContacta: "Contact us",
     ctaAgendar: "Book a free call",
     servicesLabel: "What we do",
@@ -171,13 +171,13 @@ const texts: Record<string, {
       "What documents do I need for an AET in Catalunya?",
     ],
     ctaTitle: "Do you have a load to manage?",
-    ctaSubtitle: "Become a member and access LEX without limits. Or contact us directly for no-obligation guidance.",
+    ctaSubtitle: "Get to know the project or contact us directly for no-obligation guidance.",
   },
   fr: {
     badge: "Services · Transport Spécial",
     heroTitle: "30 ans à accompagner les charges exceptionnelles.",
     heroSubtitle: "Conseils réglementaires DGT et SCT. Accompagnement pour les permis AE, AEG et AET. Soutien à la planification des itinéraires. Sans mauvaises surprises légales.",
-    ctaSocio: "Devenir membre",
+    ctaProyecto: "Découvrir le projet",
     ctaContacta: "Nous contacter",
     ctaAgendar: "Réserver un appel gratuit",
     servicesLabel: "Ce que nous faisons",
@@ -213,7 +213,7 @@ const texts: Record<string, {
       "Quels documents sont nécessaires pour un AET en Catalogne ?",
     ],
     ctaTitle: "Vous avez une charge à gérer ?",
-    ctaSubtitle: "Devenez membre et accédez à LEX sans limites. Ou contactez-nous directement pour un accompagnement sans engagement.",
+    ctaSubtitle: "Découvrez le projet ou contactez-nous directement pour un accompagnement sans engagement.",
   },
 };
 
@@ -362,10 +362,10 @@ export default function TransporteEspecial() {
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <button
-              onClick={() => window.location.href = `/${locale}/socios`}
+              onClick={() => window.location.href = `/${locale}/sobre-nosotros`}
               className="px-7 py-3.5 bg-xpertblue hover:bg-xpertblue/90 text-pure font-semibold rounded-lg transition-all duration-200 flex items-center justify-center gap-2"
             >
-              {t.ctaSocio} <ArrowRight className="w-4 h-4" />
+              {t.ctaProyecto} <ArrowRight className="w-4 h-4" />
             </button>
             <button
               onClick={() => setContactOpen(true)}
@@ -491,10 +491,10 @@ export default function TransporteEspecial() {
           <p className="text-white/60 text-lg mb-10 max-w-xl mx-auto">{t.ctaSubtitle}</p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <button
-              onClick={() => window.location.href = `/${locale}/socios`}
+              onClick={() => window.location.href = `/${locale}/sobre-nosotros`}
               className="px-7 py-3.5 bg-xpertblue hover:bg-xpertblue/90 text-pure font-semibold rounded-lg transition-all duration-200 flex items-center justify-center gap-2"
             >
-              {t.ctaSocio} <ArrowRight className="w-4 h-4" />
+              {t.ctaProyecto} <ArrowRight className="w-4 h-4" />
             </button>
             <button
               onClick={() => setContactOpen(true)}

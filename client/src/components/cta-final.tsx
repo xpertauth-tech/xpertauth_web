@@ -16,6 +16,8 @@ const gradientStyle: React.CSSProperties = {
 
 export default function CtaFinal() {
   const { t, locale } = useTranslations("ctaFinal");
+  // "Conoce el proyecto" reutiliza la clave ya definida en el Footer (footer.aboutProject).
+  const { t: footerT } = useTranslations("footer");
   const [, navigate] = useLocation();
   const [contactOpen, setContactOpen] = useState(false);
 
@@ -44,11 +46,11 @@ export default function CtaFinal() {
 
           <div className="mt-10 sm:mt-12 flex flex-col sm:flex-row items-center justify-center gap-4">
             <button
-              onClick={() => navigate(`/${locale}/socios`)}
+              onClick={() => navigate(`/${locale}/sobre-nosotros`)}
               className="group px-8 py-4 bg-xpertblue text-pure font-semibold rounded-md text-sm sm:text-base transition-all duration-300 flex items-center gap-2 w-full sm:w-auto justify-center hover:bg-xpertblue/90"
-              data-testid="button-cta-final-socio"
+              data-testid="button-cta-final-proyecto"
             >
-              {t("cta1")}
+              {footerT("aboutProject")}
               <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
             </button>
 

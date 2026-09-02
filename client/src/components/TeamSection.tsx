@@ -6,7 +6,6 @@ const SUPABASE_BASE = "https://supabase.xpertauth.com/storage/v1/object/public/w
 const JOSE_LUIS_PHOTO = `${SUPABASE_BASE}/equipo/jose-luis_foto_v1.webp`;
 const LEX_AVATAR = `${SUPABASE_BASE}/equipo/lex_avatar_v1.webp`;
 const NOVA_AVATAR = `${SUPABASE_BASE}/equipo/nova_avatar_v1.webp`;
-const ALMA_AVATAR = `${SUPABASE_BASE}/equipo/alma_avatar_v1.webp`;
 
 const gradientStyle: React.CSSProperties = {
   background: "linear-gradient(135deg,#ffffff 0%,#4D9FEC 40%,#1B4FD8 70%,#ffffff 100%)",
@@ -111,37 +110,6 @@ const teamMembers = [
     ctaStyle: "bg-arctic text-obsidian hover:bg-arctic/90",
     avatarFallback: "N",
   },
-  {
-    id: "alma",
-    name: "ALMA",
-    photo: ALMA_AVATAR,
-    role: {
-      es: "Agente IA · Formación Senior",
-      ca: "Agent IA · Formació Sènior",
-      en: "AI Agent · Senior Training",
-      fr: "Agent IA · Formation Senior",
-    },
-    description: {
-      es: "Paciente, cálida, sin jerga. Acompaña a personas mayores en su camino hacia la tecnología.",
-      ca: "Pacient, càlida, sense argot. Acompanya persones grans en el seu camí cap a la tecnologia.",
-      en: "Patient, warm, no jargon. Guides seniors on their journey towards technology.",
-      fr: "Patiente, chaleureuse, sans jargon. Accompagne les seniors dans leur chemin vers la technologie.",
-    },
-    cta: {
-      es: "Pregunta al agente",
-      ca: "Pregunta a l'agent",
-      en: "Ask the agent",
-      fr: "Interroger l'agent",
-    },
-    ctaHref: null as null,
-    agente: "ALMA" as const,
-    isHuman: false,
-    accentColor: "border-ember/30",
-    numberColor: "text-ember",
-    numberBg: "bg-ember/25",
-    ctaStyle: "bg-ember text-pure hover:bg-ember/90",
-    avatarFallback: "A",
-  },
 ];
 
 const aiBadge = {
@@ -235,7 +203,7 @@ export default function TeamSection() {
           </p>
         </motion.div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
           {teamMembers.map((member, i) => (
             <motion.div
               key={member.id}
