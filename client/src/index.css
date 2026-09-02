@@ -267,3 +267,20 @@
   50%  { background-position: 100% 50%; }
   100% { background-position: 0% 50%; }
 }
+
+/* Hero de transporte — mapa/ruta firma (hero-route-map.tsx) */
+@keyframes heroDraw {
+  to { stroke-dashoffset: 0; }
+}
+@keyframes heroFlow {
+  0%   { stroke-dashoffset: 1.05; }
+  62%  { stroke-dashoffset: 0.05; }
+  100% { stroke-dashoffset: 0.05; }
+}
+@keyframes heroTrace {
+  to { stroke-dashoffset: -1; }
+}
+@keyframes heroTwinkle {
+  0%, 100% { opacity: 0.06; }
+  50%      { opacity: 0.2; }
+}

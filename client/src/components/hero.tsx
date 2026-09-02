@@ -1,89 +1,8 @@
-import { useEffect, useRef } from "react";
 import { motion } from "framer-motion";
 import { ArrowRight, ChevronDown } from "lucide-react";
 import { useTranslations } from "@/i18n/context";
 import { useLocation } from "wouter";
-
-function ParticleField() {
-  const canvasRef = useRef<HTMLCanvasElement>(null);
-
-  useEffect(() => {
-    const canvas = canvasRef.current;
-    if (!canvas) return;
-    const ctx = canvas.getContext("2d");
-    if (!ctx) return;
-
-    let animationId: number;
-    const particles: Array<{
-      x: number; y: number; vx: number; vy: number; size: number; opacity: number;
-    }> = [];
-
-    const resize = () => {
-      canvas.width = canvas.offsetWidth * window.devicePixelRatio;
-      canvas.height = canvas.offsetHeight * window.devicePixelRatio;
-      ctx.setTransform(1, 0, 0, 1, 0, 0);
-      ctx.scale(window.devicePixelRatio, window.devicePixelRatio);
-    };
-
-    const initParticles = () => {
-      particles.length = 0;
-      const count = Math.min(70, Math.floor((canvas.offsetWidth * canvas.offsetHeight) / 12000));
-      for (let i = 0; i < count; i++) {
-        particles.push({
-          x: Math.random() * canvas.offsetWidth,
-          y: Math.random() * canvas.offsetHeight,
-          vx: (Math.random() - 0.5) * 0.3,
-          vy: (Math.random() - 0.5) * 0.3,
-          size: Math.random() * 2 + 0.8,
-          opacity: Math.random() * 0.5 + 0.2,
-        });
-      }
-    };
-
-    const animate = () => {
-      ctx.clearRect(0, 0, canvas.offsetWidth, canvas.offsetHeight);
-
-      particles.forEach((p) => {
-        p.x += p.vx;
-        p.y += p.vy;
-        if (p.x < 0 || p.x > canvas.offsetWidth) p.vx *= -1;
-        if (p.y < 0 || p.y > canvas.offsetHeight) p.vy *= -1;
-        ctx.beginPath();
-        ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
-        ctx.fillStyle = `rgba(77, 159, 236, ${p.opacity})`;
-        ctx.fill();
-      });
-
-      particles.forEach((a, i) => {
-        particles.slice(i + 1).forEach((b) => {
-          const dx = a.x - b.x;
-          const dy = a.y - b.y;
-          const dist = Math.sqrt(dx * dx + dy * dy);
-          if (dist < 160) {
-            ctx.beginPath();
-            ctx.moveTo(a.x, a.y);
-            ctx.lineTo(b.x, b.y);
-            ctx.strokeStyle = `rgba(77, 159, 236, ${0.18 * (1 - dist / 160)})`;
-            ctx.lineWidth = 0.6;
-            ctx.stroke();
-          }
-        });
-      });
-
-      animationId = requestAnimationFrame(animate);
-    };
-
-    resize();
-    initParticles();
-    animate();
-
-    const handleResize = () => { resize(); initParticles(); };
-    window.addEventListener("resize", handleResize);
-    return () => { cancelAnimationFrame(animationId); window.removeEventListener("resize", handleResize); };
-  }, []);
-
-  return <canvas ref={canvasRef} className="absolute inset-0 w-full h-full pointer-events-none" style={{ opacity: 0.8 }} />;
-}
+import HeroRouteMap from "@/components/hero-route-map";
 
 export default function Hero() {
   const { t, locale } = useTranslations("hero");
@@ -92,6 +11,11 @@ export default function Hero() {
     const el = document.querySelector(href);
     if (el) el.scrollIntoView({ behavior: "smooth" });
   };
+
+  // El badge llega como "Parte A · Parte B". En escritorio se muestra en una
+  // línea con el separador; en móvil se parte en dos líneas (mismo texto, sin
+  // el "·"). Ver Documento Base v1.1, sección 1 bis.
+  const badgeParts = t("badge").split(" · ");
 
   return (
     <section id="hero" className="relative min-h-screen flex items-center justify-center bg-obsidian overflow-hidden" data-testid="section-hero">
@@ -109,16 +33,26 @@ export default function Hero() {
         }}
       />
 
-      <ParticleField />
+      <HeroRouteMap />
 
       {/* Gradiente fade hacia abajo */}
       <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-obsidian/70 pointer-events-none" />
 
       <div className="relative z-10 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center pt-20 pb-32">
         <motion.div initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8, ease: "easeOut" }}>
-          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-white/10 bg-white/5 mb-8">
-            <div className="w-2 h-2 rounded-full bg-arctic animate-pulse" />
-            <span className="text-white/60 text-xs font-medium tracking-wide uppercase">{t("badge")}</span>
+          <div className="inline-flex items-center gap-1.5 sm:gap-2 px-2.5 sm:px-4 py-1.5 max-w-full rounded-xl sm:rounded-full border border-white/10 bg-white/5 mb-8">
+            <div className="w-1.5 h-1.5 sm:w-2 sm:h-2 rounded-full bg-arctic animate-pulse shrink-0" />
+            <span className="text-white/60 text-[0.46rem] sm:text-xs font-medium tracking-normal sm:tracking-wide uppercase leading-snug">
+              {badgeParts.length === 2 ? (
+                <>
+                  <span className="block sm:inline">{badgeParts[0]}</span>
+                  <span className="hidden sm:inline"> · </span>
+                  <span className="block sm:inline">{badgeParts[1]}</span>
+                </>
+              ) : (
+                t("badge")
+              )}
+            </span>
           </div>
 
           <h1 className="font-heading font-bold text-pure text-4xl sm:text-5xl md:text-6xl lg:text-7xl leading-tight tracking-tight">
@@ -141,11 +75,12 @@ export default function Hero() {
           <p className="mt-6 sm:mt-8 text-white/60 text-base sm:text-lg md:text-xl max-w-2xl mx-auto leading-relaxed font-light">{t("subtitle")}</p>
 
           <div className="mt-10 sm:mt-12 flex flex-col sm:flex-row items-center justify-center gap-4">
-            <button onClick={() => navigate(`/${locale}/socios`)} className="group px-8 py-3.5 bg-xpertblue text-pure font-semibold rounded-md text-sm sm:text-base transition-all duration-300 flex items-center gap-2 w-full sm:w-auto justify-center" data-testid="button-hero-socio">
+            <button onClick={() => navigate(`/${locale}/sobre-nosotros`)} className="group px-8 py-3.5 bg-xpertblue text-pure font-semibold rounded-md text-sm sm:text-base transition-all duration-300 flex items-center gap-2 w-full sm:w-auto justify-center" data-testid="button-hero-proyecto">
               {t("cta1")}
               <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
             </button>
-            <button onClick={() => scrollTo("#servicios")} className="px-8 py-3.5 border border-white/20 text-pure/90 font-medium rounded-md text-sm sm:text-base transition-all duration-300 w-full sm:w-auto" data-testid="button-hero-servicios">
+            {/* Ancla preparada para la sección "Cómo funciona" del Home (pendiente de construir). */}
+            <button onClick={() => scrollTo("#como-funciona")} className="px-8 py-3.5 border border-white/20 text-pure/90 font-medium rounded-md text-sm sm:text-base transition-all duration-300 w-full sm:w-auto" data-testid="button-hero-como-funciona">
               {t("cta2")}
             </button>
           </div>

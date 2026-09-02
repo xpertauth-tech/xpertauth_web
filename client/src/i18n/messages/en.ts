@@ -6,12 +6,12 @@ const en = {
     entrar: "Sign in",
   },
   hero: {
-    badge: "Non-profit association",
-    title1: "We forge digital authority.",
-    title2: "Expert knowledge powered by AI.",
-    subtitle: "At XpertAuth we don't accumulate services. We solve problems. Special transport, AI training, and digital literacy for seniors.",
-    cta1: "Join Us",
-    cta2: "Explore services",
+    badge: "Special transport specialists · Association exploring formal establishment",
+    title1: "Special transport,",
+    title2: "with real judgement.",
+    subtitle: "Thirty years in the trade, with artificial intelligence as a tool — regulations, permits and case files explained plainly.",
+    cta1: "About the project",
+    cta2: "How it works",
   },
   problemSolution: {
     label: "The problem",

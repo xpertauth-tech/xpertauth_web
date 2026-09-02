@@ -20,8 +20,8 @@ const translations = {
         "Cuando llegó el momento de cerrar esa etapa, mi mente inquieta no supo quedarse quieta. Empecé a formarme en inteligencia artificial. Primero por curiosidad. Después con convicción.",
         "Fue entonces cuando lo vi claro. Las herramientas de IA que estaba estudiando podían transformar algo que siempre había sido un problema en el sector: el acceso al conocimiento normativo. Buscar entre cientos de páginas de reglamentos no es lo mismo que hablar con alguien que los conoce a fondo y te responde al instante. Eso era lo que la IA podía hacer. Y yo podía construirlo.",
         "Eso sí, con una condición innegociable: la IA siempre supervisada por personas. La inteligencia artificial es una herramienta extraordinaria, pero la experiencia humana —y el sentido común en la toma de decisiones— es y será siempre necesaria. En XpertAuth, los agentes no trabajan solos. Trabajan conmigo.",
-        "Pero había otro problema que no podía ignorar. Las personas seniors se enfrentan cada día a barreras digitales que el resto damos por superadas. Usar la app del banco en lugar de ir a la ventanilla. Acceder a la Meva Salut. Usar el certificado electrónico, Cl@ve PIN o idCAT para cualquier trámite oficial. Para muchas personas, eso es un muro.",
-        "Decidí que una parte importante de los ingresos de la asociación se destinaría a formaciones para seniors. Y que esas formaciones serían siempre gratuitas. Una condición innegociable.",
+        "Con el tiempo, ese mismo enfoque —experiencia real más IA bien supervisada— fue tomando forma en otro terreno: la alfabetización digital de las personas mayores, un proyecto hermano que nace de la misma convicción, aunque camina por su cuenta.",
+        "XpertAuth es hoy un proyecto personal, en fase de aprendizaje y validación. No hay prisa por llegar a ningún sitio concreto — hay interés real por hacer las cosas bien.",
       ],
       firma: "José Luis Echezarreta — Fundador de XpertAuth",
       fotoAlt: "José Luis Echezarreta — Fundador de XpertAuth (placeholder)",
@@ -30,7 +30,7 @@ const translations = {
       etiqueta: "Misión",
       titulo: "Por qué existimos",
       texto:
-        "XpertAuth es una asociación sin ánimo de lucro que combina experiencia humana real e inteligencia artificial para democratizar el acceso al conocimiento experto. Trabajamos en tres frentes: la gestión normativa del transporte especial, la adopción de la IA en PYMEs y autónomos, y la formación digital gratuita para personas seniors. Siempre con tecnología al servicio de las personas, nunca al revés.",
+        "XpertAuth combina experiencia real del sector con inteligencia artificial para hacer accesible el conocimiento experto en transporte especial: orientación normativa clara, con las fuentes a la vista, y herramientas de IA pensadas para quien vive el sector cada día. Siempre con tecnología al servicio de las personas, nunca al revés.",
     },
     valores: {
       etiqueta: "Valores",
@@ -39,31 +39,31 @@ const translations = {
       items: [
         {
           num: "01",
-          titulo: "La formación senior, siempre gratuita",
-          texto: "No es una decisión económica ni una estrategia de captación. Es un compromiso fundacional. Las personas seniors no deberían pagar por aprender a usar las herramientas que el resto del mundo ya da por sentadas.",
-        },
-        {
-          num: "02",
           titulo: "Transparencia radical",
           texto: "Usamos inteligencia artificial y lo decimos abiertamente. Sabemos lo que la IA puede hacer y lo que no puede hacer. Y cuando no sabemos algo, también lo decimos.",
         },
         {
-          num: "03",
+          num: "02",
           titulo: "La IA como herramienta, el humano como criterio",
           texto: "Los agentes de XpertAuth no trabajan solos. Cada respuesta está respaldada por experiencia real. La tecnología amplifica el conocimiento humano; no lo sustituye.",
         },
         {
-          num: "04",
+          num: "03",
           titulo: "Empatía tecnológica",
           texto: "No todo el mundo llegó a la tecnología al mismo tiempo ni de la misma manera. En XpertAuth no juzgamos desde dónde empieza cada persona. Empezamos desde ahí.",
+        },
+        {
+          num: "04",
+          titulo: "Sin prisa, sin humo",
+          texto: "Este es un proyecto que avanza a su ritmo, sin presión de plazos ni de resultado comercial. Preferimos hacer las cosas bien que hacerlas rápido.",
         },
       ],
     },
     cta: {
-      titulo: "¿Quieres formar parte de esto?",
+      titulo: "¿Quieres saber más?",
       subtitulo:
-        "XpertAuth está en construcción, pero el rumbo está claro. Únete como socio o habla con nosotros si tienes alguna pregunta.",
-      boton1: "Hazte socio",
+        "XpertAuth está en fase de aprendizaje y construcción, pero el rumbo está claro. Conoce el proyecto o escríbenos si tienes alguna pregunta.",
+      boton1: "Conoce el proyecto",
       boton2: "Contacta con nosotros",
     },
   },
@@ -81,8 +81,8 @@ const translations = {
         "Quan va arribar el moment de tancar aquella etapa, la meva ment inquieta no va saber quedar-se quieta. Vaig començar a formar-me en intel·ligència artificial. Primer per curiositat. Després amb convicció.",
         "Va ser llavors quan ho vaig veure clar. Les eines d'IA que estava estudiant podien transformar quelcom que sempre havia estat un problema al sector: l'accés al coneixement normatiu. Cercar entre centenars de pàgines de reglaments no és el mateix que parlar amb algú que els coneix a fons i et respon al moment. Això era el que la IA podia fer. I jo podia construir-ho.",
         "Això sí, amb una condició innegociable: la IA sempre supervisada per persones. La intel·ligència artificial és una eina extraordinària, però l'experiència humana —i el sentit comú en la presa de decisions— és i serà sempre necessària. A XpertAuth, els agents no treballen sols. Treballen amb mi.",
-        "Però hi havia un altre problema que no podia ignorar. Les persones seniors s'enfronten cada dia a barreres digitals que la resta donem per superades. Usar l'app del banc en lloc d'anar a la finestreta. Accedir a la Meva Salut. Usar el certificat electrònic, Cl@ve PIN o idCAT per a qualsevol tràmit oficial. Per a moltes persones, això és un mur.",
-        "Vaig decidir que una part important dels ingressos de l'associació es destinaria a formacions per a seniors. I que aquestes formacions serien sempre gratuïtes. Una condició innegociable.",
+        "Amb el temps, aquest mateix enfocament —experiència real més IA ben supervisada— va anar prenent forma en un altre terreny: l'alfabetització digital de les persones grans, un projecte germà que neix de la mateixa convicció, tot i que camina pel seu compte.",
+        "XpertAuth és avui un projecte personal, en fase d'aprenentatge i validació. No hi ha pressa per arribar a cap lloc concret — hi ha interès real per fer les coses bé.",
       ],
       firma: "José Luis Echezarreta — Fundador de XpertAuth",
       fotoAlt: "José Luis Echezarreta — Fundador de XpertAuth (placeholder)",
@@ -91,7 +91,7 @@ const translations = {
       etiqueta: "Missió",
       titulo: "Per què existim",
       texto:
-        "XpertAuth és una associació sense ànim de lucre que combina experiència humana real i intel·ligència artificial per democratitzar l'accés al coneixement expert. Treballem en tres fronts: la gestió normativa del transport especial, l'adopció de la IA en PIMEs i autònoms, i la formació digital gratuïta per a persones seniors. Sempre amb tecnologia al servei de les persones, mai al revés.",
+        "XpertAuth combina experiència real del sector amb intel·ligència artificial per fer accessible el coneixement expert en transport especial: orientació normativa clara, amb les fonts a la vista, i eines d'IA pensades per a qui viu el sector cada dia. Sempre amb tecnologia al servei de les persones, mai al revés.",
     },
     valores: {
       etiqueta: "Valors",
@@ -100,31 +100,31 @@ const translations = {
       items: [
         {
           num: "01",
-          titulo: "La formació senior, sempre gratuïta",
-          texto: "No és una decisió econòmica ni una estratègia de captació. És un compromís fundacional. Les persones seniors no haurien de pagar per aprendre a usar les eines que la resta del món ja dona per descomptades.",
-        },
-        {
-          num: "02",
           titulo: "Transparència radical",
           texto: "Usem intel·ligència artificial i ho diem obertament. Sabem el que la IA pot fer i el que no pot fer. I quan no sabem alguna cosa, també ho diem.",
         },
         {
-          num: "03",
+          num: "02",
           titulo: "La IA com a eina, l'humà com a criteri",
           texto: "Els agents de XpertAuth no treballen sols. Cada resposta està avalada per experiència real. La tecnologia amplifica el coneixement humà; no el substitueix.",
         },
         {
-          num: "04",
+          num: "03",
           titulo: "Empatia tecnològica",
           texto: "No tothom va arribar a la tecnologia al mateix temps ni de la mateixa manera. A XpertAuth no jutgem des d'on comença cada persona. Comencem des d'allà.",
+        },
+        {
+          num: "04",
+          titulo: "Sense pressa, sense fum",
+          texto: "Aquest és un projecte que avança al seu ritme, sense pressió de terminis ni de resultat comercial. Preferim fer les coses bé que fer-les de pressa.",
         },
       ],
     },
     cta: {
-      titulo: "Vols formar part d'això?",
+      titulo: "Vols saber-ne més?",
       subtitulo:
-        "XpertAuth està en construcció, però el rumb és clar. Uneix-te com a soci o parla amb nosaltres si tens alguna pregunta.",
-      boton1: "Fes-te soci",
+        "XpertAuth està en fase d'aprenentatge i construcció, però el rumb és clar. Coneix el projecte o escriu-nos si tens alguna pregunta.",
+      boton1: "Coneix el projecte",
       boton2: "Contacta amb nosaltres",
     },
   },
@@ -142,8 +142,8 @@ const translations = {
         "When the time came to close that chapter, my restless mind couldn't stay still. I started training in artificial intelligence. First out of curiosity. Then out of conviction.",
         "That's when it became clear. The AI tools I was studying could transform something that had always been a problem in the sector: access to regulatory knowledge. Searching through hundreds of pages of regulations is not the same as talking to someone who knows them inside out and answers you instantly. That's what AI could do. And I could build it.",
         "But with one non-negotiable condition: AI always supervised by humans. Artificial intelligence is an extraordinary tool, but human experience —and common sense in decision-making— is and will always be necessary. At XpertAuth, agents don't work alone. They work with me.",
-        "But there was another problem I couldn't ignore. Senior people face digital barriers every day that the rest of us take for granted. Using the bank app instead of going to the counter. Accessing health services online. Using digital certificates or official IDs for any administrative procedure. For many people, that's a wall.",
-        "I decided that a significant part of the association's income would go towards training for seniors. And that this training would always be free. A non-negotiable condition.",
+        "Over time, that same approach —real experience plus well-supervised AI— started taking shape in another area: digital literacy for older people, a sister project born from the same conviction, though it walks its own path.",
+        "XpertAuth today is a personal project, in a learning and validation phase. There's no rush to get anywhere in particular — there's a real interest in doing things well.",
       ],
       firma: "José Luis Echezarreta — Founder of XpertAuth",
       fotoAlt: "José Luis Echezarreta — Founder of XpertAuth (placeholder)",
@@ -152,7 +152,7 @@ const translations = {
       etiqueta: "Mission",
       titulo: "Why we exist",
       texto:
-        "XpertAuth is a non-profit association that combines real human expertise and artificial intelligence to democratise access to expert knowledge. We work on three fronts: regulatory management in special transport, AI adoption in SMEs and freelancers, and free digital training for senior people. Always with technology serving people, never the other way around.",
+        "XpertAuth combines real sector experience with artificial intelligence to make expert knowledge in special transport accessible: clear regulatory guidance, with the sources in plain view, and AI tools built for the people who live the sector every day. Always with technology serving people, never the other way around.",
     },
     valores: {
       etiqueta: "Values",
@@ -161,31 +161,31 @@ const translations = {
       items: [
         {
           num: "01",
-          titulo: "Senior training, always free",
-          texto: "This is not an economic decision or a marketing strategy. It's a founding commitment. Senior people shouldn't have to pay to learn to use tools that the rest of the world already takes for granted.",
-        },
-        {
-          num: "02",
           titulo: "Radical transparency",
           texto: "We use artificial intelligence and we say so openly. We know what AI can do and what it can't. And when we don't know something, we say that too.",
         },
         {
-          num: "03",
+          num: "02",
           titulo: "AI as a tool, humans as the judge",
           texto: "XpertAuth's agents don't work alone. Every answer is backed by real experience. Technology amplifies human knowledge; it doesn't replace it.",
         },
         {
-          num: "04",
+          num: "03",
           titulo: "Technological empathy",
           texto: "Not everyone arrived at technology at the same time or in the same way. At XpertAuth we don't judge where each person starts from. We start from there.",
+        },
+        {
+          num: "04",
+          titulo: "No rush, no hype",
+          texto: "This is a project that moves at its own pace, with no pressure of deadlines or commercial results. We'd rather do things well than do them fast.",
         },
       ],
     },
     cta: {
-      titulo: "Want to be part of this?",
+      titulo: "Want to know more?",
       subtitulo:
-        "XpertAuth is still being built, but the direction is clear. Join as a member or talk to us if you have any questions.",
-      boton1: "Become a member",
+        "XpertAuth is in a learning and building phase, but the direction is clear. Get to know the project or write to us if you have any questions.",
+      boton1: "About the project",
       boton2: "Contact us",
     },
   },
@@ -203,8 +203,8 @@ const translations = {
         "Quand est venu le moment de clore ce chapitre, mon esprit curieux n'a pas su rester tranquille. J'ai commencé à me former à l'intelligence artificielle. D'abord par curiosité. Puis par conviction.",
         "C'est là que tout est devenu clair. Les outils d'IA que j'étudiais pouvaient transformer quelque chose qui avait toujours été un problème dans le secteur : l'accès à la connaissance réglementaire. Chercher dans des centaines de pages de règlements n'est pas la même chose que parler à quelqu'un qui les connaît parfaitement et vous répond instantanément. C'est ce que l'IA pouvait faire. Et je pouvais le construire.",
         "Mais avec une condition non négociable : l'IA toujours supervisée par des humains. L'intelligence artificielle est un outil extraordinaire, mais l'expérience humaine —et le bon sens dans la prise de décision— est et sera toujours nécessaire. Chez XpertAuth, les agents ne travaillent pas seuls. Ils travaillent avec moi.",
-        "Mais il y avait un autre problème que je ne pouvais pas ignorer. Les personnes seniors font face chaque jour à des barrières numériques que les autres considèrent comme surmontées. Utiliser l'application bancaire plutôt que d'aller au guichet. Accéder à la Meva Salut. Utiliser les certificats électroniques pour n'importe quelle démarche officielle. Pour beaucoup de personnes, c'est un mur.",
-        "J'ai décidé qu'une part importante des revenus de l'association serait consacrée aux formations pour seniors. Et que ces formations seraient toujours gratuites. Une condition non négociable.",
+        "Avec le temps, cette même approche —expérience réelle et IA bien supervisée— a pris forme sur un autre terrain : l'alphabétisation numérique des personnes âgées, un projet frère né de la même conviction, même s'il suit son propre chemin.",
+        "XpertAuth est aujourd'hui un projet personnel, en phase d'apprentissage et de validation. Il n'y a pas d'urgence à arriver quelque part en particulier — il y a un intérêt réel à bien faire les choses.",
       ],
       firma: "José Luis Echezarreta — Fondateur de XpertAuth",
       fotoAlt: "José Luis Echezarreta — Fondateur de XpertAuth (placeholder)",
@@ -213,7 +213,7 @@ const translations = {
       etiqueta: "Mission",
       titulo: "Pourquoi nous existons",
       texto:
-        "XpertAuth est une association à but non lucratif qui combine expertise humaine réelle et intelligence artificielle pour démocratiser l'accès au savoir expert. Nous travaillons sur trois fronts : la gestion réglementaire du transport spécial, l'adoption de l'IA dans les PME et les indépendants, et la formation numérique gratuite pour les personnes seniors. Toujours avec la technologie au service des personnes, jamais l'inverse.",
+        "XpertAuth combine une expérience réelle du secteur et l'intelligence artificielle pour rendre accessible le savoir expert du transport spécial : une orientation réglementaire claire, avec les sources en évidence, et des outils d'IA pensés pour ceux qui vivent le secteur au quotidien. Toujours avec la technologie au service des personnes, jamais l'inverse.",
     },
     valores: {
       etiqueta: "Valeurs",
@@ -222,31 +222,31 @@ const translations = {
       items: [
         {
           num: "01",
-          titulo: "La formation senior, toujours gratuite",
-          texto: "Ce n'est pas une décision économique ni une stratégie de marketing. C'est un engagement fondateur. Les personnes seniors ne devraient pas payer pour apprendre à utiliser des outils que le reste du monde considère déjà comme acquis.",
-        },
-        {
-          num: "02",
           titulo: "Transparence radicale",
           texto: "Nous utilisons l'intelligence artificielle et nous le disons ouvertement. Nous savons ce que l'IA peut faire et ce qu'elle ne peut pas faire. Et quand nous ne savons pas quelque chose, nous le disons aussi.",
         },
         {
-          num: "03",
+          num: "02",
           titulo: "L'IA comme outil, l'humain comme critère",
           texto: "Les agents de XpertAuth ne travaillent pas seuls. Chaque réponse est soutenue par une expérience réelle. La technologie amplifie la connaissance humaine ; elle ne la remplace pas.",
         },
         {
-          num: "04",
+          num: "03",
           titulo: "Empathie technologique",
           texto: "Tout le monde n'est pas arrivé à la technologie au même moment ni de la même façon. Chez XpertAuth, nous ne jugeons pas le point de départ de chaque personne. Nous partons de là.",
+        },
+        {
+          num: "04",
+          titulo: "Sans précipitation, sans esbroufe",
+          texto: "C'est un projet qui avance à son rythme, sans pression de délais ni de résultat commercial. Nous préférons bien faire les choses plutôt que de les faire vite.",
         },
       ],
     },
     cta: {
-      titulo: "Vous voulez faire partie de ceci ?",
+      titulo: "Vous voulez en savoir plus ?",
       subtitulo:
-        "XpertAuth est encore en construction, mais la direction est claire. Rejoignez-nous comme membre ou parlez-nous si vous avez des questions.",
-      boton1: "Devenir membre",
+        "XpertAuth est en phase d'apprentissage et de construction, mais la direction est claire. Découvrez le projet ou écrivez-nous si vous avez des questions.",
+      boton1: "Découvrir le projet",
       boton2: "Nous contacter",
     },
   },
@@ -531,7 +531,8 @@ export default function SobreNosotros() {
             </p>
             <div style={{ display: "flex", gap: "1rem", justifyContent: "center", flexWrap: "wrap" }}>
               <button
-                onClick={() => { window.location.href = `/${locale}/socios`; }}
+                /* Destino provisional — pendiente de confirmar (ancla interna o página de servicios de transporte). */
+                onClick={() => { window.location.href = `/${locale}/servicios/transporte-especial`; }}
                 style={{ background: "#1B4FD8", color: "#fff", border: "none", borderRadius: ".5rem", padding: ".875rem 2rem", fontFamily: "'Sora',sans-serif", fontWeight: 600, fontSize: ".95rem", cursor: "pointer", transition: "background .2s,transform .2s" }}
                 onMouseEnter={(e) => { e.currentTarget.style.background = "#1641b0"; e.currentTarget.style.transform = "translateY(-2px)"; }}
                 onMouseLeave={(e) => { e.currentTarget.style.background = "#1B4FD8"; e.currentTarget.style.transform = "translateY(0)"; }}

@@ -6,12 +6,12 @@ const fr = {
     entrar: "Se connecter",
   },
   hero: {
-    badge: "Association à but non lucratif",
-    title1: "Nous forgeons l'autorité numérique.",
-    title2: "Expertise professionnelle propulsée par l'IA.",
-    subtitle: "Chez XpertAuth nous n'accumulons pas des services. Nous résolvons des problèmes. Transport spécial, formation en IA et alphabétisation numérique pour les seniors.",
-    cta1: "Rejoignez-nous",
-    cta2: "Découvrir les services",
+    badge: "Spécialistes du transport spécial · Association à l'étude pour une constitution formelle",
+    title1: "Transport spécial,",
+    title2: "avec un vrai discernement.",
+    subtitle: "Trente ans de métier, avec l'intelligence artificielle comme outil — réglementation, autorisations et dossiers expliqués sans détour.",
+    cta1: "Découvrir le projet",
+    cta2: "Comment ça marche",
   },
   problemSolution: {
     label: "Le problème",

@@ -6,12 +6,12 @@ const ca = {
     entrar: "Entrar",
   },
   hero: {
-    badge: "Associació sense ànim de lucre",
-    title1: "Forjem l'autoritat digital.",
-    title2: "Coneixement expert potenciat per IA.",
-    subtitle: "A XpertAuth no acumulem serveis. Desactivem problemes. Transport especial, formació en IA i alfabetització digital per a gent gran.",
-    cta1: "Fes-te Soci",
-    cta2: "Coneix els serveis",
+    badge: "Especialistes en transport especial · Associació en procés d'estudi de constitució",
+    title1: "Transport especial,",
+    title2: "amb criteri real.",
+    subtitle: "Trenta anys d'ofici, amb intel·ligència artificial com a eina — normativa, permisos i expedients explicats sense embuts.",
+    cta1: "Coneix el projecte",
+    cta2: "Com funciona",
   },
   problemSolution: {
     label: "El problema",

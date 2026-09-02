@@ -6,12 +6,12 @@ const es = {
     entrar: "Entrar",
   },
   hero: {
-    badge: "Asociación sin ánimo de lucro",
-    title1: "Forjamos la autoridad digital.",
-    title2: "Conocimiento experto potenciado por IA.",
-    subtitle: "En XpertAuth no acumulamos servicios. Desactivamos problemas. Transporte especial, formación en IA y alfabetización digital para mayores.",
-    cta1: "Hazte Socio",
-    cta2: "Conoce los servicios",
+    badge: "Especialistas en transporte especial · Asociación en proceso de estudio de constitución",
+    title1: "Transporte especial,",
+    title2: "con criterio real.",
+    subtitle: "Treinta años de oficio, con inteligencia artificial como herramienta — normativa, permisos y expedientes explicados sin rodeos.",
+    cta1: "Conoce el proyecto",
+    cta2: "Cómo funciona",
   },
   problemSolution: {
     label: "El problema",
