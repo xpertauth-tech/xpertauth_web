@@ -5,7 +5,7 @@ import TeamSection from "@/components/TeamSection";
 import Services from "@/components/services";
 import HowItWorks from "@/components/how-it-works";
 import SocialProof from "@/components/social-proof";
-import BlogNewsletter from "@/components/blog-newsletter";
+import BlogSection from "@/components/blog";
 import CtaFinal from "@/components/cta-final";
 import Footer from "@/components/footer";
 
@@ -29,7 +29,7 @@ export default function Home() {
       <Services />
       <HowItWorks />
       <SocialProof />
-      <BlogNewsletter />
+      <BlogSection />
       <CtaFinal />
       <Footer />
     </div>

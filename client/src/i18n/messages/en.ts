@@ -193,35 +193,9 @@ const en = {
   },
   blog: {
     label: "Content",
-    title: "Blog and Newsletter",
-    subtitle: "Stay up to date with the latest news on transport, AI, and digital training.",
-    articlesTitle: "Latest articles",
-    posts: [
-      {
-        title: "New DGT regulations for special transport 2026",
-        excerpt: "Analysis of the latest regulatory changes and how they affect your professional activity.",
-      },
-      {
-        title: "5 ways AI can transform your SME today",
-        excerpt: "Practical cases of artificial intelligence implementation in small and medium enterprises.",
-      },
-      {
-        title: "Basic guide: your first smartphone without fear",
-        excerpt: "Everything you need to know to start using a smartphone with confidence.",
-      },
-    ],
-    comingSoon: "Coming soon",
-    newsletters: [
-      { volume: "Vol. 1", title: "Welcome to XpertAuth", description: "Introduction to the association, mission, and first steps." },
-      { volume: "Vol. 2", title: "Accessible AI for everyone", description: "How artificial intelligence can benefit anyone." },
-    ],
-    subscribePlaceholder: "you@email.com",
-    subscribeButton: "Subscribe",
-    subscribeSuccess: "Successfully subscribed!",
-    subscribeErrorDuplicate: "This email is already subscribed.",
-    subscribeErrorGeneric: "Error subscribing. Please try again.",
-    blogSubscribeLabel: "Receive new articles in your email",
-    blogSubscribeSubtitle: "Special transport and AI for SMEs. No spam.",
+    title: "Up to date without chasing the official gazette.",
+    subtitle: "Regulatory changes, permits and the real-world practice of special transport, explained for people who don't have time to read official bulletins.",
+    seeAll: "See all articles",
   },
   ctaFinal: {
     title1: "Join XpertAuth.",

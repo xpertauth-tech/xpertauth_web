@@ -193,35 +193,9 @@ const fr = {
   },
   blog: {
     label: "Contenu",
-    title: "Blog et Newsletter",
-    subtitle: "Restez à jour avec les dernières nouvelles sur le transport, l'IA et la formation numérique.",
-    articlesTitle: "Derniers articles",
-    posts: [
-      {
-        title: "Nouveautés réglementaires DGT pour le transport spécial 2026",
-        excerpt: "Analyse des derniers changements réglementaires et de leur impact sur votre activité professionnelle.",
-      },
-      {
-        title: "5 façons dont l'IA peut transformer votre PME aujourd'hui",
-        excerpt: "Cas pratiques d'implémentation d'intelligence artificielle dans les petites et moyennes entreprises.",
-      },
-      {
-        title: "Guide basique : votre premier smartphone sans peur",
-        excerpt: "Tout ce que vous devez savoir pour commencer à utiliser un smartphone en toute confiance.",
-      },
-    ],
-    comingSoon: "Bientôt",
-    newsletters: [
-      { volume: "Vol. 1", title: "Bienvenue chez XpertAuth", description: "Présentation de l'association, mission et premiers pas." },
-      { volume: "Vol. 2", title: "IA accessible pour tous", description: "Comment l'intelligence artificielle peut bénéficier à tout le monde." },
-    ],
-    subscribePlaceholder: "vous@email.com",
-    subscribeButton: "S'abonner",
-    subscribeSuccess: "Abonné avec succès !",
-    subscribeErrorDuplicate: "Cet email est déjà abonné.",
-    subscribeErrorGeneric: "Erreur lors de l'abonnement. Veuillez réessayer.",
-    blogSubscribeLabel: "Recevez les nouveaux articles dans votre email",
-    blogSubscribeSubtitle: "Transport spécial et IA pour PME. Sans spam.",
+    title: "À jour sans courir après le journal officiel.",
+    subtitle: "Changements réglementaires, autorisations et pratique réelle du transport spécial, expliqués pour ceux qui n'ont pas le temps de lire les bulletins officiels.",
+    seeAll: "Voir tous les articles",
   },
   ctaFinal: {
     title1: "Rejoignez XpertAuth.",
