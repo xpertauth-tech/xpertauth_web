@@ -198,7 +198,7 @@ const ca = {
     seeAll: "Veure tots els articles",
   },
   ctaFinal: {
-    title1: "Uneix-te a XpertAuth.",
+    title1: "Explica'ns el teu cas.",
     title2: "El coneixement que necessites,",
     title3: "quan el necessites.",
     cta2: "Contacta amb nosaltres",

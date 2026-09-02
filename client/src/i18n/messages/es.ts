@@ -198,7 +198,7 @@ const es = {
     seeAll: "Ver todos los artículos",
   },
   ctaFinal: {
-    title1: "Únete a XpertAuth.",
+    title1: "Cuéntanos tu caso.",
     title2: "El conocimiento que necesitas,",
     title3: "cuando lo necesitas.",
     cta2: "Contacta con nosotros",

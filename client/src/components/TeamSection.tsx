@@ -22,10 +22,10 @@ const teamMembers = [
     name: "José Luis",
     photo: JOSE_LUIS_PHOTO,
     role: {
-      es: "Fundador y presidente",
-      ca: "Fundador i president",
-      en: "Founder and president",
-      fr: "Fondateur et président",
+      es: "Fundador",
+      ca: "Fundador",
+      en: "Founder",
+      fr: "Fondateur",
     },
     description: {
       es: "30 años en transporte especial. El conocimiento humano detrás de todo lo que hacemos.",
