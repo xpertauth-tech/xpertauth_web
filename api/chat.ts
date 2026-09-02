@@ -288,7 +288,8 @@ function formatearContexto(frags: Fragmento[]): string {
     .join("\n\n");
 }
 
-// Fragmentos → apartado "Fuentes:" (construido en código, no por el modelo)
+// Fragmentos → apartado "Fuentes:" (construido en código, no por el modelo).
+// Deduplica por archivo (o fuente si no hay archivo) y conserva el primer bloque.
 function bloqueFuentes(frags: Fragmento[], idioma: Idioma): string {
   const titulo: Record<Idioma, string> = {
     es: "Fuentes",
@@ -296,19 +297,36 @@ function bloqueFuentes(frags: Fragmento[], idioma: Idioma): string {
     en: "Sources",
     fr: "Sources",
   };
-  const vistas = new Set<string>();
-  const lineas: string[] = [];
+  const porClave = new Map<string, { fuente: string; bloque: string; archivo: string }>();
   for (const f of frags) {
-    const partes = [f.fuente, f.bloque, f.archivo]
-      .map((p) => (p ?? "").trim())
-      .filter(Boolean);
-    const clave = partes.join(" · ");
-    if (!clave || vistas.has(clave)) continue;
-    vistas.add(clave);
-    lineas.push(`- ${clave}`);
+    const fuente = (f.fuente ?? "").trim();
+    const bloque = (f.bloque ?? "").trim();
+    const archivo = (f.archivo ?? "").trim();
+    const clave = archivo || fuente;
+    if (!clave) continue;
+    const prev = porClave.get(clave);
+    if (!prev) {
+      porClave.set(clave, { fuente, bloque, archivo });
+    } else if (!prev.bloque && bloque) {
+      prev.bloque = bloque;
+    }
   }
+  const lineas = [...porClave.values()].map((v) => {
+    const partes = [v.fuente, v.bloque, v.archivo].filter(Boolean);
+    // fuente y archivo casi iguales (mismo nombre + .pdf) → deja solo uno
+    if (partes.length >= 2 && v.archivo.replace(/\.\w+$/, "") === v.fuente) {
+      return `- ${[v.bloque, v.archivo].filter(Boolean).join(" · ")}`;
+    }
+    return `- ${partes.join(" · ")}`;
+  });
   if (lineas.length === 0) return "";
   return `\n\n**${titulo[idioma]}:**\n${lineas.join("\n")}`;
+}
+
+// El modelo añade [BOTON_CITA:...] cuando escala a José Luis (consulta no
+// cubierta por los fragmentos). En ese caso no tiene sentido listar fuentes.
+function haEscalado(texto: string): boolean {
+  return /\[BOTON_CITA:/.test(texto);
 }
 
 // Respuesta fija cuando el RAG no aporta nada (0 fragmentos o error)
@@ -429,12 +447,14 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
       const texto =
         respuesta.content[0].type === "text" ? respuesta.content[0].text : "";
       const idioma = detectarIdioma(ultimaPreguntaUsuario);
+      const fuentes = haEscalado(texto) ? "" : bloqueFuentes(fragmentos, idioma);
 
       return res.status(200).json({
         agente,
-        respuesta: texto + bloqueFuentes(fragmentos, idioma),
+        respuesta: texto + fuentes,
         model: modelo,
         fragmentos: fragmentos.length,
+        escalado: haEscalado(texto),
       });
     }
 
