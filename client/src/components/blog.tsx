@@ -70,8 +70,10 @@ function formatDate(dateStr: string) {
   });
 }
 
+// Los títulos llegan de Supabase en mayúsculas; los pasamos a "Frase con
+// mayúscula inicial" (mismo criterio que usaba blog-newsletter.tsx).
 function titleCase(s: string) {
-  return s ? s.charAt(0).toUpperCase() + s.slice(1) : s;
+  return s ? s.charAt(0).toUpperCase() + s.slice(1).toLowerCase() : s;
 }
 
 // ─── Tarjeta ─────────────────────────────────────────────────────────────────
