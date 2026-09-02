@@ -2,9 +2,7 @@ const es = {
   nav: {
     servicios: "Servicios",
     comoFunciona: "Cómo funciona",
-    formacionSenior: "Formación Senior",
     blog: "Blog",
-    hazteSocio: "Hazte Socio",
     entrar: "Entrar",
   },
   hero: {
@@ -255,16 +253,10 @@ const es = {
     cta2: "Contacta con nosotros",
   },
   footer: {
-    description: "Asociación sin ánimo de lucro que combina experiencia humana con inteligencia artificial para crear un futuro más accesible.",
+    description: "Proyecto que combina experiencia real del sector con inteligencia artificial, sin ánimo comercial.",
     quickLinks: "Links rápidos",
+    aboutProject: "Conoce el proyecto",
     contact: "Contacto",
-    newsletter: "Newsletter",
-    newsletterSubtitle: "Recibe novedades sobre formación digital para mayores.",
-    subscribed: "¡Suscrito!",
-    subscribeButton: "Suscribirse",
-    subscribePlaceholder: "tu@email.com",
-    subscribeErrorDuplicate: "Ya estás suscrito.",
-    subscribeErrorGeneric: "Error. Inténtalo de nuevo.",
     privacy: "Política de Privacidad",
     legal: "Aviso Legal",
     cookies: "Cookies",

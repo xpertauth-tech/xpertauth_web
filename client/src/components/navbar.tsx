@@ -23,6 +23,8 @@ type UserProfile = {
 
 export default function Navbar() {
   const { t, locale } = useTranslations("nav");
+  // "Conoce el proyecto" reutiliza la clave ya definida en el Footer (footer.aboutProject).
+  const { t: footerT } = useTranslations("footer");
   const [, navigate] = useLocation();
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
@@ -37,8 +39,8 @@ export default function Navbar() {
   const navLinks = [
     { label: t("servicios"), href: "#servicios" },
     { label: t("comoFunciona"), href: "#como-funciona" },
-    { label: t("formacionSenior"), href: "#formacion-senior" },
     { label: t("blog"), href: "#blog" },
+    { label: footerT("aboutProject"), href: `/${locale}/sobre-nosotros`, isRoute: true },
   ];
 
   useEffect(() => {
@@ -116,8 +118,12 @@ export default function Navbar() {
     };
   }, []);
 
-  const handleNavLink = (href: string) => {
+  const handleNavLink = (href: string, isRoute?: boolean) => {
     setMobileOpen(false);
+    if (isRoute) {
+      navigate(href);
+      return;
+    }
     if (isHome) {
       const el = document.querySelector(href);
       if (el) el.scrollIntoView({ behavior: "smooth" });
@@ -204,9 +210,9 @@ export default function Navbar() {
             {navLinks.map((link) => (
               <button
                 key={link.href}
-                onClick={() => handleNavLink(link.href)}
+                onClick={() => handleNavLink(link.href, link.isRoute)}
                 className="px-4 py-2 text-sm text-white/70 font-medium transition-colors duration-200 rounded-md hover:text-white"
-                data-testid={`link-${link.href.replace("#", "")}`}
+                data-testid={`link-${link.href.replace("#", "").replace(`/${locale}/`, "")}`}
               >
                 {link.label}
               </button>
@@ -332,9 +338,9 @@ export default function Navbar() {
               {navLinks.map((link) => (
                 <button
                   key={link.href}
-                  onClick={() => handleNavLink(link.href)}
+                  onClick={() => handleNavLink(link.href, link.isRoute)}
                   className="block w-full text-left px-4 py-3 rounded-md text-sm font-medium text-white/70 transition-colors"
-                  data-testid={`link-mobile-${link.href.replace("#", "")}`}
+                  data-testid={`link-mobile-${link.href.replace("#", "").replace(`/${locale}/`, "")}`}
                 >
                   {link.label}
                 </button>

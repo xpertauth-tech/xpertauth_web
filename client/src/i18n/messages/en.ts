@@ -2,9 +2,7 @@ const en = {
   nav: {
     servicios: "Services",
     comoFunciona: "How it works",
-    formacionSenior: "Senior Training",
     blog: "Blog",
-    hazteSocio: "Join Us",
     entrar: "Sign in",
   },
   hero: {
@@ -255,16 +253,10 @@ const en = {
     cta2: "Contact us",
   },
   footer: {
-    description: "Non-profit association that combines human expertise with artificial intelligence to create a more accessible future.",
+    description: "A project that combines real sector experience with artificial intelligence, with no commercial aim.",
     quickLinks: "Quick links",
+    aboutProject: "About the project",
     contact: "Contact",
-    newsletter: "Newsletter",
-    newsletterSubtitle: "Receive news about digital training for seniors.",
-    subscribed: "Subscribed!",
-    subscribeButton: "Subscribe",
-    subscribePlaceholder: "you@email.com",
-    subscribeErrorDuplicate: "You are already subscribed.",
-    subscribeErrorGeneric: "Error. Please try again.",
     privacy: "Privacy Policy",
     legal: "Legal Notice",
     cookies: "Cookies",

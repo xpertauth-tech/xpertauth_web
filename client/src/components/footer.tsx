@@ -14,9 +14,8 @@ export default function Footer() {
   const quickLinks = [
     { label: navT("servicios"), href: "#servicios" },
     { label: navT("comoFunciona"), href: "#como-funciona" },
-    { label: navT("formacionSenior"), href: "#formacion-senior" },
     { label: navT("blog"), href: "#blog" },
-    { label: navT("hazteSocio"), href: `/${locale}/socios`, isExternal: true },
+    { label: m.aboutProject, href: `/${locale}/sobre-nosotros`, isExternal: true },
   ];
 
   const handleLink = (href: string, isExternal?: boolean) => {

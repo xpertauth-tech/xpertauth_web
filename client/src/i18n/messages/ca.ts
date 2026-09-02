@@ -2,9 +2,7 @@ const ca = {
   nav: {
     servicios: "Serveis",
     comoFunciona: "Com funciona",
-    formacionSenior: "Formació Sènior",
     blog: "Blog",
-    hazteSocio: "Fes-te Soci",
     entrar: "Entrar",
   },
   hero: {
@@ -255,16 +253,10 @@ const ca = {
     cta2: "Contacta amb nosaltres",
   },
   footer: {
-    description: "Associació sense ànim de lucre que combina experiència humana amb intel·ligència artificial per crear un futur més accessible.",
+    description: "Projecte que combina experiència real del sector amb intel·ligència artificial, sense ànim comercial.",
     quickLinks: "Enllaços ràpids",
+    aboutProject: "Coneix el projecte",
     contact: "Contacte",
-    newsletter: "Newsletter",
-    newsletterSubtitle: "Rep novetats sobre formació digital per a gent gran.",
-    subscribed: "Subscrit!",
-    subscribeButton: "Subscriure's",
-    subscribePlaceholder: "tu@email.com",
-    subscribeErrorDuplicate: "Ja estàs subscrit.",
-    subscribeErrorGeneric: "Error. Torna-ho a provar.",
     privacy: "Política de Privacitat",
     legal: "Avís Legal",
     cookies: "Cookies",
