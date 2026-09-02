@@ -165,11 +165,6 @@ const ca = {
         author: "Maria R.",
         role: "Directora d'operacions",
       },
-      {
-        quote: "Els meus pares ara fan videotrucades sols. El programa de formació és meravellós.",
-        author: "Ana P.",
-        role: "Familiar d'alumne sènior",
-      },
     ],
     partnersLabel: "Properament: partners i col·laboradors",
   },
@@ -215,7 +210,6 @@ const ca = {
     title: "Blog i Newsletter",
     subtitle: "Mantén-te al dia amb les últimes novetats en transport, IA i formació digital.",
     articlesTitle: "Últims articles",
-    newsletterTitle: "Newsletter",
     posts: [
       {
         title: "Novetats en normativa DGT per a transport especial 2026",
@@ -235,7 +229,6 @@ const ca = {
       { volume: "Vol. 1", title: "Benvinguda a XpertAuth", description: "Presentació de l'associació, missió i primers passos." },
       { volume: "Vol. 2", title: "IA accessible per a tothom", description: "Com la intel·ligència artificial pot beneficiar qualsevol persona." },
     ],
-    subscribeLabel: "Rep cada edició al teu email",
     subscribePlaceholder: "tu@email.com",
     subscribeButton: "Subscriure",
     subscribeSuccess: "Subscrit correctament!",
@@ -243,7 +236,6 @@ const ca = {
     subscribeErrorGeneric: "Error en subscriure. Torna-ho a provar.",
     blogSubscribeLabel: "Rep els nous articles al teu email",
     blogSubscribeSubtitle: "Transport especial i IA per a PIMEs. Sense spam.",
-    newsletterSubscribeSubtitle: "Formació digital per a gent gran. Una entrega cada dues setmanes.",
   },
   ctaFinal: {
     title1: "Uneix-te a XpertAuth.",

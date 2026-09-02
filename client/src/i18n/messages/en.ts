@@ -165,11 +165,6 @@ const en = {
         author: "María R.",
         role: "Operations Director",
       },
-      {
-        quote: "My parents now make video calls on their own. The training programme is wonderful.",
-        author: "Ana P.",
-        role: "Family member of senior student",
-      },
     ],
     partnersLabel: "Coming soon: partners and collaborators",
   },
@@ -215,7 +210,6 @@ const en = {
     title: "Blog and Newsletter",
     subtitle: "Stay up to date with the latest news on transport, AI, and digital training.",
     articlesTitle: "Latest articles",
-    newsletterTitle: "Newsletter",
     posts: [
       {
         title: "New DGT regulations for special transport 2026",
@@ -235,7 +229,6 @@ const en = {
       { volume: "Vol. 1", title: "Welcome to XpertAuth", description: "Introduction to the association, mission, and first steps." },
       { volume: "Vol. 2", title: "Accessible AI for everyone", description: "How artificial intelligence can benefit anyone." },
     ],
-    subscribeLabel: "Receive each edition in your email",
     subscribePlaceholder: "you@email.com",
     subscribeButton: "Subscribe",
     subscribeSuccess: "Successfully subscribed!",
@@ -243,7 +236,6 @@ const en = {
     subscribeErrorGeneric: "Error subscribing. Please try again.",
     blogSubscribeLabel: "Receive new articles in your email",
     blogSubscribeSubtitle: "Special transport and AI for SMEs. No spam.",
-    newsletterSubscribeSubtitle: "Digital training for seniors. One edition every two weeks.",
   },
   ctaFinal: {
     title1: "Join XpertAuth.",

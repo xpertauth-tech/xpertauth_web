@@ -6,13 +6,11 @@ const SUPABASE_BASE = "https://supabase.xpertauth.com/storage/v1/object/public/w
 const testimonialBgs = [
   `${SUPABASE_BASE}/testimonials/carlos_bg_v1.webp`,
   `${SUPABASE_BASE}/testimonials/maria_bg_v1.webp`,
-  `${SUPABASE_BASE}/testimonials/ana_bg_v1.webp`,
 ];
 
 const testimonialAvatars = [
   `${SUPABASE_BASE}/testimonials/carlos_avatar_v1.webp`,
   `${SUPABASE_BASE}/testimonials/maria_avatar_v1.webp`,
-  `${SUPABASE_BASE}/testimonials/ana_avatar_v1.webp`,
 ];
 
 const carlosOverride = {
@@ -74,7 +72,7 @@ export default function SocialProof() {
         </div>
 
         {/* Testimonios con imagen de fondo */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-3xl mx-auto">
           {testimonials.map((t: any, i: number) => (
             <motion.div
               key={i}

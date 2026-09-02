@@ -165,11 +165,6 @@ const es = {
         author: "María R.",
         role: "Directora de operaciones",
       },
-      {
-        quote: "Mis padres ahora hacen videollamadas solos. El programa de formación es maravilloso.",
-        author: "Ana P.",
-        role: "Familiar de alumno senior",
-      },
     ],
     partnersLabel: "Próximamente: partners y colaboradores",
   },
@@ -215,7 +210,6 @@ const es = {
     title: "Blog y Newsletter",
     subtitle: "Mantente al día con las últimas novedades en transporte, IA y formación digital.",
     articlesTitle: "Últimos artículos",
-    newsletterTitle: "Newsletter",
     posts: [
       {
         title: "Novedades en normativa DGT para transporte especial 2026",
@@ -235,7 +229,6 @@ const es = {
       { volume: "Vol. 1", title: "Bienvenida a XpertAuth", description: "Presentación de la asociación, misión y primeros pasos." },
       { volume: "Vol. 2", title: "IA accesible para todos", description: "Cómo la inteligencia artificial puede beneficiar a cualquier persona." },
     ],
-    subscribeLabel: "Recibe cada edición en tu email",
     subscribePlaceholder: "tu@email.com",
     subscribeButton: "Suscribir",
     subscribeSuccess: "¡Suscrito correctamente!",
@@ -243,7 +236,6 @@ const es = {
     subscribeErrorGeneric: "Error al suscribir. Inténtalo de nuevo.",
     blogSubscribeLabel: "Recibe los nuevos artículos en tu email",
     blogSubscribeSubtitle: "Transporte especial e IA para PYMEs. Sin spam.",
-    newsletterSubscribeSubtitle: "Formación digital para mayores. Una entrega cada dos semanas.",
   },
   ctaFinal: {
     title1: "Únete a XpertAuth.",
