@@ -696,9 +696,9 @@ const serviceIcons = [
 
 // ─── Tarjeta Problema/Solucion ────────────────────────────────────────────────
 function ServiceCard({
-  number, title, subtitle, problema, solucion, badge, index, labelProblema, labelSolucion,
+  num, title, subtitle, problema, solucion, badge, index, labelProblema, labelSolucion,
 }: {
-  number: string; title: string; subtitle: string;
+  num: string; title: string; subtitle: string;
   problema: string; solucion: string; badge: string; index: number;
   labelProblema: string; labelSolucion: string;
 }) {

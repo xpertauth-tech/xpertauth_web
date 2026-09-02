@@ -565,6 +565,7 @@ const texts: Record<string, {
     ctaTitle: "The first step is the easiest.",
     ctaSubtitle: "Leave us your name and phone number. We call you. No strange forms, no waiting.",
     ctaBtn: "I want to join",
+    ctaAgendar: "Book a free call",
     ctaBtnSecondary: "I have a question",
     seniorFormOk: "Perfect! We'll call you soon. 📞",
     entityPills: ["🏛️ Civic centres", "📚 Libraries", "🏘️ Associations", "🎨 Craftspeople", "🏫 Schools", "🏢 Local councils"],
