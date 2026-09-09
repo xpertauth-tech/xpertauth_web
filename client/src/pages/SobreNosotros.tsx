@@ -417,7 +417,7 @@ export default function SobreNosotros() {
               display: "grid",
               gridTemplateColumns: "1fr 1.4fr",
               gap: "4rem",
-              alignItems: "start",
+              alignItems: "center",
             }}
             className="sn-grid-historia"
           >
