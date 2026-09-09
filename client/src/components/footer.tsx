@@ -1,5 +1,5 @@
 import { Mail, Phone, MapPin, Clock } from "lucide-react";
-import { SiLinkedin, SiInstagram } from "react-icons/si";
+import { SiLinkedin, SiInstagram, SiWhatsapp } from "react-icons/si";
 import { useTranslations } from "@/i18n/context";
 import { useLocation } from "wouter";
 
@@ -59,7 +59,7 @@ export default function Footer() {
             <p className="text-white/50 text-sm leading-relaxed mb-6">{m.description}</p>
             <div className="flex items-center gap-3">
               <a
-                href="https://www.linkedin.com/in/josé-luis-echezarreta-fabregó-633b691b5"
+                href="https://www.linkedin.com/in/jl-echezarreta-fabregó"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="w-9 h-9 rounded-md bg-white/[0.05] flex items-center justify-center text-white/40 hover:text-arctic transition-colors"
@@ -77,6 +77,16 @@ export default function Footer() {
                 aria-label="Instagram"
               >
                 <SiInstagram className="w-4 h-4" />
+              </a>
+              <a
+                href="https://wa.me/34625897546?text=Hola%2C%20te%20escribo%20desde%20xpertauth.com"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-9 h-9 rounded-md bg-white/[0.05] flex items-center justify-center text-white/40 hover:text-[#25D366] transition-colors"
+                data-testid="link-whatsapp"
+                aria-label="WhatsApp"
+              >
+                <SiWhatsapp className="w-4 h-4" />
               </a>
             </div>
           </div>
