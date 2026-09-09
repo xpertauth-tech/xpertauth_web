@@ -5,43 +5,30 @@ import { useIsMobile } from "@/hooks/use-mobile";
 /**
  * Fondo "firma" del Hero de transporte.
  *
- * Mapa abstracto tipo circuito + una ruta A -> B que se traza sola al cargar,
- * recorrida por un marcador (vehículo) con estela. SVG + CSS/SMIL nativo,
- * sin librerías de mapas. Arranca solo (no depende de scroll); el
- * IntersectionObserver solo pausa las animaciones cuando el Hero sale de
- * viewport para no gastar batería en móvil.
+ * Malla abstracta tipo circuito (SVG, sin librerías): traza ortogonal tipo PCB
+ * entre nodos, algún pulso de datos recorriéndolas y nodos que parpadean muy
+ * suave. Arranca solo (no depende de scroll); el IntersectionObserver solo
+ * pausa las animaciones cuando el Hero sale de viewport para no gastar batería.
  *
- * Paleta: Obsidian de fondo (lo pone la <section>), ruta y marcador en
- * Arctic (#4D9FEC) / XpertBlue (#1B4FD8). Guiño territorial: silueta muy
- * tenue de Catalunya, casi invisible, solo como textura.
+ * Guiño territorial: silueta muy tenue de Catalunya, casi invisible, solo como
+ * textura.
  *
- * Línea de tiempo de la animación:
- *   0,9 s          el vehículo arranca en A; la línea se dibuja tras él.
- *   ~4,8 s         llega a B; se dispara la onda de llegada en el destino.
- *   bucle de 6 s   recorre (~3,9 s con easing), descansa ~2 s y repite.
- *   entre pasadas  un pulso tenue recorre la ruta para mantenerla viva.
+ * Paleta: Obsidian de fondo (lo pone la <section>), circuito en Arctic
+ * (#4D9FEC). Malla al ~9 % y nodos al ~14 % (textura, no protagonismo);
+ * silueta de Catalunya al ~3 %.
  *
- * Sobriedad: malla de circuito al ~9 % y nodos al ~16 % (textura, no
- * protagonismo); silueta de Catalunya al ~3 %; la ruta enmarca el titular
- * sin cruzarlo ni pasar pegada al texto.
- *
- * Rendimiento: sin filtros SVG (el glow son capas de trazo + gradientes),
- * se pausa fuera de viewport, y con prefers-reduced-motion la ruta queda
- * fija y sin vehículo.
+ * Rendimiento: sin filtros SVG, se pausa fuera de viewport, y con
+ * prefers-reduced-motion queda todo estático.
  */
 
 type Pt = { x: number; y: number };
 
 type Layout = {
   viewBox: string;
-  a: Pt;
-  b: Pt;
-  route: string;
   cat: { transform: string; opacity: number };
   nodes: Pt[];
   traces: [number, number][];
   active: number[];
-  routeWidth: number;
 };
 
 // Silueta estilizada de Catalunya (Cap de Creus -> Pirineu -> Ponent -> Delta
@@ -54,15 +41,6 @@ const CAT_PATH =
 
 const DESKTOP: Layout = {
   viewBox: "0 0 1440 820",
-  // La ruta entra por el margen izquierdo (bajo y a la izquierda del titular),
-  // recorre el borde inferior por debajo de los botones y asciende pegada al
-  // margen derecho hasta la esquina superior. Enmarca el contenido dejando un
-  // hueco claro con el texto: nunca lo invade ni pasa rozándolo.
-  a: { x: 92, y: 452 },
-  b: { x: 1344, y: 92 },
-  route:
-    "M92 452 C 168 578 200 664 340 680 C 600 702 900 700 1120 636 " +
-    "C 1320 566 1352 320 1344 92",
   cat: { transform: "translate(470 150) scale(1.6)", opacity: 0.028 },
   nodes: [
     { x: 120, y: 140 }, { x: 300, y: 88 }, { x: 470, y: 196 }, { x: 210, y: 330 },
@@ -76,16 +54,10 @@ const DESKTOP: Layout = {
     [9, 11], [11, 13], [8, 14], [14, 17], [15, 16], [10, 11], [3, 4], [7, 8],
   ],
   active: [1, 7, 13],
-  routeWidth: 2.75,
 };
 
 const MOBILE: Layout = {
   viewBox: "0 0 430 900",
-  // En vertical el texto ocupa casi todo el centro: la ruta se reserva a la
-  // franja inferior, por debajo de los botones.
-  a: { x: 40, y: 866 },
-  b: { x: 406, y: 726 },
-  route: "M40 866 C 120 832 132 752 242 730 C 312 716 344 708 406 726",
   cat: { transform: "translate(150 470) scale(0.9)", opacity: 0.03 },
   nodes: [
     { x: 58, y: 120 }, { x: 210, y: 70 }, { x: 360, y: 150 }, { x: 96, y: 250 },
@@ -96,7 +68,6 @@ const MOBILE: Layout = {
     [0, 1], [1, 11], [11, 5], [3, 9], [0, 3], [6, 7], [7, 8], [9, 10], [2, 5], [1, 2],
   ],
   active: [1, 6, 8],
-  routeWidth: 2.4,
 };
 
 // Traza ortogonal tipo PCB entre dos nodos, con un codo redondeado.
@@ -108,28 +79,11 @@ function manhattan(a: Pt, b: Pt, r = 14): string {
   return `M${a.x} ${a.y} H${b.x - sx * rr} Q${b.x} ${a.y} ${b.x} ${a.y + sy * rr} V${b.y}`;
 }
 
-const DRAW = { animation: "heroDraw 3.9s cubic-bezier(.4,0,.15,1) .9s forwards" as const, strokeDashoffset: 1 };
-
-// Motion compartido por el vehículo y su estela. Recorre la ruta en el 65%
-// inicial de cada ciclo (con easing) y descansa el resto antes de repetir.
-const MOTION = {
-  dur: "6s",
-  repeatCount: "indefinite" as const,
-  calcMode: "spline" as const,
-  keyTimes: "0;0.65;1",
-  keyPoints: "0;1;1",
-  keySplines: "0.4 0 0.15 1;0 0 1 1",
-};
-
 export default function HeroRouteMap() {
   const mobile = useIsMobile();
   const reduced = useReducedMotion() ?? false;
   const svgRef = useRef<SVGSVGElement>(null);
   const L = mobile ? MOBILE : DESKTOP;
-  const uid = mobile ? "m" : "d";
-  const routeId = `hero-route-${uid}`;
-  const gradId = `hero-route-grad-${uid}`;
-  const glowId = `hero-route-glow-${uid}`;
 
   useEffect(() => {
     const svg = svgRef.current;
@@ -148,22 +102,6 @@ export default function HeroRouteMap() {
     return () => io.disconnect();
   }, [reduced, mobile]);
 
-  // Vehículo + estela: círculos apilados con el mismo motion. El `t` (retardo
-  // relativo del begin) los separa a lo largo de la ruta -> menor t = cabeza,
-  // mayor t = cola. Se disponen del más externo/tenue al núcleo brillante.
-  const w = L.routeWidth;
-  const comet = [
-    { r: w * 6.5, fill: `url(#${glowId})`, opacity: 0.55, t: 0 }, // charco de luz que viaja
-    { r: w * 3.4, fill: "#4D9FEC", opacity: 0.3, t: 0 }, // halo de la cabeza
-    { r: w * 0.55, fill: "#4D9FEC", opacity: 0.1, t: 0.42 },
-    { r: w * 0.7, fill: "#4D9FEC", opacity: 0.18, t: 0.33 },
-    { r: w * 0.9, fill: "#4D9FEC", opacity: 0.28, t: 0.25 },
-    { r: w * 1.1, fill: "#7FB8F2", opacity: 0.4, t: 0.17 },
-    { r: w * 1.35, fill: "#BBD9F8", opacity: 0.6, t: 0.09 },
-    { r: w * 1.05, fill: "#4D9FEC", opacity: 0.5, t: 0.04 },
-    { r: w * 1.7, fill: "#EAF4FE", opacity: 1, t: 0 }, // núcleo (cabeza)
-  ];
-
   return (
     <svg
       ref={svgRef}
@@ -173,26 +111,6 @@ export default function HeroRouteMap() {
       aria-hidden="true"
       style={{ opacity: 0.85 }}
     >
-      <defs>
-        <linearGradient
-          id={gradId}
-          gradientUnits="userSpaceOnUse"
-          x1={L.a.x}
-          y1={L.a.y}
-          x2={L.b.x}
-          y2={L.b.y}
-        >
-          <stop offset="0" stopColor="#1B4FD8" />
-          <stop offset="0.5" stopColor="#4D9FEC" />
-          <stop offset="1" stopColor="#9BC9F5" />
-        </linearGradient>
-        <radialGradient id={glowId}>
-          <stop offset="0" stopColor="#4D9FEC" stopOpacity="0.9" />
-          <stop offset="0.5" stopColor="#4D9FEC" stopOpacity="0.25" />
-          <stop offset="1" stopColor="#4D9FEC" stopOpacity="0" />
-        </radialGradient>
-      </defs>
-
       {/* Guiño territorial: silueta apenas perceptible */}
       <g transform={L.cat.transform} opacity={L.cat.opacity}>
         <path d={CAT_PATH} fill="#4D9FEC" />
@@ -242,94 +160,6 @@ export default function HeroRouteMap() {
           />
         ))}
       </g>
-
-      {/* Ruta firma: dos capas de glow + la línea con degradado */}
-      <path
-        d={L.route}
-        fill="none"
-        stroke="#4D9FEC"
-        strokeWidth={L.routeWidth * 5}
-        strokeLinecap="round"
-        opacity={0.04}
-        pathLength={1}
-        strokeDasharray={1}
-        style={reduced ? undefined : DRAW}
-      />
-      <path
-        d={L.route}
-        fill="none"
-        stroke="#4D9FEC"
-        strokeWidth={L.routeWidth * 2.2}
-        strokeLinecap="round"
-        opacity={0.08}
-        pathLength={1}
-        strokeDasharray={1}
-        style={reduced ? undefined : DRAW}
-      />
-      <path
-        d={L.route}
-        fill="none"
-        stroke={`url(#${gradId})`}
-        strokeWidth={L.routeWidth}
-        strokeLinecap="round"
-        opacity={0.55}
-        pathLength={1}
-        strokeDasharray={1}
-        style={reduced ? undefined : DRAW}
-      />
-
-      {/* Path de referencia para el motion del vehículo */}
-      <path id={routeId} d={L.route} fill="none" stroke="none" />
-
-      {/* Pulso de flujo recurrente que mantiene la ruta "viva" */}
-      {!reduced && (
-        <path
-          d={L.route}
-          fill="none"
-          stroke="#EAF4FE"
-          strokeWidth={L.routeWidth * 1.1}
-          strokeLinecap="round"
-          opacity={0.5}
-          pathLength={1}
-          strokeDasharray="0.05 1"
-          style={{ animation: "heroFlow 6s ease-in-out 6.4s infinite" }}
-        />
-      )}
-
-      {/* Punto de origen (A) */}
-      <circle cx={L.a.x} cy={L.a.y} r={3.2} fill="#4D9FEC" />
-      {!reduced && (
-        <circle cx={L.a.x} cy={L.a.y} r={6} fill="none" stroke="#4D9FEC" strokeWidth={1.2}>
-          <animate attributeName="r" values="5;15;5" dur="3.6s" repeatCount="indefinite" />
-          <animate attributeName="opacity" values="0.55;0;0.55" dur="3.6s" repeatCount="indefinite" />
-        </circle>
-      )}
-
-      {/* Punto de destino (B) */}
-      <circle cx={L.b.x} cy={L.b.y} r={4} fill="#1B4FD8" stroke="#4D9FEC" strokeWidth={1.2} />
-      {!reduced && (
-        <>
-          <circle cx={L.b.x} cy={L.b.y} r={6} fill="none" stroke="#4D9FEC" strokeWidth={1.2}>
-            <animate attributeName="r" values="6;16;6" dur="3.6s" begin="1.8s" repeatCount="indefinite" />
-            <animate attributeName="opacity" values="0.5;0;0.5" dur="3.6s" begin="1.8s" repeatCount="indefinite" />
-          </circle>
-          {/* Onda de llegada, sincronizada con el paso del vehículo */}
-          <circle cx={L.b.x} cy={L.b.y} r={4} fill="none" stroke="#4D9FEC" strokeWidth={1.5}>
-            <animate attributeName="r" values="3;28;28" keyTimes="0;0.16;1" dur="6s" begin="4.8s" repeatCount="indefinite" />
-            <animate attributeName="opacity" values="0.7;0;0" keyTimes="0;0.16;1" dur="6s" begin="4.8s" repeatCount="indefinite" />
-          </circle>
-        </>
-      )}
-
-      {/* Vehículo + estela */}
-      {!reduced &&
-        comet.map((c, k) => (
-          <circle key={k} r={c.r} fill={c.fill} opacity={c.opacity} cx={L.a.x} cy={L.a.y}>
-            <animateMotion begin={`${0.9 + c.t}s`} {...MOTION}>
-              <mpath href={`#${routeId}`} xlinkHref={`#${routeId}`} />
-            </animateMotion>
-          </circle>
-        ))}
     </svg>
   );
 }

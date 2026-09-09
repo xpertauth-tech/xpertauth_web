@@ -79,7 +79,6 @@ export default function Hero() {
               {t("cta1")}
               <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
             </button>
-            {/* Ancla preparada para la sección "Cómo funciona" del Home (pendiente de construir). */}
             <button onClick={() => scrollTo("#como-funciona")} className="px-8 py-3.5 border border-white/20 text-pure/90 font-medium rounded-md text-sm sm:text-base transition-all duration-300 w-full sm:w-auto" data-testid="button-hero-como-funciona">
               {t("cta2")}
             </button>
