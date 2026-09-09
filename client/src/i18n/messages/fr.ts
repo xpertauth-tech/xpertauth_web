@@ -31,27 +31,6 @@ const fr = {
       },
     ],
   },
-  services: {
-    label: "Services",
-    title: "Deux outils, un même discernement.",
-    subtitle: "Tout ce que fait XpertAuth vient du même endroit : trente ans de transport spécial, avec l'IA comme appui et la révision humaine comme règle.",
-    items: [
-      {
-        num: "01",
-        name: "LEX",
-        role: "Réglementation et autorisations",
-        description: "Questions sur les autorisations, les itinéraires, l'ADR ou les changements légaux, avec la source citée. Nous orientons ; nous ne faisons pas les démarches auprès de l'administration.",
-        href: "/servicios/transporte-especial",
-      },
-      {
-        num: "02",
-        name: "NOVA",
-        role: "L'IA appliquée au quotidien",
-        description: "Des automatisations concrètes pour les PME de transport : expiration des autorisations, dossiers, alertes obligatoires, suivi de flotte. Sans jargon et sans esbroufe.",
-        href: "/servicios/ia-pymes",
-      },
-    ],
-  },
   howItWorks: {
     label: "Processus",
     title: "Comment nous travaillons.",

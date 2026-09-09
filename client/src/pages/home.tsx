@@ -2,7 +2,6 @@ import { useEffect } from "react";
 import Navbar from "@/components/navbar";
 import Hero from "@/components/hero";
 import TeamSection from "@/components/TeamSection";
-import Services from "@/components/services";
 import HowItWorks from "@/components/how-it-works";
 import SocialProof from "@/components/social-proof";
 import BlogSection from "@/components/blog";
@@ -26,7 +25,6 @@ export default function Home() {
       <Navbar />
       <Hero />
       <TeamSection />
-      <Services />
       <HowItWorks />
       <SocialProof />
       <BlogSection />

@@ -31,27 +31,6 @@ const ca = {
       },
     ],
   },
-  services: {
-    label: "Serveis",
-    title: "Dues eines, un mateix criteri.",
-    subtitle: "Tot el que fa XpertAuth neix del mateix lloc: trenta anys de transport especial, amb la IA com a suport i la revisió humana com a norma.",
-    items: [
-      {
-        num: "01",
-        name: "LEX",
-        role: "Normativa i permisos",
-        description: "Dubtes sobre autoritzacions, itineraris, ADR o canvis legals, respostos amb la font citada. Orientem; no tramitem davant l'administració.",
-        href: "/servicios/transporte-especial",
-      },
-      {
-        num: "02",
-        name: "NOVA",
-        role: "IA aplicada al dia a dia",
-        description: "Automatitzacions reals per a pimes de transport: caducitat de permisos, expedients, avisos obligatoris, seguiment de flota. Sense argot i sense fum.",
-        href: "/servicios/ia-pymes",
-      },
-    ],
-  },
   howItWorks: {
     label: "Procés",
     title: "Així treballem.",

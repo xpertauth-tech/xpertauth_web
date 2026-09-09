@@ -31,27 +31,6 @@ const en = {
       },
     ],
   },
-  services: {
-    label: "Services",
-    title: "Two tools, one and the same judgement.",
-    subtitle: "Everything XpertAuth does comes from the same place: thirty years of special transport, with AI as support and human review as the rule.",
-    items: [
-      {
-        num: "01",
-        name: "LEX",
-        role: "Regulations and permits",
-        description: "Questions about authorisations, routes, ADR or legal changes, answered with the source cited. We advise; we do not file paperwork with the administration.",
-        href: "/servicios/transporte-especial",
-      },
-      {
-        num: "02",
-        name: "NOVA",
-        role: "AI applied to day-to-day work",
-        description: "Real automations for transport SMEs: permit expiry, case files, mandatory alerts, fleet tracking. No jargon, no hype.",
-        href: "/servicios/ia-pymes",
-      },
-    ],
-  },
   howItWorks: {
     label: "Process",
     title: "How we work.",

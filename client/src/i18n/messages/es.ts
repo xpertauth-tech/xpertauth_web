@@ -31,27 +31,6 @@ const es = {
       },
     ],
   },
-  services: {
-    label: "Servicios",
-    title: "Dos herramientas, un mismo criterio.",
-    subtitle: "Todo lo que hace XpertAuth nace del mismo sitio: treinta años de transporte especial, con la IA como apoyo y la revisión humana como norma.",
-    items: [
-      {
-        num: "01",
-        name: "LEX",
-        role: "Normativa y permisos",
-        description: "Dudas sobre autorizaciones, itinerarios, ADR o cambios legales, respondidas con la fuente citada. Orientamos; no tramitamos ante la administración.",
-        href: "/servicios/transporte-especial",
-      },
-      {
-        num: "02",
-        name: "NOVA",
-        role: "IA aplicada al día a día",
-        description: "Automatizaciones reales para pymes de transporte: caducidad de permisos, expedientes, avisos obligatorios, seguimiento de flota. Sin jerga y sin humo.",
-        href: "/servicios/ia-pymes",
-      },
-    ],
-  },
   howItWorks: {
     label: "Proceso",
     title: "Así trabajamos.",
