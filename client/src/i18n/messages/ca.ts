@@ -3,7 +3,7 @@ const ca = {
     servicios: "Serveis",
     comoFunciona: "Com funciona",
     blog: "Blog",
-    entrar: "Entrar",
+    registrate: "Registra't",
   },
   hero: {
     badge: "Especialistes en transport especial · Associació en procés d'estudi de constitució",

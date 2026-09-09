@@ -3,7 +3,7 @@ const fr = {
     servicios: "Services",
     comoFunciona: "Comment ça marche",
     blog: "Blog",
-    entrar: "Se connecter",
+    registrate: "S'inscrire",
   },
   hero: {
     badge: "Spécialistes du transport spécial · Association à l'étude pour une constitution formelle",

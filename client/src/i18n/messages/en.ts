@@ -3,7 +3,7 @@ const en = {
     servicios: "Services",
     comoFunciona: "How it works",
     blog: "Blog",
-    entrar: "Sign in",
+    registrate: "Sign up",
   },
   hero: {
     badge: "Special transport specialists · Association exploring formal establishment",

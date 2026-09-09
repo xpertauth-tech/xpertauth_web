@@ -180,7 +180,7 @@ export default function TeamSection() {
   }
 
   return (
-    <section id="equipo" className="py-20 sm:py-28 bg-obsidian-light" data-testid="section-equipo">
+    <section id="servicios" className="py-20 sm:py-28 bg-obsidian-light" data-testid="section-equipo">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <motion.div
           initial={{ opacity: 0, y: 20 }}

@@ -3,7 +3,7 @@ const es = {
     servicios: "Servicios",
     comoFunciona: "Cómo funciona",
     blog: "Blog",
-    entrar: "Entrar",
+    registrate: "Regístrate",
   },
   hero: {
     badge: "Especialistas en transporte especial · Asociación en proceso de estudio de constitución",
