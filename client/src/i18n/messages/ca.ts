@@ -38,17 +38,22 @@ const ca = {
       {
         num: "01",
         title: "Planteja el teu cas",
-        description: "Un dubte normatiu, un permís que no saps per on agafar, una tasca que repeteixes cada setmana.",
+        description: "Un permís, un itinerari, un dubte normatiu. Ens ho expliques com ho explicaries a un company.",
       },
       {
         num: "02",
-        title: "La IA busca, una persona revisa",
-        description: "LEX i NOVA fan la feina de base; en José Luis supervisa tot el que tingui pes legal o econòmic.",
+        title: "La IA busca",
+        description: "LEX consulta la base normativa pròpia i localitza el que aplica al teu cas, amb la font citada.",
       },
       {
         num: "03",
+        title: "Una persona revisa",
+        description: "No surt res sense que algú amb trenta anys d'ofici ho hagi llegit. Si hi ha dubtes, se't diu.",
+      },
+      {
+        num: "04",
         title: "Tu decideixes",
-        description: "Reps una resposta clara i amb fonts. La decisió i la tramitació continuen sent teves.",
+        description: "Reps una orientació clara. XpertAuth no tramita davant l'administració: el següent pas és teu.",
       },
     ],
     closingNote: "Avui XpertAuth està en fase d'aprenentatge i validació: no hi ha quotes ni facturació.",

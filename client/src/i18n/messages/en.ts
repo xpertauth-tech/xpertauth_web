@@ -38,17 +38,22 @@ const en = {
       {
         num: "01",
         title: "Set out your case",
-        description: "A regulatory question, a permit you don't know where to start with, a task you repeat every week.",
+        description: "A permit, a route, a regulatory question. You tell us the way you'd tell a colleague.",
       },
       {
         num: "02",
-        title: "AI searches, a person reviews",
-        description: "LEX and NOVA do the groundwork; José Luis oversees anything with legal or financial weight.",
+        title: "The AI searches",
+        description: "LEX checks our own regulatory base and finds what applies to your case, with the source cited.",
       },
       {
         num: "03",
+        title: "A person reviews",
+        description: "Nothing goes out without someone with thirty years in the trade having read it. If there's any doubt, we tell you.",
+      },
+      {
+        num: "04",
         title: "You decide",
-        description: "You get a clear, sourced answer. The decision and the paperwork stay yours.",
+        description: "You get clear guidance. XpertAuth doesn't file paperwork with the administration: the next step is yours.",
       },
     ],
     closingNote: "Today XpertAuth is in a learning and validation phase: there are no fees and no invoicing.",

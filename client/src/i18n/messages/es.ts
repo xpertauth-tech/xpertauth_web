@@ -38,17 +38,22 @@ const es = {
       {
         num: "01",
         title: "Plantea tu caso",
-        description: "Una duda normativa, un permiso que no sabes por dónde coger, una tarea que repites cada semana.",
+        description: "Un permiso, un itinerario, una duda normativa. Nos lo cuentas como lo contarías a un compañero.",
       },
       {
         num: "02",
-        title: "La IA busca, una persona revisa",
-        description: "LEX y NOVA hacen el trabajo de base; José Luis supervisa todo lo que tenga peso legal o económico.",
+        title: "La IA busca",
+        description: "LEX consulta la base normativa propia y localiza lo que aplica a tu caso, con la fuente citada.",
       },
       {
         num: "03",
+        title: "Una persona revisa",
+        description: "Nada sale sin que alguien con treinta años de oficio lo haya leído. Si hay dudas, se te dice.",
+      },
+      {
+        num: "04",
         title: "Tú decides",
-        description: "Recibes una respuesta clara y con fuentes. La decisión y la tramitación siguen siendo tuyas.",
+        description: "Recibes una orientación clara. XpertAuth no tramita ante la administración: el siguiente paso es tuyo.",
       },
     ],
     closingNote: "Hoy XpertAuth está en fase de aprendizaje y validación: no hay cuotas ni facturación.",

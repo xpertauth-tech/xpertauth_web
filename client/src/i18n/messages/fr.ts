@@ -38,17 +38,22 @@ const fr = {
       {
         num: "01",
         title: "Exposez votre cas",
-        description: "Une question réglementaire, une autorisation par laquelle vous ne savez pas commencer, une tâche que vous répétez chaque semaine.",
+        description: "Un permis, un itinéraire, une question réglementaire. Vous nous l'expliquez comme à un collègue.",
       },
       {
         num: "02",
-        title: "L'IA cherche, une personne vérifie",
-        description: "LEX et NOVA font le travail de base ; José Luis supervise tout ce qui a un poids juridique ou financier.",
+        title: "L'IA cherche",
+        description: "LEX consulte notre propre base réglementaire et trouve ce qui s'applique à votre cas, avec la source citée.",
       },
       {
         num: "03",
+        title: "Une personne vérifie",
+        description: "Rien ne sort sans que quelqu'un avec trente ans de métier l'ait lu. En cas de doute, on vous le dit.",
+      },
+      {
+        num: "04",
         title: "Vous décidez",
-        description: "Vous recevez une réponse claire et sourcée. La décision et les démarches restent les vôtres.",
+        description: "Vous recevez une orientation claire. XpertAuth ne fait pas les démarches auprès de l'administration : l'étape suivante est la vôtre.",
       },
     ],
     closingNote: "Aujourd'hui XpertAuth est en phase d'apprentissage et de validation : il n'y a ni cotisations ni facturation.",
