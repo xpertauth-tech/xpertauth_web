@@ -63,7 +63,7 @@ const translations = {
       titulo: "¿Quieres saber más?",
       subtitulo:
         "XpertAuth está en fase de aprendizaje y construcción, pero el rumbo está claro. Conoce el proyecto o escríbenos si tienes alguna pregunta.",
-      boton1: "Conoce el proyecto",
+      boton1: "Ver los servicios",
       boton2: "Contacta con nosotros",
     },
   },
@@ -124,7 +124,7 @@ const translations = {
       titulo: "Vols saber-ne més?",
       subtitulo:
         "XpertAuth està en fase d'aprenentatge i construcció, però el rumb és clar. Coneix el projecte o escriu-nos si tens alguna pregunta.",
-      boton1: "Coneix el projecte",
+      boton1: "Veure els serveis",
       boton2: "Contacta amb nosaltres",
     },
   },
@@ -185,7 +185,7 @@ const translations = {
       titulo: "Want to know more?",
       subtitulo:
         "XpertAuth is in a learning and building phase, but the direction is clear. Get to know the project or write to us if you have any questions.",
-      boton1: "About the project",
+      boton1: "See the services",
       boton2: "Contact us",
     },
   },
@@ -246,7 +246,7 @@ const translations = {
       titulo: "Vous voulez en savoir plus ?",
       subtitulo:
         "XpertAuth est en phase d'apprentissage et de construction, mais la direction est claire. Découvrez le projet ou écrivez-nous si vous avez des questions.",
-      boton1: "Découvrir le projet",
+      boton1: "Voir les services",
       boton2: "Nous contacter",
     },
   },
@@ -531,7 +531,6 @@ export default function SobreNosotros() {
             </p>
             <div style={{ display: "flex", gap: "1rem", justifyContent: "center", flexWrap: "wrap" }}>
               <button
-                /* Destino provisional — pendiente de confirmar (ancla interna o página de servicios de transporte). */
                 onClick={() => { window.location.href = `/${locale}/servicios/transporte-especial`; }}
                 style={{ background: "#1B4FD8", color: "#fff", border: "none", borderRadius: ".5rem", padding: ".875rem 2rem", fontFamily: "'Sora',sans-serif", fontWeight: 600, fontSize: ".95rem", cursor: "pointer", transition: "background .2s,transform .2s" }}
                 onMouseEnter={(e) => { e.currentTarget.style.background = "#1641b0"; e.currentTarget.style.transform = "translateY(-2px)"; }}
