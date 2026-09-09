@@ -1,8 +1,7 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
-import { ArrowRight, Calendar } from "lucide-react";
+import { Calendar } from "lucide-react";
 import { useTranslations } from "@/i18n/context";
-import { useLocation } from "wouter";
 import ContactModal from "./ContactModal";
 
 const gradientStyle: React.CSSProperties = {
@@ -15,10 +14,7 @@ const gradientStyle: React.CSSProperties = {
 };
 
 export default function CtaFinal() {
-  const { t, locale } = useTranslations("ctaFinal");
-  // "Conoce el proyecto" reutiliza la clave ya definida en el Footer (footer.aboutProject).
-  const { t: footerT } = useTranslations("footer");
-  const [, navigate] = useLocation();
+  const { t } = useTranslations("ctaFinal");
   const [contactOpen, setContactOpen] = useState(false);
 
   return (
@@ -45,15 +41,6 @@ export default function CtaFinal() {
           </h2>
 
           <div className="mt-10 sm:mt-12 flex flex-col sm:flex-row items-center justify-center gap-4">
-            <button
-              onClick={() => navigate(`/${locale}/sobre-nosotros`)}
-              className="group px-8 py-4 bg-xpertblue text-pure font-semibold rounded-md text-sm sm:text-base transition-all duration-300 flex items-center gap-2 w-full sm:w-auto justify-center hover:bg-xpertblue/90"
-              data-testid="button-cta-final-proyecto"
-            >
-              {footerT("aboutProject")}
-              <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
-            </button>
-
             <button
               onClick={() => setContactOpen(true)}
               className="px-8 py-4 border border-white/20 text-pure/90 font-medium rounded-md text-sm sm:text-base transition-all duration-300 w-full sm:w-auto text-center hover:bg-white/5 hover:border-white/30"
