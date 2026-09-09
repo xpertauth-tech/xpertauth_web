@@ -362,10 +362,11 @@ export default function TransporteEspecial() {
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <button
-              onClick={() => window.location.href = `/${locale}/sobre-nosotros`}
+              onClick={() => abrirAgente("LEX")}
               className="px-7 py-3.5 bg-xpertblue hover:bg-xpertblue/90 text-pure font-semibold rounded-lg transition-all duration-200 flex items-center justify-center gap-2"
             >
-              {t.ctaProyecto} <ArrowRight className="w-4 h-4" />
+              <MessageSquare className="w-4 h-4" />
+              {t.lexCta}
             </button>
             <button
               onClick={() => setContactOpen(true)}
