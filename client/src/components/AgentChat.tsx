@@ -1,9 +1,13 @@
 import { useState, useEffect, useRef } from "react";
 import { X, Send, Loader2, ExternalLink, Calendar } from "lucide-react";
+import ContactModal from "./ContactModal";
 
 // ─── Tipos ───────────────────────────────────────────────────────────────────
 
 type Agente = "LEX" | "NOVA";
+
+// Avatares ilustrados (los mismos que usa la sección Equipo)
+const AVATAR_BASE = "https://supabase.xpertauth.com/storage/v1/object/public/web-images/equipo";
 
 interface Mensaje {
   role: "user" | "assistant";
@@ -27,7 +31,7 @@ const AGENTE_CONFIG: Record<Agente, {
   color: string;
   colorBg: string;
   colorBorder: string;
-  emoji: string;
+  avatar: string;
   tagline: string;
   mensajeBienvenida: string;
   placeholder: string;
@@ -37,7 +41,7 @@ const AGENTE_CONFIG: Record<Agente, {
     color: "#1B4FD8",
     colorBg: "rgba(27,79,216,0.10)",
     colorBorder: "rgba(27,79,216,0.25)",
-    emoji: "⚖️",
+    avatar: `${AVATAR_BASE}/lex_avatar_v1.webp`,
     tagline: "Normativa de transporte especial",
     mensajeBienvenida:
       "Hola, soy LEX. Estoy especializado en normativa de transporte especial — permisos de circulación, autorizaciones DGT y SCT Catalunya, restricciones, vehículos de acompañamiento y más.\n\n¿Cuál es tu consulta?",
@@ -48,10 +52,10 @@ const AGENTE_CONFIG: Record<Agente, {
     color: "#4D9FEC",
     colorBg: "rgba(77,159,236,0.10)",
     colorBorder: "rgba(77,159,236,0.25)",
-    emoji: "🤖",
+    avatar: `${AVATAR_BASE}/nova_avatar_v1.webp`,
     tagline: "IA para pequeñas y medianas empresas",
     mensajeBienvenida:
-      "Hola, soy NOVA. Te ayudo a entender qué puede hacer la IA por tu negocio: qué herramientas existen, cómo empezar sin invertir y qué procesos se pueden automatizar según tu sector.\n\n¿En qué puedo ayudarte?",
+      "Hola, soy NOVA. Te ayudo a ver qué puede hacer la IA en una pyme de transporte: caducidad de permisos, expedientes, avisos obligatorios, seguimiento de flota. Cómo empezar sin invertir y sin humo.\n\n¿En qué puedo ayudarte?",
     placeholder: "Pregúntame sobre IA para tu empresa…",
     disclaimer: "NOVA es IA y puede cometer errores. Contrasta siempre la información.",
   },
@@ -179,9 +183,11 @@ function parsearInline(texto: string): React.ReactNode {
 function Burbuja({
   mensaje,
   config,
+  onCita,
 }: {
   mensaje: Mensaje;
   config: typeof AGENTE_CONFIG[Agente];
+  onCita: () => void;
 }) {
   const esAsistente = mensaje.role === "assistant";
   const { textoLimpio, botones } = parsearBotones(mensaje.content);
@@ -190,10 +196,10 @@ function Burbuja({
     <div className={`flex gap-3 ${esAsistente ? "justify-start" : "justify-end"}`}>
       {esAsistente && (
         <div
-          className="flex-shrink-0 w-8 h-8 rounded-lg flex items-center justify-center text-base mt-0.5"
+          className="flex-shrink-0 w-8 h-8 rounded-lg overflow-hidden mt-0.5"
           style={{ backgroundColor: config.colorBg, border: `1px solid ${config.colorBorder}` }}
         >
-          {config.emoji}
+          <img src={config.avatar} alt="" className="w-full h-full object-cover" />
         </div>
       )}
 
@@ -244,9 +250,10 @@ function Burbuja({
 
               if (btn.tipo === "CITA") {
                 return (
-                  <a
+                  <button
                     key={i}
-                    href="mailto:joseluis@xpertauth.com?subject=Solicitud%20de%20cita"
+                    type="button"
+                    onClick={onCita}
                     className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium transition-opacity hover:opacity-80"
                     style={{
                       backgroundColor: "rgba(232,98,10,0.15)",
@@ -256,7 +263,7 @@ function Burbuja({
                   >
                     <Calendar size={12} />
                     {btn.label}
-                  </a>
+                  </button>
                 );
               }
 
@@ -291,6 +298,7 @@ export default function AgentChat({
   const [input, setInput] = useState("");
   const [cargando, setCargando] = useState(false);
   const [limiteAlcanzado, setLimiteAlcanzado] = useState(false);
+  const [contactOpen, setContactOpen] = useState(false);
 
   const EMAIL_CORPORATIVO = "eche.jose@gmail.com";
   const esCorporativo = email === EMAIL_CORPORATIVO;
@@ -440,10 +448,10 @@ export default function AgentChat({
           }}
         >
           <div
-            className="w-9 h-9 rounded-xl flex items-center justify-center text-lg flex-shrink-0"
+            className="w-9 h-9 rounded-xl overflow-hidden flex-shrink-0"
             style={{ backgroundColor: config.colorBg, border: `1px solid ${config.colorBorder}` }}
           >
-            {config.emoji}
+            <img src={config.avatar} alt={agente} className="w-full h-full object-cover" />
           </div>
 
           <div className="flex-1 min-w-0">
@@ -471,16 +479,16 @@ export default function AgentChat({
         {/* ── MENSAJES ── */}
         <div className="flex-1 overflow-y-auto px-4 py-5 space-y-4">
           {mensajes.map((msg, i) => (
-            <Burbuja key={i} mensaje={msg} config={config} />
+            <Burbuja key={i} mensaje={msg} config={config} onCita={() => setContactOpen(true)} />
           ))}
 
           {cargando && (
             <div className="flex gap-3 justify-start">
               <div
-                className="w-8 h-8 rounded-lg flex items-center justify-center text-base flex-shrink-0"
+                className="w-8 h-8 rounded-lg overflow-hidden flex-shrink-0"
                 style={{ backgroundColor: config.colorBg, border: `1px solid ${config.colorBorder}` }}
               >
-                {config.emoji}
+                <img src={config.avatar} alt="" className="w-full h-full object-cover" />
               </div>
               <div
                 className="px-4 py-3 rounded-2xl flex items-center gap-2"
@@ -572,6 +580,8 @@ export default function AgentChat({
           </p>
         </div>
       </div>
+
+      <ContactModal open={contactOpen} onClose={() => setContactOpen(false)} />
     </>
   );
 }

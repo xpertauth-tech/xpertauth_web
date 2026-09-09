@@ -78,7 +78,7 @@ const texts: Record<string, {
     restricDesc: "Restricciones vigentes para el transporte especial en Catalunya: fechas, tramos, dimensiones máximas y condiciones específicas de circulación.",
     lexLabel: "Agente IA",
     lexTitle: "LEX — Tu experto normativo 24/7",
-    lexDesc1: "LEX tiene acceso a más de 7.400 fragmentos de normativa de transporte especial: leyes marco, instrucciones DGT, resoluciones SCT, mercancías peligrosas y jornadas de conducción.",
+    lexDesc1: "LEX tiene acceso a una base normativa propia de transporte especial, que crece con cada nueva norma: leyes marco, instrucciones DGT, resoluciones SCT, mercancías peligrosas y jornadas de conducción.",
     lexDesc2: "Pregunta sobre permisos, restricciones horarias, velocidades máximas o trámites con la SCT. LEX cita siempre la fuente exacta.",
     lexCta: "Pregunta a LEX",
     lexSamples: [
@@ -120,7 +120,7 @@ const texts: Record<string, {
     restricDesc: "Restriccions vigents per al transport especial a Catalunya: dates, trams, dimensions màximes i condicions específiques de circulació.",
     lexLabel: "Agent IA",
     lexTitle: "LEX — El teu expert normatiu 24/7",
-    lexDesc1: "LEX té accés a més de 7.400 fragments de normativa de transport especial: lleis marc, instruccions DGT, resolucions SCT, mercaderies perilloses i jornades de conducció.",
+    lexDesc1: "LEX té accés a una base normativa pròpia de transport especial, que creix amb cada nova norma: lleis marc, instruccions DGT, resolucions SCT, mercaderies perilloses i jornades de conducció.",
     lexDesc2: "Pregunta sobre permisos, restriccions horàries, velocitats màximes o tràmits amb la SCT. LEX cita sempre la font exacta.",
     lexCta: "Pregunta a LEX",
     lexSamples: [
@@ -162,7 +162,7 @@ const texts: Record<string, {
     restricDesc: "Current restrictions for special transport in Catalunya: dates, road sections, maximum dimensions and specific circulation conditions.",
     lexLabel: "AI Agent",
     lexTitle: "LEX — Your regulatory expert 24/7",
-    lexDesc1: "LEX has access to over 7,400 fragments of special transport regulations: framework laws, DGT instructions, SCT resolutions, dangerous goods and driving hours.",
+    lexDesc1: "LEX has access to its own special transport regulatory base, growing with every new rule: framework laws, DGT instructions, SCT resolutions, dangerous goods and driving hours.",
     lexDesc2: "Ask about permits, time restrictions, maximum speeds or SCT procedures. LEX always cites the exact source.",
     lexCta: "Ask LEX",
     lexSamples: [
@@ -204,7 +204,7 @@ const texts: Record<string, {
     restricDesc: "Restrictions en vigueur pour le transport spécial en Catalogne : dates, tronçons, dimensions maximales et conditions spécifiques de circulation.",
     lexLabel: "Agent IA",
     lexTitle: "LEX — Votre expert réglementaire 24h/24",
-    lexDesc1: "LEX a accès à plus de 7 400 fragments de réglementation sur le transport spécial : lois cadres, instructions DGT, résolutions SCT, matières dangereuses et temps de conduite.",
+    lexDesc1: "LEX a accès à sa propre base réglementaire du transport spécial, qui s'enrichit à chaque nouvelle norme : lois cadres, instructions DGT, résolutions SCT, matières dangereuses et temps de conduite.",
     lexDesc2: "Posez des questions sur les permis, les restrictions horaires, les vitesses maximales ou les démarches SCT. LEX cite toujours la source exacte.",
     lexCta: "Demandez à LEX",
     lexSamples: [

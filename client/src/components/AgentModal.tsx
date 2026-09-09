@@ -1,9 +1,13 @@
 import { useState, useEffect } from "react";
 import { X, Shield } from "lucide-react";
+import { useI18n } from "@/i18n/context";
 
 // ─── Tipos ───────────────────────────────────────────────────────────────────
 
 type Agente = "LEX" | "NOVA";
+
+// Avatares ilustrados (los mismos que usa la sección Equipo)
+const AVATAR_BASE = "https://supabase.xpertauth.com/storage/v1/object/public/web-images/equipo";
 
 interface AgentModalProps {
   agente: Agente | null;           // null = modal cerrado
@@ -19,7 +23,7 @@ const AGENTE_CONFIG: Record<Agente, {
   colorBorder: string;   // borde del modal
   colorBtn: string;      // color del botón CTA
   colorBtnHover: string;
-  emoji: string;
+  avatar: string;        // avatar ilustrado del agente
   tagline: string;       // subtítulo del modal
   descripcion: string;   // qué puede hacer
   placeholder: string;   // hint en el campo nombre
@@ -31,10 +35,10 @@ const AGENTE_CONFIG: Record<Agente, {
     colorBorder: "rgba(27,79,216,0.25)",
     colorBtn: "#1B4FD8",
     colorBtnHover: "#1640b0",
-    emoji: "⚖️",
+    avatar: `${AVATAR_BASE}/lex_avatar_v1.webp`,
     tagline: "Especialista en normativa de transporte especial",
     descripcion:
-      "LEX responde consultas sobre permisos de circulación, autorizaciones especiales, normativa DGT y SCT Catalunya, restricciones, vehículos de acompañamiento y mucho más. Basado en una base normativa de más de 9.500 fragmentos actualizados.",
+      "LEX responde consultas sobre permisos de circulación, autorizaciones especiales, normativa DGT y SCT Catalunya, restricciones, vehículos de acompañamiento y mucho más. Basado en una base normativa propia, que crece con cada nueva norma.",
     placeholder: "Tu nombre",
     ctaLabel: "Consultar con LEX",
   },
@@ -44,10 +48,10 @@ const AGENTE_CONFIG: Record<Agente, {
     colorBorder: "rgba(77,159,236,0.25)",
     colorBtn: "#4D9FEC",
     colorBtnHover: "#3a8fd8",
-    emoji: "🤖",
+    avatar: `${AVATAR_BASE}/nova_avatar_v1.webp`,
     tagline: "Especialista en IA para pequeñas y medianas empresas",
     descripcion:
-      "NOVA te ayuda a entender qué puede hacer la IA por tu negocio, qué herramientas existen, cómo empezar sin invertir y qué procesos se automatizan bien según tu sector. Sin humo, sin promesas vacías.",
+      "NOVA te ayuda a ver qué puede hacer la IA en una pyme de transporte: caducidad de permisos, expedientes, avisos obligatorios, seguimiento de flota. Cómo empezar sin invertir y sin humo.",
     placeholder: "Tu nombre",
     ctaLabel: "Consultar con NOVA",
   },
@@ -84,6 +88,7 @@ const LIMITE_CONSULTAS = 5;
 // ─── Componente ──────────────────────────────────────────────────────────────
 
 export default function AgentModal({ agente, onConfirm, onClose }: AgentModalProps) {
+  const { locale } = useI18n();
   const [nombre, setNombre] = useState("");
   const [email, setEmail] = useState("");
   const [privacidad, setPrivacidad] = useState(false);
@@ -164,10 +169,10 @@ export default function AgentModal({ agente, onConfirm, onClose }: AgentModalPro
           {/* Badge agente */}
           <div className="flex items-center gap-3 mb-5">
             <div
-              className="flex items-center justify-center w-12 h-12 rounded-xl text-2xl"
+              className="flex items-center justify-center w-12 h-12 rounded-xl overflow-hidden"
               style={{ backgroundColor: config.colorBg, border: `1px solid ${config.colorBorder}` }}
             >
-              {config.emoji}
+              <img src={config.avatar} alt={agente} className="w-full h-full object-cover" />
             </div>
             <div>
               <p className="text-white font-bold text-lg leading-tight">{agente}</p>
@@ -271,7 +276,7 @@ export default function AgentModal({ agente, onConfirm, onClose }: AgentModalPro
                   <span className="text-white/50 text-xs leading-relaxed group-hover:text-white/70 transition-colors">
                     Acepto la{" "}
                     <a
-                      href="/es/privacidad"
+                      href={`/${locale}/politica-de-privacidad`}
                       target="_blank"
                       rel="noopener noreferrer"
                       className="underline hover:text-white transition-colors"

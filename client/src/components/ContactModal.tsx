@@ -9,7 +9,7 @@ interface ContactModalProps {
 }
 
 export default function ContactModal({ open, onClose }: ContactModalProps) {
-  const { t } = useTranslations("contact");
+  const { t, locale } = useTranslations("contact");
 
   const [form, setForm] = useState({ nombre: "", email: "", mensaje: "" });
   const [privacy, setPrivacy] = useState(false);
@@ -177,7 +177,7 @@ export default function ContactModal({ open, onClose }: ContactModalProps) {
                       </div>
                       <span className="text-white/50 text-xs leading-relaxed">
                         {t("privacyText")}{" "}
-                        <a href="/es/privacidad" className="text-arctic hover:underline">{t("privacyLink")}</a>
+                        <a href={`/${locale}/politica-de-privacidad`} className="text-arctic hover:underline">{t("privacyLink")}</a>
                       </span>
                     </label>
 

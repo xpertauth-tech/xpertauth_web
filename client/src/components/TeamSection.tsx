@@ -90,10 +90,10 @@ const teamMembers = [
       fr: "Agent IA · IA pour PME",
     },
     description: {
-      es: "Curiosa, práctica, sin humo. Automatización e implementación de IA para empresas que quieren resultados reales.",
-      ca: "Curiosa, pràctica, sense fum. Automatització i implementació d'IA per a empreses que volen resultats reals.",
-      en: "Curious, practical, no fluff. Automation and AI implementation for businesses that want real results.",
-      fr: "Curieuse, pratique, sans fioriture. Automatisation et implémentation d'IA pour les entreprises qui veulent de vrais résultats.",
+      es: "NOVA te ayuda a ver qué puede hacer la IA en una pyme de transporte: caducidad de permisos, expedientes, avisos obligatorios, seguimiento de flota. Cómo empezar sin invertir y sin humo.",
+      ca: "NOVA t'ajuda a veure què pot fer la IA en una pime de transport: caducitat de permisos, expedients, avisos obligatoris, seguiment de flota. Com començar sense invertir i sense fum.",
+      en: "NOVA helps you see what AI can do in a transport SME: permit expiry, case files, mandatory alerts, fleet tracking. How to start without investing and without hype.",
+      fr: "NOVA vous aide à voir ce que l'IA peut faire dans une PME de transport : expiration des permis, dossiers, alertes obligatoires, suivi de flotte. Comment commencer sans investir et sans esbroufe.",
     },
     cta: {
       es: "Pregunta al agente",
