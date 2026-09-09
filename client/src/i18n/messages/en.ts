@@ -118,22 +118,24 @@ const en = {
   },
   socialProof: {
     label: "Trust",
-    title: "Experience that speaks for itself",
-    subtitle: "Decades of specialised knowledge at the service of those who need it most.",
+    title: "Cases we've lived through.",
+    subtitle: "Real situations from the sector, solved with craft and, when it helps, with AI.",
     stats: [
       { value: "30+", label: "Years of experience" },
-      { value: "100%", label: "Social commitment" },
+      { value: "100%", label: "Human review" },
     ],
-    testimonials: [
+    cases: [
       {
-        quote: "Thanks to XpertAuth I was able to resolve my regulatory doubts in minutes, not weeks.",
-        author: "Carlos M.",
-        role: "Self-employed transporter",
+        label: "Special transport · 340 km on a single permit",
+        text: "A convoy that was going to need three separate authorisations. By reviewing the route and the applicable regulations, it was resolved with just one. Less paperwork, fewer days stopped.",
       },
       {
-        quote: "AI helped us automate processes that used to take hours. Incredible value for money.",
-        author: "María R.",
-        role: "Operations Director",
+        label: "Transport SME · Automation",
+        text: "A company that lost hours every week checking permit and insurance expiry dates. With a spreadsheet and an automatic alert, it now finds out 30 days ahead.",
+      },
+      {
+        label: "Oversize loads · Departure notice",
+        text: "A convoy with its authorisation in order, but with no notice given to the Guardia Civil or the town councils along the route. It's mandatory and easily forgotten. A checklist before setting off avoids the fine and the vehicle being held up.",
       },
     ],
     partnersLabel: "Coming soon: partners and collaborators",

@@ -118,22 +118,24 @@ const fr = {
   },
   socialProof: {
     label: "Confiance",
-    title: "Une expérience qui parle d'elle-même",
-    subtitle: "Des décennies de connaissances spécialisées au service de ceux qui en ont le plus besoin.",
+    title: "Des cas que nous avons vécus.",
+    subtitle: "Des situations réelles du secteur, résolues avec le métier et, quand ça aide, avec l'IA.",
     stats: [
       { value: "30+", label: "Années d'expérience" },
-      { value: "100%", label: "Engagement social" },
+      { value: "100%", label: "Révision humaine" },
     ],
-    testimonials: [
+    cases: [
       {
-        quote: "Grâce à XpertAuth, j'ai pu résoudre mes doutes réglementaires en minutes, pas en semaines.",
-        author: "Carlos M.",
-        role: "Transporteur indépendant",
+        label: "Transport spécial · 340 km avec un seul permis",
+        text: "Un convoi qui allait nécessiter trois autorisations distinctes. En révisant l'itinéraire et la réglementation applicable, il a été résolu avec une seule. Moins de paperasse, moins de jours à l'arrêt.",
       },
       {
-        quote: "L'IA nous a aidés à automatiser des processus qui prenaient des heures. Un rapport qualité-prix incroyable.",
-        author: "María R.",
-        role: "Directrice des opérations",
+        label: "PME de transport · Automatisation",
+        text: "Une entreprise qui perdait des heures chaque semaine à vérifier les échéances des permis et des assurances. Avec un tableur et une alerte automatique, elle est aujourd'hui prévenue 30 jours à l'avance.",
+      },
+      {
+        label: "Convois exceptionnels · Avis de départ",
+        text: "Un convoi avec son autorisation en règle, mais sans avoir prévenu la Guardia Civil ni les mairies de l'itinéraire. C'est obligatoire et vite oublié. Une checklist avant le départ évite l'amende et le véhicule immobilisé.",
       },
     ],
     partnersLabel: "Bientôt : partenaires et collaborateurs",

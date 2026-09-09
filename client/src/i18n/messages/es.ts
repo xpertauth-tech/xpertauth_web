@@ -118,22 +118,24 @@ const es = {
   },
   socialProof: {
     label: "Confianza",
-    title: "Experiencia que habla por sí misma",
-    subtitle: "Décadas de conocimiento especializado al servicio de quienes más lo necesitan.",
+    title: "Casos que hemos vivido.",
+    subtitle: "Situaciones reales del sector, resueltas con oficio y, cuando ayuda, con IA.",
     stats: [
       { value: "30+", label: "Años de experiencia" },
-      { value: "100%", label: "Compromiso social" },
+      { value: "100%", label: "Revisión humana" },
     ],
-    testimonials: [
+    cases: [
       {
-        quote: "Gracias a XpertAuth pude resolver mis dudas sobre normativa en minutos, no en semanas.",
-        author: "Carlos M.",
-        role: "Transportista autónomo",
+        label: "Transporte especial · 340 km en un solo permiso",
+        text: "Un convoy que iba a necesitar tres autorizaciones distintas. Revisando el itinerario y la normativa aplicable, se resolvió con una sola. Menos papeleo, menos días parado.",
       },
       {
-        quote: "La IA nos ayudó a automatizar procesos que antes consumían horas. Increíble relación calidad-precio.",
-        author: "María R.",
-        role: "Directora de operaciones",
+        label: "Pyme de transporte · Automatización",
+        text: "Una empresa que cada semana perdía horas revisando caducidades de permisos y seguros. Con una hoja de cálculo y un aviso automático, hoy se entera 30 días antes.",
+      },
+      {
+        label: "Grandes dimensiones · Aviso de salida",
+        text: "Un convoy con la autorización en regla, pero sin avisar a la Guardia Civil ni a los ayuntamientos del itinerario. Es obligatorio y se olvida con facilidad. Un checklist antes de salir evita la sanción y el vehículo parado.",
       },
     ],
     partnersLabel: "Próximamente: partners y colaboradores",

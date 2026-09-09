@@ -118,22 +118,24 @@ const ca = {
   },
   socialProof: {
     label: "Confiança",
-    title: "Experiència que parla per si mateixa",
-    subtitle: "Dècades de coneixement especialitzat al servei de qui més ho necessita.",
+    title: "Casos que hem viscut.",
+    subtitle: "Situacions reals del sector, resoltes amb ofici i, quan ajuda, amb IA.",
     stats: [
       { value: "30+", label: "Anys d'experiència" },
-      { value: "100%", label: "Compromís social" },
+      { value: "100%", label: "Revisió humana" },
     ],
-    testimonials: [
+    cases: [
       {
-        quote: "Gràcies a XpertAuth vaig poder resoldre els meus dubtes sobre normativa en minuts, no en setmanes.",
-        author: "Carlos M.",
-        role: "Transportista autònom",
+        label: "Transport especial · 340 km amb un sol permís",
+        text: "Un comboi que anava a necessitar tres autoritzacions diferents. Revisant l'itinerari i la normativa aplicable, es va resoldre amb una de sola. Menys paperassa, menys dies aturat.",
       },
       {
-        quote: "La IA ens va ajudar a automatitzar processos que abans consumien hores. Increïble relació qualitat-preu.",
-        author: "Maria R.",
-        role: "Directora d'operacions",
+        label: "Pime de transport · Automatització",
+        text: "Una empresa que cada setmana perdia hores revisant caducitats de permisos i assegurances. Amb un full de càlcul i un avís automàtic, avui se n'assabenta 30 dies abans.",
+      },
+      {
+        label: "Grans dimensions · Avís de sortida",
+        text: "Un comboi amb l'autorització en regla, però sense avisar la Guàrdia Civil ni els ajuntaments de l'itinerari. És obligatori i s'oblida amb facilitat. Una llista de comprovació abans de sortir evita la sanció i el vehicle aturat.",
       },
     ],
     partnersLabel: "Properament: partners i col·laboradors",

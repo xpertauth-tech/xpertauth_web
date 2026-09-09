@@ -3,20 +3,13 @@ import { useTranslations } from "@/i18n/context";
 
 const SUPABASE_BASE = "https://supabase.xpertauth.com/storage/v1/object/public/web-images";
 
-const testimonialBgs = [
-  `${SUPABASE_BASE}/testimonials/carlos_bg_v1.webp`,
-  `${SUPABASE_BASE}/testimonials/maria_bg_v1.webp`,
+// Foto de fondo por caso (B/N → color al hover). null = sin foto disponible
+// en Storage; la tarjeta usa un fondo degradado de marca.
+const caseBgs: (string | null)[] = [
+  `${SUPABASE_BASE}/testimonials/carlos_bg_v1.webp`, // carretera
+  `${SUPABASE_BASE}/testimonials/maria_bg_v1.webp`,  // oficina
+  null,                                              // convoy / grandes dimensiones — pendiente
 ];
-
-const testimonialAvatars = [
-  `${SUPABASE_BASE}/testimonials/carlos_avatar_v1.webp`,
-  `${SUPABASE_BASE}/testimonials/maria_avatar_v1.webp`,
-];
-
-const carlosOverride = {
-  stat: "340 km",
-  statLabel: "en un solo permiso",
-};
 
 const gradientStyle: React.CSSProperties = {
   background: "linear-gradient(135deg,#ffffff 0%,#4D9FEC 40%,#1B4FD8 70%,#ffffff 100%)",
@@ -31,7 +24,7 @@ export default function SocialProof() {
   const { messages } = useTranslations("socialProof");
   const m = messages as any;
   const stats = m.stats || [];
-  const testimonials = m.testimonials || [];
+  const cases = m.cases || [];
 
   return (
     <section id="autoridad" className="py-20 sm:py-28 bg-obsidian" data-testid="section-social-proof">
@@ -71,61 +64,45 @@ export default function SocialProof() {
           ))}
         </div>
 
-        {/* Testimonios con imagen de fondo */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-3xl mx-auto">
-          {testimonials.map((t: any, i: number) => (
-            <motion.div
-              key={i}
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-60px" }}
-              transition={{ duration: 0.6, delay: i * 0.15, ease: "easeOut" }}
-              className="relative rounded-xl overflow-hidden min-h-[320px] flex flex-col justify-end group cursor-pointer"
-              data-testid={`testimonial-${i}`}
-            >
-              <div
-                className="testimonial-bg absolute inset-0 bg-cover bg-top"
-                style={{ backgroundImage: `url(${testimonialBgs[i]})` }}
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-obsidian via-obsidian/60 to-transparent" />
-
-              {i === 0 && (
-                <div className="absolute top-4 left-4 z-10">
-                  <div className="bg-black/40 backdrop-blur-sm border border-white/10 rounded-lg px-3 py-2 text-center">
-                    <p className="font-heading font-bold text-arctic text-xl leading-none">{carlosOverride.stat}</p>
-                    <p className="text-white/60 text-xs mt-0.5">{carlosOverride.statLabel}</p>
-                  </div>
-                </div>
-              )}
-
-              <div className="relative z-10 p-6 sm:p-8">
-                <p className="text-white/90 text-sm leading-relaxed italic mb-5">"{t.quote}"</p>
-                <div className="flex items-center gap-3">
-                  <img
-                    src={testimonialAvatars[i]}
-                    alt={t.author}
-                    className="w-10 h-10 rounded-full object-cover border border-white/20"
-                    onError={(e) => {
-                      const target = e.target as HTMLImageElement;
-                      target.style.display = "none";
-                      const fallback = target.nextElementSibling as HTMLElement;
-                      if (fallback) fallback.style.display = "flex";
+        {/* Casos: etiqueta + texto corto, sobre foto (B/N → color al hover) */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-5xl mx-auto">
+          {cases.map((c: any, i: number) => {
+            const bg = caseBgs[i];
+            return (
+              <motion.div
+                key={i}
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: "-60px" }}
+                transition={{ duration: 0.6, delay: i * 0.15, ease: "easeOut" }}
+                className="relative rounded-xl overflow-hidden min-h-[340px] flex flex-col justify-end group"
+                data-testid={`case-${i}`}
+              >
+                {bg ? (
+                  <div
+                    className="case-bg absolute inset-0 bg-cover bg-center"
+                    style={{ backgroundImage: `url(${bg})` }}
+                  />
+                ) : (
+                  <div
+                    className="absolute inset-0"
+                    style={{
+                      background:
+                        "linear-gradient(150deg, #12213f 0%, #0d1830 45%, #0a1122 100%)",
                     }}
                   />
-                  <div
-                    className="w-10 h-10 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 items-center justify-center"
-                    style={{ display: "none" }}
-                  >
-                    <span className="text-arctic font-heading font-bold text-sm">{t.author?.charAt(0)}</span>
-                  </div>
-                  <div>
-                    <div className="font-heading font-semibold text-pure text-sm">{t.author}</div>
-                    <div className="text-white/50 text-xs">{t.role}</div>
-                  </div>
+                )}
+                <div className="absolute inset-0 bg-gradient-to-t from-obsidian via-obsidian/70 to-transparent" />
+
+                <div className="relative z-10 p-6 sm:p-7">
+                  <p className="text-arctic text-[0.7rem] font-semibold tracking-wide uppercase mb-3">
+                    {c.label}
+                  </p>
+                  <p className="text-white/85 text-sm leading-relaxed">{c.text}</p>
                 </div>
-              </div>
-            </motion.div>
-          ))}
+              </motion.div>
+            );
+          })}
         </div>
 
         {/* Partners */}
@@ -148,11 +125,11 @@ export default function SocialProof() {
       </div>
 
       <style>{`
-        .testimonial-bg {
+        .case-bg {
           filter: grayscale(100%);
           transition: transform 0.7s ease, filter 0.7s ease;
         }
-        .group:hover .testimonial-bg {
+        .group:hover .case-bg {
           filter: grayscale(0%);
           transform: scale(1.05);
         }
