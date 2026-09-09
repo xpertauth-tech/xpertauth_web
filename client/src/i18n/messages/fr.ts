@@ -179,8 +179,8 @@ const fr = {
   },
   blog: {
     label: "Contenu",
-    title: "À jour sans courir après le journal officiel.",
-    subtitle: "Changements réglementaires, autorisations et pratique réelle du transport spécial, expliqués pour ceux qui n'ont pas le temps de lire les bulletins officiels.",
+    title: "Ce qui se passe sur la route, raconté avec discernement.",
+    subtitle: "Réglementation, permis et aussi ce qui ne paraît pas au journal officiel : la réalité du transport spécial, expliquée pour ceux qui manquent de temps.",
     seeAll: "Voir tous les articles",
   },
   ctaFinal: {

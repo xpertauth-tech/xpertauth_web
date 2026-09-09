@@ -179,8 +179,8 @@ const es = {
   },
   blog: {
     label: "Contenido",
-    title: "Al día sin perseguir el BOE.",
-    subtitle: "Cambios normativos, permisos y práctica real del transporte especial, explicados para quien no tiene tiempo de leer boletines.",
+    title: "Lo que pasa en la carretera, contado con criterio.",
+    subtitle: "Normativa, permisos y también lo que no sale en el BOE: la realidad del transporte especial, explicada para quien va con el tiempo justo.",
     seeAll: "Ver todos los artículos",
   },
   ctaFinal: {

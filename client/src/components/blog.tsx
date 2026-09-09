@@ -70,12 +70,6 @@ function formatDate(dateStr: string) {
   });
 }
 
-// Los títulos llegan de Supabase en mayúsculas; los pasamos a "Frase con
-// mayúscula inicial" (mismo criterio que usaba blog-newsletter.tsx).
-function titleCase(s: string) {
-  return s ? s.charAt(0).toUpperCase() + s.slice(1).toLowerCase() : s;
-}
-
 // ─── Tarjeta ─────────────────────────────────────────────────────────────────
 function CardInner({ post }: { post: Post }) {
   return (
@@ -100,7 +94,7 @@ function CardInner({ post }: { post: Post }) {
           <span className="text-white/40 text-xs">{formatDate(post.published_at)}</span>
         </div>
         <h3 className="font-heading font-semibold text-pure text-base leading-snug mb-2 group-hover:text-arctic transition-colors">
-          {titleCase(post.title)}
+          {post.title}
         </h3>
         <p className="text-white/55 text-sm leading-relaxed line-clamp-3">{post.excerpt}</p>
       </div>
@@ -116,10 +110,16 @@ function DossierRow({ posts, locale }: { posts: Post[]; locale: string }) {
   const reduce = useMediaQuery("(prefers-reduced-motion: reduce)");
   const containerRef = useRef<HTMLDivElement>(null);
   const [revealed, setRevealed] = useState(reduce);
+  // Una vez terminada la apertura (1,6 s + escalón), las transiciones de hover
+  // vuelven a ser rápidas.
+  const [settled, setSettled] = useState(reduce);
   const [hovered, setHovered] = useState<number | null>(null);
 
+  const OPEN_DURATION = 1.6; // s
+  const OPEN_STAGGER = 0.15; // s entre tarjetas
+
   useEffect(() => {
-    if (reduce) { setRevealed(true); return; }
+    if (reduce) { setRevealed(true); setSettled(true); return; }
     const el = containerRef.current;
     if (!el) return;
     const obs = new IntersectionObserver(
@@ -131,6 +131,15 @@ function DossierRow({ posts, locale }: { posts: Post[]; locale: string }) {
     obs.observe(el);
     return () => obs.disconnect();
   }, [reduce]);
+
+  useEffect(() => {
+    if (!revealed || settled) return;
+    const t = setTimeout(
+      () => setSettled(true),
+      (OPEN_DURATION + OPEN_STAGGER * 2) * 1000 + 100
+    );
+    return () => clearTimeout(t);
+  }, [revealed, settled]);
 
   // Reparto pre-apertura: apiladas hacia el centro (columna 1), ligeramente
   // desplazadas y giradas; la más reciente (índice 0) delante.
@@ -170,7 +179,9 @@ function DossierRow({ posts, locale }: { posts: Post[]; locale: string }) {
               zIndex,
               transition: reduce
                 ? "none"
-                : "transform 0.8s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.4s ease",
+                : settled
+                ? "transform 0.8s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.4s ease"
+                : `transform ${OPEN_DURATION}s cubic-bezier(0.22, 1, 0.36, 1) ${i * OPEN_STAGGER}s, opacity 0.6s ease ${i * OPEN_STAGGER}s`,
             }}
             onMouseEnter={() => revealed && !reduce && setHovered(i)}
             onMouseLeave={() => setHovered(null)}

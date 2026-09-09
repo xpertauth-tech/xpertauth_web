@@ -179,8 +179,8 @@ const ca = {
   },
   blog: {
     label: "Contingut",
-    title: "Al dia sense perseguir el BOE.",
-    subtitle: "Canvis normatius, permisos i pràctica real del transport especial, explicats per a qui no té temps de llegir butlletins.",
+    title: "El que passa a la carretera, explicat amb criteri.",
+    subtitle: "Normativa, permisos i també el que no surt al BOE: la realitat del transport especial, explicada per a qui va just de temps.",
     seeAll: "Veure tots els articles",
   },
   ctaFinal: {

@@ -179,8 +179,8 @@ const en = {
   },
   blog: {
     label: "Content",
-    title: "Up to date without chasing the official gazette.",
-    subtitle: "Regulatory changes, permits and the real-world practice of special transport, explained for people who don't have time to read official bulletins.",
+    title: "What happens on the road, told with judgement.",
+    subtitle: "Regulations, permits and also what doesn't make the official gazette: the reality of special transport, explained for people who are short on time.",
     seeAll: "See all articles",
   },
   ctaFinal: {
