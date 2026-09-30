@@ -3,7 +3,7 @@ import { useI18n } from "@/i18n/context";
 import { useAgent } from "@/App";
 
 const SUPABASE_BASE = "https://supabase.xpertauth.com/storage/v1/object/public/web-images";
-const JOSE_LUIS_PHOTO = `${SUPABASE_BASE}/equipo/jose-luis_foto_v1.webp`;
+const JOSE_LUIS_PHOTO = `${SUPABASE_BASE}/equipo/equipo_jose-luis-avatar_v1.webp`;
 const LEX_AVATAR = `${SUPABASE_BASE}/equipo/lex_avatar_v1.webp`;
 const NOVA_AVATAR = `${SUPABASE_BASE}/equipo/nova_avatar_v1.webp`;
 
@@ -15,6 +15,9 @@ const gradientStyle: React.CSSProperties = {
   backgroundClip: "text",
   animation: "snGrad 6s ease infinite",
 };
+
+// Prueba de diseño: los tres botones con el mismo estilo (relleno Arctic #4D9FEC).
+const CTA_ARCTIC = "bg-arctic text-obsidian hover:bg-arctic/90";
 
 const teamMembers = [
   {
@@ -45,7 +48,7 @@ const teamMembers = [
     accentColor: "border-arctic/30",
     numberColor: "text-arctic",
     numberBg: "bg-arctic/10",
-    ctaStyle: "border border-arctic/40 text-arctic hover:bg-arctic/10",
+    ctaStyle: CTA_ARCTIC,
     avatarFallback: "JL",
   },
   {
@@ -76,7 +79,7 @@ const teamMembers = [
     accentColor: "border-xpertblue/30",
     numberColor: "text-xpertblue",
     numberBg: "bg-xpertblue/25",
-    ctaStyle: "bg-xpertblue text-pure hover:bg-xpertblue/90",
+    ctaStyle: CTA_ARCTIC,
     avatarFallback: "L",
   },
   {
@@ -107,7 +110,7 @@ const teamMembers = [
     accentColor: "border-arctic/30",
     numberColor: "text-arctic",
     numberBg: "bg-arctic/25",
-    ctaStyle: "bg-arctic text-obsidian hover:bg-arctic/90",
+    ctaStyle: CTA_ARCTIC,
     avatarFallback: "N",
   },
 ];
