@@ -12,7 +12,7 @@ export default function Footer() {
   const isHome = window.location.pathname === `/${locale}` || window.location.pathname === `/${locale}/`;
 
   const quickLinks = [
-    { label: navT("servicios"), href: "#servicios" },
+    { label: navT("servicios"), href: `/${locale}/servicios/transporte-especial`, isExternal: true },
     { label: navT("comoFunciona"), href: "#como-funciona" },
     { label: navT("blog"), href: "#blog" },
     { label: m.aboutProject, href: `/${locale}/sobre-nosotros`, isExternal: true },

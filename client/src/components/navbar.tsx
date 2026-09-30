@@ -37,7 +37,7 @@ export default function Navbar() {
   const isHome = window.location.pathname === `/${locale}` || window.location.pathname === `/${locale}/`;
 
   const navLinks = [
-    { label: t("servicios"), href: "#servicios" },
+    { label: t("servicios"), href: `/${locale}/servicios/transporte-especial`, isRoute: true },
     { label: t("comoFunciona"), href: "#como-funciona" },
     { label: t("blog"), href: "#blog" },
     { label: footerT("aboutProject"), href: `/${locale}/sobre-nosotros`, isRoute: true },

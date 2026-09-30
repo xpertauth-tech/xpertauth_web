@@ -78,7 +78,7 @@ const es = {
   },
   footer: {
     description: "Proyecto que combina experiencia real del sector con inteligencia artificial, sin ánimo comercial.",
-    quickLinks: "Links rápidos",
+    quickLinks: "Enlaces rápidos",
     aboutProject: "Conoce el proyecto",
     contact: "Contacto",
     privacy: "Política de Privacidad",
