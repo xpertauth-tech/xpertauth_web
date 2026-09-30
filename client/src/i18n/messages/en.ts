@@ -38,7 +38,7 @@ const en = {
         description: "You get clear guidance. XpertAuth doesn't file paperwork with the administration: the next step is yours.",
       },
     ],
-    closingNote: "Today XpertAuth is in a learning and validation phase: there are no fees and no invoicing.",
+    subtitle: "Four steps, no small print. AI helps; the last word belongs to a person.",
   },
   socialProof: {
     label: "Trust",

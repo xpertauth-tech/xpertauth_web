@@ -93,9 +93,9 @@ export default function HowItWorks() {
             >
               {m.title}
             </h2>
-            {m.closingNote && (
+            {m.subtitle && (
               <p className="mt-2 sm:mt-3 text-white/50 text-xs sm:text-sm lg:text-base max-w-xl mx-auto">
-                {m.closingNote}
+                {m.subtitle}
               </p>
             )}
           </div>

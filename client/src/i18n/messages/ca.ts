@@ -38,7 +38,7 @@ const ca = {
         description: "Reps una orientació clara. XpertAuth no tramita davant l'administració: el següent pas és teu.",
       },
     ],
-    closingNote: "Avui XpertAuth està en fase d'aprenentatge i validació: no hi ha quotes ni facturació.",
+    subtitle: "Quatre passos, sense lletra petita. La IA ajuda; l'última paraula és d'una persona.",
   },
   socialProof: {
     label: "Confiança",

@@ -38,7 +38,7 @@ const fr = {
         description: "Vous recevez une orientation claire. XpertAuth ne fait pas les démarches auprès de l'administration : l'étape suivante est la vôtre.",
       },
     ],
-    closingNote: "Aujourd'hui XpertAuth est en phase d'apprentissage et de validation : il n'y a ni cotisations ni facturation.",
+    subtitle: "Quatre étapes, sans petits caractères. L'IA aide ; le dernier mot revient à une personne.",
   },
   socialProof: {
     label: "Confiance",

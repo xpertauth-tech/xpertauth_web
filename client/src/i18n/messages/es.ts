@@ -38,7 +38,7 @@ const es = {
         description: "Recibes una orientación clara. XpertAuth no tramita ante la administración: el siguiente paso es tuyo.",
       },
     ],
-    closingNote: "Hoy XpertAuth está en fase de aprendizaje y validación: no hay cuotas ni facturación.",
+    subtitle: "Cuatro pasos, sin letra pequeña. La IA ayuda; la última palabra es de una persona.",
   },
   socialProof: {
     label: "Confianza",
