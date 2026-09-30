@@ -50,19 +50,19 @@ const fr = {
     ],
     cases: [
       {
-        label: "Transport spécial · 340 km avec un seul permis",
-        text: "Un convoi qui allait nécessiter trois autorisations distinctes. En révisant l'itinéraire et la réglementation applicable, il a été résolu avec une seule. Moins de paperasse, moins de jours à l'arrêt.",
+        label: "Engins de chantier · 3,49 m sur le plan, 3,69 m en réalité",
+        text: "Un engin de travaux publics de 3,49 m de large selon le plan du constructeur. Au chargement, il portait une pièce soudée à l'avant qui dépassait de 10 cm de chaque côté. Ce détail transforme un permis générique en un permis spécifique. C'est pourquoi nous mesurons l'engin, pas le plan.",
       },
       {
         label: "PME de transport · Automatisation",
         text: "Une entreprise qui perdait des heures chaque semaine à vérifier les échéances des permis et des assurances. Avec un tableur et une alerte automatique, elle est aujourd'hui prévenue 30 jours à l'avance.",
       },
       {
-        label: "Convois exceptionnels · Avis de départ",
-        text: "Un convoi avec son autorisation en règle, mais sans avoir prévenu la Guardia Civil ni les mairies de l'itinéraire. C'est obligatoire et vite oublié. Une checklist avant le départ évite l'amende et le véhicule immobilisé.",
+        label: "Convois exceptionnels · Communication du départ",
+        text: "Un convoi avec son autorisation en règle, mais sans avoir communiqué le départ aux Mossos d'Esquadra ni aux mairies de l'itinéraire. C'est obligatoire et facile à négliger. Une checklist avant le départ évite l'amende et le véhicule immobilisé.",
       },
     ],
-    partnersLabel: "Bientôt : partenaires et collaborateurs",
+    partnersLabel: "Collaborations",
   },
   blog: {
     label: "Contenu",

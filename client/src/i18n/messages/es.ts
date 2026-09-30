@@ -50,19 +50,19 @@ const es = {
     ],
     cases: [
       {
-        label: "Transporte especial · 340 km en un solo permiso",
-        text: "Un convoy que iba a necesitar tres autorizaciones distintas. Revisando el itinerario y la normativa aplicable, se resolvió con una sola. Menos papeleo, menos días parado.",
+        label: "Maquinaria de obra · 3,49 m en el plano, 3,69 m en la realidad",
+        text: "Una máquina de obra pública con 3,49 m de ancho según el plano del fabricante. Al cargarla, llevaba una pieza soldada en el frontal que sobresalía 10 cm por cada lado. Ese detalle convierte un permiso genérico en uno específico. Por eso medimos la máquina, no el plano.",
       },
       {
         label: "Pyme de transporte · Automatización",
         text: "Una empresa que cada semana perdía horas revisando caducidades de permisos y seguros. Con una hoja de cálculo y un aviso automático, hoy se entera 30 días antes.",
       },
       {
-        label: "Grandes dimensiones · Aviso de salida",
-        text: "Un convoy con la autorización en regla, pero sin avisar a la Guardia Civil ni a los ayuntamientos del itinerario. Es obligatorio y se olvida con facilidad. Un checklist antes de salir evita la sanción y el vehículo parado.",
+        label: "Grandes dimensiones · Comunicación de salida",
+        text: "Un convoy con la autorización en regla, pero sin comunicar la salida a los Mossos d'Esquadra ni a los ayuntamientos del itinerario. Es obligatorio y fácil de pasar por alto. Un checklist antes de salir evita la sanción y el vehículo parado.",
       },
     ],
-    partnersLabel: "Próximamente: partners y colaboradores",
+    partnersLabel: "Colaboraciones",
   },
   blog: {
     label: "Contenido",

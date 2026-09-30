@@ -50,19 +50,19 @@ const en = {
     ],
     cases: [
       {
-        label: "Special transport · 340 km on a single permit",
-        text: "A convoy that was going to need three separate authorisations. By reviewing the route and the applicable regulations, it was resolved with just one. Less paperwork, fewer days stopped.",
+        label: "Construction machinery · 3.49 m on the drawing, 3.69 m in reality",
+        text: "A public-works machine 3.49 m wide according to the manufacturer's drawing. When loaded, it had a piece welded to the front that stuck out 10 cm on each side. That detail turns a generic permit into a specific one. That's why we measure the machine, not the drawing.",
       },
       {
         label: "Transport SME · Automation",
         text: "A company that lost hours every week checking permit and insurance expiry dates. With a spreadsheet and an automatic alert, it now finds out 30 days ahead.",
       },
       {
-        label: "Oversize loads · Departure notice",
-        text: "A convoy with its authorisation in order, but with no notice given to the Guardia Civil or the town councils along the route. It's mandatory and easily forgotten. A checklist before setting off avoids the fine and the vehicle being held up.",
+        label: "Oversize loads · Departure notification",
+        text: "A convoy with its authorisation in order, but without notifying the Mossos d'Esquadra or the town councils along the route of its departure. It's mandatory and easy to overlook. A checklist before setting off avoids the fine and the vehicle being held up.",
       },
     ],
-    partnersLabel: "Coming soon: partners and collaborators",
+    partnersLabel: "Collaborations",
   },
   blog: {
     label: "Content",

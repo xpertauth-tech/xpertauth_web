@@ -8,8 +8,11 @@ const SUPABASE_BASE = "https://supabase.xpertauth.com/storage/v1/object/public/w
 const caseBgs: (string | null)[] = [
   `${SUPABASE_BASE}/testimonials/carlos_bg_v1.webp`, // carretera
   `${SUPABASE_BASE}/testimonials/maria_bg_v1.webp`,  // oficina
-  null,                                              // convoy / grandes dimensiones — pendiente
+  `${SUPABASE_BASE}/testimonials/casos_convoy-amanecer_v1.webp`, // convoy al amanecer (logo del vehículo difuminado)
 ];
+
+// Franja de colaboraciones: desactivada hasta que haya colaboradores reales.
+const SHOW_COLLABORATIONS = false;
 
 const gradientStyle: React.CSSProperties = {
   background: "linear-gradient(135deg,#ffffff 0%,#4D9FEC 40%,#1B4FD8 70%,#ffffff 100%)",
@@ -105,7 +108,8 @@ export default function SocialProof() {
           })}
         </div>
 
-        {/* Partners */}
+        {/* Colaboraciones (desactivada) */}
+        {SHOW_COLLABORATIONS && (
         <motion.div
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
@@ -122,6 +126,7 @@ export default function SocialProof() {
             ))}
           </div>
         </motion.div>
+        )}
       </div>
 
       <style>{`

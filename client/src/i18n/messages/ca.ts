@@ -50,19 +50,19 @@ const ca = {
     ],
     cases: [
       {
-        label: "Transport especial · 340 km amb un sol permís",
-        text: "Un comboi que anava a necessitar tres autoritzacions diferents. Revisant l'itinerari i la normativa aplicable, es va resoldre amb una de sola. Menys paperassa, menys dies aturat.",
+        label: "Maquinària d'obra · 3,49 m al plànol, 3,69 m a la realitat",
+        text: "Una màquina d'obra pública amb 3,49 m d'amplada segons el plànol del fabricant. En carregar-la, portava una peça soldada al frontal que sobresortia 10 cm per cada costat. Aquest detall converteix un permís genèric en un d'específic. Per això mesurem la màquina, no el plànol.",
       },
       {
         label: "Pime de transport · Automatització",
         text: "Una empresa que cada setmana perdia hores revisant caducitats de permisos i assegurances. Amb un full de càlcul i un avís automàtic, avui se n'assabenta 30 dies abans.",
       },
       {
-        label: "Grans dimensions · Avís de sortida",
-        text: "Un comboi amb l'autorització en regla, però sense avisar la Guàrdia Civil ni els ajuntaments de l'itinerari. És obligatori i s'oblida amb facilitat. Una llista de comprovació abans de sortir evita la sanció i el vehicle aturat.",
+        label: "Grans dimensions · Comunicació de sortida",
+        text: "Un comboi amb l'autorització en regla, però sense comunicar la sortida als Mossos d'Esquadra ni als ajuntaments de l'itinerari. És obligatori i fàcil de passar per alt. Una llista de comprovació abans de sortir evita la sanció i el vehicle aturat.",
       },
     ],
-    partnersLabel: "Properament: partners i col·laboradors",
+    partnersLabel: "Col·laboracions",
   },
   blog: {
     label: "Contingut",
