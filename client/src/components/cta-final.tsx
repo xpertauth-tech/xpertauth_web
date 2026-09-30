@@ -43,7 +43,7 @@ export default function CtaFinal() {
           <div className="mt-10 sm:mt-12 flex flex-col sm:flex-row items-center justify-center gap-4">
             <button
               onClick={() => setContactOpen(true)}
-              className="px-8 py-4 border border-white/20 text-pure/90 font-medium rounded-md text-sm sm:text-base transition-all duration-300 w-full sm:w-auto text-center hover:bg-white/5 hover:border-white/30"
+              className="px-8 py-4 bg-arctic text-obsidian font-semibold rounded-md text-sm sm:text-base transition-all duration-300 w-full sm:w-auto text-center hover:bg-arctic/90"
               data-testid="button-cta-contacto"
             >
               {t("cta2")}
@@ -53,7 +53,7 @@ export default function CtaFinal() {
               href="https://calendar.app.google/q54rranYyoyCfcu77"
               target="_blank"
               rel="noopener noreferrer"
-              className="px-8 py-4 border border-arctic/40 text-arctic font-medium rounded-md text-sm sm:text-base transition-all duration-300 w-full sm:w-auto flex items-center justify-center gap-2 hover:bg-arctic/10 hover:border-arctic/60"
+              className="px-8 py-4 bg-xpertblue text-pure font-semibold rounded-md text-sm sm:text-base transition-all duration-300 w-full sm:w-auto flex items-center justify-center gap-2 hover:bg-xpertblue-light"
             >
               <Calendar className="w-4 h-4" />
               Reserva tu cita
