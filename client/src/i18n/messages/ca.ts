@@ -96,7 +96,7 @@ const ca = {
   },
   contact: {
     title: "Contacta amb nosaltres",
-    subtitle: "Et responem en menys de 24 hores.",
+    subtitle: "Et responem en menys de 24 hores en dies laborables.",
     nameLabel: "Nom",
     namePlaceholder: "El teu nom",
     emailLabel: "Email",

@@ -96,7 +96,7 @@ const en = {
   },
   contact: {
     title: "Contact us",
-    subtitle: "We'll get back to you within 24 hours.",
+    subtitle: "We'll get back to you within 24 hours on working days.",
     nameLabel: "Name",
     namePlaceholder: "Your name",
     emailLabel: "Email",
