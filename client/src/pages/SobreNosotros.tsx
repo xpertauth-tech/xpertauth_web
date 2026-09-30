@@ -252,9 +252,9 @@ const translations = {
   },
 };
 
-// ─── PLACEHOLDER foto ─────────────────────────────────────────────────────────
+// ─── Foto de "Nuestra historia" ───────────────────────────────────────────────
 const FOTO_URL =
-  "https://supabase.xpertauth.com/storage/v1/object/public/web-images/equipo/jose-luis_foto_v1.webp";
+  "https://supabase.xpertauth.com/storage/v1/object/public/web-images/sobre-nosotros/sobre-nosotros_cafe-jose-luis_v1.webp";
 
 // ─── COLORES TARJETAS POR SLOT ────────────────────────────────────────────────
 const SLOT_BG = [
@@ -417,7 +417,7 @@ export default function SobreNosotros() {
               display: "grid",
               gridTemplateColumns: "1fr 1.4fr",
               gap: "4rem",
-              alignItems: "center",
+              alignItems: "start",
             }}
             className="sn-grid-historia"
           >
