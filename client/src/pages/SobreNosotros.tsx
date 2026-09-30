@@ -254,7 +254,7 @@ const translations = {
 
 // ─── Foto de "Nuestra historia" ───────────────────────────────────────────────
 const FOTO_URL =
-  "https://supabase.xpertauth.com/storage/v1/object/public/web-images/sobre-nosotros/sobre-nosotros_cafe-jose-luis_v1.webp";
+  "https://supabase.xpertauth.com/storage/v1/object/public/web-images/equipo/sobre-nosotros_cafe-jose-luis_v1.webp";
 
 // ─── COLORES TARJETAS POR SLOT ────────────────────────────────────────────────
 const SLOT_BG = [
