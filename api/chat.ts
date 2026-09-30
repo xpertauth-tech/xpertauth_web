@@ -12,6 +12,12 @@ const supabase = createClient(
   process.env.SUPABASE_SERVICE_KEY!
 );
 
+// Límite mensual de consultas por usuario registrado. Nunca más de 30.
+// Lo aplica el servidor (función SQL registrar_consulta); el navegador no decide nada.
+const LIMITE_MENSUAL = 30;
+const MAX_MENSAJES = 20;          // historial máximo enviado al modelo
+const MAX_CARACTERES = 4000;      // por mensaje
+
 // ─── Tipos ───────────────────────────────────────────────────────────────────
 
 type Agente = "LEX" | "NOVA";
@@ -252,13 +258,15 @@ const RAG_COUNT = 10;
 
 async function recuperarFragmentos(
   pregunta: string
-): Promise<{ fragmentos: Fragmento[]; ok: boolean }> {
+): Promise<{ fragmentos: Fragmento[]; ok: boolean; embeddingTokens: number }> {
+  let embeddingTokens = 0;
   try {
     const embeddingRes = await openai.embeddings.create({
       model: "text-embedding-3-small",
       input: pregunta,
     });
     const embedding = embeddingRes.data[0].embedding;
+    embeddingTokens = embeddingRes.usage?.total_tokens ?? 0;
 
     const { data, error } = await supabase.schema("lex").rpc("match_lex_documentos", {
       query_embedding: embedding,
@@ -268,13 +276,13 @@ async function recuperarFragmentos(
 
     if (error) {
       console.error("[RAG] Error RPC:", error.message);
-      return { fragmentos: [], ok: false };
+      return { fragmentos: [], ok: false, embeddingTokens };
     }
 
-    return { fragmentos: (data as Fragmento[]) ?? [], ok: true };
+    return { fragmentos: (data as Fragmento[]) ?? [], ok: true, embeddingTokens };
   } catch (err) {
     console.error("[RAG] Excepción:", err);
-    return { fragmentos: [], ok: false };
+    return { fragmentos: [], ok: false, embeddingTokens };
   }
 }
 
@@ -374,22 +382,39 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
     return res.status(405).json({ error: "Method not allowed" });
   }
 
+  // ─── Sesión: solo usuarios registrados con Google ────────────────────────
+  const authHeader = req.headers.authorization ?? "";
+  const token = authHeader.startsWith("Bearer ") ? authHeader.slice(7) : "";
+  if (!token) {
+    return res.status(401).json({ error: "Sesión requerida", sesionRequerida: true });
+  }
+  const { data: userData, error: userError } = await supabase.auth.getUser(token);
+  if (userError || !userData?.user) {
+    return res.status(401).json({ error: "Sesión no válida", sesionRequerida: true });
+  }
+  const userId = userData.user.id;
+
   const {
-    messages,
+    messages: mensajesBody,
     agente: agenteBody,
     agenteForzado,
-    email,
-    esAutenticado,
   } = req.body as {
     messages: Mensaje[];
     agente?: Agente;
     agenteForzado?: Agente;
-    email?: string;
-    esAutenticado?: boolean;
   };
 
-  if (!messages || !Array.isArray(messages) || messages.length === 0) {
+  if (!mensajesBody || !Array.isArray(mensajesBody) || mensajesBody.length === 0) {
     return res.status(400).json({ error: "messages requerido" });
+  }
+
+  // Recorte defensivo: acota el coste de cada consulta.
+  const messages: Mensaje[] = mensajesBody
+    .filter((m) => (m?.role === "user" || m?.role === "assistant") && typeof m.content === "string")
+    .slice(-MAX_MENSAJES)
+    .map((m) => ({ role: m.role, content: m.content.slice(0, MAX_CARACTERES) }));
+  if (messages.length === 0 || messages[messages.length - 1].role !== "user") {
+    return res.status(400).json({ error: "messages inválido" });
   }
 
   // Determinar agente: agenteForzado > agente > detección automática
@@ -398,6 +423,38 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
     agenteRaw === "LEX" || agenteRaw === "NOVA"
       ? agenteRaw
       : detectarAgente(messages);
+
+  // ─── Límite mensual (atómico, en base de datos) ──────────────────────────
+  // Falla cerrado: si no se puede comprobar el límite, no se llama al modelo.
+  const { data: reserva, error: reservaError } = await supabase.rpc("registrar_consulta", {
+    p_user: userId,
+    p_agente: agente,
+    p_limite: LIMITE_MENSUAL,
+  });
+  const fila = Array.isArray(reserva) ? reserva[0] : reserva;
+  if (reservaError || !fila) {
+    console.error("[chat] Error al comprobar el límite:", reservaError?.message);
+    return res.status(500).json({ error: "No se pudo comprobar el límite de consultas." });
+  }
+  if (!fila.permitido) {
+    return res.status(429).json({
+      error: "Límite mensual alcanzado",
+      limitAlcanzado: true,
+      limite: LIMITE_MENSUAL,
+    });
+  }
+  const consultaId: number = fila.consulta_id;
+
+  // Uso real de la consulta, para poder calcular el coste por consulta.
+  const registrarUso = async (uso: {
+    model: string | null;
+    input_tokens?: number;
+    output_tokens?: number;
+    embedding_tokens?: number;
+  }) => {
+    const { error } = await supabase.from("consultas_agente").update(uso).eq("id", consultaId);
+    if (error) console.error("[chat] No se pudo guardar el uso:", error.message);
+  };
 
   const ultimaPreguntaUsuario =
     [...messages].reverse().find((m) => m.role === "user")?.content ?? "";
@@ -411,7 +468,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
         .map((m) => m.content)
         .join(" ");
 
-      const { fragmentos, ok } = await recuperarFragmentos(preguntasUsuario);
+      const { fragmentos, ok, embeddingTokens } = await recuperarFragmentos(preguntasUsuario);
       const simMax = fragmentos.length
         ? Math.max(...fragmentos.map((f) => f.similarity ?? 0))
         : 0;
@@ -422,6 +479,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
       // Barrera: sin fragmentos (o error) → NO se llama al modelo
       if (!ok || fragmentos.length === 0) {
         const idioma = detectarIdioma(ultimaPreguntaUsuario);
+        await registrarUso({ model: null, embedding_tokens: embeddingTokens });
         return res.status(200).json({
           agente,
           respuesta: RESPUESTA_SIN_RAG[idioma],
@@ -446,6 +504,12 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
 
       const texto =
         respuesta.content[0].type === "text" ? respuesta.content[0].text : "";
+      await registrarUso({
+        model: modelo,
+        input_tokens: respuesta.usage.input_tokens,
+        output_tokens: respuesta.usage.output_tokens,
+        embedding_tokens: embeddingTokens,
+      });
       const idioma = detectarIdioma(ultimaPreguntaUsuario);
       const fuentes = haEscalado(texto) ? "" : bloqueFuentes(fragmentos, idioma);
 
@@ -469,6 +533,11 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
 
     const texto =
       respuesta.content[0].type === "text" ? respuesta.content[0].text : "";
+    await registrarUso({
+      model: modelo,
+      input_tokens: respuesta.usage.input_tokens,
+      output_tokens: respuesta.usage.output_tokens,
+    });
 
     return res.status(200).json({
       agente,
@@ -477,6 +546,8 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
     });
   } catch (err: unknown) {
     console.error("[chat] Error:", err);
+    // La consulta falló: no se descuenta del límite del usuario.
+    await supabase.from("consultas_agente").delete().eq("id", consultaId);
     const mensaje = err instanceof Error ? err.message : "Error desconocido";
     return res.status(500).json({ error: mensaje });
   }

@@ -1,6 +1,8 @@
 import { useState, useEffect, useRef } from "react";
 import { X, Send, Loader2, ExternalLink, Calendar } from "lucide-react";
 import ContactModal from "./ContactModal";
+import { supabase } from "@/lib/supabase";
+import { useI18n } from "@/i18n/context";
 
 // ─── Tipos ───────────────────────────────────────────────────────────────────
 
@@ -18,12 +20,11 @@ interface Mensaje {
 interface AgentChatProps {
   abierto: boolean;
   agente: Agente;
-  nombre: string;
-  email: string;
-  esAutenticado: boolean;
   onClose: () => void;
-  onLimiteAlcanzado: () => void;
+  onSesionRequerida: () => void;
 }
+
+type Idioma = "es" | "ca" | "en" | "fr";
 
 // ─── Config por agente ───────────────────────────────────────────────────────
 
@@ -32,59 +33,117 @@ const AGENTE_CONFIG: Record<Agente, {
   colorBg: string;
   colorBorder: string;
   avatar: string;
-  tagline: string;
-  mensajeBienvenida: string;
-  placeholder: string;
-  disclaimer: string;
 }> = {
   LEX: {
     color: "#1B4FD8",
     colorBg: "rgba(27,79,216,0.10)",
     colorBorder: "rgba(27,79,216,0.25)",
     avatar: `${AVATAR_BASE}/lex_avatar_v1.webp`,
-    tagline: "Normativa de transporte especial",
-    mensajeBienvenida:
-      "Hola, soy LEX. Estoy especializado en normativa de transporte especial — permisos de circulación, autorizaciones DGT y SCT Catalunya, restricciones, vehículos de acompañamiento y más.\n\n¿Cuál es tu consulta?",
-    placeholder: "Escribe tu consulta normativa…",
-    disclaimer: "LEX es IA y puede cometer errores. Verifica siempre la información antes de actuar.",
   },
   NOVA: {
     color: "#4D9FEC",
     colorBg: "rgba(77,159,236,0.10)",
     colorBorder: "rgba(77,159,236,0.25)",
     avatar: `${AVATAR_BASE}/nova_avatar_v1.webp`,
-    tagline: "IA para pequeñas y medianas empresas",
-    mensajeBienvenida:
-      "Hola, soy NOVA. Te ayudo a ver qué puede hacer la IA en una pyme de transporte: caducidad de permisos, expedientes, avisos obligatorios, seguimiento de flota. Cómo empezar sin invertir y sin humo.\n\n¿En qué puedo ayudarte?",
-    placeholder: "Pregúntame sobre IA para tu empresa…",
-    disclaimer: "NOVA es IA y puede cometer errores. Contrasta siempre la información.",
   },
 };
 
-// ─── Helpers localStorage (contador de consultas) ─────────────────────────────
+// ─── Textos por idioma ───────────────────────────────────────────────────────
 
-function getConsultasKey(email: string) {
-  const d = new Date();
-  return `xpertauth_consultas_${email}_${d.getFullYear()}_${d.getMonth()}`;
-}
-
-function getConsultas(email: string): number {
-  try {
-    return parseInt(localStorage.getItem(getConsultasKey(email)) || "0", 10);
-  } catch {
-    return 0;
-  }
-}
-
-function incrementarConsultas(email: string) {
-  try {
-    const key = getConsultasKey(email);
-    const actual = parseInt(localStorage.getItem(key) || "0", 10);
-    localStorage.setItem(key, String(actual + 1));
-  } catch {}
-}
-
-const LIMITE = 5;
+const TEXTOS: Record<Idioma, {
+  taglineLex: string;
+  taglineNova: string;
+  bienvenidaLex: string;
+  bienvenidaNova: string;
+  placeholderLex: string;
+  placeholderNova: string;
+  disclaimer: (agente: Agente) => string;
+  pensando: string;
+  errorConexion: string;
+  limitePre: string;
+  limiteNegrita: string;
+  limitePost: string;
+  limiteRestaura: string;
+  cerrar: string;
+  enviar: string;
+}> = {
+  es: {
+    taglineLex: "Normativa de transporte especial",
+    taglineNova: "IA para pymes de transporte",
+    bienvenidaLex:
+      "Hola, soy LEX. Estoy especializado en normativa de transporte especial: permisos de circulación, autorizaciones DGT y SCT Catalunya, restricciones, vehículos de acompañamiento y más.\n\n¿Cuál es tu consulta?",
+    bienvenidaNova:
+      "Hola, soy NOVA. Te ayudo a ver qué puede hacer la IA en una pyme de transporte: caducidad de permisos, expedientes, avisos obligatorios, seguimiento de flota. Cómo empezar sin invertir y sin humo.\n\n¿En qué puedo ayudarte?",
+    placeholderLex: "Escribe tu consulta normativa…",
+    placeholderNova: "Pregúntame sobre IA para tu empresa…",
+    disclaimer: (a) => `${a} es IA y puede equivocarse. Verifica siempre la información antes de actuar.`,
+    pensando: "Pensando…",
+    errorConexion: "Lo siento, ha habido un problema al conectar. Por favor, inténtalo de nuevo en unos segundos.",
+    limitePre: "Has usado tus ",
+    limiteNegrita: "30 consultas de este mes",
+    limitePost: ".",
+    limiteRestaura: "Tus consultas se restauran el 1 del mes siguiente.",
+    cerrar: "Cerrar chat",
+    enviar: "Enviar",
+  },
+  ca: {
+    taglineLex: "Normativa de transport especial",
+    taglineNova: "IA per a pimes de transport",
+    bienvenidaLex:
+      "Hola, sóc LEX. Estic especialitzat en normativa de transport especial: permisos de circulació, autoritzacions DGT i SCT Catalunya, restriccions, vehicles d'acompanyament i més.\n\nQuina és la teva consulta?",
+    bienvenidaNova:
+      "Hola, sóc NOVA. T'ajudo a veure què pot fer la IA en una pime de transport: caducitat de permisos, expedients, avisos obligatoris, seguiment de flota. Com començar sense invertir i sense fum.\n\nEn què et puc ajudar?",
+    placeholderLex: "Escriu la teva consulta normativa…",
+    placeholderNova: "Pregunta'm sobre IA per a la teva empresa…",
+    disclaimer: (a) => `${a} és IA i es pot equivocar. Verifica sempre la informació abans d'actuar.`,
+    pensando: "Pensant…",
+    errorConexion: "Ho sento, hi ha hagut un problema en connectar. Torna-ho a provar d'aquí a uns segons.",
+    limitePre: "Has fet servir les teves ",
+    limiteNegrita: "30 consultes d'aquest mes",
+    limitePost: ".",
+    limiteRestaura: "Les teves consultes es restauren l'1 del mes següent.",
+    cerrar: "Tanca el xat",
+    enviar: "Envia",
+  },
+  en: {
+    taglineLex: "Special transport regulations",
+    taglineNova: "AI for transport SMEs",
+    bienvenidaLex:
+      "Hi, I'm LEX. I specialise in special transport regulations: circulation permits, DGT and SCT Catalunya authorisations, restrictions, escort vehicles and more.\n\nWhat's your question?",
+    bienvenidaNova:
+      "Hi, I'm NOVA. I help you see what AI can do in a transport SME: permit expiry, case files, mandatory alerts, fleet tracking. How to start without investing and without hype.\n\nHow can I help you?",
+    placeholderLex: "Write your regulatory question…",
+    placeholderNova: "Ask me about AI for your business…",
+    disclaimer: (a) => `${a} is AI and can make mistakes. Always verify the information before acting on it.`,
+    pensando: "Thinking…",
+    errorConexion: "Sorry, there was a problem connecting. Please try again in a few seconds.",
+    limitePre: "You have used your ",
+    limiteNegrita: "30 queries for this month",
+    limitePost: ".",
+    limiteRestaura: "Your queries reset on the 1st of next month.",
+    cerrar: "Close chat",
+    enviar: "Send",
+  },
+  fr: {
+    taglineLex: "Réglementation du transport spécial",
+    taglineNova: "IA pour PME de transport",
+    bienvenidaLex:
+      "Bonjour, je suis LEX. Je suis spécialisé dans la réglementation du transport spécial : permis de circulation, autorisations DGT et SCT Catalunya, restrictions, véhicules d'accompagnement et plus encore.\n\nQuelle est votre question ?",
+    bienvenidaNova:
+      "Bonjour, je suis NOVA. Je vous aide à voir ce que l'IA peut faire dans une PME de transport : expiration des permis, dossiers, alertes obligatoires, suivi de flotte. Comment commencer sans investir et sans esbroufe.\n\nComment puis-je vous aider ?",
+    placeholderLex: "Écrivez votre question réglementaire…",
+    placeholderNova: "Posez-moi vos questions sur l'IA pour votre entreprise…",
+    disclaimer: (a) => `${a} est une IA et peut se tromper. Vérifiez toujours les informations avant d'agir.`,
+    pensando: "Réflexion…",
+    errorConexion: "Désolé, un problème de connexion est survenu. Veuillez réessayer dans quelques secondes.",
+    limitePre: "Vous avez utilisé vos ",
+    limiteNegrita: "30 requêtes de ce mois",
+    limitePost: ".",
+    limiteRestaura: "Vos requêtes sont réinitialisées le 1er du mois suivant.",
+    cerrar: "Fermer le chat",
+    enviar: "Envoyer",
+  },
+};
 
 // ─── Parser de botones contextuales ─────────────────────────────────────────
 
@@ -281,33 +340,27 @@ function Burbuja({
 export default function AgentChat({
   abierto,
   agente,
-  nombre,
-  email,
-  esAutenticado,
   onClose,
-  onLimiteAlcanzado,
+  onSesionRequerida,
 }: AgentChatProps) {
+  const { locale } = useI18n();
+  const idioma: Idioma = locale === "ca" || locale === "en" || locale === "fr" ? locale : "es";
+  const t = TEXTOS[idioma];
   const config = AGENTE_CONFIG[agente];
+  const bienvenida = agente === "LEX" ? t.bienvenidaLex : t.bienvenidaNova;
+  const tagline = agente === "LEX" ? t.taglineLex : t.taglineNova;
+  const placeholder = agente === "LEX" ? t.placeholderLex : t.placeholderNova;
+
   const [mensajes, setMensajes] = useState<Mensaje[]>([
-    {
-      role: "assistant",
-      content: config.mensajeBienvenida,
-      agente,
-    },
+    { role: "assistant", content: bienvenida, agente },
   ]);
   const [input, setInput] = useState("");
   const [cargando, setCargando] = useState(false);
   const [limiteAlcanzado, setLimiteAlcanzado] = useState(false);
   const [contactOpen, setContactOpen] = useState(false);
 
-  const EMAIL_CORPORATIVO = "eche.jose@gmail.com";
-  const esCorporativo = email === EMAIL_CORPORATIVO;
-  const sinLimite = esAutenticado || esCorporativo;
-
   const bottomRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLTextAreaElement>(null);
-
-  const lexDeshabilitado = false;
 
   useEffect(() => {
     if (abierto) {
@@ -316,25 +369,25 @@ export default function AgentChat({
     }
   }, [mensajes, abierto]);
 
+  // Cambio de agente o de idioma: conversación nueva con la bienvenida correspondiente.
   useEffect(() => {
-    setMensajes([
-      {
-        role: "assistant",
-        content: config.mensajeBienvenida,
-        agente,
-      },
-    ]);
+    setMensajes([{ role: "assistant", content: bienvenida, agente }]);
     setInput("");
-  }, [agente]);
+  }, [agente, idioma]);
 
   async function enviar() {
     const texto = input.trim();
-    if (!texto || cargando) return;
+    if (!texto || cargando || limiteAlcanzado) return;
 
-    const nuevosMensajes: Mensaje[] = [
-      ...mensajes,
-      { role: "user", content: texto },
-    ];
+    // El servidor valida la sesión y cuenta las consultas: se envía el token de Google.
+    const { data: sesion } = await supabase.auth.getSession();
+    const token = sesion.session?.access_token;
+    if (!token) {
+      onSesionRequerida();
+      return;
+    }
+
+    const nuevosMensajes: Mensaje[] = [...mensajes, { role: "user", content: texto }];
 
     setMensajes(nuevosMensajes);
     setInput("");
@@ -343,18 +396,24 @@ export default function AgentChat({
     try {
       const res = await fetch("/api/chat", {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
+        headers: { "Content-Type": "application/json", Authorization: `Bearer ${token}` },
         body: JSON.stringify({
-          messages: nuevosMensajes.map((m) => ({
-            role: m.role,
-            content: m.content,
-          })),
+          messages: nuevosMensajes.map((m) => ({ role: m.role, content: m.content })),
           agente,
-          email: esAutenticado ? undefined : email,
-          esAutenticado,
         }),
       });
 
+      if (res.status === 401) {
+        setMensajes(mensajes);
+        onSesionRequerida();
+        return;
+      }
+      if (res.status === 429) {
+        // Límite mensual alcanzado (lo decide el servidor).
+        setMensajes(mensajes);
+        setLimiteAlcanzado(true);
+        return;
+      }
       if (!res.ok) throw new Error(`HTTP ${res.status}`);
 
       const data = await res.json();
@@ -364,33 +423,13 @@ export default function AgentChat({
         {
           role: "assistant",
           content: data.respuesta,
-          // El backend aún puede enrutar a otros agentes; si no es LEX/NOVA, mantenemos el actual.
           agente: data.agente === "LEX" || data.agente === "NOVA" ? data.agente : agente,
         },
       ]);
-
-      if (!sinLimite) {
-        if (esAutenticado) {
-          if (data.limitAlcanzado) {
-            setLimiteAlcanzado(true);
-          }
-        } else {
-          incrementarConsultas(email);
-          const consultasTras = getConsultas(email);
-          if (consultasTras >= LIMITE) {
-            setLimiteAlcanzado(true);
-          }
-        }
-      }
     } catch (err) {
       setMensajes((prev) => [
         ...prev,
-        {
-          role: "assistant",
-          content:
-            "Lo siento, ha habido un problema al conectar. Por favor, inténtalo de nuevo en unos segundos.",
-          agente,
-        },
+        { role: "assistant", content: t.errorConexion, agente },
       ]);
     } finally {
       setCargando(false);
@@ -405,19 +444,10 @@ export default function AgentChat({
   }
 
   function handleInput(e: React.ChangeEvent<HTMLTextAreaElement>) {
-    if (limiteAlcanzado) {
-      e.preventDefault();
-      onLimiteAlcanzado();
-      return;
-    }
     setInput(e.target.value);
     e.target.style.height = "auto";
     e.target.style.height = Math.min(e.target.scrollHeight, 120) + "px";
   }
-
-  const consultasRestantes = sinLimite
-    ? null
-    : LIMITE - getConsultas(email);
 
   return (
     <>
@@ -457,20 +487,14 @@ export default function AgentChat({
           <div className="flex-1 min-w-0">
             <p className="text-white font-bold text-sm leading-tight">{agente}</p>
             <p className="text-xs leading-tight truncate" style={{ color: config.color }}>
-              {config.tagline}
+              {tagline}
             </p>
           </div>
-
-          {!esAutenticado && consultasRestantes !== null && (
-            <span className="text-xs text-white/30 flex-shrink-0">
-              {consultasRestantes} consulta{consultasRestantes !== 1 ? "s" : ""} restante{consultasRestantes !== 1 ? "s" : ""}
-            </span>
-          )}
 
           <button
             onClick={onClose}
             className="flex-shrink-0 text-white/40 hover:text-white/80 transition-colors ml-1"
-            aria-label="Cerrar chat"
+            aria-label={t.cerrar}
           >
             <X size={18} />
           </button>
@@ -495,7 +519,7 @@ export default function AgentChat({
                 style={{ backgroundColor: "rgba(255,255,255,0.06)", borderTopLeftRadius: 4 }}
               >
                 <Loader2 size={14} className="animate-spin text-white/50" />
-                <span className="text-white/40 text-sm">Pensando…</span>
+                <span className="text-white/40 text-sm">{t.pensando}</span>
               </div>
             </div>
           )}
@@ -509,28 +533,11 @@ export default function AgentChat({
                 color: "rgba(255,255,255,0.70)",
               }}
             >
-              {esAutenticado ? (
-                <>
-                  Has usado tus <strong style={{ color: "#fff" }}>30 consultas de este mes</strong>.
-                  <br />
-                  <span style={{ color: "rgba(255,255,255,0.50)", fontSize: "0.75rem" }}>
-                    Tus consultas se restauran el 1 del mes siguiente.
-                  </span>
-                </>
-              ) : (
-                <>
-                  Has usado tus <strong style={{ color: "#fff" }}>5 consultas de prueba</strong>.
-                  Regístrate gratis y obtén <strong style={{ color: "#fff" }}>30 consultas al mes</strong>.
-                  <br />
-                  <button
-                    onClick={onLimiteAlcanzado}
-                    className="mt-2 px-4 py-1.5 rounded-lg text-xs font-semibold transition-opacity hover:opacity-80"
-                    style={{ backgroundColor: "#1B4FD8", color: "#fff" }}
-                  >
-                    Registrarme gratis
-                  </button>
-                </>
-              )}
+              {t.limitePre}<strong style={{ color: "#fff" }}>{t.limiteNegrita}</strong>{t.limitePost}
+              <br />
+              <span style={{ color: "rgba(255,255,255,0.50)", fontSize: "0.75rem" }}>
+                {t.limiteRestaura}
+              </span>
             </div>
           )}
 
@@ -555,28 +562,28 @@ export default function AgentChat({
               value={input}
               onChange={handleInput}
               onKeyDown={handleKeyDown}
-              placeholder={config.placeholder}
+              placeholder={placeholder}
               disabled={cargando || limiteAlcanzado}
               className="flex-1 bg-transparent text-white text-sm placeholder-white/30 outline-none resize-none leading-relaxed py-1"
               style={{ maxHeight: 120 }}
             />
             <button
               onClick={enviar}
-              disabled={!input.trim() || cargando}
+              disabled={!input.trim() || cargando || limiteAlcanzado}
               className="flex-shrink-0 w-8 h-8 rounded-lg flex items-center justify-center transition-all mb-0.5"
               style={{
                 backgroundColor: input.trim() && !cargando ? config.color : "rgba(255,255,255,0.08)",
                 opacity: input.trim() && !cargando ? 1 : 0.4,
               }}
-              aria-label="Enviar"
+              aria-label={t.enviar}
             >
               <Send size={14} className="text-white" style={{ transform: "translateX(1px)" }} />
             </button>
           </div>
 
-          {/* Disclaimer IA */}
+          {/* Aviso IA (igual en los dos agentes) */}
           <p className="text-center text-white/50 text-xs mt-2 leading-snug px-1">
-            {config.disclaimer}
+            {t.disclaimer(agente)}
           </p>
         </div>
       </div>

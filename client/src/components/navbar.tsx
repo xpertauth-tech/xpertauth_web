@@ -4,14 +4,10 @@ import { motion, AnimatePresence } from "framer-motion";
 import { useTranslations } from "@/i18n/context";
 import { useLocation } from "wouter";
 import LocaleSwitcher from "./locale-switcher";
-import { createClient } from "@supabase/supabase-js";
+import { supabase } from "@/lib/supabase";
+import { useAgent } from "@/App";
 
 const LOGO_URL = "https://supabase.xpertauth.com/storage/v1/object/public/web-images/logo/logo_xpertauth_icon_v1.png";
-
-const supabase = createClient(
-  import.meta.env.VITE_SUPABASE_URL,
-  import.meta.env.VITE_SUPABASE_ANON_KEY
-);
 
 type UserProfile = {
   email: string;
@@ -26,6 +22,7 @@ export default function Navbar() {
   // "Conoce el proyecto" reutiliza la clave ya definida en el Footer (footer.aboutProject).
   const { t: footerT } = useTranslations("footer");
   const [, navigate] = useLocation();
+  const { abrirRegistro } = useAgent();
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
   const [logoLoaded, setLogoLoaded] = useState(false);
@@ -141,13 +138,10 @@ export default function Navbar() {
     }
   };
 
-  const handleGoogleLogin = async () => {
-    await supabase.auth.signInWithOAuth({
-      provider: "google",
-      options: {
-        redirectTo: "https://xpertauth.com/es",
-      },
-    });
+  // "Regístrate" abre el mismo flujo que los agentes: pantalla de acceso solo con Google.
+  const handleGoogleLogin = () => {
+    setMobileOpen(false);
+    abrirRegistro();
   };
 
   const handleLogout = async () => {

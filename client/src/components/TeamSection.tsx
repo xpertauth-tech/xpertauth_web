@@ -87,10 +87,10 @@ const teamMembers = [
     name: "NOVA",
     photo: NOVA_AVATAR,
     role: {
-      es: "Agente IA · IA para PYMEs",
-      ca: "Agent IA · IA per a PIMEs",
-      en: "AI Agent · AI for SMEs",
-      fr: "Agent IA · IA pour PME",
+      es: "IA para pymes de transporte",
+      ca: "IA per a pimes de transport",
+      en: "AI for transport SMEs",
+      fr: "IA pour PME de transport",
     },
     description: {
       es: "NOVA te ayuda a ver qué puede hacer la IA en una pyme de transporte: caducidad de permisos, expedientes, avisos obligatorios, seguimiento de flota. Cómo empezar sin invertir y sin humo.",
