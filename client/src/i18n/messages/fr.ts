@@ -84,7 +84,7 @@ const fr = {
     privacy: "Politique de confidentialité",
     legal: "Mentions légales",
     cookies: "Cookies",
-    aiDisclosure: "Contenu créé et développé avec l'aide de l'Intelligence Artificielle.",
+    aiDisclosure: "Images et une partie des textes créés avec l'aide de l'IA, relus par une personne.",
     rights: "Tous droits réservés.",
     spain: "L'Escala, Girona, Catalogne",
     scheduleTitle: "Horaires d'ouverture",

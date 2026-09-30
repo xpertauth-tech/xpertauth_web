@@ -84,7 +84,7 @@ const ca = {
     privacy: "Política de Privacitat",
     legal: "Avís Legal",
     cookies: "Cookies",
-    aiDisclosure: "Contingut creat i desenvolupat amb l'ajuda d'Intel·ligència Artificial.",
+    aiDisclosure: "Imatges i part dels textos creats amb ajuda d'IA, revisats per una persona.",
     rights: "Tots els drets reservats.",
     spain: "L'Escala, Girona, Catalunya",
     scheduleTitle: "Horari d'atenció",

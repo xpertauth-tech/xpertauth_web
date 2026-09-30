@@ -84,7 +84,7 @@ const en = {
     privacy: "Privacy Policy",
     legal: "Legal Notice",
     cookies: "Cookies",
-    aiDisclosure: "Content created and developed with the help of Artificial Intelligence.",
+    aiDisclosure: "Images and some of the text created with the help of AI, reviewed by a person.",
     rights: "All rights reserved.",
     spain: "L'Escala, Girona, Catalonia",
     scheduleTitle: "Office hours",
