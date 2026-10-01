@@ -9,7 +9,7 @@ const fr = {
     badge: "Spécialistes du transport spécial · Association à l'étude pour une constitution formelle",
     title1: "Transport spécial,",
     title2: "avec un vrai discernement.",
-    subtitle: "Trente ans de métier, avec l'intelligence artificielle comme outil. Réglementation, autorisations et dossiers expliqués sans détour.",
+    subtitle: "Trente ans de métier dans le transport spécial.\nAujourd'hui, avec l'intelligence artificielle comme outil.",
     cta1: "Découvrir le projet",
     cta2: "Comment ça marche",
     viewSide: "Vue latérale",

@@ -9,7 +9,7 @@ const en = {
     badge: "Special transport specialists · Association exploring formal establishment",
     title1: "Special transport,",
     title2: "with real judgement.",
-    subtitle: "Thirty years in the trade, with artificial intelligence as a tool. Regulations, permits and case files explained plainly.",
+    subtitle: "Thirty years of experience in special transport.\nToday, with artificial intelligence as a tool.",
     cta1: "About the project",
     cta2: "How it works",
     viewSide: "Side view",

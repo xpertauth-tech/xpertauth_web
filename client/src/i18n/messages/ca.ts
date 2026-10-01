@@ -9,7 +9,7 @@ const ca = {
     badge: "Especialistes en transport especial · Associació en procés d'estudi de constitució",
     title1: "Transport especial,",
     title2: "amb criteri real.",
-    subtitle: "Trenta anys d'ofici, amb intel·ligència artificial com a eina. Normativa, permisos i expedients explicats sense embuts.",
+    subtitle: "Trenta anys d'ofici en transport especial.\nAvui, amb la intel·ligència artificial com a eina.",
     cta1: "Coneix el projecte",
     cta2: "Com funciona",
     viewSide: "Vista lateral",

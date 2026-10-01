@@ -74,7 +74,18 @@ export default function Hero() {
             <HeroSketch />
           </div>
 
-          <p className="mt-6 sm:mt-8 text-white/60 text-base sm:text-lg md:text-xl max-w-2xl lg:max-w-4xl mx-auto leading-relaxed font-light">{t("subtitle")}</p>
+          <p className="mt-6 sm:mt-8 text-white/60 text-base sm:text-lg md:text-xl max-w-2xl lg:max-w-4xl mx-auto leading-relaxed font-light">{t("subtitle").split("\n").map((line, i) => (
+              <span key={i}>
+                {i > 0 && (
+                  <>
+                    {" "}
+                    <br className="hidden lg:block" />
+                  </>
+                )}
+                {line}
+              </span>
+            ))}
+          </p>
 
           <div className="mt-12 sm:mt-14 flex flex-col sm:flex-row items-center justify-center gap-4">
             <button onClick={() => navigate(`/${locale}/sobre-nosotros`)} className="group px-8 py-3.5 bg-xpertblue text-pure font-semibold rounded-md text-sm sm:text-base transition-all duration-300 flex items-center gap-2 w-full sm:w-auto justify-center" data-testid="button-hero-proyecto">

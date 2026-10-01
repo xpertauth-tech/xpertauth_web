@@ -9,7 +9,7 @@ const es = {
     badge: "Especialistas en transporte especial · Asociación en proceso de estudio de constitución",
     title1: "Transporte especial,",
     title2: "con criterio real.",
-    subtitle: "Treinta años de oficio, con inteligencia artificial como herramienta. Normativa, permisos y expedientes explicados sin rodeos.",
+    subtitle: "Treinta años de oficio en transporte especial.\nHoy, con la inteligencia artificial como herramienta.",
     cta1: "Conoce el proyecto",
     cta2: "Cómo funciona",
     viewSide: "Vista lateral",
