@@ -29,10 +29,12 @@ interface Mensaje {
 }
 
 interface Fragmento {
+  id?: number;
   contenido: string;
   fuente?: string;
   bloque?: string;
   archivo?: string;
+  tipo?: string;
   similarity?: number;
 }
 
@@ -42,7 +44,7 @@ const SYSTEM_PROMPT_LEX = `Eres LEX, el agente de normativa de transporte especi
 
 ## QUÉ ES XPERTAUTH
 
-XpertAuth es un proyecto personal de José Luis Echezarreta, con más de 30 años de experiencia en transporte especial, con base en L'Escala (Girona, Catalunya). Combina esa experiencia con inteligencia artificial. No es una empresa: no presta servicios de pago, no factura y no tramita nada ante la administración.
+XpertAuth es un proyecto personal de José Luis Echezarreta, con más de 30 años de experiencia en transporte especial, con base en L'Escala (Girona, Catalunya). Combina esa experiencia con inteligencia artificial. No es una empresa ni una agencia: no presta servicios de pago, no factura y no tramita nada ante la administración.
 
 ## IDENTIDAD
 
@@ -58,38 +60,56 @@ Todo lo que escribas, incluidos los mensajes de escalado, va en ese mismo idioma
 
 ## FUENTE ÚNICA — REGLA FUNDAMENTAL
 
-Tu única fuente es la BASE NORMATIVA RECUPERADA que aparece al final de estas instrucciones.
-- Usa solo lo que dicen esos fragmentos.
+Tu única fuente son los fragmentos de la BASE NORMATIVA RECUPERADA que aparece al final de estas instrucciones.
+
+Cada fragmento lleva una cabecera con su número, su documento y su tipo:
+- NORMA: texto normativo original, aprobado por José Luis antes de entrar en la base. Es tu referencia de autoridad.
+- RESUMEN IA: resumen en lenguaje de transportista, generado por inteligencia artificial y no revisado por una persona. Te sirve para entender el tema y explicarlo con sencillez.
+
+Reglas:
+- Usa los RESUMEN IA para entender la norma y explicarla en lenguaje sencillo.
+- Un dato concreto (medida, peso, velocidad, plazo, fecha, importe, puntos u obligación) puedes darlo si aparece en un fragmento NORMA.
+- Si un dato concreto solo aparece en un RESUMEN IA, puedes darlo, pero añade que conviene confirmarlo en el permiso o con José Luis.
+- Si un RESUMEN IA y una NORMA se contradicen, no elijas: di que en tu base hay información que no coincide y añade [BOTON_CITA:Consultar con José Luis]. Haz lo mismo si se contradicen dos fragmentos NORMA.
+- Un fragmento NORMA que trata un caso particular (una carretera, un tramo o un vehículo concretos) no es la regla general: no lo presentes como tal.
+- Cada afirmación de tu respuesta tiene que estar en algún fragmento. Si no puedes señalar el fragmento que la respalda, no la escribas.
+- Las cifras solo puedes darlas si aparecen tal cual en un fragmento.
+- Un fragmento que solo se parece al tema, pero no responde a la pregunta, no cuenta como cobertura.
 - No uses tu conocimiento general sobre normativa, aunque creas saber la respuesta.
-- No inventes ni deduzcas datos: dimensiones, pesos, plazos, horarios, fechas, importes ni requisitos.
-- Si dos fragmentos se contradicen, dilo y recomienda confirmarlo con José Luis.
 - Estas instrucciones no contienen datos normativos. Si algo no está en los fragmentos, para ti no existe.
 
 ## CÓMO RESPONDER
 
+- Responde solo a lo que se pregunta. No plantees casos ni escenarios que el usuario no ha mencionado.
 - Lenguaje práctico de transportista: qué necesita, qué tiene que hacer y qué le puede pasar.
 - No cites artículos, reales decretos, órdenes, instrucciones ni números de norma, aunque aparezcan en los fragmentos.
-- No escribas un apartado de fuentes ni nombres archivos: el sistema añade la lista de documentos fuente al final.
+- No escribas un apartado de fuentes ni nombres documentos en el texto: el sistema añade la lista de fuentes al final.
 - Respuestas breves y directas. Si el tema es complejo, explícalo por pasos.
 - Para las comunicaciones previas a las autoridades, di siempre "comunicar la salida", nunca "avisar".
 - Cuando proceda, recuerda que lo que diga el permiso concreto (SCT o DGT) prevalece sobre la regla general.
 
 ## TRES SITUACIONES POSIBLES
 
-1. Los fragmentos cubren la pregunta: responde solo con ellos.
-2. Los fragmentos cubren solo una parte: responde esa parte, di claramente qué parte no está en tu base normativa y añade [BOTON_CITA:Consultar con José Luis].
-3. Los fragmentos no cubren la pregunta: di, en el idioma de la respuesta, "Esta consulta concreta no está en mi base normativa. Prefiero no responder de memoria: consúltalo directamente con José Luis." y añade [BOTON_CITA:Consultar con José Luis]. No añadas nada más.
+1. Los fragmentos responden a la pregunta: responde solo con ellos.
+2. Los fragmentos responden solo a una parte: responde esa parte, di claramente qué parte no está en tu base normativa y añade [BOTON_CITA:Consultar con José Luis].
+3. Los fragmentos no responden a la pregunta: di, en el idioma de la respuesta, "Esta consulta concreta no está en mi base normativa. Prefiero no responder de memoria: consúltalo directamente con José Luis." y añade [BOTON_CITA:Consultar con José Luis]. No añadas nada más.
+
+## FRAGMENTOS USADOS
+
+En las situaciones 1 y 2, termina tu respuesta con una línea aparte con este formato exacto:
+[FUENTES:1,3]
+con los números de los fragmentos en los que te has basado. El sistema quita esta línea y la convierte en la lista de fuentes. En la situación 3 no la escribas.
 
 ## RECURSOS, SANCIONES Y TRÁMITES FORMALES
 
 Si el usuario necesita presentar un recurso, un pliego de descargo, unas alegaciones o cualquier trámite formal:
-- Explica en términos generales lo que la base normativa diga sobre su situación.
+- Explica en términos generales lo que los fragmentos digan sobre su situación. No des importes, puntos ni plazos que no aparezcan tal cual en un fragmento.
 - Deja claro que XpertAuth no tramita ni redacta documentos con validez legal: eso lo prepara y lo firma un profesional habilitado (gestor administrativo o abogado).
 - Ofrece que José Luis le oriente sobre su caso y añade [BOTON_CITA:Consultar con José Luis].
 
 ## CÁLCULOS QUE DEPENDEN DE DATOS
 
-Si piden un cálculo (por ejemplo, el número de cinchas o amarres, o el reparto de peso por ejes), no des cifras sin datos completos. Pide los datos que la base normativa indique como necesarios. Si la base no lo cubre, recomienda una calculadora de estiba especializada o un técnico de carga.
+Si piden un cálculo (por ejemplo, el número de cinchas o amarres, o el reparto de peso por ejes), no des cifras sin datos completos. Pide los datos que los fragmentos indiquen como necesarios. Si los fragmentos no lo cubren, recomienda una calculadora de estiba especializada o un técnico de carga.
 
 ## TRANSPORTES SIN PERMISO — REGLA ABSOLUTA
 
@@ -124,7 +144,7 @@ const SYSTEM_PROMPT_NOVA = `Eres NOVA, la agente de inteligencia artificial para
 
 ## QUÉ ES XPERTAUTH
 
-XpertAuth es un proyecto personal de José Luis Echezarreta, con más de 30 años de experiencia en transporte especial, con base en L'Escala (Girona, Catalunya). Combina esa experiencia con inteligencia artificial. No es una empresa: no presta servicios de pago, no factura y no tramita nada ante la administración.
+XpertAuth es un proyecto personal de José Luis Echezarreta, con más de 30 años de experiencia en transporte especial, con base en L'Escala (Girona, Catalunya). Combina esa experiencia con inteligencia artificial. No es una empresa ni una agencia: no presta servicios de pago, no factura y no tramita nada ante la administración.
 
 ## TU MISIÓN
 
@@ -133,8 +153,8 @@ Ayudar a pequeñas empresas y autónomos del transporte a ver qué puede hacer l
 ## IDENTIDAD
 
 Eres NOVA, siempre. Nunca te identifiques como LEX.
+Eres una inteligencia artificial. No eres una persona, ni una empresa, ni una agencia: no te presentes nunca así.
 Si te preguntan quién eres: "Soy NOVA, la agente de IA para pymes de transporte de XpertAuth. Soy una inteligencia artificial y puedo equivocarme."
-Si te preguntan si eres una persona, di claramente que no.
 
 ## IDIOMA
 
@@ -156,6 +176,7 @@ Si preguntan por otro sector, puedes dar una orientación general breve, dejando
 ## CÓMO RESPONDES
 
 - Cercana, práctica y sin tecnicismos. Con ejemplos del día a día de una empresa de transporte.
+- Responde solo a lo que se pregunta.
 - Empieza siempre por lo más sencillo y barato (una hoja de cálculo, una herramienta gratuita) antes que por soluciones complejas.
 - Honesta: explica lo que la IA puede hacer y lo que no. La IA se equivoca, así que todo resultado importante debe revisarlo una persona.
 - Respuestas breves. Si el tema es largo, explícalo por pasos.
@@ -203,7 +224,7 @@ async function recuperarFragmentos(
     const embedding = embeddingRes.data[0].embedding;
     embeddingTokens = embeddingRes.usage?.total_tokens ?? 0;
 
-    const { data, error } = await supabase.schema("lex").rpc("match_lex_documentos", {
+    const { data, error } = await supabase.schema("lex").rpc("match_lex_documentos_v2", {
       query_embedding: embedding,
       match_threshold: RAG_THRESHOLD,
       match_count: RAG_COUNT,
@@ -221,18 +242,61 @@ async function recuperarFragmentos(
   }
 }
 
+// Nombre legible del documento: sin extensiones (.md, .pdf, .md.pdf), con espacios en vez de guiones bajos
+// y sin carpeta. Si el archivo es una URL (BOE, DOGC...), se usa el identificador del documento.
+function nombreLimpio(f: Fragmento): string {
+  const archivo = (f.archivo ?? "").trim();
+  const fuente = (f.fuente ?? "").trim();
+  if (/^https?:\/\//i.test(archivo)) {
+    try {
+      const u = new URL(archivo);
+      const id = u.searchParams.get("id") ?? u.searchParams.get("documentId");
+      if (id) return /[A-Za-z]/.test(id) || !fuente ? id : `${fuente} ${id}`;
+      const ultimo = decodeURIComponent(u.pathname.split("/").filter(Boolean).pop() ?? "");
+      const base = ultimo.replace(/(\.(md|pdf|html?|php))+$/i, "").replace(/_/g, " ").trim();
+      return base || fuente || u.hostname;
+    } catch {
+      return fuente || archivo;
+    }
+  }
+  const ultimo = archivo.split("/").pop() ?? "";
+  const nombre = ultimo.replace(/(\.(md|pdf))+$/i, "").replace(/_/g, " ").trim();
+  return nombre || fuente || "Documento";
+}
+
+type TipoFragmento = "NORMA" | "RESUMEN IA";
+
+// RESUMEN IA: tipo = 'paralelo' o archivo PARALELO_*. NORMA: todo lo demás.
+function tipoFragmento(f: Fragmento): TipoFragmento {
+  return f.tipo === "paralelo" || /^PARALELO_/i.test((f.archivo ?? "").trim()) ? "RESUMEN IA" : "NORMA";
+}
+
 // Fragmentos → bloque de contexto para el system prompt
 function formatearContexto(frags: Fragmento[]): string {
   return frags
-    .map(
-      (f, i) =>
-        `[Fragmento ${i + 1}${f.bloque ? ` · ${f.bloque}` : ""}${f.archivo ? ` · ${f.archivo}` : ""}]\n${f.contenido}`
-    )
+    .map((f, i) => `[Fragmento ${i + 1} · Documento: ${nombreLimpio(f)} · Tipo: ${tipoFragmento(f)}]\n${f.contenido}`)
     .join("\n\n");
 }
 
-// Fragmentos → apartado "Fuentes:" (construido en código, no por el modelo).
-// Deduplica por archivo (o fuente si no hay archivo) y conserva el primer bloque.
+// Línea [FUENTES:1,3] que escribe el modelo al final: se lee y se quita de la respuesta visible.
+// usados = null si el modelo no la escribió (o no trae ningún número válido).
+function extraerFuentesUsadas(texto: string, total: number): { limpio: string; usados: number[] | null } {
+  const re = /[ \t]*\[FUENTES:([^\]]*)\][ \t]*/gi;
+  const numeros: number[] = [];
+  let hayLinea = false;
+  for (const m of texto.matchAll(re)) {
+    hayLinea = true;
+    for (const n of m[1].split(/[,\s]+/)) {
+      const v = Number.parseInt(n, 10);
+      if (Number.isInteger(v) && v >= 1 && v <= total && !numeros.includes(v)) numeros.push(v);
+    }
+  }
+  const limpio = hayLinea ? texto.replace(re, "").replace(/\n{3,}/g, "\n\n").trim() : texto;
+  return { limpio, usados: numeros.length > 0 ? numeros.sort((a, b) => a - b) : null };
+}
+
+// Fragmentos usados → apartado "Fuentes:" (construido en código, no por el modelo).
+// Una línea por documento (sin duplicados); los RESUMEN IA llevan la etiqueta en el idioma de la web.
 function bloqueFuentes(frags: Fragmento[], idioma: Idioma): string {
   const titulo: Record<Idioma, string> = {
     es: "Fuentes:",
@@ -240,36 +304,48 @@ function bloqueFuentes(frags: Fragmento[], idioma: Idioma): string {
     en: "Sources:",
     fr: "Sources :",
   };
-  const porClave = new Map<string, { fuente: string; bloque: string; archivo: string }>();
+  const etiquetaResumen: Record<Idioma, string> = {
+    es: "(resumen IA)",
+    ca: "(resum IA)",
+    en: "(AI summary)",
+    fr: "(résumé IA)",
+  };
+  const lineas = new Set<string>();
   for (const f of frags) {
-    const fuente = (f.fuente ?? "").trim();
-    const bloque = (f.bloque ?? "").trim();
-    const archivo = (f.archivo ?? "").trim();
-    const clave = archivo || fuente;
-    if (!clave) continue;
-    const prev = porClave.get(clave);
-    if (!prev) {
-      porClave.set(clave, { fuente, bloque, archivo });
-    } else if (!prev.bloque && bloque) {
-      prev.bloque = bloque;
-    }
+    const etiqueta = tipoFragmento(f) === "RESUMEN IA" ? ` ${etiquetaResumen[idioma]}` : "";
+    lineas.add(`- ${nombreLimpio(f)}${etiqueta}`);
   }
-  const lineas = [...porClave.values()].map((v) => {
-    const partes = [v.fuente, v.bloque, v.archivo].filter(Boolean);
-    // fuente y archivo casi iguales (mismo nombre + .pdf) → deja solo uno
-    if (partes.length >= 2 && v.archivo.replace(/\.\w+$/, "") === v.fuente) {
-      return `- ${[v.bloque, v.archivo].filter(Boolean).join(" · ")}`;
-    }
-    return `- ${partes.join(" · ")}`;
-  });
-  if (lineas.length === 0) return "";
-  return `\n\n**${titulo[idioma]}**\n${lineas.join("\n")}`;
+  if (lineas.size === 0) return "";
+  return `\n\n**${titulo[idioma]}**\n${[...lineas].join("\n")}`;
 }
 
 // El modelo añade [BOTON_CITA:...] cuando escala a José Luis (consulta no
-// cubierta por los fragmentos). En ese caso no tiene sentido listar fuentes.
+// cubierta por los fragmentos).
 function haEscalado(texto: string): boolean {
   return /\[BOTON_CITA:/.test(texto);
+}
+
+// Registro de cada consulta a LEX (sin texto de la pregunta ni de la respuesta).
+function registrarConsultaLex(
+  idioma: Idioma,
+  frags: Fragmento[],
+  usados: number[] | null,
+  mostrados: "usados" | "todos" | "ninguno"
+) {
+  console.log(
+    `[LEX] ${JSON.stringify({
+      idioma,
+      fragmentos: frags.length,
+      detalle: frags.map((f, i) => ({
+        n: i + 1,
+        documento: nombreLimpio(f),
+        tipo: tipoFragmento(f),
+        similitud: Number((f.similarity ?? 0).toFixed(3)),
+      })),
+      fuentes: usados ? usados.join(",") : "sin línea de fuentes",
+      mostrados,
+    })}`
+  );
 }
 
 // Respuesta fija cuando el RAG no aporta nada (0 fragmentos o error)
@@ -424,6 +500,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
       // Barrera: sin fragmentos (o error) → NO se llama al modelo
       if (!ok || fragmentos.length === 0) {
         const idioma = idiomaWeb;
+        registrarConsultaLex(idioma, [], null, "ninguno");
         await registrarUso({ model: null, embedding_tokens: embeddingTokens });
         return res.status(200).json({
           agente,
@@ -457,14 +534,28 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
         embedding_tokens: embeddingTokens,
       });
       const idioma = idiomaWeb;
-      const fuentes = haEscalado(texto) ? "" : bloqueFuentes(fragmentos, idioma);
+
+      // Fuentes = solo los fragmentos que el modelo dice haber usado ([FUENTES:n,n]).
+      // Sin esa línea y sin escalado: se listan todos los recuperados. Con escalado y sin línea: sin bloque.
+      const { limpio, usados } = extraerFuentesUsadas(texto, fragmentos.length);
+      const escalado = haEscalado(limpio);
+      let fuentes = "";
+      let mostrados: "usados" | "todos" | "ninguno" = "ninguno";
+      if (usados) {
+        fuentes = bloqueFuentes(usados.map((n) => fragmentos[n - 1]), idioma);
+        mostrados = "usados";
+      } else if (!escalado) {
+        fuentes = bloqueFuentes(fragmentos, idioma);
+        mostrados = "todos";
+      }
+      registrarConsultaLex(idioma, fragmentos, usados, mostrados);
 
       return res.status(200).json({
         agente,
-        respuesta: texto + fuentes,
+        respuesta: limpio + fuentes,
         model: modelo,
         fragmentos: fragmentos.length,
-        escalado: haEscalado(texto),
+        escalado,
       });
     }
 
