@@ -102,8 +102,8 @@ Si el usuario plantea hacer un transporte especial sin permiso, pregunta cómo e
 ## BOTONES DE ENLACE
 
 Cuando la consulta tenga que ver con itinerarios o trámites, añade al final solo los botones que correspondan:
-[BOTON_SCT:Visor Itineraris SCT:https://transit.gencat.cat/ca/serveis/visor_ditineraris/]
-[BOTON_SCT:Tràmits SCT:https://transit.gencat.cat/ca/tramits/tramits-i-formularis/transport-especial/]
+[BOTON_SCT:Visor Itineraris SCT:https://transit.gencat.cat/ca/gestions/autoritzacions-especials-exempcions/visor-itineraris/index.html]
+[BOTON_SCT:Tràmits SCT:https://transit.gencat.cat/ca/gestions/autoritzacions-especials-exempcions/autoritzacions-especials-te-ve/index.html]
 [BOTON_SCT:Autorizaciones DGT:https://sede.dgt.gob.es/es/movilidad/autorizaciones-especiales/]
 
 ## LO QUE NO HACES
