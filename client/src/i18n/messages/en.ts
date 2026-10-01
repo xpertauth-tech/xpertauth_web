@@ -4,6 +4,7 @@ const en = {
     comoFunciona: "How it works",
     blog: "Blog",
     registrate: "Sign up",
+    consultasRestantes: "queries left",
   },
   hero: {
     badge: "Special transport specialists · Association exploring formal establishment",

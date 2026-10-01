@@ -12,9 +12,8 @@ const supabase = createClient(
   process.env.SUPABASE_SERVICE_KEY!
 );
 
-// Límite mensual de consultas por usuario registrado. Nunca más de 30.
-// Lo aplica el servidor (función SQL registrar_consulta); el navegador no decide nada.
-const LIMITE_MENSUAL = 30;
+// Límite mensual de consultas por usuario registrado: lo define y aplica la base de datos
+// (limite_consultas_mes() y registrar_consulta); aquí no hay constante y el navegador no decide nada.
 const MAX_MENSAJES = 20;          // historial máximo enviado al modelo
 const MAX_CARACTERES = 4000;      // por mensaje
 
@@ -429,7 +428,6 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
   const { data: reserva, error: reservaError } = await supabase.rpc("registrar_consulta", {
     p_user: userId,
     p_agente: agente,
-    p_limite: LIMITE_MENSUAL,
   });
   const fila = Array.isArray(reserva) ? reserva[0] : reserva;
   if (reservaError || !fila) {
@@ -440,7 +438,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
     return res.status(429).json({
       error: "Límite mensual alcanzado",
       limitAlcanzado: true,
-      limite: LIMITE_MENSUAL,
+      limite: fila.limite,
     });
   }
   const consultaId: number = fila.consulta_id;

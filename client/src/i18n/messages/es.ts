@@ -4,6 +4,7 @@ const es = {
     comoFunciona: "Cómo funciona",
     blog: "Blog",
     registrate: "Regístrate",
+    consultasRestantes: "consultas restantes",
   },
   hero: {
     badge: "Especialistas en transporte especial · Asociación en proceso de estudio de constitución",

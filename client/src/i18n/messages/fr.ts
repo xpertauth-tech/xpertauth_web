@@ -4,6 +4,7 @@ const fr = {
     comoFunciona: "Comment ça marche",
     blog: "Blog",
     registrate: "S'inscrire",
+    consultasRestantes: "consultations restantes",
   },
   hero: {
     badge: "Spécialistes du transport spécial · Association à l'étude pour une constitution formelle",

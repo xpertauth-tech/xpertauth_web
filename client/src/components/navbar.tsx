@@ -13,8 +13,6 @@ type UserProfile = {
   email: string;
   nombre: string;
   avatar_url?: string;
-  plan?: string;
-  creditos?: number;
 };
 
 export default function Navbar() {
@@ -29,7 +27,7 @@ export default function Navbar() {
   const [user, setUser] = useState<UserProfile | null>(null);
   const [userMenuOpen, setUserMenuOpen] = useState(false);
   const [authLoading, setAuthLoading] = useState(true);
-  const [creditosNavbar, setCreditosNavbar] = useState<number | null>(null);
+  const [restantes, setRestantes] = useState<number | null>(null);
 
   const isHome = window.location.pathname === `/${locale}` || window.location.pathname === `/${locale}/`;
 
@@ -46,6 +44,13 @@ export default function Navbar() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
+  // Consultas que quedan este mes (función SQL consultas_restantes, usa auth.uid()).
+  const refrescarRestantes = () => {
+    supabase.rpc("consultas_restantes").then(({ data, error }) => {
+      setRestantes(!error && typeof data === "number" ? data : null);
+    });
+  };
+
   useEffect(() => {
     supabase.auth.getSession().then(({ data: { session } }) => {
       if (session?.user) {
@@ -55,18 +60,7 @@ export default function Navbar() {
           nombre: session.user.user_metadata?.full_name ?? email,
           avatar_url: session.user.user_metadata?.avatar_url,
         });
-        // Consultar créditos y plan
-        supabase
-          .from("perfiles")
-          .select("plan, creditos")
-          .eq("email", email)
-          .single()
-          .then(({ data }) => {
-            if (data) {
-              setUser(prev => prev ? { ...prev, plan: data.plan, creditos: data.creditos } : prev);
-              if (data.plan !== "corporativo") setCreditosNavbar(data.creditos);
-            }
-          });
+        refrescarRestantes();
       }
       setAuthLoading(false);
     });
@@ -79,39 +73,22 @@ export default function Navbar() {
           nombre: session.user.user_metadata?.full_name ?? email,
           avatar_url: session.user.user_metadata?.avatar_url,
         });
-        // Consultar créditos y plan
-        supabase
-          .from("perfiles")
-          .select("plan, creditos")
-          .eq("email", email)
-          .single()
-          .then(({ data }) => {
-            if (data) {
-              setUser(prev => prev ? { ...prev, plan: data.plan, creditos: data.creditos } : prev);
-              if (data.plan !== "corporativo") setCreditosNavbar(data.creditos);
-            }
-          });
+        refrescarRestantes();
         if (window.location.hash.includes("access_token")) {
           window.history.replaceState(null, "", window.location.pathname);
         }
       } else if (event === "SIGNED_OUT") {
         setUser(null);
-        setCreditosNavbar(null);
+        setRestantes(null);
       }
     });
 
-    // Escuchar actualizaciones de créditos desde el chat
-    const handleCreditUpdate = (e: Event) => {
-      const creditos = (e as CustomEvent).detail?.creditos;
-      if (typeof creditos === "number" && creditos >= 0) {
-        setCreditosNavbar(creditos);
-      }
-    };
-    window.addEventListener("xpertauth:creditos", handleCreditUpdate);
+    // El chat avisa tras cada consulta; el número real lo calcula el servidor.
+    window.addEventListener("xpertauth:consultas", refrescarRestantes);
 
     return () => {
       subscription.unsubscribe();
-      window.removeEventListener("xpertauth:creditos", handleCreditUpdate);
+      window.removeEventListener("xpertauth:consultas", refrescarRestantes);
     };
   }, []);
 
@@ -236,23 +213,17 @@ export default function Navbar() {
                     <span className="text-sm text-white/80 font-medium max-w[120px] truncate">
                       {user.nombre.split(" ")[0]}
                     </span>
-                    {/* Contador de créditos */}
-                    {creditosNavbar !== null && (
+                    {/* Consultas restantes este mes */}
+                    {restantes !== null && (
                       <span
                         className="text-xs font-semibold px-2 py-0.5 rounded-full"
                         style={{
-                          backgroundColor: creditosNavbar <= (user.plan === "gratuito" ? 10 : 100)
-                            ? "rgba(239,68,68,0.15)"
-                            : "rgba(255,255,255,0.08)",
-                          color: creditosNavbar <= (user.plan === "gratuito" ? 10 : 100)
-                            ? "#f87171"
-                            : "rgba(255,255,255,0.40)",
-                          border: `1px solid ${creditosNavbar <= (user.plan === "gratuito" ? 10 : 100)
-                            ? "rgba(239,68,68,0.30)"
-                            : "rgba(255,255,255,0.10)"}`,
+                          backgroundColor: restantes <= 5 ? "rgba(239,68,68,0.15)" : "rgba(255,255,255,0.08)",
+                          color: restantes <= 5 ? "#f87171" : "rgba(255,255,255,0.40)",
+                          border: `1px solid ${restantes <= 5 ? "rgba(239,68,68,0.30)" : "rgba(255,255,255,0.10)"}`,
                         }}
                       >
-                        {creditosNavbar} cr.
+                        {restantes} {t("consultasRestantes")}
                       </span>
                     )}
                   </button>
@@ -267,11 +238,9 @@ export default function Navbar() {
                       >
                         <div className="px-4 py-3 border-b border-white/10">
                           <p className="text-xs text-white/50 truncate">{user.email}</p>
-                          {creditosNavbar !== null && (
-                            <p className="text-xs mt-1"
-                              style={{ color: creditosNavbar <= (user.plan === "gratuito" ? 10 : 100) ? "#f87171" : "rgba(255,255,255,0.30)" }}
-                            >
-                              {creditosNavbar} créditos disponibles
+                          {restantes !== null && (
+                            <p className="text-xs mt-1" style={{ color: restantes <= 5 ? "#f87171" : "rgba(255,255,255,0.30)" }}>
+                              {restantes} {t("consultasRestantes")}
                             </p>
                           )}
                         </div>

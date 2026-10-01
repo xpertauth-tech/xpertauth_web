@@ -403,6 +403,9 @@ export default function AgentChat({
         }),
       });
 
+      // Tras cada consulta (también si se alcanza el límite) el navbar vuelve a pedir las que quedan.
+      if (res.status !== 401) window.dispatchEvent(new Event("xpertauth:consultas"));
+
       if (res.status === 401) {
         setMensajes(mensajes);
         onSesionRequerida();
