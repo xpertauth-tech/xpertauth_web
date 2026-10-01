@@ -53,14 +53,12 @@ export default function ContactModal({ open, onClose }: ContactModalProps) {
         }),
       });
 
-      if (!res.ok) {
-        const data = await res.json();
-        throw new Error(data.error || t("errorGeneric"));
-      }
+      // No se lee el cuerpo de la respuesta: el visitante solo ve la confirmación o el mensaje traducido.
+      if (!res.ok) throw new Error("envio");
 
       setStatus("ok");
-    } catch (err: any) {
-      setErrorMsg(err.message || t("errorGeneric"));
+    } catch {
+      setErrorMsg(t("errorGeneric"));
       setStatus("error");
     }
   };

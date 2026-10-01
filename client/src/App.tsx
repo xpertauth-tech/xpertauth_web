@@ -15,7 +15,6 @@ import { supabase, tomarAgentePendiente, type Agente } from "@/lib/supabase";
 import SobreNosotros from "@/pages/SobreNosotros";
 import TransporteEspecial from "@/pages/TransporteEspecial";
 import IaPymes from "@/pages/IaPymes";
-import FormacionSenior from "@/pages/FormacionSenior";
 import Blog from "@/pages/Blog";
 import BlogPost from "@/pages/BlogPost";
 import Newsletter from "@/pages/Newsletter";
@@ -58,7 +57,6 @@ function AuthCallback() {
 function Router() {
   return (
     <Switch>
-      <Route path="/:locale/servicios/formacion-senior" component={FormacionSenior} />
       <Route path="/:locale/servicios/ia-pymes" component={IaPymes} />
       <Route path="/:locale/servicios/transporte-especial" component={TransporteEspecial} />
       <Route path="/:locale/sobre-nosotros" component={SobreNosotros} />

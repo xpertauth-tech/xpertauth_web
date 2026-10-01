@@ -115,7 +115,7 @@ const fr = {
     successTitle: "Message envoyé !",
     successMessage: "Nous avons reçu votre message. Nous vous contacterons bientôt.",
     close: "Fermer",
-    errorGeneric: "Erreur lors de l'envoi. Veuillez réessayer.",
+    errorGeneric: "Impossible d'envoyer le message. Réessayez ou écrivez-nous à info@xpertauth.com.",
     errorRequired: "Veuillez remplir tous les champs.",
     errorPrivacy: "Vous devez accepter la politique de confidentialité.",
   },

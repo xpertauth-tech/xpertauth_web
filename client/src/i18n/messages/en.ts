@@ -115,7 +115,7 @@ const en = {
     successTitle: "Message sent!",
     successMessage: "We have received your message. We'll be in touch soon.",
     close: "Close",
-    errorGeneric: "Error sending. Please try again.",
+    errorGeneric: "We couldn't send your message. Please try again or write to us at info@xpertauth.com.",
     errorRequired: "Please fill in all fields.",
     errorPrivacy: "You must accept the privacy policy.",
   },

@@ -115,7 +115,7 @@ const ca = {
     successTitle: "Missatge enviat!",
     successMessage: "Hem rebut el teu missatge. Ens posarem en contacte amb tu aviat.",
     close: "Tancar",
-    errorGeneric: "Error en enviar. Torna-ho a provar.",
+    errorGeneric: "No s'ha pogut enviar. Torna-ho a provar o escriu-nos a info@xpertauth.com.",
     errorRequired: "Si us plau, omple tots els camps.",
     errorPrivacy: "Has d'acceptar la política de privacitat.",
   },
