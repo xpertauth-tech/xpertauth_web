@@ -46,7 +46,7 @@ export default function Navbar() {
 
   // Consultas que quedan este mes (función SQL consultas_restantes, usa auth.uid()).
   const refrescarRestantes = () => {
-    supabase.rpc("consultas_restantes").then(({ data, error }) => {
+    supabase.schema("web").rpc("consultas_restantes").then(({ data, error }) => {
       setRestantes(!error && typeof data === "number" ? data : null);
     });
   };

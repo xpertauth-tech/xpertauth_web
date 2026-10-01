@@ -12,6 +12,11 @@
   las llamadas REST con la service_role funcionan. No des por muerta
   la base por eso.
 
+## Esquemas de la base de datos
+- Las tablas de la web XpertAuth van en el esquema web; public es de la
+  app de ecografías; revisar siempre todos los esquemas antes de afirmar
+  que algo no existe.
+
 ## Ramas
 - main = espejo de producción. No se toca sin instrucción explícita.
 - Todo el trabajo va en rebuild/web-nueva.

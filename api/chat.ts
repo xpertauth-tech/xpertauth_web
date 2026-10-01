@@ -425,7 +425,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
 
   // ─── Límite mensual (atómico, en base de datos) ──────────────────────────
   // Falla cerrado: si no se puede comprobar el límite, no se llama al modelo.
-  const { data: reserva, error: reservaError } = await supabase.rpc("registrar_consulta", {
+  const { data: reserva, error: reservaError } = await supabase.schema("web").rpc("registrar_consulta", {
     p_user: userId,
     p_agente: agente,
   });
@@ -450,7 +450,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
     output_tokens?: number;
     embedding_tokens?: number;
   }) => {
-    const { error } = await supabase.from("consultas_agente").update(uso).eq("id", consultaId);
+    const { error } = await supabase.schema("web").from("consultas_agente").update(uso).eq("id", consultaId);
     if (error) console.error("[chat] No se pudo guardar el uso:", error.message);
   };
 
@@ -545,7 +545,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
   } catch (err: unknown) {
     console.error("[chat] Error:", err);
     // La consulta falló: no se descuenta del límite del usuario.
-    await supabase.from("consultas_agente").delete().eq("id", consultaId);
+    await supabase.schema("web").from("consultas_agente").delete().eq("id", consultaId);
     const mensaje = err instanceof Error ? err.message : "Error desconocido";
     return res.status(500).json({ error: mensaje });
   }
