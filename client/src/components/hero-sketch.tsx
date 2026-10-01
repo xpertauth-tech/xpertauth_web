@@ -105,12 +105,12 @@ const SIDE_EXCAVATOR: Shape[] = [
   c(377, 167, 2),
   p("M322 150 L322 143 L392 143 L392 150"),
   // torreta con el contrapeso hacia la tractora y cabina
-  p("M326 143 Q310 143 310 131 L310 122 Q310 114 320 114 L366 114 L366 124 L396 124 L396 143 Z"),
-  p("M368 124 L368 92 Q368 88 372 88 L392 88 Q396 88 396 92 L396 124"),
-  p("M372 92 L392 92 L392 112 L372 112 Z"),
+  p("M326 143 Q310 143 310 131 L310 112 Q310 102 320 102 L366 102 L366 112 L396 112 L396 143 Z"),
+  p("M368 112 L368 70 Q368 66 372 66 L392 66 Q396 66 396 70 L396 112"),
+  p("M372 70 L392 70 L392 98 L372 98 Z"),
   // pluma plegada hacia atrás, cilindro y cazo apoyado en la parte trasera
-  p("M396 134 Q408 84 448 82 L538 134 L530 146 L444 96 Q414 98 402 136 Z"),
-  l(406, 126, 438, 102),
+  p("M396 128 Q408 48 450 46 L540 130 L530 144 L446 62 Q416 66 402 132 Z"),
+  l(410, 124, 444, 76),
   p("M524 142 Q554 144 552 152 L514 152 Z"),
 ];
 
@@ -130,10 +130,10 @@ const FRONT_EXCAVATOR: Shape[] = [
   r(24, 134, 14, 24, 6),
   r(78, 134, 14, 24, 6),
   r(38, 142, 40, 12),
-  p("M30 142 L30 112 Q30 106 36 106 L80 106 Q86 106 86 112 L86 142"),
-  p("M34 106 L34 88 Q34 84 38 84 L56 84 Q60 84 60 88 L60 106"),
-  r(38, 88, 18, 14, 1),
-  p("M66 106 L66 84 Q66 80 70 80 L76 80 Q80 80 80 84 L80 106"),
+  p("M30 142 L30 100 Q30 94 36 94 L80 94 Q86 94 86 100 L86 142"),
+  p("M34 94 L34 62 Q34 58 38 58 L56 58 Q60 58 60 62 L60 94"),
+  r(38, 62, 18, 26, 1),
+  p("M66 94 L66 50 Q66 46 70 46 L76 46 Q80 46 80 50 L80 94"),
 ];
 
 /* Tiempos (ms): vehículo → excavadora → rotativo → cotas, ~4 s en total. */
@@ -144,9 +144,13 @@ const T_COT = 2600;
 export default function HeroSketch() {
   const { t } = useTranslations("hero");
   const chain = [10, ...AXLES_TRACTOR, ...AXLES_TRAILER, 584];
+  const spans: [number, number][] = [
+    [10, AXLES_TRACTOR[3]],
+    [AXLES_TRAILER[0], 584],
+  ];
 
   return (
-    <figure className="m-0 w-full max-w-[780px] mx-auto">
+    <figure className="m-0 w-full max-w-[640px] mx-auto">
       <span className="sr-only">{t("sketchAlt")}</span>
 
       <div className="flex items-start w-full" aria-hidden="true">
@@ -162,28 +166,30 @@ export default function HeroSketch() {
             </g>
             <g stroke={ARCTIC} strokeWidth={1}>
               {/* L — longitud total */}
-              <Dim x1={10} y1={108} x2={10} y2={26} at={T_COT} />
-              <Dim x1={584} y1={122} x2={584} y2={26} at={T_COT + 60} />
-              <Dim x1={10} y1={34} x2={283} y2={34} at={T_COT + 250} dur={600} />
-              <Dim x1={311} y1={34} x2={584} y2={34} at={T_COT + 250} dur={600} />
-              <Arrow x={10} y={34} dir="l" at={T_COT + 850} />
-              <Arrow x={584} y={34} dir="r" at={T_COT + 850} />
-              <Letter x={297} y={41} at={T_COT + 900}>L</Letter>
+              <Dim x1={10} y1={108} x2={10} y2={18} at={T_COT} />
+              <Dim x1={584} y1={122} x2={584} y2={18} at={T_COT + 60} />
+              <Dim x1={10} y1={26} x2={283} y2={26} at={T_COT + 250} dur={600} />
+              <Dim x1={311} y1={26} x2={584} y2={26} at={T_COT + 250} dur={600} />
+              <Arrow x={10} y={26} dir="l" at={T_COT + 850} />
+              <Arrow x={584} y={26} dir="r" at={T_COT + 850} />
+              <Letter x={297} y={33} at={T_COT + 900}>L</Letter>
 
               {/* H — altura total */}
-              <Dim x1={454} y1={82} x2={632} y2={82} at={T_COT + 150} />
+              <Dim x1={454} y1={46} x2={632} y2={46} at={T_COT + 150} />
               <Dim x1={600} y1={190} x2={632} y2={190} at={T_COT + 200} dur={250} />
-              <Dim x1={620} y1={82} x2={620} y2={123} at={T_COT + 450} dur={500} />
-              <Dim x1={620} y1={149} x2={620} y2={190} at={T_COT + 450} dur={500} />
-              <Arrow x={620} y={82} dir="u" at={T_COT + 950} />
+              <Dim x1={620} y1={46} x2={620} y2={105} at={T_COT + 450} dur={500} />
+              <Dim x1={620} y1={131} x2={620} y2={190} at={T_COT + 450} dur={500} />
+              <Arrow x={620} y={46} dir="u" at={T_COT + 950} />
               <Arrow x={620} y={190} dir="d" at={T_COT + 950} />
-              <Letter x={620} y={142} at={T_COT + 1000}>H</Letter>
+              <Letter x={620} y={124} at={T_COT + 1000}>H</Letter>
 
-              {/* Cadena de cotas entre ejes: sin texto */}
+              {/* Cadena de cotas entre ejes: dos tramos (tractora y góndola), sin texto */}
               {chain.map((x, i) => (
                 <Dim key={`e${x}`} x1={x} y1={194} x2={x} y2={218} at={T_COT + 500 + i * 40} dur={250} />
               ))}
-              <Dim x1={10} y1={212} x2={584} y2={212} at={T_COT + 700} dur={800} />
+              {spans.map(([a, b]) => (
+                <Dim key={a} x1={a} y1={212} x2={b} y2={212} at={T_COT + 700} dur={600} />
+              ))}
               {chain.map((x, i) => (
                 <line key={`t${x}`} x1={x - 3} y1={215} x2={x + 3} y2={209} strokeWidth={1.3} className="hc-f" style={fade(T_COT + 1050 + i * 35)} />
               ))}
