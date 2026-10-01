@@ -12,6 +12,9 @@ const en = {
     subtitle: "Thirty years in the trade, with artificial intelligence as a tool. Regulations, permits and case files explained plainly.",
     cta1: "About the project",
     cta2: "How it works",
+    viewSide: "Side view",
+    viewFront: "Front view",
+    sketchAlt: "Technical sketch of a special transport: tractor unit and low-loader carrying an excavator, in side and front view.",
   },
   howItWorks: {
     label: "Process",

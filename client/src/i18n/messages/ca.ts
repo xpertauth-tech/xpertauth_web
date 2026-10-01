@@ -12,6 +12,9 @@ const ca = {
     subtitle: "Trenta anys d'ofici, amb intel·ligència artificial com a eina. Normativa, permisos i expedients explicats sense embuts.",
     cta1: "Coneix el projecte",
     cta2: "Com funciona",
+    viewSide: "Vista lateral",
+    viewFront: "Vista frontal",
+    sketchAlt: "Croquis tècnic d'un transport especial: tractora i plataforma baixa amb una excavadora, en vista lateral i frontal.",
   },
   howItWorks: {
     label: "Procés",

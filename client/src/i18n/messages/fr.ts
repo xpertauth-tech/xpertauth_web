@@ -12,6 +12,9 @@ const fr = {
     subtitle: "Trente ans de métier, avec l'intelligence artificielle comme outil. Réglementation, autorisations et dossiers expliqués sans détour.",
     cta1: "Découvrir le projet",
     cta2: "Comment ça marche",
+    viewSide: "Vue latérale",
+    viewFront: "Vue de face",
+    sketchAlt: "Croquis technique d'un transport spécial : tracteur et porte-engins avec une pelle, en vue latérale et de face.",
   },
   howItWorks: {
     label: "Processus",

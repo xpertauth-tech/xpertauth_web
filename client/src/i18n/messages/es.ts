@@ -12,6 +12,9 @@ const es = {
     subtitle: "Treinta años de oficio, con inteligencia artificial como herramienta. Normativa, permisos y expedientes explicados sin rodeos.",
     cta1: "Conoce el proyecto",
     cta2: "Cómo funciona",
+    viewSide: "Vista lateral",
+    viewFront: "Vista frontal",
+    sketchAlt: "Croquis técnico de un transporte especial: tractora y góndola con una excavadora, en vista lateral y frontal.",
   },
   howItWorks: {
     label: "Proceso",

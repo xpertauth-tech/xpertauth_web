@@ -2,7 +2,7 @@ import { motion } from "framer-motion";
 import { ArrowRight, ChevronDown } from "lucide-react";
 import { useTranslations } from "@/i18n/context";
 import { useLocation } from "wouter";
-import HeroRouteMap from "@/components/hero-route-map";
+import HeroSketch from "@/components/hero-sketch";
 
 export default function Hero() {
   const { t, locale } = useTranslations("hero");
@@ -33,13 +33,11 @@ export default function Hero() {
         }}
       />
 
-      <HeroRouteMap />
-
       {/* Gradiente fade hacia abajo */}
       <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-obsidian/70 pointer-events-none" />
 
-      <div className="relative z-10 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center pt-20 pb-32">
-        <motion.div initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8, ease: "easeOut" }}>
+      <div className="relative z-10 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-20 pb-32 grid lg:grid-cols-2 gap-12 lg:gap-10 items-center">
+        <motion.div className="text-center lg:text-left" initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8, ease: "easeOut" }}>
           <div className="inline-flex items-center gap-1.5 sm:gap-2 px-2.5 sm:px-4 py-1.5 max-w-full rounded-xl sm:rounded-full border border-white/10 bg-white/5 mb-8">
             <div className="w-1.5 h-1.5 sm:w-2 sm:h-2 rounded-full bg-arctic animate-pulse shrink-0" />
             <span className="text-white/60 text-[0.46rem] sm:text-xs font-medium tracking-normal sm:tracking-wide uppercase leading-snug">
@@ -55,7 +53,7 @@ export default function Hero() {
             </span>
           </div>
 
-          <h1 className="font-heading font-bold text-pure text-4xl sm:text-5xl md:text-6xl lg:text-7xl leading-tight tracking-tight">
+          <h1 className="font-heading font-bold text-pure text-4xl sm:text-5xl md:text-6xl lg:text-5xl xl:text-6xl leading-tight tracking-tight">
             {t("title1")}
             <br />
             <span
@@ -72,9 +70,9 @@ export default function Hero() {
             </span>
           </h1>
 
-          <p className="mt-6 sm:mt-8 text-white/60 text-base sm:text-lg md:text-xl max-w-2xl mx-auto leading-relaxed font-light">{t("subtitle")}</p>
+          <p className="mt-6 sm:mt-8 text-white/60 text-base sm:text-lg md:text-xl max-w-2xl mx-auto lg:mx-0 leading-relaxed font-light">{t("subtitle")}</p>
 
-          <div className="mt-10 sm:mt-12 flex flex-col sm:flex-row items-center justify-center gap-4">
+          <div className="mt-10 sm:mt-12 flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4">
             <button onClick={() => navigate(`/${locale}/sobre-nosotros`)} className="group px-8 py-3.5 bg-xpertblue text-pure font-semibold rounded-md text-sm sm:text-base transition-all duration-300 flex items-center gap-2 w-full sm:w-auto justify-center" data-testid="button-hero-proyecto">
               {t("cta1")}
               <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
@@ -84,6 +82,8 @@ export default function Hero() {
             </button>
           </div>
         </motion.div>
+
+        <HeroSketch />
 
         <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 1.2, duration: 0.8 }} className="absolute bottom-8 left-1/2 -translate-x-1/2">
           <button onClick={() => scrollTo("#problema-solucion")} className="text-white/30 animate-bounce" aria-label="Desplazar hacia abajo" data-testid="button-scroll-down">
