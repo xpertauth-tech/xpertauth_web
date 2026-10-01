@@ -299,10 +299,10 @@ function formatearContexto(frags: Fragmento[]): string {
 // Deduplica por archivo (o fuente si no hay archivo) y conserva el primer bloque.
 function bloqueFuentes(frags: Fragmento[], idioma: Idioma): string {
   const titulo: Record<Idioma, string> = {
-    es: "Fuentes",
-    ca: "Fonts",
-    en: "Sources",
-    fr: "Sources",
+    es: "Fuentes:",
+    ca: "Fonts:",
+    en: "Sources:",
+    fr: "Sources :",
   };
   const porClave = new Map<string, { fuente: string; bloque: string; archivo: string }>();
   for (const f of frags) {
@@ -327,7 +327,7 @@ function bloqueFuentes(frags: Fragmento[], idioma: Idioma): string {
     return `- ${partes.join(" · ")}`;
   });
   if (lineas.length === 0) return "";
-  return `\n\n**${titulo[idioma]}:**\n${lineas.join("\n")}`;
+  return `\n\n**${titulo[idioma]}**\n${lineas.join("\n")}`;
 }
 
 // El modelo añade [BOTON_CITA:...] cuando escala a José Luis (consulta no
@@ -344,7 +344,7 @@ const RESPUESTA_SIN_RAG: Record<Idioma, string> = {
   fr: "Je n'ai pas d'information sur cette question dans ma base réglementaire, je préfère donc ne pas répondre de mémoire. Posez-la directement à José Luis, il vous orientera.\n\n[BOTON_CITA:Consulter José Luis]",
 };
 
-// Detección de idioma para la respuesta fija (heurística: es por defecto)
+// Deducción de idioma por la pregunta: solo si el navegador no manda el idioma de la web (heurística: es por defecto)
 function detectarIdioma(texto: string): Idioma {
   const t = ` ${texto.toLowerCase()} `;
   if (/\b(què|amb|aquest|aquesta|però|tràmit|meva|meu|necessito|puc|vull|dubte)\b/.test(t) || / l['’]/.test(t)) {
@@ -397,10 +397,12 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
     messages: mensajesBody,
     agente: agenteBody,
     agenteForzado,
+    idioma: idiomaBody,
   } = req.body as {
     messages: Mensaje[];
     agente?: Agente;
     agenteForzado?: Agente;
+    idioma?: string;
   };
 
   if (!mensajesBody || !Array.isArray(mensajesBody) || mensajesBody.length === 0) {
@@ -457,6 +459,12 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
   const ultimaPreguntaUsuario =
     [...messages].reverse().find((m) => m.role === "user")?.content ?? "";
 
+  // Idioma activo de la web (lo manda el navegador). Si no llega o no es válido, se deduce de la pregunta.
+  const idiomaWeb: Idioma =
+    idiomaBody === "es" || idiomaBody === "ca" || idiomaBody === "en" || idiomaBody === "fr"
+      ? idiomaBody
+      : detectarIdioma(ultimaPreguntaUsuario);
+
   try {
     // ─── LEX: RAG obligatorio ────────────────────────────────────────────────
     if (agente === "LEX") {
@@ -476,7 +484,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
 
       // Barrera: sin fragmentos (o error) → NO se llama al modelo
       if (!ok || fragmentos.length === 0) {
-        const idioma = detectarIdioma(ultimaPreguntaUsuario);
+        const idioma = idiomaWeb;
         await registrarUso({ model: null, embedding_tokens: embeddingTokens });
         return res.status(200).json({
           agente,
@@ -508,7 +516,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
         output_tokens: respuesta.usage.output_tokens,
         embedding_tokens: embeddingTokens,
       });
-      const idioma = detectarIdioma(ultimaPreguntaUsuario);
+      const idioma = idiomaWeb;
       const fuentes = haEscalado(texto) ? "" : bloqueFuentes(fragmentos, idioma);
 
       return res.status(200).json({

@@ -61,9 +61,10 @@ const TEXTOS: Record<Idioma, {
   pensando: string;
   errorConexion: string;
   limitePre: string;
-  limiteNegrita: string;
+  limiteNegrita: (n: number | null) => string;
   limitePost: string;
   limiteRestaura: string;
+  botonCita: string;
   cerrar: string;
   enviar: string;
 }> = {
@@ -80,9 +81,10 @@ const TEXTOS: Record<Idioma, {
     pensando: "Pensando…",
     errorConexion: "Lo siento, ha habido un problema al conectar. Por favor, inténtalo de nuevo en unos segundos.",
     limitePre: "Has usado tus ",
-    limiteNegrita: "30 consultas de este mes",
+    limiteNegrita: (n) => (n === null ? "consultas de este mes" : `${n} consultas de este mes`),
     limitePost: ".",
     limiteRestaura: "Tus consultas se restauran el 1 del mes siguiente.",
+    botonCita: "Consultar con José Luis",
     cerrar: "Cerrar chat",
     enviar: "Enviar",
   },
@@ -99,9 +101,10 @@ const TEXTOS: Record<Idioma, {
     pensando: "Pensant…",
     errorConexion: "Ho sento, hi ha hagut un problema en connectar. Torna-ho a provar d'aquí a uns segons.",
     limitePre: "Has fet servir les teves ",
-    limiteNegrita: "30 consultes d'aquest mes",
+    limiteNegrita: (n) => (n === null ? "consultes d'aquest mes" : `${n} consultes d'aquest mes`),
     limitePost: ".",
     limiteRestaura: "Les teves consultes es restauren l'1 del mes següent.",
+    botonCita: "Consultar amb José Luis",
     cerrar: "Tanca el xat",
     enviar: "Envia",
   },
@@ -118,9 +121,10 @@ const TEXTOS: Record<Idioma, {
     pensando: "Thinking…",
     errorConexion: "Sorry, there was a problem connecting. Please try again in a few seconds.",
     limitePre: "You have used your ",
-    limiteNegrita: "30 queries for this month",
+    limiteNegrita: (n) => (n === null ? "queries for this month" : `${n} queries for this month`),
     limitePost: ".",
     limiteRestaura: "Your queries reset on the 1st of next month.",
+    botonCita: "Consult José Luis",
     cerrar: "Close chat",
     enviar: "Send",
   },
@@ -137,9 +141,10 @@ const TEXTOS: Record<Idioma, {
     pensando: "Réflexion…",
     errorConexion: "Désolé, un problème de connexion est survenu. Veuillez réessayer dans quelques secondes.",
     limitePre: "Vous avez utilisé vos ",
-    limiteNegrita: "30 requêtes de ce mois",
+    limiteNegrita: (n) => (n === null ? "requêtes de ce mois" : `${n} requêtes de ce mois`),
     limitePost: ".",
     limiteRestaura: "Vos requêtes sont réinitialisées le 1er du mois suivant.",
+    botonCita: "Consulter José Luis",
     cerrar: "Fermer le chat",
     enviar: "Envoyer",
   },
@@ -242,10 +247,12 @@ function parsearInline(texto: string): React.ReactNode {
 function Burbuja({
   mensaje,
   config,
+  labelCita,
   onCita,
 }: {
   mensaje: Mensaje;
   config: typeof AGENTE_CONFIG[Agente];
+  labelCita: string;
   onCita: () => void;
 }) {
   const esAsistente = mensaje.role === "assistant";
@@ -321,7 +328,7 @@ function Burbuja({
                     }}
                   >
                     <Calendar size={12} />
-                    {btn.label}
+                    {labelCita}
                   </button>
                 );
               }
@@ -357,6 +364,7 @@ export default function AgentChat({
   const [input, setInput] = useState("");
   const [cargando, setCargando] = useState(false);
   const [limiteAlcanzado, setLimiteAlcanzado] = useState(false);
+  const [limite, setLimite] = useState<number | null>(null); // cifra que devuelve el servidor
   const [contactOpen, setContactOpen] = useState(false);
 
   const bottomRef = useRef<HTMLDivElement>(null);
@@ -400,6 +408,7 @@ export default function AgentChat({
         body: JSON.stringify({
           messages: nuevosMensajes.map((m) => ({ role: m.role, content: m.content })),
           agente,
+          idioma,
         }),
       });
 
@@ -414,6 +423,8 @@ export default function AgentChat({
       if (res.status === 429) {
         // Límite mensual alcanzado (lo decide el servidor).
         setMensajes(mensajes);
+        const cuerpo = await res.json().catch(() => null);
+        setLimite(typeof cuerpo?.limite === "number" ? cuerpo.limite : null);
         setLimiteAlcanzado(true);
         return;
       }
@@ -506,7 +517,7 @@ export default function AgentChat({
         {/* ── MENSAJES ── */}
         <div className="flex-1 overflow-y-auto px-4 py-5 space-y-4">
           {mensajes.map((msg, i) => (
-            <Burbuja key={i} mensaje={msg} config={config} onCita={() => setContactOpen(true)} />
+            <Burbuja key={i} mensaje={msg} config={config} labelCita={t.botonCita} onCita={() => setContactOpen(true)} />
           ))}
 
           {cargando && (
@@ -536,7 +547,7 @@ export default function AgentChat({
                 color: "rgba(255,255,255,0.70)",
               }}
             >
-              {t.limitePre}<strong style={{ color: "#fff" }}>{t.limiteNegrita}</strong>{t.limitePost}
+              {t.limitePre}<strong style={{ color: "#fff" }}>{t.limiteNegrita(limite)}</strong>{t.limitePost}
               <br />
               <span style={{ color: "rgba(255,255,255,0.50)", fontSize: "0.75rem" }}>
                 {t.limiteRestaura}
