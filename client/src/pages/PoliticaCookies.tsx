@@ -2,78 +2,318 @@ import { useEffect } from "react";
 import { useParams } from "wouter";
 import Navbar from "@/components/navbar";
 import Footer from "@/components/footer";
+import LegalText, { Inline } from "@/components/legal-text";
 
-const data: Record<string, {
-  title: string; updated: string; intro: string;
-  table: { name: string; type: string; duration: string }[];
-  items: { id: string; title: string; content: string }[];
-}> = {
-  es: {
-    title: "Política de Cookies",
-    updated: "Última actualización: marzo de 2026",
-    intro: "Esta página explica qué son las cookies, cuáles usamos en XpertAuth y cómo puedes gestionarlas.",
-    table: [
-      { name: "Sesión de usuario", type: "Funcional", duration: "Hasta cerrar sesión" },
-      { name: "Idioma preferido", type: "Funcional", duration: "1 año" },
-      { name: "Preferencia cookies", type: "Técnica", duration: "1 año" },
-    ],
-    items: [
-      { id: "que-son", title: "01 · ¿Qué son las cookies?", content: `Las cookies son pequeños archivos de texto que los sitios web guardan en tu dispositivo cuando los visitas. Sirven para recordar preferencias, mantener sesiones activas y mejorar la experiencia de navegación.` },
-      { id: "cuales", title: "02 · Cookies que usamos", content: `XpertAuth utiliza únicamente cookies técnicas y funcionales, estrictamente necesarias para el funcionamiento del sitio:\n\n• Sesión de usuario (Supabase Auth): si inicias sesión con Google, se almacena un token de sesión para mantenerte autenticado.\n• Preferencia de idioma: guardamos tu idioma seleccionado (ES / CA / EN / FR).\n• Preferencia de cookies: guardamos si has aceptado o rechazado esta política.\n\nNo usamos cookies de publicidad, seguimiento ni analítica de terceros.` },
-      { id: "no-usamos", title: "03 · Lo que NO hacemos", content: `• No instalamos cookies de Google Analytics ni de ninguna herramienta de analítica.\n• No usamos píxeles de seguimiento de Meta, X ni ninguna red social.\n• No compartimos datos de navegación con terceros.\n• No mostramos publicidad personalizada.` },
-      { id: "gestion", title: "04 · Cómo gestionar las cookies", content: `Puedes gestionar o eliminar las cookies desde la configuración de tu navegador:\n\n• Chrome: Configuración → Privacidad y seguridad → Cookies\n• Safari: Preferencias → Privacidad\n• Firefox: Opciones → Privacidad y seguridad\n• Edge: Configuración → Privacidad, búsqueda y servicios` },
-      { id: "cambios", title: "05 · Cambios en esta política", content: `Si en el futuro incorporamos nuevas funcionalidades que impliquen cookies adicionales, actualizaremos esta política y volveremos a solicitar tu consentimiento si fuera necesario.\n\nPara cualquier duda: info@xpertauth.com` },
+type Item = { id: string; title: string; content: string; table?: { headers: string[]; rows: string[][] }; after?: string };
+type Doc = { title: string; updated: string; intro: string; items: Item[] };
+
+const data: Record<string, Doc> = {
+  "es": {
+    "title": "Política de cookies",
+    "updated": "Última actualización: octubre de 2026",
+    "intro": "",
+    "items": [
+      {
+        "id": "resumen",
+        "title": "01 · En resumen",
+        "content": "Esta web **no usa cookies**. Tampoco usa herramientas de publicidad ni de seguimiento. Solo guarda en tu navegador lo imprescindible para funcionar: tu idioma, que ya has visto el aviso y, si entras con Google, tu sesión."
+      },
+      {
+        "id": "que-son",
+        "title": "02 · Qué son las cookies y el almacenamiento local",
+        "content": "Las cookies son pequeños archivos que algunas webs guardan en tu dispositivo. El almacenamiento local es un mecanismo parecido: un espacio de tu navegador donde una web puede guardar datos. Esta web solo usa el almacenamiento local, y únicamente para lo siguiente."
+      },
+      {
+        "id": "guardamos",
+        "title": "03 · Qué guardamos en tu navegador",
+        "content": "",
+        "table": {
+          "headers": [
+            "Qué",
+            "Para qué",
+            "Cuánto dura"
+          ],
+          "rows": [
+            [
+              "Idioma (`xpertauth-locale`)",
+              "Recordar el idioma que elegiste",
+              "Hasta que borres los datos del navegador"
+            ],
+            [
+              "Aviso visto (`xpertauth_cookie_consent`)",
+              "No volver a mostrarte el aviso inicial",
+              "Hasta que borres los datos del navegador"
+            ],
+            [
+              "Sesión (`sb-supabase-auth-token`)",
+              "Mantenerte dentro tras entrar con Google. Solo existe si te registras",
+              "Hasta que cierres sesión"
+            ],
+            [
+              "Agente pendiente (`xpertauth_pending_agent`)",
+              "Abrir LEX o NOVA al volver del inicio de sesión de Google",
+              "Se borra sola al volver o al cerrar la pestaña"
+            ]
+          ]
+        },
+        "after": "Todo esto es técnicamente necesario para que la web funcione. Por eso la ley no exige pedirte permiso, pero queremos que sepas qué es."
+      },
+      {
+        "id": "medicion",
+        "title": "04 · Medición de visitas",
+        "content": "Contamos las visitas con Plausible, instalado en nuestro propio servidor en la Unión Europea. **No guarda nada en tu navegador**, no te identifica y no te sigue por otras webs. Solo nos dice cuántas personas visitan cada página y desde dónde llegan, de forma anónima."
+      },
+      {
+        "id": "no-hacemos",
+        "title": "05 · Lo que no hacemos",
+        "content": "- No usamos Google Analytics ni otras analíticas de terceros.\n- No usamos píxeles de Meta, X ni de ninguna red social.\n- No mostramos publicidad.\n- Las fuentes de letra y las imágenes se sirven desde nuestros propios servidores: al abrir la web no se contacta con Google ni con otras empresas."
+      },
+      {
+        "id": "salir",
+        "title": "06 · Cuando sales de esta web",
+        "content": "Si pulsas en el inicio de sesión con Google, en el calendario de citas o en los enlaces a LinkedIn, Instagram o WhatsApp, pasas a la web de esa empresa, que puede usar sus propias cookies según su política."
+      },
+      {
+        "id": "borrar",
+        "title": "07 · Cómo borrar lo guardado",
+        "content": "- Al **cerrar sesión**, se borra tu sesión.\n- Para borrar todo lo demás, usa la opción de tu navegador para eliminar los datos de los sitios web (en Chrome, Safari, Firefox o Edge, dentro de Privacidad). Si lo haces, la web volverá a preguntarte el idioma y a mostrarte el aviso."
+      },
+      {
+        "id": "cambios",
+        "title": "08 · Cambios",
+        "content": "Si algún día añadimos algo que necesite tu permiso, actualizaremos esta página y te lo pediremos antes de activarlo.\n\nDudas: [info@xpertauth.com](mailto:info@xpertauth.com)"
+      }
     ]
   },
-  ca: {
-    title: "Política de Cookies",
-    updated: "Darrera actualització: març de 2026",
-    intro: "Aquesta pàgina explica què són les cookies, quines fem servir a XpertAuth i com les pots gestionar.",
-    table: [
-      { name: "Sessió d'usuari", type: "Funcional", duration: "Fins a tancar sessió" },
-      { name: "Idioma preferit", type: "Funcional", duration: "1 any" },
-      { name: "Preferència cookies", type: "Tècnica", duration: "1 any" },
-    ],
-    items: [
-      { id: "que-son", title: "01 · Què són les cookies?", content: `Les cookies són petits fitxers de text que els llocs web guarden al teu dispositiu quan els visites. Serveixen per recordar preferències, mantenir sessions actives i millorar l'experiència de navegació.` },
-      { id: "quines", title: "02 · Cookies que fem servir", content: `XpertAuth utilitza únicament cookies tècniques i funcionals, estrictament necessàries per al funcionament del lloc:\n\n• Sessió d'usuari (Supabase Auth): si inicies sessió amb Google, s'emmagatzema un token de sessió.\n• Preferència d'idioma: guardem el teu idioma seleccionat (ES / CA / EN / FR).\n• Preferència de cookies: guardem si has acceptat o rebutjat aquesta política.\n\nNo fem servir cookies de publicitat, seguiment ni analítica de tercers.` },
-      { id: "no-fem", title: "03 · El que NO fem", content: `• No instal·lem cookies de Google Analytics ni de cap eina d'analítica.\n• No fem servir píxels de seguiment de Meta, X ni cap xarxa social.\n• No compartim dades de navegació amb tercers.\n• No mostrem publicitat personalitzada.` },
-      { id: "gestio", title: "04 · Com gestionar les cookies", content: `Pots gestionar o eliminar les cookies des de la configuració del teu navegador:\n\n• Chrome: Configuració → Privadesa i seguretat → Cookies\n• Safari: Preferències → Privadesa\n• Firefox: Opcions → Privadesa i seguretat\n• Edge: Configuració → Privadesa, cerca i serveis` },
-      { id: "canvis", title: "05 · Canvis en aquesta política", content: `Si en el futur incorporem noves funcionalitats que impliquin cookies addicionals, actualitzarem aquesta política.\n\nPer a qualsevol dubte: info@xpertauth.com` },
+  "ca": {
+    "title": "Política de galetes",
+    "updated": "Darrera actualització: octubre de 2026",
+    "intro": "",
+    "items": [
+      {
+        "id": "resumen",
+        "title": "01 · En resum",
+        "content": "Aquest web **no fa servir galetes**. Tampoc fa servir eines de publicitat ni de seguiment. Només guarda al teu navegador el que és imprescindible per funcionar: el teu idioma, que ja has vist l'avís i, si entres amb Google, la teva sessió."
+      },
+      {
+        "id": "que-son",
+        "title": "02 · Què són les galetes i l'emmagatzematge local",
+        "content": "Les galetes són petits fitxers que algunes webs guarden al teu dispositiu. L'emmagatzematge local és un mecanisme semblant: un espai del teu navegador on un web pot guardar dades. Aquest web només fa servir l'emmagatzematge local, i únicament per al següent."
+      },
+      {
+        "id": "guardamos",
+        "title": "03 · Què guardem al teu navegador",
+        "content": "",
+        "table": {
+          "headers": [
+            "Què",
+            "Per a què",
+            "Quant dura"
+          ],
+          "rows": [
+            [
+              "Idioma (`xpertauth-locale`)",
+              "Recordar l'idioma que vas triar",
+              "Fins que esborris les dades del navegador"
+            ],
+            [
+              "Avís vist (`xpertauth_cookie_consent`)",
+              "No tornar a mostrar-te l'avís inicial",
+              "Fins que esborris les dades del navegador"
+            ],
+            [
+              "Sessió (`sb-supabase-auth-token`)",
+              "Mantenir-te dins després d'entrar amb Google. Només existeix si et registres",
+              "Fins que tanquis la sessió"
+            ],
+            [
+              "Agent pendent (`xpertauth_pending_agent`)",
+              "Obrir LEX o NOVA en tornar de l'inici de sessió de Google",
+              "S'esborra sola en tornar o en tancar la pestanya"
+            ]
+          ]
+        },
+        "after": "Tot això és tècnicament necessari perquè el web funcioni. Per això la llei no exigeix demanar-te permís, però volem que sàpigues què és."
+      },
+      {
+        "id": "medicion",
+        "title": "04 · Mesurament de visites",
+        "content": "Comptem les visites amb Plausible, instal·lat al nostre propi servidor a la Unió Europea. **No guarda res al teu navegador**, no t'identifica i no et segueix per altres webs. Només ens diu quantes persones visiten cada pàgina i des d'on arriben, de manera anònima."
+      },
+      {
+        "id": "no-hacemos",
+        "title": "05 · El que no fem",
+        "content": "- No fem servir Google Analytics ni altres analítiques de tercers.\n- No fem servir píxels de Meta, X ni de cap xarxa social.\n- No mostrem publicitat.\n- Les fonts de lletra i les imatges es serveixen des dels nostres propis servidors: en obrir el web no es contacta amb Google ni amb altres empreses."
+      },
+      {
+        "id": "salir",
+        "title": "06 · Quan surts d'aquest web",
+        "content": "Si prems l'inici de sessió amb Google, el calendari de cites o els enllaços a LinkedIn, Instagram o WhatsApp, passes al web d'aquesta empresa, que pot fer servir les seves pròpies galetes segons la seva política."
+      },
+      {
+        "id": "borrar",
+        "title": "07 · Com esborrar el que s'ha guardat",
+        "content": "- En **tancar la sessió**, s'esborra la teva sessió.\n- Per esborrar tota la resta, fes servir l'opció del teu navegador per eliminar les dades dels llocs web (a Chrome, Safari, Firefox o Edge, dins de Privadesa). Si ho fas, el web et tornarà a preguntar l'idioma i a mostrar-te l'avís."
+      },
+      {
+        "id": "cambios",
+        "title": "08 · Canvis",
+        "content": "Si algun dia afegim alguna cosa que necessiti el teu permís, actualitzarem aquesta pàgina i te'l demanarem abans d'activar-ho.\n\nDubtes: [info@xpertauth.com](mailto:info@xpertauth.com)"
+      }
     ]
   },
-  en: {
-    title: "Cookie Policy",
-    updated: "Last updated: March 2026",
-    intro: "This page explains what cookies are, which ones we use at XpertAuth and how you can manage them.",
-    table: [
-      { name: "User session", type: "Functional", duration: "Until logout" },
-      { name: "Language preference", type: "Functional", duration: "1 year" },
-      { name: "Cookie preference", type: "Technical", duration: "1 year" },
-    ],
-    items: [
-      { id: "what", title: "01 · What are cookies?", content: `Cookies are small text files that websites store on your device when you visit them. They are used to remember preferences, maintain active sessions and improve the browsing experience.` },
-      { id: "which", title: "02 · Cookies we use", content: `XpertAuth uses only technical and functional cookies, strictly necessary for the site to work:\n\n• User session (Supabase Auth): if you log in with Google, a session token is stored to keep you authenticated.\n• Language preference: we store your selected language (ES / CA / EN / FR).\n• Cookie preference: we store whether you have accepted or rejected this policy.\n\nWe do not use advertising, tracking or third-party analytics cookies.` },
-      { id: "not", title: "03 · What we do NOT do", content: `• We do not install Google Analytics or any analytics tool cookies.\n• We do not use tracking pixels from Meta, X or any social network.\n• We do not share browsing data with third parties.\n• We do not show personalised advertising.` },
-      { id: "manage", title: "04 · How to manage cookies", content: `You can manage or delete cookies from your browser settings:\n\n• Chrome: Settings → Privacy and security → Cookies\n• Safari: Preferences → Privacy\n• Firefox: Options → Privacy and security\n• Edge: Settings → Privacy, search and services` },
-      { id: "changes", title: "05 · Changes to this policy", content: `If we incorporate new features that involve additional cookies in the future, we will update this policy and request your consent again if necessary.\n\nFor any questions: info@xpertauth.com` },
+  "en": {
+    "title": "Cookie policy",
+    "updated": "Last updated: October 2026",
+    "intro": "",
+    "items": [
+      {
+        "id": "resumen",
+        "title": "01 · In short",
+        "content": "This website **does not use cookies**. It does not use advertising or tracking tools either. It only stores in your browser what is essential for it to work: your language, the fact that you have seen the notice and, if you sign in with Google, your session."
+      },
+      {
+        "id": "que-son",
+        "title": "02 · What cookies and local storage are",
+        "content": "Cookies are small files that some websites save on your device. Local storage is a similar mechanism: a space in your browser where a website can save data. This website only uses local storage, and only for the following."
+      },
+      {
+        "id": "guardamos",
+        "title": "03 · What we store in your browser",
+        "content": "",
+        "table": {
+          "headers": [
+            "What",
+            "What for",
+            "How long"
+          ],
+          "rows": [
+            [
+              "Language (`xpertauth-locale`)",
+              "To remember the language you chose",
+              "Until you clear your browser data"
+            ],
+            [
+              "Notice seen (`xpertauth_cookie_consent`)",
+              "So the initial notice is not shown to you again",
+              "Until you clear your browser data"
+            ],
+            [
+              "Session (`sb-supabase-auth-token`)",
+              "To keep you signed in after signing in with Google. It only exists if you sign up",
+              "Until you sign out"
+            ],
+            [
+              "Pending agent (`xpertauth_pending_agent`)",
+              "To open LEX or NOVA when you return from Google sign-in",
+              "It deletes itself on return or when you close the tab"
+            ]
+          ]
+        },
+        "after": "All of this is technically necessary for the website to work. That is why the law does not require asking your permission, but we want you to know what it is."
+      },
+      {
+        "id": "medicion",
+        "title": "04 · Visit measurement",
+        "content": "We count visits with Plausible, installed on our own server in the European Union. **It stores nothing in your browser**, does not identify you and does not follow you across other websites. It only tells us how many people visit each page and where they come from, anonymously."
+      },
+      {
+        "id": "no-hacemos",
+        "title": "05 · What we do not do",
+        "content": "- We do not use Google Analytics or other third-party analytics.\n- We do not use pixels from Meta, X or any social network.\n- We do not show advertising.\n- Fonts and images are served from our own servers: when you open the website, no contact is made with Google or other companies."
+      },
+      {
+        "id": "salir",
+        "title": "06 · When you leave this website",
+        "content": "If you click on Google sign-in, the appointment calendar or the links to LinkedIn, Instagram or WhatsApp, you go to that company's website, which may use its own cookies under its own policy."
+      },
+      {
+        "id": "borrar",
+        "title": "07 · How to delete what is stored",
+        "content": "- When you **sign out**, your session is deleted.\n- To delete everything else, use your browser's option to delete website data (in Chrome, Safari, Firefox or Edge, under Privacy). If you do, the website will ask you for your language again and show you the notice again."
+      },
+      {
+        "id": "cambios",
+        "title": "08 · Changes",
+        "content": "If one day we add something that needs your permission, we will update this page and ask you before turning it on.\n\nQuestions: [info@xpertauth.com](mailto:info@xpertauth.com)"
+      }
     ]
   },
-  fr: {
-    title: "Politique de Cookies",
-    updated: "Dernière mise à jour : mars 2026",
-    intro: "Cette page explique ce que sont les cookies, lesquels nous utilisons chez XpertAuth et comment vous pouvez les gérer.",
-    table: [
-      { name: "Session utilisateur", type: "Fonctionnel", duration: "Jusqu'à déconnexion" },
-      { name: "Langue préférée", type: "Fonctionnel", duration: "1 an" },
-      { name: "Préférence cookies", type: "Technique", duration: "1 an" },
-    ],
-    items: [
-      { id: "quoi", title: "01 · Que sont les cookies ?", content: `Les cookies sont de petits fichiers texte que les sites web enregistrent sur votre appareil lors de votre visite. Ils servent à mémoriser les préférences, maintenir les sessions actives et améliorer l'expérience de navigation.` },
-      { id: "lesquels", title: "02 · Cookies que nous utilisons", content: `XpertAuth utilise uniquement des cookies techniques et fonctionnels, strictement nécessaires au fonctionnement du site :\n\n• Session utilisateur (Supabase Auth) : si vous vous connectez avec Google, un token de session est stocké.\n• Préférence de langue : nous enregistrons votre langue sélectionnée (ES / CA / EN / FR).\n• Préférence cookies : nous enregistrons si vous avez accepté ou refusé cette politique.\n\nNous n'utilisons pas de cookies publicitaires, de suivi ou d'analyse tiers.` },
-      { id: "non", title: "03 · Ce que nous ne faisons PAS", content: `• Nous n'installons pas de cookies Google Analytics ni d'outil d'analyse.\n• Nous n'utilisons pas de pixels de suivi de Meta, X ou tout réseau social.\n• Nous ne partageons pas de données de navigation avec des tiers.\n• Nous n'affichons pas de publicité personnalisée.` },
-      { id: "gerer", title: "04 · Comment gérer les cookies", content: `Vous pouvez gérer ou supprimer les cookies depuis les paramètres de votre navigateur :\n\n• Chrome : Paramètres → Confidentialité et sécurité → Cookies\n• Safari : Préférences → Confidentialité\n• Firefox : Options → Vie privée et sécurité\n• Edge : Paramètres → Confidentialité, recherche et services` },
-      { id: "changements", title: "05 · Modifications de cette politique", content: `Si nous incorporons de nouvelles fonctionnalités impliquant des cookies supplémentaires, nous mettrons à jour cette politique.\n\nPour toute question : info@xpertauth.com` },
+  "fr": {
+    "title": "Politique de cookies",
+    "updated": "Dernière mise à jour : octobre 2026",
+    "intro": "",
+    "items": [
+      {
+        "id": "resumen",
+        "title": "01 · En résumé",
+        "content": "Ce site **n'utilise pas de cookies**. Il n'utilise pas non plus d'outils de publicité ni de suivi. Il enregistre seulement dans votre navigateur le strict nécessaire pour fonctionner : votre langue, le fait que vous avez vu l'avis et, si vous vous connectez avec Google, votre session."
+      },
+      {
+        "id": "que-son",
+        "title": "02 · Que sont les cookies et le stockage local",
+        "content": "Les cookies sont de petits fichiers que certains sites enregistrent sur votre appareil. Le stockage local est un mécanisme similaire : un espace de votre navigateur où un site peut enregistrer des données. Ce site n'utilise que le stockage local, et uniquement pour ce qui suit."
+      },
+      {
+        "id": "guardamos",
+        "title": "03 · Ce que nous enregistrons dans votre navigateur",
+        "content": "",
+        "table": {
+          "headers": [
+            "Quoi",
+            "Pourquoi",
+            "Durée"
+          ],
+          "rows": [
+            [
+              "Langue (`xpertauth-locale`)",
+              "Mémoriser la langue que vous avez choisie",
+              "Jusqu'à ce que vous effaciez les données du navigateur"
+            ],
+            [
+              "Avis vu (`xpertauth_cookie_consent`)",
+              "Ne plus vous afficher l'avis initial",
+              "Jusqu'à ce que vous effaciez les données du navigateur"
+            ],
+            [
+              "Session (`sb-supabase-auth-token`)",
+              "Vous garder connecté après la connexion avec Google. N'existe que si vous vous inscrivez",
+              "Jusqu'à ce que vous vous déconnectiez"
+            ],
+            [
+              "Agent en attente (`xpertauth_pending_agent`)",
+              "Ouvrir LEX ou NOVA au retour de la connexion Google",
+              "S'efface seul au retour ou à la fermeture de l'onglet"
+            ]
+          ]
+        },
+        "after": "Tout cela est techniquement nécessaire au fonctionnement du site. C'est pourquoi la loi n'exige pas de vous demander votre autorisation, mais nous voulons que vous sachiez de quoi il s'agit."
+      },
+      {
+        "id": "medicion",
+        "title": "04 · Mesure des visites",
+        "content": "Nous comptons les visites avec Plausible, installé sur notre propre serveur dans l'Union européenne. **Il n'enregistre rien dans votre navigateur**, ne vous identifie pas et ne vous suit pas sur d'autres sites. Il nous indique seulement combien de personnes visitent chaque page et d'où elles viennent, de façon anonyme."
+      },
+      {
+        "id": "no-hacemos",
+        "title": "05 · Ce que nous ne faisons pas",
+        "content": "- Nous n'utilisons pas Google Analytics ni d'autres outils d'analyse tiers.\n- Nous n'utilisons pas de pixels de Meta, de X ni d'aucun réseau social.\n- Nous n'affichons pas de publicité.\n- Les polices de caractères et les images sont servies depuis nos propres serveurs : à l'ouverture du site, aucun contact n'est établi avec Google ni avec d'autres entreprises."
+      },
+      {
+        "id": "salir",
+        "title": "06 · Quand vous quittez ce site",
+        "content": "Si vous cliquez sur la connexion avec Google, sur le calendrier de rendez-vous ou sur les liens vers LinkedIn, Instagram ou WhatsApp, vous passez sur le site de cette entreprise, qui peut utiliser ses propres cookies selon sa politique."
+      },
+      {
+        "id": "borrar",
+        "title": "07 · Comment effacer ce qui est enregistré",
+        "content": "- Quand vous **vous déconnectez**, votre session est effacée.\n- Pour effacer tout le reste, utilisez l'option de votre navigateur pour supprimer les données des sites web (dans Chrome, Safari, Firefox ou Edge, dans Confidentialité). Si vous le faites, le site vous redemandera la langue et vous affichera de nouveau l'avis."
+      },
+      {
+        "id": "cambios",
+        "title": "08 · Modifications",
+        "content": "Si un jour nous ajoutons quelque chose qui nécessite votre autorisation, nous mettrons à jour cette page et vous la demanderons avant de l'activer.\n\nQuestions : [info@xpertauth.com](mailto:info@xpertauth.com)"
+      }
     ]
   }
 };
@@ -84,14 +324,6 @@ export default function PoliticaCookies() {
   const s = data[locale];
 
   useEffect(() => { window.scrollTo(0, 0); }, []);
-
-  const tableHeaders: Record<string, [string, string, string]> = {
-    es: ["Cookie", "Tipo", "Duración"],
-    ca: ["Cookie", "Tipus", "Durada"],
-    en: ["Cookie", "Type", "Duration"],
-    fr: ["Cookie", "Type", "Durée"],
-  };
-  const [h1, h2, h3] = tableHeaders[locale];
 
   return (
     <div className="min-h-screen bg-[#0A0E1A]">
@@ -105,23 +337,7 @@ export default function PoliticaCookies() {
           <span className="inline-block text-xs font-semibold tracking-widest text-[#4D9FEC] uppercase mb-4 border border-[#4D9FEC]/30 px-3 py-1 rounded-full">Legal</span>
           <h1 className="text-4xl md:text-5xl font-bold text-white mb-4">{s.title}</h1>
           <p className="text-white/40 text-sm">{s.updated}</p>
-          <p className="text-white/60 text-lg mt-6 leading-relaxed">{s.intro}</p>
-        </div>
-      </section>
-      <section className="px-6 pb-8 bg-[#0A0E1A]">
-        <div className="max-w-3xl mx-auto">
-          <div className="bg-[#0F1628] border border-white/8 rounded-xl overflow-hidden">
-            <div className="grid grid-cols-3 bg-white/5 px-5 py-3 text-xs font-bold text-white/40 uppercase tracking-wider">
-              <span>{h1}</span><span>{h2}</span><span>{h3}</span>
-            </div>
-            {s.table.map((row, i) => (
-              <div key={i} className="grid grid-cols-3 px-5 py-3.5 border-t border-white/5 text-sm text-white/60">
-                <span className="text-white/80 font-medium">{row.name}</span>
-                <span className="text-[#4D9FEC]">{row.type}</span>
-                <span>{row.duration}</span>
-              </div>
-            ))}
-          </div>
+          {s.intro && <p className="text-white/60 text-lg mt-6 leading-relaxed">{s.intro}</p>}
         </div>
       </section>
       <section className="px-6 pb-8 bg-[#0A0E1A]">
@@ -138,7 +354,24 @@ export default function PoliticaCookies() {
           {s.items.map(item => (
             <div key={item.id} id={item.id} className="legal-card bg-[#0F1628] border border-white/8 rounded-xl p-7 scroll-mt-24">
               <h2 className="text-xs font-bold text-[#4D9FEC] mb-4 tracking-wide uppercase">{item.title}</h2>
-              <div className="text-white/65 text-sm leading-relaxed whitespace-pre-line">{item.content}</div>
+              <LegalText text={item.content} />
+              {item.table && (
+                <div className="my-4 bg-[#0A0E1A] border border-white/8 rounded-lg overflow-hidden">
+                  <div className="grid grid-cols-3 bg-white/5 px-4 sm:px-5 py-3 text-xs font-bold text-white/40 uppercase tracking-wider gap-3 sm:gap-4">
+                    {item.table.headers.map((h, i) => (
+                      <span key={i}>{h}</span>
+                    ))}
+                  </div>
+                  {item.table.rows.map((row, i) => (
+                    <div key={i} className="grid grid-cols-3 px-4 sm:px-5 py-3.5 border-t border-white/5 text-sm text-white/60 gap-3 sm:gap-4">
+                      <span className="text-white/80 font-medium break-words"><Inline text={row[0]} /></span>
+                      <span>{row[1]}</span>
+                      <span className="text-[#4D9FEC]">{row[2]}</span>
+                    </div>
+                  ))}
+                </div>
+              )}
+              {item.after && <LegalText text={item.after} />}
             </div>
           ))}
         </div>
