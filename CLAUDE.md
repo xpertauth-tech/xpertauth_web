@@ -34,3 +34,10 @@
 - No subas ni generes imágenes nuevas: solo las que ya hay en
   Supabase Storage.
 - Nunca inventes texto de la web. Si falta, pídelo.
+
+## Textos legales
+- Textos legales: si un cambio altera lo que la web guarda en el
+  navegador del visitante (cookies, localStorage, sessionStorage), los
+  datos que recoge o los servicios externos que usa, hay que actualizar
+  Privacidad y/o Cookies en el mismo encargo, en los 4 idiomas, y
+  avisarlo en el informe.
