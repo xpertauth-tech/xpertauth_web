@@ -89,7 +89,7 @@ const ca = {
     contact: "Contacte",
     privacy: "Política de Privacitat",
     legal: "Avís Legal",
-    cookies: "Cookies",
+    cookies: "Galetes",
     aiDisclosure: "Imatges i part dels textos creats amb ajuda d'IA, revisats per una persona.",
     rights: "Tots els drets reservats.",
     spain: "L'Escala, Girona, Catalunya",
