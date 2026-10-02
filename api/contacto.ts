@@ -15,6 +15,7 @@ const schema = z.object({
   nombre: z.string().trim().min(1).max(200),
   email: z.string().trim().email().max(320),
   mensaje: z.string().trim().min(1).max(5000),
+  acepta_privacidad: z.boolean().optional(),
 });
 
 const esc = (s: string) =>
@@ -23,6 +24,7 @@ const esc = (s: string) =>
 // Formulario "Contacta con nosotros". Dos vías independientes: el correo a info@ (lo principal)
 // y una copia en web.contacto (red de seguridad). Si una falla, la otra se hace igualmente.
 // Siempre responde JSON; el visitante nunca ve texto técnico (lo traduce el cliente).
+// Exige acepta_privacidad: true y deja constancia de la fecha y hora en web.contacto.privacidad_aceptada_en.
 export default async function handler(req: VercelRequest, res: VercelResponse) {
   res.setHeader("Access-Control-Allow-Origin", "*");
   res.setHeader("Access-Control-Allow-Methods", "POST, OPTIONS");
@@ -34,7 +36,14 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
   const parsed = schema.safeParse(req.body);
   if (!parsed.success) return res.status(400).json({ ok: false });
 
+  // Sin la aceptación de la política de privacidad no se envía ni se guarda nada.
+  // El cliente traduce este código al mensaje del idioma activo.
+  if (parsed.data.acepta_privacidad !== true) {
+    return res.status(400).json({ ok: false, error: "privacidad_requerida" });
+  }
+
   const { nombre, email, mensaje } = parsed.data;
+  const privacidadAceptadaEn = new Date().toISOString();
   const ahora = new Date().toLocaleString("es-ES", { timeZone: "Europe/Madrid" });
 
   const enviarCorreo = async (): Promise<boolean> => {
@@ -96,6 +105,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
         respondido: false,
         estado: "nuevo",
         tipo: "contacto_web",
+        privacidad_aceptada_en: privacidadAceptadaEn,
       });
       if (error) {
         console.error("[contacto] Supabase error:", error);

@@ -49,12 +49,20 @@ export default function ContactModal({ open, onClose }: ContactModalProps) {
           nombre: form.nombre.trim(),
           email: form.email.trim(),
           mensaje: form.mensaje.trim(),
-          acepta_privacidad: true,
+          acepta_privacidad: privacy,
         }),
       });
 
-      // No se lee el cuerpo de la respuesta: el visitante solo ve la confirmación o el mensaje traducido.
-      if (!res.ok) throw new Error("envio");
+      // Del cuerpo solo se lee el código "privacidad_requerida"; el visitante ve siempre un mensaje traducido.
+      if (!res.ok) {
+        const cuerpo = await res.json().catch(() => null);
+        if (cuerpo?.error === "privacidad_requerida") {
+          setErrorMsg(t("errorPrivacy"));
+          setStatus("error");
+          return;
+        }
+        throw new Error("envio");
+      }
 
       setStatus("ok");
     } catch {
