@@ -122,20 +122,9 @@ const ca = {
     errorPrivacy: "Has d'acceptar la política de privacitat.",
   },
   cookies: {
-    title: "La teva privacitat importa",
-    description: "Fem servir cookies per millorar la teva experiència a XpertAuth. Pots acceptar-les totes, rebutjar les no essencials o personalitzar la teva elecció.",
+    description: "Aquest web no fa servir galetes. Només guarda el teu idioma i, si entres amb Google, la teva sessió. Mesurem les visites de manera anònima, sense rastrejar-te.",
+    button: "Entesos",
     learnMore: "Més informació",
-    accept: "Acceptar totes",
-    reject: "Només necessàries",
-    customize: "Personalitzar",
-    hideCustomize: "Amagar opcions",
-    savePreferences: "Desar preferències",
-    necessary: "Necessàries",
-    necessaryDesc: "Imprescindibles per al funcionament del web. No es poden desactivar.",
-    analytics: "Analítiques",
-    analyticsDesc: "Ens ajuden a entendre com s'utilitza el web per millorar-lo.",
-    marketing: "Màrqueting",
-    marketingDesc: "Permeten mostrar-te contingut rellevant segons els teus interessos.",
   },
 };
 

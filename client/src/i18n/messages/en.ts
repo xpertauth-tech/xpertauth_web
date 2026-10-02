@@ -122,20 +122,9 @@ const en = {
     errorPrivacy: "You must accept the privacy policy.",
   },
   cookies: {
-    title: "Your privacy matters",
-    description: "We use cookies to improve your experience at XpertAuth. You can accept all, reject non-essential ones, or customise your choice.",
-    learnMore: "Learn more",
-    accept: "Accept all",
-    reject: "Necessary only",
-    customize: "Customise",
-    hideCustomize: "Hide options",
-    savePreferences: "Save preferences",
-    necessary: "Necessary",
-    necessaryDesc: "Essential for the website to function. Cannot be disabled.",
-    analytics: "Analytics",
-    analyticsDesc: "Help us understand how the site is used so we can improve it.",
-    marketing: "Marketing",
-    marketingDesc: "Allow us to show you relevant content based on your interests.",
+    description: "This website does not use cookies. It only stores your language and, if you sign in with Google, your session. We measure visits anonymously, without tracking you.",
+    button: "Got it",
+    learnMore: "More information",
   },
 };
 
