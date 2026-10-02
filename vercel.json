@@ -1,6 +1,13 @@
 {
   "buildCommand": "npm run build",
   "outputDirectory": "dist/public",
+  "redirects": [
+    {
+      "source": "/:locale(es|ca|en|fr)/servicios/ia-pymes",
+      "destination": "/:locale/servicios/transporte-especial",
+      "permanent": true
+    }
+  ],
   "rewrites": [
     {
       "source": "/api/(.*)",
