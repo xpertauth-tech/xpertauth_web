@@ -34,8 +34,8 @@ const es = {
       },
       {
         num: "03",
-        title: "Una persona revisa",
-        description: "Nada sale sin que alguien con treinta años de oficio lo haya leído. Si hay dudas, se te dice.",
+        title: "Una persona, cuando hace falta",
+        description: "LEX responde al momento, y puede equivocarse. Si tu caso es delicado o la respuesta no te basta, lo revisa alguien con treinta años de oficio: escríbenos o pide cita.",
       },
       {
         num: "04",

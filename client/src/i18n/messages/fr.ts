@@ -34,8 +34,8 @@ const fr = {
       },
       {
         num: "03",
-        title: "Une personne vérifie",
-        description: "Rien ne sort sans que quelqu'un avec trente ans de métier l'ait lu. En cas de doute, on vous le dit.",
+        title: "Une personne, quand il le faut",
+        description: "LEX répond immédiatement, et peut se tromper. Si votre cas est délicat ou si la réponse ne vous suffit pas, quelqu'un avec trente ans de métier l'examine : écrivez-nous ou prenez rendez-vous.",
       },
       {
         num: "04",

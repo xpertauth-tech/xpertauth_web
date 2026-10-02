@@ -34,8 +34,8 @@ const en = {
       },
       {
         num: "03",
-        title: "A person reviews",
-        description: "Nothing goes out without someone with thirty years in the trade having read it. If there's any doubt, we tell you.",
+        title: "A person, when needed",
+        description: "LEX answers instantly, and it can be wrong. If your case is sensitive or the answer isn't enough, someone with thirty years in the trade will review it: write to us or book an appointment.",
       },
       {
         num: "04",

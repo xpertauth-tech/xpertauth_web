@@ -34,8 +34,8 @@ const ca = {
       },
       {
         num: "03",
-        title: "Una persona revisa",
-        description: "No surt res sense que algú amb trenta anys d'ofici ho hagi llegit. Si hi ha dubtes, se't diu.",
+        title: "Una persona, quan cal",
+        description: "LEX respon a l'instant, i es pot equivocar. Si el teu cas és delicat o la resposta no et basta, el revisa algú amb trenta anys d'ofici: escriu-nos o demana cita.",
       },
       {
         num: "04",
