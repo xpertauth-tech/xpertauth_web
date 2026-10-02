@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { useParams } from "wouter";
 import Navbar from "@/components/navbar";
 import Footer from "@/components/footer";
+import { SHOW_SUBSCRIPTION } from "@/lib/features";
 import ContactModal from "@/components/ContactModal";
 
 const PAGE_SIZE = 10;
@@ -336,36 +337,38 @@ export default function Newsletter() {
       </section>
 
       {/* SUSCRIPCIÓN */}
-      <section className="py-16 px-6 bg-[#070A12]">
-        <div className="max-w-xl mx-auto text-center">
-          <h2 className="text-2xl font-bold text-white mb-3">{t.subscribeTitle}</h2>
-          <p className="text-white/50 text-sm mb-8">{t.subscribeSubtitle}</p>
-          {subStatus === "ok" ? (
-            <p className="text-[#E8620A] font-medium">{t.successMsg}</p>
-          ) : (
-            <div className="flex flex-col sm:flex-row gap-3 max-w-md mx-auto">
-              <input
-                type="email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                onKeyDown={(e) => e.key === "Enter" && handleSubscribe()}
-                placeholder={t.placeholder}
-                className="flex-1 bg-white/5 border border-white/15 rounded-lg px-4 py-3 text-white placeholder-white/30 text-sm focus:outline-none focus:border-[#E8620A]/60 transition-colors"
-              />
-              <button
-                onClick={handleSubscribe}
-                disabled={subLoading}
-                className="bg-[#E8620A] hover:bg-[#E8620A]/80 text-white font-semibold px-6 py-3 rounded-lg text-sm transition-colors disabled:opacity-50 whitespace-nowrap"
-              >
-                {subLoading ? "..." : t.subscribeBtn}
-              </button>
-            </div>
-          )}
-          {subStatus === "error" && (
-            <p className="text-red-400 text-sm mt-3">{t.errorMsg}</p>
-          )}
-        </div>
-      </section>
+      {SHOW_SUBSCRIPTION && (
+        <section className="py-16 px-6 bg-[#070A12]">
+          <div className="max-w-xl mx-auto text-center">
+            <h2 className="text-2xl font-bold text-white mb-3">{t.subscribeTitle}</h2>
+            <p className="text-white/50 text-sm mb-8">{t.subscribeSubtitle}</p>
+            {subStatus === "ok" ? (
+              <p className="text-[#E8620A] font-medium">{t.successMsg}</p>
+            ) : (
+              <div className="flex flex-col sm:flex-row gap-3 max-w-md mx-auto">
+                <input
+                  type="email"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  onKeyDown={(e) => e.key === "Enter" && handleSubscribe()}
+                  placeholder={t.placeholder}
+                  className="flex-1 bg-white/5 border border-white/15 rounded-lg px-4 py-3 text-white placeholder-white/30 text-sm focus:outline-none focus:border-[#E8620A]/60 transition-colors"
+                />
+                <button
+                  onClick={handleSubscribe}
+                  disabled={subLoading}
+                  className="bg-[#E8620A] hover:bg-[#E8620A]/80 text-white font-semibold px-6 py-3 rounded-lg text-sm transition-colors disabled:opacity-50 whitespace-nowrap"
+                >
+                  {subLoading ? "..." : t.subscribeBtn}
+                </button>
+              </div>
+            )}
+            {subStatus === "error" && (
+              <p className="text-red-400 text-sm mt-3">{t.errorMsg}</p>
+            )}
+          </div>
+        </section>
+      )}
 
       <Footer />
       <ContactModal open={contactOpen} onClose={() => setContactOpen(false)} />
