@@ -79,6 +79,7 @@ const es = {
     title2: "El conocimiento que necesitas,",
     title3: "cuando lo necesitas.",
     cta2: "Contacta con nosotros",
+    cta3: "Reserva tu cita",
   },
   footer: {
     description: "Proyecto que combina experiencia real del sector con inteligencia artificial, sin ánimo comercial.",

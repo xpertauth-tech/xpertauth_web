@@ -79,6 +79,7 @@ const en = {
     title2: "The knowledge you need,",
     title3: "when you need it.",
     cta2: "Contact us",
+    cta3: "Book an appointment",
   },
   footer: {
     description: "A project that combines real sector experience with artificial intelligence, with no commercial aim.",

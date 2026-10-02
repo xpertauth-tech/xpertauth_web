@@ -79,6 +79,7 @@ const ca = {
     title2: "El coneixement que necessites,",
     title3: "quan el necessites.",
     cta2: "Contacta amb nosaltres",
+    cta3: "Reserva la teva cita",
   },
   footer: {
     description: "Projecte que combina experiència real del sector amb intel·ligència artificial, sense ànim comercial.",

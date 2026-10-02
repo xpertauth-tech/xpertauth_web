@@ -56,7 +56,7 @@ export default function CtaFinal() {
               className="px-8 py-4 bg-xpertblue text-pure font-semibold rounded-md text-sm sm:text-base transition-all duration-300 w-full sm:w-auto flex items-center justify-center gap-2 hover:bg-xpertblue-light"
             >
               <Calendar className="w-4 h-4" />
-              Reserva tu cita
+              {t("cta3")}
             </a>
           </div>
         </motion.div>

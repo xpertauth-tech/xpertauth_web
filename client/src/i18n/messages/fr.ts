@@ -79,6 +79,7 @@ const fr = {
     title2: "Les connaissances dont vous avez besoin,",
     title3: "quand vous en avez besoin.",
     cta2: "Contactez-nous",
+    cta3: "Prenez rendez-vous",
   },
   footer: {
     description: "Un projet qui combine une expérience réelle du secteur et l'intelligence artificielle, sans but commercial.",
