@@ -40,9 +40,9 @@ const TEXTOS: Record<Idioma, {
     descNova:
       "NOVA te ayuda a ver qué puede hacer la IA en una pyme de transporte: caducidad de permisos, expedientes, avisos obligatorios, seguimiento de flota. Cómo empezar sin invertir y sin humo.",
     google: "Continuar con Google",
-    consentPre: "Al registrarte aceptas la ",
-    consentLink: "política de privacidad",
-    consentPost: ". Tus consultas se procesan con Claude (Anthropic). No vendemos ni compartimos tus datos.",
+    consentPre: "Tus preguntas se envían a Anthropic (y, en LEX, también a OpenAI) para generar la respuesta. No guardamos su texto. Más información en la ",
+    consentLink: "Política de privacidad",
+    consentPost: ".",
     cerrar: "Cerrar",
   },
   ca: {
@@ -53,9 +53,9 @@ const TEXTOS: Record<Idioma, {
     descNova:
       "NOVA t'ajuda a veure què pot fer la IA en una pime de transport: caducitat de permisos, expedients, avisos obligatoris, seguiment de flota. Com començar sense invertir i sense fum.",
     google: "Continua amb Google",
-    consentPre: "En registrar-te acceptes la ",
-    consentLink: "política de privacitat",
-    consentPost: ". Les teves consultes es processen amb Claude (Anthropic). No venem ni compartim les teves dades.",
+    consentPre: "Les teves preguntes s'envien a Anthropic (i, a LEX, també a OpenAI) per generar la resposta. No en guardem el text. Més informació a la ",
+    consentLink: "Política de privacitat",
+    consentPost: ".",
     cerrar: "Tanca",
   },
   en: {
@@ -66,9 +66,9 @@ const TEXTOS: Record<Idioma, {
     descNova:
       "NOVA helps you see what AI can do in a transport SME: permit expiry, case files, mandatory alerts, fleet tracking. How to start without investing and without hype.",
     google: "Continue with Google",
-    consentPre: "By signing up you accept the ",
-    consentLink: "privacy policy",
-    consentPost: ". Your queries are processed with Claude (Anthropic). We do not sell or share your data.",
+    consentPre: "Your questions are sent to Anthropic (and, in LEX, also to OpenAI) to generate the answer. We do not store their text. More information in the ",
+    consentLink: "Privacy Policy",
+    consentPost: ".",
     cerrar: "Close",
   },
   fr: {
@@ -79,9 +79,9 @@ const TEXTOS: Record<Idioma, {
     descNova:
       "NOVA vous aide à voir ce que l'IA peut faire dans une PME de transport : expiration des permis, dossiers, alertes obligatoires, suivi de flotte. Comment commencer sans investir et sans esbroufe.",
     google: "Continuer avec Google",
-    consentPre: "En vous inscrivant, vous acceptez la ",
-    consentLink: "politique de confidentialité",
-    consentPost: ". Vos requêtes sont traitées avec Claude (Anthropic). Nous ne vendons ni ne partageons vos données.",
+    consentPre: "Vos questions sont envoyées à Anthropic (et, dans LEX, également à OpenAI) pour générer la réponse. Nous n'en conservons pas le texte. Plus d'informations dans la ",
+    consentLink: "Politique de confidentialité",
+    consentPost: ".",
     cerrar: "Fermer",
   },
 };
