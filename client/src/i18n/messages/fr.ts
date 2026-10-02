@@ -1,5 +1,6 @@
 const fr = {
   nav: {
+    inicio: "Accueil",
     servicios: "Services",
     comoFunciona: "Comment ça marche",
     blog: "Blog",

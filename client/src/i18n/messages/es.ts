@@ -1,5 +1,6 @@
 const es = {
   nav: {
+    inicio: "Inicio",
     servicios: "Servicios",
     comoFunciona: "Cómo funciona",
     blog: "Blog",

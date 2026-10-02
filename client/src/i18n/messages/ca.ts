@@ -1,5 +1,6 @@
 const ca = {
   nav: {
+    inicio: "Inici",
     servicios: "Serveis",
     comoFunciona: "Com funciona",
     blog: "Blog",

@@ -32,6 +32,7 @@ export default function Navbar() {
   const isHome = window.location.pathname === `/${locale}` || window.location.pathname === `/${locale}/`;
 
   const navLinks = [
+    { label: t("inicio"), href: `/${locale}`, isRoute: true, testId: "link-inicio" },
     { label: t("servicios"), href: `/${locale}/servicios/transporte-especial`, isRoute: true },
     { label: t("comoFunciona"), href: "#como-funciona" },
     { label: t("blog"), href: "#blog" },
@@ -94,6 +95,12 @@ export default function Navbar() {
 
   const handleNavLink = (href: string, isRoute?: boolean) => {
     setMobileOpen(false);
+    if (href === `/${locale}`) {
+      // "Inicio": en la Home sube arriba del todo; en el resto de páginas navega a la Home.
+      if (isHome) window.scrollTo({ top: 0, behavior: "smooth" });
+      else navigate(href);
+      return;
+    }
     if (isRoute) {
       navigate(href);
       return;
@@ -183,7 +190,7 @@ export default function Navbar() {
                 key={link.href}
                 onClick={() => handleNavLink(link.href, link.isRoute)}
                 className="px-4 py-2 text-sm text-white/70 font-medium transition-colors duration-200 rounded-md hover:text-white"
-                data-testid={`link-${link.href.replace("#", "").replace(`/${locale}/`, "")}`}
+                data-testid={link.testId ?? `link-${link.href.replace("#", "").replace(`/${locale}/`, "")}`}
               >
                 {link.label}
               </button>
@@ -303,7 +310,7 @@ export default function Navbar() {
                   key={link.href}
                   onClick={() => handleNavLink(link.href, link.isRoute)}
                   className="block w-full text-left px-4 py-3 rounded-md text-sm font-medium text-white/70 transition-colors"
-                  data-testid={`link-mobile-${link.href.replace("#", "").replace(`/${locale}/`, "")}`}
+                  data-testid={link.testId ? `link-mobile-inicio` : `link-mobile-${link.href.replace("#", "").replace(`/${locale}/`, "")}`}
                 >
                   {link.label}
                 </button>
