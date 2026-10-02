@@ -1,6 +1,9 @@
 {
   "buildCommand": "npm run build",
   "outputDirectory": "dist/public",
+  "regions": [
+    "fra1"
+  ],
   "redirects": [
     {
       "source": "/:locale(es|ca|en|fr)/servicios/ia-pymes",
