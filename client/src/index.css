@@ -239,6 +239,70 @@
   }
 }
 
+/* ESCALA ÚNICA (Encargo 4B). Móvil primero; ordenador a partir de 768 px.
+   Tipografía, botones, tarjetas y espaciado se definen aquí y solo aquí. */
+@layer components {
+  /* Tipografía: Sora en títulos, Inter en el resto */
+  .t-h1 { font-family: "Sora", sans-serif; font-weight: 700; font-size: 36px; line-height: 1.15; }
+  .t-h1-hero { font-family: "Sora", sans-serif; font-weight: 700; font-size: 36px; line-height: 1.1; }
+  .t-h2 { font-family: "Sora", sans-serif; font-weight: 700; font-size: 28px; line-height: 1.2; }
+  .t-h3 { font-family: "Sora", sans-serif; font-weight: 600; font-size: 18px; line-height: 1.3; }
+  .t-lead { font-family: "Inter", sans-serif; font-weight: 400; font-size: 17px; line-height: 1.6; }
+  .t-body { font-family: "Inter", sans-serif; font-weight: 400; font-size: 16px; line-height: 1.65; }
+  .t-small { font-family: "Inter", sans-serif; font-weight: 400; font-size: 14px; line-height: 1.5; }
+  .t-label {
+    display: block; margin-bottom: 8px;
+    font-family: "Inter", sans-serif; font-weight: 600; font-size: 12px; line-height: 1.4;
+    text-transform: uppercase; letter-spacing: 0.14em; color: #4D9FEC;
+  }
+  @media (min-width: 768px) {
+    .t-h1 { font-size: 56px; line-height: 1.1; }
+    .t-h1-hero { font-size: 56px; }
+    .t-h2 { font-size: 40px; }
+    .t-h3 { font-size: 20px; }
+    .t-lead { font-size: 20px; }
+  }
+  @media (min-width: 1024px) {
+    .t-h1-hero { font-size: 72px; }
+  }
+
+  /* Botones: uno principal, uno secundario y la variante pequeña */
+  .btn {
+    display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+    width: 100%; padding: 16px 32px; border-radius: 8px; border: 1px solid transparent;
+    font-family: "Inter", sans-serif; font-weight: 600; font-size: 16px; line-height: 1.25;
+    text-align: center; transition: background-color .2s, border-color .2s, color .2s;
+  }
+  @media (min-width: 640px) { .btn { width: auto; } }
+  .btn-primary { background-color: #1B4FD8; color: #FFFFFF; }
+  .btn-primary:hover { background-color: #1540B0; }
+  .btn-secondary { background-color: transparent; color: #FFFFFF; border-color: rgba(255,255,255,0.25); }
+  .btn-secondary:hover { border-color: #4D9FEC; }
+  .btn.btn-small { width: auto; padding: 8px 16px; font-size: 14px; }
+
+  /* Tarjeta única */
+  .card {
+    border-radius: 12px; padding: 16px;
+    background-color: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.1);
+    transition: border-color .2s;
+  }
+  .card:hover { border-color: rgba(77,159,236,0.4); }
+  @media (min-width: 768px) { .card { padding: 24px; } }
+
+  /* Espaciado (todo múltiplo de 8) */
+  .section-y { padding-top: 64px; padding-bottom: 64px; }
+  .section-y-cta { padding-top: 64px; padding-bottom: 64px; }
+  .page-top { padding-top: 112px; }
+  .head-gap { margin-bottom: 32px; }
+  .lead-gap { margin-top: 16px; }
+  @media (min-width: 768px) {
+    .section-y { padding-top: 96px; padding-bottom: 96px; }
+    .section-y-cta { padding-top: 128px; padding-bottom: 128px; }
+    .page-top { padding-top: 128px; }
+    .head-gap { margin-bottom: 48px; }
+  }
+}
+
 @layer utilities {
   input[type="search"]::-webkit-search-cancel-button {
     @apply hidden;
