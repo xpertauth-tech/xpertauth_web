@@ -290,16 +290,16 @@
   @media (min-width: 768px) { .card { padding: 24px; } }
 
   /* Espaciado (todo múltiplo de 8) */
-  .section-y { padding-top: 64px; padding-bottom: 64px; }
-  .section-y-cta { padding-top: 64px; padding-bottom: 64px; }
+  .section-y { padding-top: 80px; padding-bottom: 80px; }
+  .section-y-cta { padding-top: 80px; padding-bottom: 80px; }
   .page-top { padding-top: 112px; }
   .head-gap { margin-bottom: 32px; }
   .lead-gap { margin-top: 16px; }
   @media (min-width: 768px) {
-    .section-y { padding-top: 96px; padding-bottom: 96px; }
-    .section-y-cta { padding-top: 128px; padding-bottom: 128px; }
+    .section-y { padding-top: 128px; padding-bottom: 128px; }
+    .section-y-cta { padding-top: 160px; padding-bottom: 160px; }
     .page-top { padding-top: 128px; }
-    .head-gap { margin-bottom: 48px; }
+    .head-gap { margin-bottom: 64px; }
   }
 }
 
