@@ -38,7 +38,7 @@ export default function Footer() {
   ];
 
   return (
-    <footer id="contacto" className="bg-obsidian-deep border-t border-white/10 pt-16 md:pt-24 pb-8" data-testid="footer">
+    <footer id="contacto" className="bg-obsidian-deep border-t border-white/15 pt-16 md:pt-24 pb-8" data-testid="footer">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10 lg:gap-8 pb-12 border-b border-white/[0.06]">
 
