@@ -150,7 +150,7 @@ const data: Record<string, Doc> = {
       {
         "id": "edad",
         "title": "07 · Minimum age",
-        "content": "To sign up you must be over 18."
+        "content": "To sign up you must be 18 or older."
       },
       {
         "id": "derechos",
@@ -202,7 +202,7 @@ const data: Record<string, Doc> = {
       {
         "id": "edad",
         "title": "07 · Âge minimum",
-        "content": "Pour vous inscrire, vous devez avoir plus de 18 ans."
+        "content": "Pour vous inscrire, vous devez avoir au moins 18 ans."
       },
       {
         "id": "derechos",

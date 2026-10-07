@@ -120,7 +120,7 @@ const data: Record<string, Doc> = {
       {
         "id": "lex-nova",
         "title": "03 · About LEX and NOVA",
-        "content": "- They are artificial intelligence assistants. Their answers are generated automatically, without a person reviewing them before they are shown to you, and **may contain errors**.\n- They are for guidance only. Before making a decision with legal or financial consequences, check the information against the official source or with a professional.\n- To use them you must sign up with Google and be over 18. Each account has a limited number of queries per month.\n- We ask you to use them reasonably: do not try to get around the limits or use the assistants for purposes unrelated to transport."
+        "content": "- They are artificial intelligence assistants. Their answers are generated automatically, without a person reviewing them before they are shown to you, and **may contain errors**.\n- They are for guidance only. Before making a decision with legal or financial consequences, check the information against the official source or with a professional.\n- To use them you must sign up with Google and be 18 or older. Each account has a limited number of queries per month.\n- We ask you to use them reasonably: do not try to get around the limits or use the assistants for purposes unrelated to transport."
       },
       {
         "id": "propiedad",
@@ -167,7 +167,7 @@ const data: Record<string, Doc> = {
       {
         "id": "lex-nova",
         "title": "03 · À propos de LEX et NOVA",
-        "content": "- Ce sont des assistants d'intelligence artificielle. Leurs réponses sont générées automatiquement, sans qu'une personne les relise avant de vous les montrer, et **peuvent contenir des erreurs**.\n- Elles sont données à titre indicatif. Avant de prendre une décision aux conséquences juridiques ou économiques, vérifiez l'information auprès de la source officielle ou d'un professionnel.\n- Pour les utiliser, vous devez vous inscrire avec Google et avoir plus de 18 ans. Chaque compte dispose d'un nombre limité de consultations par mois.\n- Nous vous demandons un usage raisonnable : n'essayez pas de contourner les limites ni d'utiliser les assistants à des fins étrangères au transport."
+        "content": "- Ce sont des assistants d'intelligence artificielle. Leurs réponses sont générées automatiquement, sans qu'une personne les relise avant de vous les montrer, et **peuvent contenir des erreurs**.\n- Elles sont données à titre indicatif. Avant de prendre une décision aux conséquences juridiques ou économiques, vérifiez l'information auprès de la source officielle ou d'un professionnel.\n- Pour les utiliser, vous devez vous inscrire avec Google et avoir au moins 18 ans. Chaque compte dispose d'un nombre limité de consultations par mois.\n- Nous vous demandons un usage raisonnable : n'essayez pas de contourner les limites ni d'utiliser les assistants à des fins étrangères au transport."
       },
       {
         "id": "propiedad",
