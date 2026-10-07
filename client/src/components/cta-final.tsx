@@ -4,6 +4,10 @@ import { Calendar } from "lucide-react";
 import { useTranslations } from "@/i18n/context";
 import ContactModal from "./ContactModal";
 
+// Foto de fondo del panel (URL de Supabase Storage). null = sin foto todavía.
+// Cuando se ponga una, se dibuja bajo una capa oscura para que el texto se lea.
+const CTA_PANEL_BG: string | null = null;
+
 export default function CtaFinal() {
   const { t } = useTranslations("ctaFinal");
   const [contactOpen, setContactOpen] = useState(false);
@@ -15,13 +19,26 @@ export default function CtaFinal() {
         <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-arctic/5 rounded-full blur-[120px]" />
       </div>
 
-      <div className="relative z-10 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+      <div className="relative z-10 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
         <motion.div
           initial={{ opacity: 0, y: 40 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-100px" }}
           transition={{ duration: 0.8 }}
+          className="relative overflow-hidden rounded-2xl bg-obsidian-light border border-white/10 p-12 md:p-24 text-center"
+          data-testid="panel-cta-final"
         >
+          {CTA_PANEL_BG && (
+            <>
+              <div
+                className="absolute inset-0 bg-cover bg-center"
+                style={{ backgroundImage: `url(${CTA_PANEL_BG})` }}
+              />
+              <div className="absolute inset-0 bg-obsidian/70" />
+            </>
+          )}
+
+          <div className="relative z-10">
           <h2
             className="t-h2 text-pure"
           >
@@ -48,6 +65,7 @@ export default function CtaFinal() {
               <Calendar className="w-4 h-4" />
               {t("cta3")}
             </a>
+          </div>
           </div>
         </motion.div>
       </div>
