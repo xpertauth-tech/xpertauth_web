@@ -6,7 +6,9 @@ import ContactModal from "./ContactModal";
 
 // Foto de fondo del panel (URL de Supabase Storage). null = sin foto todavía.
 // Cuando se ponga una, se dibuja bajo una capa oscura para que el texto se lea.
-const CTA_PANEL_BG: string | null = null;
+// Imagen del bucket blog-images servida redimensionada por Storage (no se sube nada).
+const CTA_PANEL_BG: string | null =
+  "https://supabase.xpertauth.com/storage/v1/render/image/public/blog-images/Gemini_Generated_Image_j326soj326soj326.png?width=1600&quality=70";
 
 export default function CtaFinal() {
   const { t } = useTranslations("ctaFinal");
@@ -30,11 +32,14 @@ export default function CtaFinal() {
         >
           {CTA_PANEL_BG && (
             <>
-              <div
-                className="absolute inset-0 bg-cover bg-center"
-                style={{ backgroundImage: `url(${CTA_PANEL_BG})` }}
+              {/* Encuadre (.cta-photo en index.css): ampliado y llevado abajo a la derecha para dejar fuera los rótulos y la marca de agua de la imagen */}
+              <img
+                src={CTA_PANEL_BG}
+                alt=""
+                aria-hidden="true"
+                className="cta-photo"
               />
-              <div className="absolute inset-0 bg-obsidian/70" />
+              <div className="absolute inset-0 bg-obsidian/80" />
             </>
           )}
 
