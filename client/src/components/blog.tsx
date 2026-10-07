@@ -88,7 +88,7 @@ function CardInner({ post }: { post: Post }) {
           </div>
         )}
       </div>
-      <div className="flex flex-col flex-grow p-5">
+      <div className="flex flex-col flex-grow p-4 md:p-6">
         <div className="flex items-center gap-2 mb-2">
           <Calendar className="w-3.5 h-3.5 text-white/40" />
           <span className="t-small text-white/40">{formatDate(post.published_at)}</span>
@@ -103,7 +103,7 @@ function CardInner({ post }: { post: Post }) {
 }
 
 const CARD_CLASS =
-  "group flex flex-col rounded-xl bg-obsidian-light border border-white/[0.08] overflow-hidden";
+  "group flex flex-col rounded-xl bg-obsidian-light border border-white/10 overflow-hidden";
 
 // ─── Efecto "expediente" (escritorio) ────────────────────────────────────────
 function DossierRow({ posts, locale }: { posts: Post[]; locale: string }) {

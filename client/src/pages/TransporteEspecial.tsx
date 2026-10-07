@@ -252,11 +252,11 @@ function TiltCard({
       onMouseLeave={handleMouseLeave}
       onClick={() => window.open(url, "_blank", "noopener noreferrer")}
       style={{ transform, transition: "transform 0.15s ease-out", transformStyle: "preserve-3d" }}
-      className="relative flex flex-col justify-between p-8 rounded-2xl overflow-hidden cursor-pointer"
+      className="relative flex flex-col justify-between p-4 md:p-6 rounded-xl overflow-hidden cursor-pointer"
     >
-      <div className="absolute inset-0 rounded-2xl" style={{ background: `linear-gradient(135deg, ${accentColor}40 0%, transparent 60%)`, border: `1px solid ${accentColor}35` }} />
-      <div className="absolute inset-0 rounded-2xl bg-white/[0.03]" />
-      <div className="absolute inset-0 rounded-2xl pointer-events-none transition-opacity duration-300" style={{ background: `radial-gradient(circle at ${shine.x}% ${shine.y}%, rgba(255,255,255,0.2) 0%, transparent 60%)`, opacity: shine.opacity }} />
+      <div className="absolute inset-0 rounded-xl" style={{ background: `linear-gradient(135deg, ${accentColor}40 0%, transparent 60%)`, border: `1px solid ${accentColor}35` }} />
+      <div className="absolute inset-0 rounded-xl bg-white/[0.03]" />
+      <div className="absolute inset-0 rounded-xl pointer-events-none transition-opacity duration-300" style={{ background: `radial-gradient(circle at ${shine.x}% ${shine.y}%, rgba(255,255,255,0.2) 0%, transparent 60%)`, opacity: shine.opacity }} />
 
       <div className="relative z-10 flex flex-col h-full gap-6">
         <div className="w-14 h-14 rounded-xl flex items-center justify-center" style={{ background: `${accentColor}20`, border: `1px solid ${accentColor}40` }}>
@@ -292,10 +292,10 @@ function ServiceCard({
         transition: "all 0.35s cubic-bezier(0.34,1.2,0.64,1)",
         transform: hovered ? "translateY(-6px) scale(1.02)" : "translateY(0) scale(1)",
       }}
-      className={`p-6 rounded-xl border transition-colors duration-300 overflow-hidden ${
+      className={`card transition-colors duration-300 overflow-hidden ${
         hovered
           ? "bg-xpertblue/10 border-xpertblue/40 shadow-lg shadow-xpertblue/10"
-          : "bg-white/[0.03] border-white/[0.08]"
+          : ""
       }`}
     >
       <div className="flex items-start gap-4 mb-4">
@@ -457,7 +457,7 @@ export default function TransporteEspecial() {
 
             {/* Panel decorativo LEX */}
             <div className="flex-1 w-full max-w-sm lg:max-w-none">
-              <div className="rounded-2xl border border-xpertblue/20 bg-xpertblue/5 p-6">
+              <div className="card border-xpertblue/20 bg-xpertblue/5">
                 <div className="flex items-center gap-3 mb-5">
                   <div className="w-8 h-8 rounded-full bg-xpertblue flex items-center justify-center">
                     <span className="text-pure text-xs font-bold">L</span>

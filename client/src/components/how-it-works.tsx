@@ -104,7 +104,7 @@ export default function HowItWorks() {
           <div className="flex-grow flex flex-col items-center justify-center px-4 sm:px-6 lg:px-8 pb-4 sm:pb-6 min-h-0">
             {/* Imagen */}
             <div
-              className="relative w-full overflow-hidden rounded-2xl border border-white/10 flex-shrink-0"
+              className="relative w-full overflow-hidden rounded-xl border border-white/10 flex-shrink-0"
               style={{ aspectRatio: "16/9", maxHeight: "clamp(180px, 40vh, 420px)", maxWidth: "calc(clamp(180px, 40vh, 420px) * 16 / 9)" }}
               onMouseEnter={() => setHovered(true)}
               onMouseLeave={() => setHovered(false)}

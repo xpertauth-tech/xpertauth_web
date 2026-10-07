@@ -58,7 +58,7 @@ export default function SocialProof() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.4, delay: i * 0.1 }}
-              className="text-center p-6 rounded-xl bg-white/[0.03] border border-white/[0.08] w-full sm:w-72"
+              className="card text-center w-full sm:w-72"
               data-testid={`stat-${i}`}
             >
               <div className="font-heading font-bold text-pure text-5xl sm:text-6xl">{stat.value}</div>
@@ -97,7 +97,7 @@ export default function SocialProof() {
                 )}
                 <div className="absolute inset-0 bg-gradient-to-t from-obsidian via-obsidian/70 to-transparent" />
 
-                <div className="relative z-10 p-6 sm:p-7">
+                <div className="relative z-10 p-4 md:p-6">
                   <p className="t-label">
                     {c.label}
                   </p>

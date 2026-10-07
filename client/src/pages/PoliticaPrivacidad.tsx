@@ -252,7 +252,7 @@ export default function PoliticaPrivacidad() {
       <section className="px-6 pb-20 bg-[#0A0E1A]">
         <div className="max-w-3xl mx-auto space-y-4">
           {s.items.map(item => (
-            <div key={item.id} id={item.id} className="legal-card bg-[#0F1628] border border-white/8 rounded-xl p-7 scroll-mt-24">
+            <div key={item.id} id={item.id} className="card legal-card scroll-mt-24">
               <h2 className="t-h3 text-[#4D9FEC] mb-4">{item.title}</h2>
               <LegalText text={item.content} />
             </div>

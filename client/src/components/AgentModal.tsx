@@ -138,7 +138,7 @@ export default function AgentModal({ agente, onClose }: AgentModalProps) {
     >
       {/* Panel */}
       <div
-        className="relative w-full max-w-md rounded-2xl overflow-hidden shadow-2xl"
+        className="relative w-full max-w-md rounded-xl overflow-hidden shadow-2xl"
         style={{
           backgroundColor: "#0F1628",
           border: `1px solid ${config.colorBorder}`,

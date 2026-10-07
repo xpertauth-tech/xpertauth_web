@@ -254,16 +254,16 @@ const FOTO_URL =
 
 // ─── COLORES TARJETAS POR SLOT ────────────────────────────────────────────────
 const SLOT_BG = [
-  "rgba(30,58,138,0.55)",
-  "rgba(22,40,100,0.50)",
-  "rgba(18,28,72,0.50)",
-  "rgba(14,20,52,0.48)",
+  "#0F1628",
+  "#0F1628",
+  "#0F1628",
+  "#0F1628",
 ];
 const SLOT_BORDER = [
-  "rgba(77,159,236,0.55)",
-  "rgba(77,159,236,0.25)",
-  "rgba(77,159,236,0.12)",
-  "rgba(77,159,236,0.06)",
+  "rgba(255,255,255,0.1)",
+  "rgba(255,255,255,0.1)",
+  "rgba(255,255,255,0.1)",
+  "rgba(255,255,255,0.1)",
 ];
 const SLOT_SHADOW = [
   "0 12px 48px rgba(27,79,216,0.45), 0 0 0 1px rgba(77,159,236,0.2)",
@@ -310,12 +310,12 @@ function ValoresStack({ items, hint }: { items: ValorItem[]; hint: string }) {
                 cursor: isFrente ? "default" : "pointer",
                 transform: "skewY(-5deg)",
                 transition: "left 0.45s cubic-bezier(0.34,1.4,0.64,1), top 0.45s cubic-bezier(0.34,1.4,0.64,1), box-shadow 0.3s, background 0.3s",
-                borderRadius: "1rem",
+                borderRadius: "12px",
                 border: `1px solid ${SLOT_BORDER[slot]}`,
                 background: SLOT_BG[slot],
                 boxShadow: SLOT_SHADOW[slot],
                 backdropFilter: "blur(10px)",
-                padding: "1.5rem 1.75rem",
+                padding: "24px",
                 display: "flex",
                 flexDirection: "column",
                 justifyContent: "space-between",

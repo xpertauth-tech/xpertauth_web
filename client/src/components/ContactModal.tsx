@@ -93,7 +93,7 @@ export default function ContactModal({ open, onClose }: ContactModalProps) {
             transition={{ duration: 0.25 }}
           >
             <div
-              className="relative w-full max-w-md bg-[#0F1628] border border-white/10 rounded-2xl p-8 shadow-2xl"
+              className="card !bg-[#0F1628] hover:border-white/10 relative w-full max-w-md shadow-2xl"
               onClick={(e) => e.stopPropagation()}
             >
               {/* Cerrar */}

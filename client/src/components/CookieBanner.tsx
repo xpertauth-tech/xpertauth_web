@@ -52,7 +52,7 @@ export default function CookieBanner() {
           className="fixed bottom-0 left-0 right-0 z-[9999] p-4 sm:p-6"
           data-testid="cookie-banner"
         >
-          <div className="max-w-4xl mx-auto bg-[#0F1628] border border-white/10 rounded-xl shadow-2xl px-6 py-5 flex flex-col sm:flex-row sm:items-center gap-4">
+          <div className="card !bg-[#0F1628] hover:border-white/10 max-w-4xl mx-auto shadow-2xl flex flex-col sm:flex-row sm:items-center gap-4">
             <p className="flex-1 t-small text-white/60">
               {t("description")}{" "}
               <a

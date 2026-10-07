@@ -210,7 +210,7 @@ export default function TeamSection() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-50px" }}
               transition={{ duration: 0.5, delay: i * 0.12 }}
-              className={`relative flex flex-col rounded-xl border ${member.accentColor} bg-white/[0.02] p-6 transition-all duration-300 hover:bg-white/[0.04]`}
+              className={`card relative flex flex-col ${member.accentColor}`}
               data-testid={`card-team-${member.id}`}
             >
               <div className="mb-5">

@@ -273,7 +273,7 @@ export default function Blog() {
               {paginatedPosts.map((post, i) => (
                 <article
                   key={post.id}
-                  className="post-card bg-[#0F1628] border border-white/10 rounded-xl overflow-hidden cursor-pointer"
+                  className="card post-card !p-0 overflow-hidden cursor-pointer"
                   style={{ animationDelay: (i * 0.06) + "s" }}
                   onClick={() => goToPost(post.slug)}
                 >
@@ -287,7 +287,7 @@ export default function Blog() {
                         />
                       </div>
                     )}
-                    <div className="flex-1 p-6 flex flex-col justify-between">
+                    <div className="flex-1 p-4 md:p-6 flex flex-col justify-between">
                       <div>
                         <h2 className="t-h3 text-white mb-3">
                           {post.title}

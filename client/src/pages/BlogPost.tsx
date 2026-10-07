@@ -281,7 +281,7 @@ export default function BlogPost() {
 
           {/* CTA */}
           <section className="py-14 px-6 bg-[#0A0E1A]">
-            <div className="max-w-3xl mx-auto bg-[#0F1628] border border-[#1B4FD8]/30 rounded-xl p-8 text-center">
+            <div className="card max-w-3xl mx-auto border-[#1B4FD8]/30 text-center">
               <h3 className="t-h3 text-white mb-2">{t.ctaTitle}</h3>
               <p className="t-small text-white/50 mb-6">{t.ctaSubtitle}</p>
               <button
