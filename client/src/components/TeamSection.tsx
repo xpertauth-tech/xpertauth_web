@@ -4,174 +4,63 @@ import { useAgent } from "@/App";
 
 const SUPABASE_BASE = "https://supabase.xpertauth.com/storage/v1/object/public/web-images";
 const JOSE_LUIS_PHOTO = `${SUPABASE_BASE}/equipo/equipo_jose-luis-avatar_v1.webp`;
-const LEX_AVATAR = `${SUPABASE_BASE}/equipo/lex_avatar_v1.webp`;
-const NOVA_AVATAR = `${SUPABASE_BASE}/equipo/nova_avatar_v1.webp`;
 
-// Prueba de diseño: los tres botones con el mismo estilo (relleno Arctic #4D9FEC).
+type Lang = "es" | "ca" | "en" | "fr";
 
-const teamMembers = [
-  {
-    id: "jose-luis",
-    name: "José Luis",
-    photo: JOSE_LUIS_PHOTO,
-    role: {
-      es: "Fundador",
-      ca: "Fundador",
-      en: "Founder",
-      fr: "Fondateur",
-    },
-    description: {
-      es: "30 años en transporte especial. El conocimiento humano detrás de todo lo que hacemos.",
-      ca: "30 anys en transport especial. El coneixement humà darrere de tot el que fem.",
-      en: "30 years in special transport. The human knowledge behind everything we do.",
-      fr: "30 ans dans le transport spécial. La connaissance humaine derrière tout ce que nous faisons.",
-    },
-    cta: {
-      es: "Conoce nuestra historia",
-      ca: "Coneix la nostra història",
-      en: "Our story",
-      fr: "Notre histoire",
-    },
-    ctaHref: "/sobre-nosotros",
-    agente: null as null,
-    isHuman: true,
-    accentColor: "border-arctic/30",
-    numberColor: "text-arctic",
-    numberBg: "bg-arctic/10",
-    avatarFallback: "JL",
+const texts = {
+  title: {
+    es: "Quién hay detrás",
+    ca: "Qui hi ha al darrere",
+    en: "Who's behind it",
+    fr: "Qui est derrière",
   },
-  {
-    id: "lex",
-    name: "LEX",
-    photo: LEX_AVATAR,
-    role: {
-      es: "Agente IA · Normativa de Transporte",
-      ca: "Agent IA · Normativa de Transport",
-      en: "AI Agent · Transport Regulations",
-      fr: "Agent IA · Réglementation Transport",
-    },
-    description: {
-      es: "Preciso, metódico, cita siempre la fuente. Experto en normativa DGT, SCT y permisos especiales.",
-      ca: "Precís, metòdic, cita sempre la font. Expert en normativa DGT, SCT i permisos especials.",
-      en: "Precise, methodical, always cites the source. Expert in DGT, SCT regulations and special permits.",
-      fr: "Précis, méthodique, cite toujours la source. Expert en réglementation DGT, SCT et permis spéciaux.",
-    },
-    cta: {
-      es: "Pregunta al agente",
-      ca: "Pregunta a l'agent",
-      en: "Ask the agent",
-      fr: "Interroger l'agent",
-    },
-    ctaHref: null as null,
-    agente: "LEX" as const,
-    isHuman: false,
-    accentColor: "border-xpertblue/30",
-    numberColor: "text-xpertblue",
-    numberBg: "bg-xpertblue/25",
-    avatarFallback: "L",
+  name: "José Luis",
+  bio: {
+    es: "Treinta años en el transporte especial, la mayor parte en Catalunya.",
+    ca: "Trenta anys en el transport especial, la major part a Catalunya.",
+    en: "Thirty years in special transport, most of them in Catalunya.",
+    fr: "Trente ans dans le transport spécial, pour la plupart en Catalogne.",
   },
-  {
-    id: "nova",
-    name: "NOVA",
-    photo: NOVA_AVATAR,
-    role: {
-      es: "IA para pymes de transporte",
-      ca: "IA per a pimes de transport",
-      en: "AI for transport SMEs",
-      fr: "IA pour PME de transport",
-    },
-    description: {
-      es: "NOVA te ayuda a ver qué puede hacer la IA en una pyme de transporte: caducidad de permisos, expedientes, avisos obligatorios, seguimiento de flota. Cómo empezar sin invertir y sin humo.",
-      ca: "NOVA t'ajuda a veure què pot fer la IA en una pime de transport: caducitat de permisos, expedients, avisos obligatoris, seguiment de flota. Com començar sense invertir i sense fum.",
-      en: "NOVA helps you see what AI can do in a transport SME: permit expiry, case files, mandatory alerts, fleet tracking. How to start without investing and without hype.",
-      fr: "NOVA vous aide à voir ce que l'IA peut faire dans une PME de transport : expiration des permis, dossiers, alertes obligatoires, suivi de flotte. Comment commencer sans investir et sans esbroufe.",
-    },
-    cta: {
-      es: "Pregunta al agente",
-      ca: "Pregunta a l'agent",
-      en: "Ask the agent",
-      fr: "Interroger l'agent",
-    },
-    ctaHref: null as null,
-    agente: "NOVA" as const,
-    isHuman: false,
-    accentColor: "border-arctic/30",
-    numberColor: "text-arctic",
-    numberBg: "bg-arctic/25",
-    avatarFallback: "N",
+  storyCta: {
+    es: "Conoce mi historia",
+    ca: "Coneix la meva història",
+    en: "Read my story",
+    fr: "Découvrez mon histoire",
   },
-];
-
-const aiBadge = {
-  es: "Agente IA",
-  ca: "Agent IA",
-  en: "AI Agent",
-  fr: "Agent IA",
+  toolsTitle: {
+    es: "Sus herramientas",
+    ca: "Les seves eines",
+    en: "Their tools",
+    fr: "Ses outils",
+  },
+  lex: {
+    es: "Resuelve tus dudas de normativa al momento.",
+    ca: "Resol els teus dubtes de normativa al moment.",
+    en: "Answers your regulation questions instantly.",
+    fr: "Répond à vos questions de réglementation sur-le-champ.",
+  },
+  nova: {
+    es: "Ideas para usar la IA en tu empresa de transporte.",
+    ca: "Idees per usar la IA a la teva empresa de transport.",
+    en: "Ideas for using AI in your transport business.",
+    fr: "Des idées pour utiliser l'IA dans votre entreprise de transport.",
+  },
+  lexCta: {
+    es: "Pregunta a LEX",
+    ca: "Pregunta a LEX",
+    en: "Ask LEX",
+    fr: "Demandez à LEX",
+  },
 };
-
-const sectionLabel = {
-  es: "El equipo",
-  ca: "L'equip",
-  en: "The team",
-  fr: "L'équipe",
-};
-
-const sectionTitle = {
-  es: "El equipo que nunca para",
-  ca: "L'equip que mai s'atura",
-  en: "The team that never stops",
-  fr: "L'équipe qui ne s'arrête jamais",
-};
-
-const sectionSubtitle = {
-  es: "Experiencia humana real combinada con agentes de IA disponibles 24/7.",
-  ca: "Experiència humana real combinada amb agents d'IA disponibles 24/7.",
-  en: "Real human expertise combined with AI agents available 24/7.",
-  fr: "Expertise humaine réelle combinée à des agents IA disponibles 24h/24.",
-};
-
-function MemberAvatar({ member }: { member: (typeof teamMembers)[0] }) {
-  return (
-    <div className="relative w-16 h-16">
-      <img
-        src={member.photo}
-        alt={member.name}
-        className={`w-16 h-16 rounded-full object-cover border-2 ${member.accentColor}`}
-        onError={(e) => {
-          const target = e.target as HTMLImageElement;
-          target.style.display = "none";
-          const fallback = target.nextElementSibling as HTMLElement;
-          if (fallback) fallback.style.display = "flex";
-        }}
-      />
-      <div
-        className={`w-16 h-16 rounded-full ${member.numberBg} border ${member.accentColor} items-center justify-center absolute inset-0`}
-        style={{ display: "none" }}
-      >
-        <span className={`font-heading font-bold ${member.numberColor} text-xl`}>
-          {member.avatarFallback}
-        </span>
-      </div>
-    </div>
-  );
-}
 
 export default function TeamSection() {
   const { locale } = useI18n();
   const { abrirAgente } = useAgent();
-  const lang = (locale as keyof typeof sectionTitle) || "es";
-
-  function handleCta(member: (typeof teamMembers)[0]) {
-    if (member.agente) {
-      abrirAgente(member.agente);
-    } else {
-      window.location.href = `/${locale}${member.ctaHref}`;
-    }
-  }
+  const lang: Lang = (["es", "ca", "en", "fr"] as const).includes(locale as Lang) ? (locale as Lang) : "es";
 
   return (
     <section id="servicios" className="section-y bg-obsidian-light" data-testid="section-equipo">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -179,64 +68,84 @@ export default function TeamSection() {
           transition={{ duration: 0.6 }}
           className="text-center head-gap"
         >
-          <span className="t-label">
-            {sectionLabel[lang]}
-          </span>
-          <h2
-            className="t-h2 text-pure"
-          >
-            {sectionTitle[lang]}
-          </h2>
-          <p className="lead-gap t-lead text-white/50 max-w-xl mx-auto">
-            {sectionSubtitle[lang]}
-          </p>
+          <h2 className="t-h2 text-pure">{texts.title[lang]}</h2>
         </motion.div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
-          {teamMembers.map((member, i) => (
-            <motion.div
-              key={member.id}
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-50px" }}
-              transition={{ duration: 0.5, delay: i * 0.12 }}
-              className={`card relative flex flex-col ${member.accentColor}`}
-              data-testid={`card-team-${member.id}`}
-            >
-              <div className="mb-4">
-                <MemberAvatar member={member} />
-              </div>
-
-              {!member.isHuman && (
-                <span
-                  className={`inline-flex self-start px-2.5 py-1 rounded-full text-xs font-semibold border mb-3 ${member.numberBg} ${member.numberColor}`}
-                  style={{ borderColor: "currentColor" }}
-                >
-                  {aiBadge[lang]}
-                </span>
-              )}
-
-              <h3 className="t-h3 text-pure mb-1">
-                {member.name}
-              </h3>
-              <p className={`t-small mb-3 ${member.numberColor}`}>
-                {member.role[lang]}
-              </p>
-
-              <p className="t-small text-white/80 flex-grow mb-6">
-                {member.description[lang]}
-              </p>
-
-              <button
-                onClick={() => handleCta(member)}
-                className="btn btn-primary w-full"
-                data-testid={`button-team-${member.id}`}
+        {/* Protagonista */}
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-50px" }}
+          transition={{ duration: 0.5 }}
+          className="card border-arctic/30 flex flex-col md:flex-row md:items-center gap-4 md:gap-8"
+          data-testid="card-team-jose-luis"
+        >
+          <div className="flex justify-center md:block md:flex-shrink-0">
+            <div className="relative w-24 h-24 md:w-36 md:h-36">
+              <img
+                src={JOSE_LUIS_PHOTO}
+                alt={texts.name}
+                className="w-full h-full rounded-full object-cover border-2 border-arctic/30"
+                onError={(e) => {
+                  const target = e.target as HTMLImageElement;
+                  target.style.display = "none";
+                  const fallback = target.nextElementSibling as HTMLElement;
+                  if (fallback) fallback.style.display = "flex";
+                }}
+              />
+              <div
+                className="w-full h-full rounded-full bg-arctic/10 border border-arctic/30 items-center justify-center absolute inset-0"
+                style={{ display: "none" }}
               >
-                {member.cta[lang]}
+                <span className="font-heading font-bold text-arctic text-2xl">JL</span>
+              </div>
+            </div>
+          </div>
+
+          <div className="flex-1">
+            <h3 className="t-h3 text-pure">{texts.name}</h3>
+            <p className="t-body text-white/70 mt-2">{texts.bio[lang]}</p>
+            <div className="mt-4">
+              <button
+                onClick={() => { window.location.href = `/${locale}/sobre-nosotros`; }}
+                className="btn btn-secondary"
+                data-testid="button-team-jose-luis"
+              >
+                {texts.storyCta[lang]}
               </button>
-            </motion.div>
-          ))}
-        </div>
+            </div>
+          </div>
+        </motion.div>
+
+        {/* Herramientas: franja discreta, sin fotos ni tarjetas */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-50px" }}
+          transition={{ duration: 0.5 }}
+          className="mt-10 md:mt-16 pt-8 border-t border-white/10"
+        >
+          <p className="t-label text-center">{texts.toolsTitle[lang]}</p>
+          <div className="mt-4 grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-8">
+            <div>
+              <h3 className="t-h3 text-pure">LEX</h3>
+              <p className="t-small text-white/70 mt-1">{texts.lex[lang]}</p>
+            </div>
+            <div>
+              <h3 className="t-h3 text-pure">NOVA</h3>
+              <p className="t-small text-white/70 mt-1">{texts.nova[lang]}</p>
+            </div>
+          </div>
+          <div className="mt-6 flex justify-center">
+            <button
+              onClick={() => abrirAgente("LEX")}
+              className="btn btn-primary"
+              data-testid="button-team-lex"
+            >
+              {texts.lexCta[lang]}
+            </button>
+          </div>
+        </motion.div>
       </div>
     </section>
   );
