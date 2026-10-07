@@ -39,7 +39,7 @@ export default function CtaFinal() {
                 aria-hidden="true"
                 className="cta-photo"
               />
-              <div className="absolute inset-0 bg-obsidian/80" />
+              <div className="cta-overlay" />
             </>
           )}
 
@@ -65,7 +65,7 @@ export default function CtaFinal() {
               href="https://calendar.app.google/q54rranYyoyCfcu77"
               target="_blank"
               rel="noopener noreferrer"
-              className="btn btn-secondary"
+              className="btn btn-secondary bg-obsidian/60"
             >
               <Calendar className="w-4 h-4" />
               {t("cta3")}
