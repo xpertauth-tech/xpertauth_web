@@ -349,7 +349,7 @@ export default function TransporteEspecial() {
       <ContactModal open={contactOpen} onClose={() => setContactOpen(false)} />
 
       {/* ── HERO ─────────────────────────────────────────────────────────────── */}
-      <section className="pt-32 pb-20 px-4 sm:px-6 lg:px-8 bg-obsidian">
+      <section className="page-top pb-16 md:pb-24 px-4 sm:px-6 lg:px-8 bg-obsidian">
         <div className="max-w-4xl mx-auto text-center">
           <span className="t-label">
             {t.badge}
@@ -379,16 +379,16 @@ export default function TransporteEspecial() {
       </section>
 
       {/* ── SERVICIOS ────────────────────────────────────────────────────────── */}
-      <section className="py-20 px-4 sm:px-6 lg:px-8 bg-obsidian border-t border-white/[0.05]">
+      <section className="section-y px-4 sm:px-6 lg:px-8 bg-obsidian border-t border-white/[0.05]">
         <div className="max-w-5xl mx-auto">
-          <div className="text-center mb-14">
+          <div className="text-center head-gap">
             <span className="t-label">{t.servicesLabel}</span>
             <h2 className="t-h2" style={gradientStyle}>
               {t.servicesTitle}
             </h2>
-            <p className="mt-4 t-lead text-white/60 max-w-xl mx-auto">{t.servicesSubtitle}</p>
+            <p className="lead-gap t-lead text-white/60 max-w-xl mx-auto">{t.servicesSubtitle}</p>
           </div>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6">
             <ServiceCard number="01" icon={<FileCheck className="w-5 h-5 text-xpertblue" />} title={t.s01title} description={t.s01desc} claim={t.s01claim} />
             <ServiceCard number="02" icon={<ShieldCheck className="w-5 h-5 text-xpertblue" />} title={t.s02title} description={t.s02desc} claim={t.s02claim} />
             <ServiceCard number="03" icon={<BookOpen className="w-5 h-5 text-xpertblue" />} title={t.s03title} description={t.s03desc} claim={t.s03claim} />
@@ -397,16 +397,16 @@ export default function TransporteEspecial() {
       </section>
 
       {/* ── HERRAMIENTAS SCT ─────────────────────────────────────────────────── */}
-      <section className="py-20 px-4 sm:px-6 lg:px-8 bg-obsidian border-t border-white/[0.05]">
+      <section className="section-y px-4 sm:px-6 lg:px-8 bg-obsidian border-t border-white/[0.05]">
         <div className="max-w-5xl mx-auto">
-          <div className="text-center mb-14">
+          <div className="text-center head-gap">
             <span className="t-label">{t.sctLabel}</span>
             <h2 className="t-h2" style={gradientStyle}>
               {t.sctTitle}
             </h2>
-            <p className="mt-4 t-lead text-white/60 max-w-xl mx-auto">{t.sctSubtitle}</p>
+            <p className="lead-gap t-lead text-white/60 max-w-xl mx-auto">{t.sctSubtitle}</p>
           </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6" style={{ perspective: "1200px" }}>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6" style={{ perspective: "1200px" }}>
             <TiltCard
               title={t.visorTitle}
               description={t.visorDesc}
@@ -436,12 +436,12 @@ export default function TransporteEspecial() {
       </section>
 
       {/* ── LEX ──────────────────────────────────────────────────────────────── */}
-      <section className="py-20 px-4 sm:px-6 lg:px-8 bg-obsidian border-t border-white/[0.05]">
+      <section className="section-y px-4 sm:px-6 lg:px-8 bg-obsidian border-t border-white/[0.05]">
         <div className="max-w-5xl mx-auto">
           <div className="flex flex-col lg:flex-row gap-10 items-center">
             <div className="flex-1">
               <span className="t-label">{t.lexLabel}</span>
-              <h2 className="t-h2 mb-5" style={gradientStyle}>
+              <h2 className="t-h2 mb-4" style={gradientStyle}>
                 {t.lexTitle}
               </h2>
               <p className="t-body text-white/60 mb-4">{t.lexDesc1}</p>
@@ -458,7 +458,7 @@ export default function TransporteEspecial() {
             {/* Panel decorativo LEX */}
             <div className="flex-1 w-full max-w-sm lg:max-w-none">
               <div className="card border-xpertblue/20 bg-xpertblue/5">
-                <div className="flex items-center gap-3 mb-5">
+                <div className="flex items-center gap-3 mb-4">
                   <div className="w-8 h-8 rounded-full bg-xpertblue flex items-center justify-center">
                     <span className="text-pure text-xs font-bold">L</span>
                   </div>
@@ -484,9 +484,9 @@ export default function TransporteEspecial() {
       </section>
 
       {/* ── CTA FINAL ────────────────────────────────────────────────────────── */}
-      <section className="py-24 px-4 sm:px-6 lg:px-8 bg-obsidian border-t border-white/[0.05]">
+      <section className="section-y px-4 sm:px-6 lg:px-8 bg-obsidian border-t border-white/[0.05]">
         <div className="max-w-3xl mx-auto text-center">
-          <h2 className="t-h2 mb-5" style={gradientStyle}>
+          <h2 className="t-h2 mb-4" style={gradientStyle}>
             {t.ctaTitle}
           </h2>
           <p className="t-lead text-white/60 mb-10 max-w-xl mx-auto">{t.ctaSubtitle}</p>

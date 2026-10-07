@@ -18,7 +18,7 @@ export default function CtaFinal() {
   const [contactOpen, setContactOpen] = useState(false);
 
   return (
-    <section id="cta-final" className="py-24 sm:py-32 bg-obsidian relative overflow-hidden" data-testid="section-cta-final">
+    <section id="cta-final" className="section-y-cta bg-obsidian relative overflow-hidden" data-testid="section-cta-final">
       <div className="absolute inset-0 pointer-events-none">
         <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-xpertblue/5 rounded-full blur-[120px]" />
         <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-arctic/5 rounded-full blur-[120px]" />

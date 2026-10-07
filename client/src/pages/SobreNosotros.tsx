@@ -379,7 +379,7 @@ export default function SobreNosotros() {
       <main>
 
         {/* ══ HERO ══════════════════════════════════════════════════════ */}
-        <section style={{ background: "#0A0E1A", minHeight: "55vh", display: "flex", alignItems: "center", padding: "140px 24px 80px" }}>
+        <section className="page-top pb-16 md:pb-24 px-6" style={{ background: "#0A0E1A", minHeight: "55vh", display: "flex", alignItems: "center" }}>
           <div style={{ maxWidth: 760, margin: "0 auto", textAlign: "center" }}>
             <h1
               className="t-h1"
@@ -403,7 +403,7 @@ export default function SobreNosotros() {
         </section>
 
         {/* ══ HISTORIA ══════════════════════════════════════════════════ */}
-        <section style={{ background: "#0A0E1A", padding: "80px 24px" }}>
+        <section className="section-y px-6" style={{ background: "#0A0E1A" }}>
           <div
             style={{
               maxWidth: 1100,
@@ -445,7 +445,7 @@ export default function SobreNosotros() {
         </section>
 
         {/* ══ MISIÓN ════════════════════════════════════════════════════ */}
-        <section style={{ background: "#0F1628", padding: "80px 24px" }}>
+        <section className="section-y px-6" style={{ background: "#0F1628" }}>
           <div style={{ maxWidth: 720, margin: "0 auto", textAlign: "center" }}>
             <span className="t-label">
               {t.mision.etiqueta}
@@ -471,9 +471,9 @@ export default function SobreNosotros() {
         </section>
 
         {/* ══ VALORES ═══════════════════════════════════════════════════ */}
-        <section style={{ background: "#0A0E1A", padding: "80px 24px 160px" }}>
+        <section className="section-y px-6" style={{ background: "#0A0E1A" }}>
           <div style={{ maxWidth: 1100, margin: "0 auto" }}>
-            <div style={{ textAlign: "center", marginBottom: "4rem" }}>
+            <div className="head-gap" style={{ textAlign: "center" }}>
               <span className="t-label">
                 {t.valores.etiqueta}
               </span>
@@ -498,7 +498,7 @@ export default function SobreNosotros() {
         </section>
 
         {/* ══ CTA FINAL ═════════════════════════════════════════════════ */}
-        <section style={{ background: "#070A12", padding: "80px 24px", textAlign: "center", borderTop: "1px solid rgba(255,255,255,.06)" }}>
+        <section className="section-y px-6" style={{ background: "#070A12", textAlign: "center", borderTop: "1px solid rgba(255,255,255,.06)" }}>
           <div style={{ maxWidth: 600, margin: "0 auto" }}>
             <h2
               className="t-h2"

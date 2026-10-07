@@ -247,7 +247,7 @@ export default function Blog() {
       <Navbar />
 
       {/* HERO */}
-      <section className="pt-32 pb-16 px-6 text-center bg-[#0A0E1A]">
+      <section className="page-top pb-12 md:pb-16 px-6 text-center bg-[#0A0E1A]">
         <div className="max-w-3xl mx-auto fade-up">
           <span className="t-label">
             {t.tag}
@@ -262,14 +262,14 @@ export default function Blog() {
       </section>
 
       {/* LISTADO */}
-      <section className="py-12 px-6 bg-[#0A0E1A]">
+      <section className="pt-4 pb-16 md:pb-24 px-6 bg-[#0A0E1A]">
         <div className="max-w-4xl mx-auto">
           {loading ? (
             <p className="text-center text-white/40 py-20">{t.loading}</p>
           ) : paginatedPosts.length === 0 ? (
             <p className="text-center text-white/40 py-20">{t.noPosts}</p>
           ) : (
-            <div className="space-y-5">
+            <div className="space-y-4 md:space-y-6">
               {paginatedPosts.map((post, i) => (
                 <article
                   key={post.id}
@@ -296,7 +296,7 @@ export default function Blog() {
                           {post.excerpt}
                         </p>
                       </div>
-                      <div className="flex items-center justify-between mt-5">
+                      <div className="flex items-center justify-between mt-4">
                         <div className="flex items-center gap-2 t-small text-white/30">
                           <span>📅 {formatDate(post.published_at, locale)}</span>
                           {post.author && (
@@ -341,7 +341,7 @@ export default function Blog() {
 
       {/* SUSCRIPCIÓN */}
       {SHOW_SUBSCRIPTION && (
-        <section className="py-16 px-6 bg-[#070A12]">
+        <section className="section-y px-6 bg-[#070A12]">
           <div className="max-w-xl mx-auto text-center">
             <h2 className="t-h2 text-white mb-3">{t.subscribeTitle}</h2>
             <p className="t-small text-white/50 mb-8">{t.subscribeSubtitle}</p>

@@ -149,7 +149,7 @@ export default function Footer() {
             <h4 className="font-heading font-semibold text-pure t-small mb-4 uppercase tracking-wider">
               {m.scheduleTitle}
             </h4>
-            <ul className="space-y-3 mb-5">
+            <ul className="space-y-3 mb-4">
               {schedule.map((item, i) => (
                 <li key={i} className="flex items-start gap-3">
                   <Clock className="w-4 h-4 text-arctic flex-shrink-0 mt-0.5" />

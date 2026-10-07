@@ -30,14 +30,14 @@ export default function SocialProof() {
   const cases = m.cases || [];
 
   return (
-    <section id="autoridad" className="py-20 sm:py-28 bg-obsidian" data-testid="section-social-proof">
+    <section id="autoridad" className="section-y bg-obsidian" data-testid="section-social-proof">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-100px" }}
           transition={{ duration: 0.6 }}
-          className="text-center mb-16"
+          className="text-center head-gap"
         >
           <span className="t-label">{m.label}</span>
           <h2
@@ -46,11 +46,11 @@ export default function SocialProof() {
           >
             {m.title}
           </h2>
-          <p className="mt-4 t-lead text-white/50 max-w-xl mx-auto">{m.subtitle}</p>
+          <p className="lead-gap t-lead text-white/50 max-w-xl mx-auto">{m.subtitle}</p>
         </motion.div>
 
         {/* Stats */}
-        <div className="flex flex-wrap justify-center gap-6 max-w-2xl mx-auto mb-16">
+        <div className="flex flex-wrap justify-center gap-4 md:gap-6 max-w-2xl mx-auto head-gap">
           {stats.map((stat: any, i: number) => (
             <motion.div
               key={i}
@@ -68,7 +68,7 @@ export default function SocialProof() {
         </div>
 
         {/* Casos: etiqueta + texto corto, sobre foto (B/N → color al hover) */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-5xl mx-auto">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6 max-w-5xl mx-auto">
           {cases.map((c: any, i: number) => {
             const bg = caseBgs[i];
             return (
@@ -115,7 +115,7 @@ export default function SocialProof() {
           whileInView={{ opacity: 1 }}
           viewport={{ once: true }}
           transition={{ delay: 0.4 }}
-          className="mt-16 text-center"
+          className="mt-12 text-center"
         >
           <p className="text-white/30 text-xs uppercase tracking-widest mb-6">{m.partnersLabel}</p>
           <div className="flex items-center justify-center gap-8 flex-wrap">

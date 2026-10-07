@@ -252,7 +252,7 @@ export default function BlogPost() {
               <span className="t-label">
                 {t.tag}
               </span>
-              <h1 className="t-h1 text-white mb-5">
+              <h1 className="t-h1 text-white mb-6">
                 {post.title}
               </h1>
               <p className="t-lead text-white/55 mb-6">{post.excerpt}</p>
@@ -273,14 +273,14 @@ export default function BlogPost() {
           )}
 
           {/* CONTENIDO */}
-          <section className="px-6 pb-16 bg-[#0A0E1A]">
+          <section className="px-6 pb-16 md:pb-24 bg-[#0A0E1A]">
             <div className="max-w-3xl mx-auto">
               {renderContent(post.content)}
             </div>
           </section>
 
           {/* CTA */}
-          <section className="py-14 px-6 bg-[#0A0E1A]">
+          <section className="section-y px-6 bg-[#0A0E1A]">
             <div className="card max-w-3xl mx-auto border-[#1B4FD8]/30 text-center">
               <h3 className="t-h3 text-white mb-2">{t.ctaTitle}</h3>
               <p className="t-small text-white/50 mb-6">{t.ctaSubtitle}</p>
@@ -297,7 +297,7 @@ export default function BlogPost() {
 
       {/* SUSCRIPCIÓN */}
       {SHOW_SUBSCRIPTION && (
-        <section className="py-16 px-6 bg-[#070A12]">
+        <section className="section-y px-6 bg-[#070A12]">
           <div className="max-w-xl mx-auto text-center">
             <h2 className="t-h2 text-white mb-3">{t.subscribeTitle}</h2>
             <p className="t-small text-white/50 mb-8">{t.subscribeSubtitle}</p>

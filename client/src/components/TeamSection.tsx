@@ -179,14 +179,14 @@ export default function TeamSection() {
   }
 
   return (
-    <section id="servicios" className="py-20 sm:py-28 bg-obsidian-light" data-testid="section-equipo">
+    <section id="servicios" className="section-y bg-obsidian-light" data-testid="section-equipo">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-100px" }}
           transition={{ duration: 0.6 }}
-          className="text-center mb-16"
+          className="text-center head-gap"
         >
           <span className="t-label">
             {sectionLabel[lang]}
@@ -197,12 +197,12 @@ export default function TeamSection() {
           >
             {sectionTitle[lang]}
           </h2>
-          <p className="mt-4 t-lead text-white/50 max-w-xl mx-auto">
+          <p className="lead-gap t-lead text-white/50 max-w-xl mx-auto">
             {sectionSubtitle[lang]}
           </p>
         </motion.div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
           {teamMembers.map((member, i) => (
             <motion.div
               key={member.id}
@@ -213,7 +213,7 @@ export default function TeamSection() {
               className={`card relative flex flex-col ${member.accentColor}`}
               data-testid={`card-team-${member.id}`}
             >
-              <div className="mb-5">
+              <div className="mb-4">
                 <MemberAvatar member={member} />
               </div>
 

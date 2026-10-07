@@ -198,7 +198,7 @@ function DossierRow({ posts, locale }: { posts: Post[]; locale: string }) {
 // ─── Columna (móvil) ─────────────────────────────────────────────────────────
 function MobileColumn({ posts, locale }: { posts: Post[]; locale: string }) {
   return (
-    <div className="flex flex-col gap-5">
+    <div className="flex flex-col gap-4">
       {posts.map((post, i) => (
         <motion.a
           key={post.id}
@@ -233,20 +233,20 @@ export default function BlogSection() {
   }, []);
 
   return (
-    <section id="blog" className="bg-obsidian py-20 sm:py-28 overflow-hidden" data-testid="section-blog">
+    <section id="blog" className="bg-obsidian section-y overflow-hidden" data-testid="section-blog">
       <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-100px" }}
           transition={{ duration: 0.6 }}
-          className="text-center mb-14"
+          className="text-center head-gap"
         >
           <span className="t-label">{m.label}</span>
           <h2 className="t-h2" style={gradientStyle}>
             {m.title}
           </h2>
-          <p className="mt-4 t-lead text-white/60 max-w-2xl mx-auto">{m.subtitle}</p>
+          <p className="lead-gap t-lead text-white/60 max-w-2xl mx-auto">{m.subtitle}</p>
         </motion.div>
 
         {loaded && posts.length > 0 && (

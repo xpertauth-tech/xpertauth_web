@@ -232,7 +232,7 @@ export default function PoliticaPrivacidad() {
         .legal-card:hover { border-color: rgba(77,159,236,0.3); }
       `}</style>
       <Navbar />
-      <section className="pt-32 pb-12 px-6 bg-[#0A0E1A]">
+      <section className="page-top pb-12 px-6 bg-[#0A0E1A]">
         <div className="max-w-3xl mx-auto">
           <span className="t-label">Legal</span>
           <h1 className="t-h1 text-white mb-4">{s.title}</h1>
@@ -249,8 +249,8 @@ export default function PoliticaPrivacidad() {
           ))}
         </div>
       </section>
-      <section className="px-6 pb-20 bg-[#0A0E1A]">
-        <div className="max-w-3xl mx-auto space-y-4">
+      <section className="px-6 pb-16 md:pb-24 bg-[#0A0E1A]">
+        <div className="max-w-3xl mx-auto space-y-4 md:space-y-6">
           {s.items.map(item => (
             <div key={item.id} id={item.id} className="card legal-card scroll-mt-24">
               <h2 className="t-h3 text-[#4D9FEC] mb-4">{item.title}</h2>
