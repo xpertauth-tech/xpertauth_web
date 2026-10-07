@@ -63,7 +63,7 @@ const data: Record<string, Doc> = {
       {
         "id": "titular",
         "title": "01 · Qui hi ha al darrere",
-        "content": "José Luis Echezarreta Fabregó, impulsor del projecte XpertAuth.\nL'Escala (Girona).\nEmail: [info@xpertauth.com](mailto:info@xpertauth.com)\n\nXpertAuth és un projecte personal, una associació en procés d'estudi de constitució. No té activitat comercial: no cobra ni factura res, i no signa contractes ni compromisos en nom de cap entitat."
+        "content": "José Luis Echezarreta Fabregó, impulsor del projecte XpertAuth.\nL'Escala (Girona).\nCorreu electrònic: [info@xpertauth.com](mailto:info@xpertauth.com)\n\nXpertAuth és un projecte personal, una associació en procés d'estudi de constitució. No té activitat comercial: no cobra ni factura res, i no signa contractes ni compromisos en nom de cap entitat."
       },
       {
         "id": "oferta",
@@ -157,7 +157,7 @@ const data: Record<string, Doc> = {
       {
         "id": "titular",
         "title": "01 · Qui est derrière",
-        "content": "José Luis Echezarreta Fabregó, promoteur du projet XpertAuth.\nL'Escala (Gérone).\nEmail : [info@xpertauth.com](mailto:info@xpertauth.com)\n\nXpertAuth est un projet personnel, une association dont la constitution est à l'étude. Il n'a pas d'activité commerciale : il ne facture ni n'encaisse rien, et ne signe ni contrats ni engagements au nom d'aucune entité."
+        "content": "José Luis Echezarreta Fabregó, promoteur du projet XpertAuth.\nL'Escala (Gérone).\nE-mail : [info@xpertauth.com](mailto:info@xpertauth.com)\n\nXpertAuth est un projet personnel, une association dont la constitution est à l'étude. Il n'a pas d'activité commerciale : il ne facture ni n'encaisse rien, et ne signe ni contrats ni engagements au nom d'aucune entité."
       },
       {
         "id": "oferta",
