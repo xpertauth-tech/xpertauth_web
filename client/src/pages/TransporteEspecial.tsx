@@ -7,15 +7,6 @@ import { useI18n } from "@/i18n/context";
 import { ArrowRight, ExternalLink, FileCheck, Map, MessageSquare, ShieldCheck, BookOpen, Calendar } from "lucide-react";
 
 // ─── Paleta ───────────────────────────────────────────────────────────────────
-const gradientStyle: React.CSSProperties = {
-  background: "linear-gradient(135deg,#ffffff 0%,#4D9FEC 40%,#1B4FD8 70%,#ffffff 100%)",
-  backgroundSize: "300% 300%",
-  WebkitBackgroundClip: "text",
-  WebkitTextFillColor: "transparent",
-  backgroundClip: "text",
-  animation: "snGrad 6s ease infinite",
-};
-
 // ─── Textos por idioma ────────────────────────────────────────────────────────
 const texts: Record<string, {
   badge: string;
@@ -337,14 +328,6 @@ export default function TransporteEspecial() {
 
   return (
     <div className="min-h-screen bg-obsidian text-pure font-sans">
-      <style>{`
-        @keyframes snGrad {
-          0%   { background-position: 0% 50%; }
-          50%  { background-position: 100% 50%; }
-          100% { background-position: 0% 50%; }
-        }
-      `}</style>
-
       <Navbar />
       <ContactModal open={contactOpen} onClose={() => setContactOpen(false)} />
 
@@ -354,7 +337,7 @@ export default function TransporteEspecial() {
           <span className="t-label">
             {t.badge}
           </span>
-          <h1 className="t-h1 mb-6" style={gradientStyle}>
+          <h1 className="t-h1 grad-title mb-6">
             {t.heroTitle}
           </h1>
           <p className="t-lead text-white/60 max-w-2xl mx-auto mb-10">
@@ -383,7 +366,7 @@ export default function TransporteEspecial() {
         <div className="max-w-5xl mx-auto">
           <div className="text-center head-gap">
             <span className="t-label">{t.servicesLabel}</span>
-            <h2 className="t-h2" style={gradientStyle}>
+            <h2 className="t-h2 text-pure">
               {t.servicesTitle}
             </h2>
             <p className="lead-gap t-lead text-white/60 max-w-xl mx-auto">{t.servicesSubtitle}</p>
@@ -401,7 +384,7 @@ export default function TransporteEspecial() {
         <div className="max-w-5xl mx-auto">
           <div className="text-center head-gap">
             <span className="t-label">{t.sctLabel}</span>
-            <h2 className="t-h2" style={gradientStyle}>
+            <h2 className="t-h2 text-pure">
               {t.sctTitle}
             </h2>
             <p className="lead-gap t-lead text-white/60 max-w-xl mx-auto">{t.sctSubtitle}</p>
@@ -441,7 +424,7 @@ export default function TransporteEspecial() {
           <div className="flex flex-col lg:flex-row gap-10 items-center">
             <div className="flex-1">
               <span className="t-label">{t.lexLabel}</span>
-              <h2 className="t-h2 mb-4" style={gradientStyle}>
+              <h2 className="t-h2 text-pure mb-4">
                 {t.lexTitle}
               </h2>
               <p className="t-body text-white/60 mb-4">{t.lexDesc1}</p>
@@ -486,7 +469,7 @@ export default function TransporteEspecial() {
       {/* ── CTA FINAL ────────────────────────────────────────────────────────── */}
       <section className="section-y px-4 sm:px-6 lg:px-8 bg-obsidian border-t border-white/[0.05]">
         <div className="max-w-3xl mx-auto text-center">
-          <h2 className="t-h2 mb-4" style={gradientStyle}>
+          <h2 className="t-h2 text-pure mb-4">
             {t.ctaTitle}
           </h2>
           <p className="t-lead text-white/60 mb-10 max-w-xl mx-auto">{t.ctaSubtitle}</p>

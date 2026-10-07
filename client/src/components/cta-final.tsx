@@ -4,15 +4,6 @@ import { Calendar } from "lucide-react";
 import { useTranslations } from "@/i18n/context";
 import ContactModal from "./ContactModal";
 
-const gradientStyle: React.CSSProperties = {
-  background: "linear-gradient(135deg,#ffffff 0%,#4D9FEC 40%,#1B4FD8 70%,#ffffff 100%)",
-  backgroundSize: "300% 300%",
-  WebkitBackgroundClip: "text",
-  WebkitTextFillColor: "transparent",
-  backgroundClip: "text",
-  animation: "snGrad 6s ease infinite",
-};
-
 export default function CtaFinal() {
   const { t } = useTranslations("ctaFinal");
   const [contactOpen, setContactOpen] = useState(false);
@@ -32,8 +23,7 @@ export default function CtaFinal() {
           transition={{ duration: 0.8 }}
         >
           <h2
-            className="t-h2"
-            style={gradientStyle}
+            className="t-h2 text-pure"
           >
             {t("title1")}<br />
             {t("title2")}<br />

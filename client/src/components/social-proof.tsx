@@ -14,15 +14,6 @@ const caseBgs: (string | null)[] = [
 // Franja de colaboraciones: desactivada hasta que haya colaboradores reales.
 const SHOW_COLLABORATIONS = false;
 
-const gradientStyle: React.CSSProperties = {
-  background: "linear-gradient(135deg,#ffffff 0%,#4D9FEC 40%,#1B4FD8 70%,#ffffff 100%)",
-  backgroundSize: "300% 300%",
-  WebkitBackgroundClip: "text",
-  WebkitTextFillColor: "transparent",
-  backgroundClip: "text",
-  animation: "snGrad 6s ease infinite",
-};
-
 export default function SocialProof() {
   const { messages } = useTranslations("socialProof");
   const m = messages as any;
@@ -41,8 +32,7 @@ export default function SocialProof() {
         >
           <span className="t-label">{m.label}</span>
           <h2
-            className="t-h2"
-            style={gradientStyle}
+            className="t-h2 text-pure"
           >
             {m.title}
           </h2>

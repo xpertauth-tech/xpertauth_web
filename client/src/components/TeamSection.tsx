@@ -7,15 +7,6 @@ const JOSE_LUIS_PHOTO = `${SUPABASE_BASE}/equipo/equipo_jose-luis-avatar_v1.webp
 const LEX_AVATAR = `${SUPABASE_BASE}/equipo/lex_avatar_v1.webp`;
 const NOVA_AVATAR = `${SUPABASE_BASE}/equipo/nova_avatar_v1.webp`;
 
-const gradientStyle: React.CSSProperties = {
-  background: "linear-gradient(135deg,#ffffff 0%,#4D9FEC 40%,#1B4FD8 70%,#ffffff 100%)",
-  backgroundSize: "300% 300%",
-  WebkitBackgroundClip: "text",
-  WebkitTextFillColor: "transparent",
-  backgroundClip: "text",
-  animation: "snGrad 6s ease infinite",
-};
-
 // Prueba de diseño: los tres botones con el mismo estilo (relleno Arctic #4D9FEC).
 
 const teamMembers = [
@@ -192,8 +183,7 @@ export default function TeamSection() {
             {sectionLabel[lang]}
           </span>
           <h2
-            className="t-h2"
-            style={gradientStyle}
+            className="t-h2 text-pure"
           >
             {sectionTitle[lang]}
           </h2>

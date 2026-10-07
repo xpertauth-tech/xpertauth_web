@@ -15,15 +15,6 @@ const SCROLL_PER_STEP = 600;
 const HEADER_SPACE = 220;
 const STICKY_TOP = 0;
 
-const gradientStyle: React.CSSProperties = {
-  background: "linear-gradient(135deg,#ffffff 0%,#4D9FEC 40%,#1B4FD8 70%,#ffffff 100%)",
-  backgroundSize: "300% 300%",
-  WebkitBackgroundClip: "text",
-  WebkitTextFillColor: "transparent",
-  backgroundClip: "text",
-  animation: "snGrad 6s ease infinite",
-};
-
 export default function HowItWorks() {
   const { messages } = useTranslations("howItWorks");
   const m = messages as any;
@@ -88,8 +79,7 @@ export default function HowItWorks() {
               {m.label}
             </span>
             <h2
-              className="t-h2"
-              style={gradientStyle}
+              className="t-h2 text-pure"
             >
               {m.title}
             </h2>

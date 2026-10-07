@@ -5,15 +5,6 @@ import { useTranslations } from "@/i18n/context";
 
 const SUPABASE_URL = import.meta.env.VITE_SUPABASE_URL;
 
-const gradientStyle: React.CSSProperties = {
-  background: "linear-gradient(135deg,#ffffff 0%,#4D9FEC 40%,#1B4FD8 70%,#ffffff 100%)",
-  backgroundSize: "300% 300%",
-  WebkitBackgroundClip: "text",
-  WebkitTextFillColor: "transparent",
-  backgroundClip: "text",
-  animation: "snGrad 6s ease infinite",
-};
-
 interface Post {
   id: string;
   title: string;
@@ -243,7 +234,7 @@ export default function BlogSection() {
           className="text-center head-gap"
         >
           <span className="t-label">{m.label}</span>
-          <h2 className="t-h2" style={gradientStyle}>
+          <h2 className="t-h2 text-pure">
             {m.title}
           </h2>
           <p className="lead-gap t-lead text-white/60 max-w-2xl mx-auto">{m.subtitle}</p>

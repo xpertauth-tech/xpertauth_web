@@ -381,6 +381,16 @@
   100% { background-position: 0% 50%; }
 }
 
+/* Degradado del título principal (H1) de cada página. Única definición. */
+.grad-title {
+  background: linear-gradient(135deg,#ffffff 0%,#4D9FEC 40%,#1B4FD8 70%,#ffffff 100%);
+  background-size: 300% 300%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: snGrad 6s ease infinite;
+}
+
 /* Hero de transporte — croquis técnico (hero-sketch.tsx): se traza una vez */
 @keyframes hcDraw {
   from { stroke-dashoffset: 1; }

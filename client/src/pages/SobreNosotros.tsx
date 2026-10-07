@@ -382,17 +382,8 @@ export default function SobreNosotros() {
         <section className="page-top pb-16 md:pb-24 px-6" style={{ background: "#0A0E1A", minHeight: "55vh", display: "flex", alignItems: "center" }}>
           <div style={{ maxWidth: 760, margin: "0 auto", textAlign: "center" }}>
             <h1
-              className="t-h1"
-              style={{
-                background: "linear-gradient(135deg,#ffffff 0%,#4D9FEC 40%,#1B4FD8 70%,#ffffff 100%)",
-                backgroundSize: "300% 300%",
-                WebkitBackgroundClip: "text",
-                WebkitTextFillColor: "transparent",
-                backgroundClip: "text",
-                animation: "snGrad 6s ease infinite",
-                marginBottom: "1.5rem",
-                whiteSpace: "pre-line",
-              }}
+              className="t-h1 grad-title"
+              style={{ marginBottom: "1.5rem", whiteSpace: "pre-line" }}
             >
               {t.hero.titulo}
             </h1>
@@ -451,16 +442,8 @@ export default function SobreNosotros() {
               {t.mision.etiqueta}
             </span>
             <h2
-              className="t-h2"
-              style={{
-                background: "linear-gradient(135deg,#ffffff 0%,#4D9FEC 40%,#1B4FD8 70%,#ffffff 100%)",
-                backgroundSize: "300% 300%",
-                WebkitBackgroundClip: "text",
-                WebkitTextFillColor: "transparent",
-                backgroundClip: "text",
-                animation: "snGrad 6s ease infinite",
-                marginBottom: "1.5rem",
-              }}
+              className="t-h2 text-pure"
+              style={{ marginBottom: "1.5rem" }}
             >
               {t.mision.titulo}
             </h2>
@@ -478,15 +461,7 @@ export default function SobreNosotros() {
                 {t.valores.etiqueta}
               </span>
               <h2
-                className="t-h2"
-                style={{
-                  background: "linear-gradient(135deg,#ffffff 0%,#4D9FEC 40%,#1B4FD8 70%,#ffffff 100%)",
-                  backgroundSize: "300% 300%",
-                  WebkitBackgroundClip: "text",
-                  WebkitTextFillColor: "transparent",
-                  backgroundClip: "text",
-                  animation: "snGrad 6s ease infinite",
-                }}
+                className="t-h2 text-pure"
               >
                 {t.valores.titulo}
               </h2>
@@ -501,16 +476,8 @@ export default function SobreNosotros() {
         <section className="section-y px-6" style={{ background: "#070A12", textAlign: "center", borderTop: "1px solid rgba(255,255,255,.06)" }}>
           <div style={{ maxWidth: 600, margin: "0 auto" }}>
             <h2
-              className="t-h2"
-              style={{
-                background: "linear-gradient(135deg,#ffffff 0%,#4D9FEC 40%,#1B4FD8 70%,#ffffff 100%)",
-                backgroundSize: "300% 300%",
-                WebkitBackgroundClip: "text",
-                WebkitTextFillColor: "transparent",
-                backgroundClip: "text",
-                animation: "snGrad 6s ease infinite",
-                marginBottom: "1.25rem",
-              }}
+              className="t-h2 text-pure"
+              style={{ marginBottom: "1.25rem" }}
             >
               {t.cta.titulo}
             </h2>
@@ -542,11 +509,6 @@ export default function SobreNosotros() {
 
       {/* Keyframe animación degradado — inyectado una sola vez */}
       <style>{`
-        @keyframes snGrad {
-          0%   { background-position: 0% 50%; }
-          50%  { background-position: 100% 50%; }
-          100% { background-position: 0% 50%; }
-        }
         .sn-foto {
           width: 100%; max-width: 320px; aspect-ratio: 3/4; object-fit: cover;
           border-radius: 1rem; filter: grayscale(100%);

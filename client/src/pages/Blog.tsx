@@ -143,15 +143,6 @@ export default function Blog() {
   const totalPages = Math.ceil(allPosts.length / PAGE_SIZE);
   const paginatedPosts = allPosts.slice((currentPage - 1) * PAGE_SIZE, currentPage * PAGE_SIZE);
 
-  const gradientStyle: React.CSSProperties = {
-    background: "linear-gradient(90deg, #ffffff 0%, #4D9FEC 50%, #1B4FD8 100%)",
-    backgroundSize: "200% auto",
-    WebkitBackgroundClip: "text",
-    WebkitTextFillColor: "transparent",
-    backgroundClip: "text",
-    animation: "snGrad 4s linear infinite",
-  };
-
   useEffect(() => {
     const fetchPosts = async () => {
       setLoading(true);
@@ -225,10 +216,6 @@ export default function Blog() {
   return (
     <div className="min-h-screen bg-[#0A0E1A]">
       <style>{`
-        @keyframes snGrad {
-          0% { background-position: 0% center; }
-          100% { background-position: 200% center; }
-        }
         @keyframes fadeUp {
           from { opacity: 0; transform: translateY(20px); }
           to   { opacity: 1; transform: translateY(0); }
@@ -252,7 +239,7 @@ export default function Blog() {
           <span className="t-label">
             {t.tag}
           </span>
-          <h1 className="t-h1 mb-6" style={gradientStyle}>
+          <h1 className="t-h1 grad-title mb-6">
             {t.heroTitle}
           </h1>
           <p className="t-lead text-white/60 max-w-xl mx-auto">
