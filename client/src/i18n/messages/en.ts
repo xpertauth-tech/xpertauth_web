@@ -43,7 +43,7 @@ const en = {
         description: "You get clear guidance. XpertAuth doesn't file paperwork with the administration: the next step is yours.",
       },
     ],
-    subtitle: "Four steps, no small print. AI helps; the last word belongs to a person.",
+    subtitle: "Four steps, no small print. AI answers instantly; a person, when needed.",
   },
   socialProof: {
     label: "Trust",

@@ -43,7 +43,7 @@ const fr = {
         description: "Vous recevez une orientation claire. XpertAuth ne fait pas les démarches auprès de l'administration : l'étape suivante est la vôtre.",
       },
     ],
-    subtitle: "Quatre étapes, sans petits caractères. L'IA aide ; le dernier mot revient à une personne.",
+    subtitle: "Quatre étapes, sans petits caractères. L'IA répond tout de suite ; une personne, quand il le faut.",
   },
   socialProof: {
     label: "Confiance",

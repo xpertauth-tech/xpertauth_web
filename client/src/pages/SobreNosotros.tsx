@@ -19,8 +19,8 @@ const translations = {
         "Llevo más de 30 años trabajando en el mundo del transporte especial por carretera, la mayor parte de ellos en Catalunya. He gestionado permisos, planificado rutas excepcionales y resuelto problemas que la normativa no siempre tiene claros. Lo aprendí todo sobre el terreno.",
         "Cuando llegó el momento de cerrar esa etapa, mi mente inquieta no supo quedarse quieta. Empecé a formarme en inteligencia artificial. Primero por curiosidad. Después con convicción.",
         "Fue entonces cuando lo vi claro. Las herramientas de IA que estaba estudiando podían transformar algo que siempre había sido un problema en el sector: el acceso al conocimiento normativo. Buscar entre cientos de páginas de reglamentos no es lo mismo que hablar con alguien que los conoce a fondo y te responde al instante. Eso era lo que la IA podía hacer. Y yo podía construirlo.",
-        "Eso sí, con una condición innegociable: la IA siempre supervisada por personas. La inteligencia artificial es una herramienta extraordinaria, pero la experiencia humana —y el sentido común en la toma de decisiones— es y será siempre necesaria. En XpertAuth, los agentes no trabajan solos. Trabajan conmigo.",
-        "Con el tiempo, ese mismo enfoque —experiencia real más IA bien supervisada— fue tomando forma en otro terreno: la alfabetización digital de las personas mayores, un proyecto hermano que nace de la misma convicción, aunque camina por su cuenta.",
+        "Eso sí, con una condición innegociable: la IA como herramienta, con una persona disponible cuando hace falta. La inteligencia artificial es una herramienta extraordinaria, pero la experiencia humana —y el sentido común en la toma de decisiones— es y será siempre necesaria. En XpertAuth, los agentes no trabajan solos. Trabajan conmigo.",
+        "Con el tiempo, ese mismo enfoque —experiencia real más IA explicada con transparencia— fue tomando forma en otro terreno: la alfabetización digital de las personas mayores, un proyecto hermano que nace de la misma convicción, aunque camina por su cuenta.",
         "XpertAuth es hoy un proyecto personal, en fase de aprendizaje y validación. No hay prisa por llegar a ningún sitio concreto — hay interés real por hacer las cosas bien.",
       ],
       firma: "José Luis Echezarreta — Fundador de XpertAuth",
@@ -45,7 +45,7 @@ const translations = {
         {
           num: "02",
           titulo: "La IA como herramienta, el humano como criterio",
-          texto: "Los agentes de XpertAuth no trabajan solos. Cada respuesta está respaldada por experiencia real. La tecnología amplifica el conocimiento humano; no lo sustituye.",
+          texto: "Detrás de los agentes de XpertAuth hay treinta años de oficio en el transporte especial. La tecnología amplifica el conocimiento humano; no lo sustituye.",
         },
         {
           num: "03",
@@ -80,8 +80,8 @@ const translations = {
         "Porto més de 30 anys treballant en el món del transport especial per carretera, la major part d'ells a Catalunya. He gestionat permisos, planificat rutes excepcionals i resolt problemes que la normativa no sempre té clars. Ho vaig aprendre tot sobre el terreny.",
         "Quan va arribar el moment de tancar aquella etapa, la meva ment inquieta no va saber quedar-se quieta. Vaig començar a formar-me en intel·ligència artificial. Primer per curiositat. Després amb convicció.",
         "Va ser llavors quan ho vaig veure clar. Les eines d'IA que estava estudiant podien transformar quelcom que sempre havia estat un problema al sector: l'accés al coneixement normatiu. Cercar entre centenars de pàgines de reglaments no és el mateix que parlar amb algú que els coneix a fons i et respon al moment. Això era el que la IA podia fer. I jo podia construir-ho.",
-        "Això sí, amb una condició innegociable: la IA sempre supervisada per persones. La intel·ligència artificial és una eina extraordinària, però l'experiència humana —i el sentit comú en la presa de decisions— és i serà sempre necessària. A XpertAuth, els agents no treballen sols. Treballen amb mi.",
-        "Amb el temps, aquest mateix enfocament —experiència real més IA ben supervisada— va anar prenent forma en un altre terreny: l'alfabetització digital de les persones grans, un projecte germà que neix de la mateixa convicció, tot i que camina pel seu compte.",
+        "Això sí, amb una condició innegociable: la IA com a eina, amb una persona disponible quan cal. La intel·ligència artificial és una eina extraordinària, però l'experiència humana —i el sentit comú en la presa de decisions— és i serà sempre necessària. A XpertAuth, els agents no treballen sols. Treballen amb mi.",
+        "Amb el temps, aquest mateix enfocament —experiència real més IA explicada amb transparència— va anar prenent forma en un altre terreny: l'alfabetització digital de les persones grans, un projecte germà que neix de la mateixa convicció, tot i que camina pel seu compte.",
         "XpertAuth és avui un projecte personal, en fase d'aprenentatge i validació. No hi ha pressa per arribar a cap lloc concret — hi ha interès real per fer les coses bé.",
       ],
       firma: "José Luis Echezarreta — Fundador de XpertAuth",
@@ -106,7 +106,7 @@ const translations = {
         {
           num: "02",
           titulo: "La IA com a eina, l'humà com a criteri",
-          texto: "Els agents de XpertAuth no treballen sols. Cada resposta està avalada per experiència real. La tecnologia amplifica el coneixement humà; no el substitueix.",
+          texto: "Darrere dels agents de XpertAuth hi ha trenta anys d'ofici en el transport especial. La tecnologia amplifica el coneixement humà; no el substitueix.",
         },
         {
           num: "03",
@@ -141,8 +141,8 @@ const translations = {
         "I've spent over 30 years working in special road transport, most of them in Catalonia. I've managed permits, planned exceptional routes and solved problems that regulations don't always make clear. I learned everything on the ground.",
         "When the time came to close that chapter, my restless mind couldn't stay still. I started training in artificial intelligence. First out of curiosity. Then out of conviction.",
         "That's when it became clear. The AI tools I was studying could transform something that had always been a problem in the sector: access to regulatory knowledge. Searching through hundreds of pages of regulations is not the same as talking to someone who knows them inside out and answers you instantly. That's what AI could do. And I could build it.",
-        "But with one non-negotiable condition: AI always supervised by humans. Artificial intelligence is an extraordinary tool, but human experience —and common sense in decision-making— is and will always be necessary. At XpertAuth, agents don't work alone. They work with me.",
-        "Over time, that same approach —real experience plus well-supervised AI— started taking shape in another area: digital literacy for older people, a sister project born from the same conviction, though it walks its own path.",
+        "But with one non-negotiable condition: AI as a tool, with a person available when needed. Artificial intelligence is an extraordinary tool, but human experience —and common sense in decision-making— is and will always be necessary. At XpertAuth, agents don't work alone. They work with me.",
+        "Over time, that same approach —real experience plus AI explained transparently— started taking shape in another area: digital literacy for older people, a sister project born from the same conviction, though it walks its own path.",
         "XpertAuth today is a personal project, in a learning and validation phase. There's no rush to get anywhere in particular — there's a real interest in doing things well.",
       ],
       firma: "José Luis Echezarreta — Founder of XpertAuth",
@@ -167,7 +167,7 @@ const translations = {
         {
           num: "02",
           titulo: "AI as a tool, humans as the judge",
-          texto: "XpertAuth's agents don't work alone. Every answer is backed by real experience. Technology amplifies human knowledge; it doesn't replace it.",
+          texto: "Behind XpertAuth's agents there are thirty years of hands-on experience in special transport. Technology amplifies human knowledge; it doesn't replace it.",
         },
         {
           num: "03",
@@ -202,8 +202,8 @@ const translations = {
         "Je travaille depuis plus de 30 ans dans le transport spécial routier, la plupart du temps en Catalogne. J'ai géré des permis, planifié des itinéraires exceptionnels et résolu des problèmes que la réglementation ne clarifie pas toujours. J'ai tout appris sur le terrain.",
         "Quand est venu le moment de clore ce chapitre, mon esprit curieux n'a pas su rester tranquille. J'ai commencé à me former à l'intelligence artificielle. D'abord par curiosité. Puis par conviction.",
         "C'est là que tout est devenu clair. Les outils d'IA que j'étudiais pouvaient transformer quelque chose qui avait toujours été un problème dans le secteur : l'accès à la connaissance réglementaire. Chercher dans des centaines de pages de règlements n'est pas la même chose que parler à quelqu'un qui les connaît parfaitement et vous répond instantanément. C'est ce que l'IA pouvait faire. Et je pouvais le construire.",
-        "Mais avec une condition non négociable : l'IA toujours supervisée par des humains. L'intelligence artificielle est un outil extraordinaire, mais l'expérience humaine —et le bon sens dans la prise de décision— est et sera toujours nécessaire. Chez XpertAuth, les agents ne travaillent pas seuls. Ils travaillent avec moi.",
-        "Avec le temps, cette même approche —expérience réelle et IA bien supervisée— a pris forme sur un autre terrain : l'alphabétisation numérique des personnes âgées, un projet frère né de la même conviction, même s'il suit son propre chemin.",
+        "Mais avec une condition non négociable : l'IA comme outil, avec une personne disponible quand il le faut. L'intelligence artificielle est un outil extraordinaire, mais l'expérience humaine —et le bon sens dans la prise de décision— est et sera toujours nécessaire. Chez XpertAuth, les agents ne travaillent pas seuls. Ils travaillent avec moi.",
+        "Avec le temps, cette même approche —expérience réelle et IA expliquée en toute transparence— a pris forme sur un autre terrain : l'alphabétisation numérique des personnes âgées, un projet frère né de la même conviction, même s'il suit son propre chemin.",
         "XpertAuth est aujourd'hui un projet personnel, en phase d'apprentissage et de validation. Il n'y a pas d'urgence à arriver quelque part en particulier — il y a un intérêt réel à bien faire les choses.",
       ],
       firma: "José Luis Echezarreta — Fondateur de XpertAuth",
@@ -228,7 +228,7 @@ const translations = {
         {
           num: "02",
           titulo: "L'IA comme outil, l'humain comme critère",
-          texto: "Les agents de XpertAuth ne travaillent pas seuls. Chaque réponse est soutenue par une expérience réelle. La technologie amplifie la connaissance humaine ; elle ne la remplace pas.",
+          texto: "Derrière les agents de XpertAuth, il y a trente ans de métier dans le transport spécial. La technologie amplifie la connaissance humaine ; elle ne la remplace pas.",
         },
         {
           num: "03",

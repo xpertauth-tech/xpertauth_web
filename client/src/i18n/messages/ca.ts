@@ -43,7 +43,7 @@ const ca = {
         description: "Reps una orientació clara. XpertAuth no tramita davant l'administració: el següent pas és teu.",
       },
     ],
-    subtitle: "Quatre passos, sense lletra petita. La IA ajuda; l'última paraula és d'una persona.",
+    subtitle: "Quatre passos, sense lletra petita. La IA respon a l'instant; una persona, quan cal.",
   },
   socialProof: {
     label: "Confiança",
