@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useI18n } from "../i18n/context";
 import Navbar from "@/components/navbar";
 import Footer from "@/components/footer";
@@ -363,6 +363,26 @@ function ValoresStack({ items, hint }: { items: ValorItem[]; hint: string }) {
   );
 }
 
+// En móvil la pila se reduce con transform: scale (no cambia el alto que ocupa
+// en el flujo). Se compensa con un margen negativo igual a lo que se encoge.
+const STACK_MOBILE_SCALE = 0.58;
+function useStackScaleGap(ref: React.RefObject<HTMLDivElement>) {
+  useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+    const apply = () => {
+      if (window.innerWidth <= 768) {
+        el.style.marginBottom = `-${Math.round(el.offsetHeight * (1 - STACK_MOBILE_SCALE))}px`;
+      } else {
+        el.style.marginBottom = "";
+      }
+    };
+    apply();
+    window.addEventListener("resize", apply);
+    return () => window.removeEventListener("resize", apply);
+  }, [ref]);
+}
+
 // ─── COMPONENTE PRINCIPAL ─────────────────────────────────────────────────────
 
 export default function SobreNosotros() {
@@ -371,6 +391,8 @@ export default function SobreNosotros() {
   const t = translations[lang] ?? translations.es;
 
   const [contactOpen, setContactOpen] = useState(false);
+  const stackRef = useRef<HTMLDivElement>(null);
+  useStackScaleGap(stackRef);
 
   return (
     <div className="min-h-screen">
@@ -466,7 +488,7 @@ export default function SobreNosotros() {
                 {t.valores.titulo}
               </h2>
             </div>
-            <div className="sn-stack-scale" style={{ display: "flex", justifyContent: "center" }}>
+            <div ref={stackRef} className="sn-stack-scale" style={{ display: "flex", justifyContent: "center" }}>
               <ValoresStack items={t.valores.items} hint={t.valores.hint} />
             </div>
           </div>
@@ -520,7 +542,7 @@ export default function SobreNosotros() {
         @media(max-width: 768px){
           .sn-grid-historia { grid-template-columns: 1fr !important; }
           .sn-foto { max-width: 200px !important; margin: 0 auto; }
-          .sn-stack-scale { transform: scale(.58) !important; transform-origin: top center; }
+          .sn-stack-scale { transform: scale(${STACK_MOBILE_SCALE}) !important; transform-origin: top center; }
         }
       `}</style>
     </div>
