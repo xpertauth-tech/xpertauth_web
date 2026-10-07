@@ -51,7 +51,6 @@ const es = {
     subtitle: "Situaciones reales del sector, resueltas con oficio y, cuando ayuda, con IA.",
     stats: [
       { value: "30+", label: "Años de experiencia" },
-      { value: "0 €", label: "Sin cuotas" },
     ],
     cases: [
       {

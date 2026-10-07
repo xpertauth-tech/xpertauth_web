@@ -51,7 +51,6 @@ const fr = {
     subtitle: "Des situations réelles du secteur, résolues avec le métier et, quand ça aide, avec l'IA.",
     stats: [
       { value: "30+", label: "Années d'expérience" },
-      { value: "0 €", label: "Sans frais" },
     ],
     cases: [
       {

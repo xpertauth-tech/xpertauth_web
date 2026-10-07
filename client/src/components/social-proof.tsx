@@ -50,7 +50,7 @@ export default function SocialProof() {
         </motion.div>
 
         {/* Stats */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 max-w-2xl mx-auto mb-16">
+        <div className="flex flex-wrap justify-center gap-6 max-w-2xl mx-auto mb-16">
           {stats.map((stat: any, i: number) => (
             <motion.div
               key={i}
@@ -58,7 +58,7 @@ export default function SocialProof() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.4, delay: i * 0.1 }}
-              className="text-center p-6 rounded-xl bg-white/[0.03] border border-white/[0.08]"
+              className="text-center p-6 rounded-xl bg-white/[0.03] border border-white/[0.08] w-full sm:w-72"
               data-testid={`stat-${i}`}
             >
               <div className="font-heading font-bold text-pure text-5xl sm:text-6xl">{stat.value}</div>

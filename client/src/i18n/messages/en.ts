@@ -51,7 +51,6 @@ const en = {
     subtitle: "Real situations from the sector, solved with craft and, when it helps, with AI.",
     stats: [
       { value: "30+", label: "Years of experience" },
-      { value: "€0", label: "No fees" },
     ],
     cases: [
       {

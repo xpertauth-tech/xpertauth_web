@@ -51,7 +51,6 @@ const ca = {
     subtitle: "Situacions reals del sector, resoltes amb ofici i, quan ajuda, amb IA.",
     stats: [
       { value: "30+", label: "Anys d'experiència" },
-      { value: "0 €", label: "Sense quotes" },
     ],
     cases: [
       {
