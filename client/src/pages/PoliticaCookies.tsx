@@ -129,7 +129,7 @@ const data: Record<string, Doc> = {
             [
               "Agent pendent (`xpertauth_pending_agent`)",
               "Obrir LEX o NOVA en tornar de l'inici de sessió de Google",
-              "S'esborra sola en tornar o en tancar la pestanya"
+              "S'esborra sol en tornar o en tancar la pestanya"
             ]
           ]
         },

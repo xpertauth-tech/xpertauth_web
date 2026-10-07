@@ -115,7 +115,7 @@ const data: Record<string, Doc> = {
       {
         "id": "oferta",
         "title": "02 · What this website offers",
-        "content": "- **LEX:** guidance on road special transport regulations, based on our own regulatory database.\n- **NOVA:** practical ideas for using artificial intelligence in a transport SME.\n- **Blog:** articles on regulations and on the reality of the sector.\n- **Contact and appointments:** to raise a specific case.\n\n**What XpertAuth does not do:**\n- It does not handle any procedure with the authorities (DGT, SCT or any other body). It gives guidance; the procedure is done by you or your administrative agent (gestor).\n- It does not draft or sign reports, appeals or statements of defence against fines with legal liability. Those documents are prepared and signed by a qualified professional."
+        "content": "- **LEX:** guidance on special road transport regulations, based on our own regulatory database.\n- **NOVA:** practical ideas for using artificial intelligence in a transport SME.\n- **Blog:** articles on regulations and on the reality of the sector.\n- **Contact and appointments:** to raise a specific case.\n\n**What XpertAuth does not do:**\n- It does not handle any procedure with the authorities (DGT, SCT or any other body). It gives guidance; the procedure is done by you or your administrative agent (gestor).\n- It does not draft or sign reports, appeals or statements of defence against fines with legal liability. Those documents are prepared and signed by a qualified professional."
       },
       {
         "id": "lex-nova",
