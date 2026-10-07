@@ -495,7 +495,7 @@ export default function SobreNosotros() {
         </section>
 
         {/* ══ CTA FINAL ═════════════════════════════════════════════════ */}
-        <section className="section-y px-6" style={{ background: "#070A12", textAlign: "center", borderTop: "1px solid rgba(255,255,255,.06)" }}>
+        <section className="section-y px-6" style={{ background: "#0A0E1A", textAlign: "center", borderTop: "1px solid rgba(255,255,255,.06)" }}>
           <div style={{ maxWidth: 600, margin: "0 auto" }}>
             <h2
               className="t-h2 text-pure"
