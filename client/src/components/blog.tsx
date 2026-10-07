@@ -91,12 +91,12 @@ function CardInner({ post }: { post: Post }) {
       <div className="flex flex-col flex-grow p-5">
         <div className="flex items-center gap-2 mb-2">
           <Calendar className="w-3.5 h-3.5 text-white/40" />
-          <span className="text-white/40 text-xs">{formatDate(post.published_at)}</span>
+          <span className="t-small text-white/40">{formatDate(post.published_at)}</span>
         </div>
-        <h3 className="font-heading font-semibold text-pure text-base leading-snug mb-2 group-hover:text-arctic transition-colors">
+        <h3 className="t-h3 text-pure mb-2 group-hover:text-arctic transition-colors">
           {post.title}
         </h3>
-        <p className="text-white/55 text-sm leading-relaxed line-clamp-3">{post.excerpt}</p>
+        <p className="t-small text-white/55 line-clamp-3">{post.excerpt}</p>
       </div>
     </>
   );
@@ -242,11 +242,11 @@ export default function BlogSection() {
           transition={{ duration: 0.6 }}
           className="text-center mb-14"
         >
-          <span className="text-arctic text-xs font-semibold tracking-widest uppercase">{m.label}</span>
-          <h2 className="font-heading font-bold text-3xl sm:text-4xl mt-4" style={gradientStyle}>
+          <span className="t-label">{m.label}</span>
+          <h2 className="t-h2" style={gradientStyle}>
             {m.title}
           </h2>
-          <p className="mt-4 text-white/60 text-base max-w-2xl mx-auto leading-relaxed">{m.subtitle}</p>
+          <p className="mt-4 t-lead text-white/60 max-w-2xl mx-auto">{m.subtitle}</p>
         </motion.div>
 
         {loaded && posts.length > 0 && (

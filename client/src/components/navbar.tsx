@@ -179,7 +179,7 @@ export default function Navbar() {
                 onError={(e) => { (e.target as HTMLImageElement).style.display = "none"; }}
               />
             )}
-            <span className="font-heading font-semibold text-pure text-lg">
+            <span className="t-h3 text-pure">
               Xpert<span className="text-arctic">Auth</span>
             </span>
           </button>

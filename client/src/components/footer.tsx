@@ -52,11 +52,11 @@ export default function Footer() {
                 height={32}
                 className="rounded-md"
               />
-              <span className="font-heading font-semibold text-pure text-lg">
+              <span className="t-h3 text-pure">
                 Xpert<span className="text-arctic">Auth</span>
               </span>
             </div>
-            <p className="text-white/50 text-sm leading-relaxed mb-6">{m.description}</p>
+            <p className="text-white/50 t-small  mb-6">{m.description}</p>
             <div className="flex items-center gap-3">
               <a
                 href="https://www.linkedin.com/in/jl-echezarreta-fabregó"
@@ -93,7 +93,7 @@ export default function Footer() {
 
           {/* Columna 2 — Links rápidos */}
           <div>
-            <h4 className="font-heading font-semibold text-pure text-sm mb-4 uppercase tracking-wider">
+            <h4 className="font-heading font-semibold text-pure t-small mb-4 uppercase tracking-wider">
               {m.quickLinks}
             </h4>
             <ul className="space-y-2.5">
@@ -101,7 +101,7 @@ export default function Footer() {
                 <li key={link.href}>
                   <button
                     onClick={() => handleLink(link.href, link.isExternal)}
-                    className="text-white/50 text-sm hover:text-white/80 transition-colors"
+                    className="text-white/50 t-small hover:text-white/80 transition-colors"
                     data-testid={`link-footer-${link.href.replace("#", "").replace("/es/", "")}`}
                   >
                     {link.label}
@@ -113,7 +113,7 @@ export default function Footer() {
 
           {/* Columna 3 — Contacto */}
           <div>
-            <h4 className="font-heading font-semibold text-pure text-sm mb-4 uppercase tracking-wider">
+            <h4 className="font-heading font-semibold text-pure t-small mb-4 uppercase tracking-wider">
               {m.contact}
             </h4>
             <ul className="space-y-3">
@@ -121,7 +121,7 @@ export default function Footer() {
                 <Mail className="w-4 h-4 text-arctic flex-shrink-0" />
                 <a
                   href="mailto:info@xpertauth.com"
-                  className="text-white/50 text-sm hover:text-white/80 transition-colors"
+                  className="text-white/50 t-small hover:text-white/80 transition-colors"
                   data-testid="link-footer-email"
                 >
                   info@xpertauth.com
@@ -131,7 +131,7 @@ export default function Footer() {
                 <Phone className="w-4 h-4 text-arctic flex-shrink-0" />
                 <a
                   href="tel:+34625897546"
-                  className="text-white/50 text-sm hover:text-white/80 transition-colors"
+                  className="text-white/50 t-small hover:text-white/80 transition-colors"
                   data-testid="link-footer-phone"
                 >
                   +34 625 897 546
@@ -139,14 +139,14 @@ export default function Footer() {
               </li>
               <li className="flex items-start gap-3">
                 <MapPin className="w-4 h-4 text-arctic flex-shrink-0 mt-0.5" />
-                <span className="text-white/50 text-sm">{m.spain}</span>
+                <span className="text-white/50 t-small">{m.spain}</span>
               </li>
             </ul>
           </div>
 
           {/* Columna 4 — Horario de atención */}
           <div>
-            <h4 className="font-heading font-semibold text-pure text-sm mb-4 uppercase tracking-wider">
+            <h4 className="font-heading font-semibold text-pure t-small mb-4 uppercase tracking-wider">
               {m.scheduleTitle}
             </h4>
             <ul className="space-y-3 mb-5">
@@ -154,8 +154,8 @@ export default function Footer() {
                 <li key={i} className="flex items-start gap-3">
                   <Clock className="w-4 h-4 text-arctic flex-shrink-0 mt-0.5" />
                   <div>
-                    <p className="text-white/70 text-xs font-medium">{item.day}</p>
-                    <p className="text-white/50 text-xs">{item.hours}</p>
+                    <p className="text-white/70 t-small font-medium">{item.day}</p>
+                    <p className="text-white/50 t-small">{item.hours}</p>
                   </div>
                 </li>
               ))}
@@ -165,11 +165,11 @@ export default function Footer() {
                 <div className="w-2 h-2 rounded-full bg-arctic animate-pulse" />
               </div>
               <div>
-                <p className="text-white/70 text-xs font-medium">{m.scheduleAgents}</p>
-                <p className="text-arctic text-xs font-semibold">24/7</p>
+                <p className="text-white/70 t-small font-medium">{m.scheduleAgents}</p>
+                <p className="text-arctic t-small font-semibold">24/7</p>
               </div>
             </div>
-            <p className="mt-4 text-white/50 text-xs leading-relaxed">
+            <p className="mt-4 text-white/50 t-small ">
               {m.scheduleResponse}
             </p>
           </div>
@@ -178,7 +178,7 @@ export default function Footer() {
 
         {/* Barra inferior */}
         <div className="pt-8 flex flex-col md:flex-row items-center justify-between gap-4">
-          <div className="flex flex-wrap items-center justify-center gap-4 text-white/30 text-xs">
+          <div className="flex flex-wrap items-center justify-center gap-4 text-white/30 t-small">
             <a href={"/" + locale + "/politica-de-privacidad"} className="hover:text-white/60 transition-colors" data-testid="link-privacy">
               {m.privacy}
             </a>
@@ -191,11 +191,11 @@ export default function Footer() {
               {m.cookies}
             </a>
           </div>
-          <p className="text-white/30 text-xs text-center md:text-right">{m.aiDisclosure}</p>
+          <p className="text-white/30 t-small text-center md:text-right">{m.aiDisclosure}</p>
         </div>
 
         <div className="mt-4 text-center">
-          <p className="text-white/20 text-xs">
+          <p className="text-white/20 t-small">
             &copy; {new Date().getFullYear()} XpertAuth. {m.rights}
           </p>
         </div>

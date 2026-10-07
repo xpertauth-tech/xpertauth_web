@@ -322,13 +322,13 @@ function ValoresStack({ items, hint }: { items: ValorItem[]; hint: string }) {
                 filter: slot === 0 ? "none" : `brightness(${1 - slot * 0.12})`,
               }}
             >
-              <span style={{ fontSize: "0.72rem", fontWeight: 800, letterSpacing: "0.18em", color: "#4D9FEC", textTransform: "uppercase" as const }}>
+              <span className="t-label" style={{ marginBottom: 0 }}>
                 {item.num}
               </span>
-              <p style={{ fontSize: "1rem", fontWeight: 700, color: "#ffffff", lineHeight: 1.4 }}>
+              <p className="t-h3" style={{ color: "#ffffff" }}>
                 {item.titulo}
               </p>
-              <p style={{ fontSize: "0.85rem", color: "#ffffff", lineHeight: 1.7 }}>
+              <p className="t-small" style={{ color: "#ffffff" }}>
                 {item.texto}
               </p>
             </div>
@@ -356,7 +356,7 @@ function ValoresStack({ items, hint }: { items: ValorItem[]; hint: string }) {
         ))}
       </div>
 
-      <p style={{ fontSize: "0.72rem", color: "rgba(255,255,255,0.28)", letterSpacing: "0.06em", marginTop: "0.1rem" }}>
+      <p className="t-small" style={{ color: "rgba(255,255,255,0.28)", letterSpacing: "0.06em", marginTop: "0.1rem" }}>
         {hint}
       </p>
     </div>
@@ -376,12 +376,13 @@ export default function SobreNosotros() {
     <div className="min-h-screen">
       <Navbar />
 
-      <main style={{ fontFamily: "'Sora','Inter',sans-serif" }}>
+      <main>
 
         {/* ══ HERO ══════════════════════════════════════════════════════ */}
         <section style={{ background: "#0A0E1A", minHeight: "55vh", display: "flex", alignItems: "center", padding: "140px 24px 80px" }}>
           <div style={{ maxWidth: 760, margin: "0 auto", textAlign: "center" }}>
             <h1
+              className="t-h1"
               style={{
                 background: "linear-gradient(135deg,#ffffff 0%,#4D9FEC 40%,#1B4FD8 70%,#ffffff 100%)",
                 backgroundSize: "300% 300%",
@@ -389,16 +390,13 @@ export default function SobreNosotros() {
                 WebkitTextFillColor: "transparent",
                 backgroundClip: "text",
                 animation: "snGrad 6s ease infinite",
-                fontSize: "clamp(2rem,5vw,3.4rem)",
-                fontWeight: 800,
-                lineHeight: 1.15,
                 marginBottom: "1.5rem",
                 whiteSpace: "pre-line",
               }}
             >
               {t.hero.titulo}
             </h1>
-            <p style={{ color: "rgba(255,255,255,.6)", fontSize: "clamp(.95rem,2vw,1.15rem)", lineHeight: 1.8, maxWidth: 620, margin: "0 auto" }}>
+            <p className="t-lead" style={{ color: "rgba(255,255,255,.6)", maxWidth: 620, margin: "0 auto" }}>
               {t.hero.subtitulo}
             </p>
           </div>
@@ -433,13 +431,13 @@ export default function SobreNosotros() {
               </div>
             </div>
             <div>
-              <span style={{ display: "block", fontSize: ".7rem", fontWeight: 700, letterSpacing: ".15em", textTransform: "uppercase" as const, color: "#4D9FEC", marginBottom: ".75rem" }}>
+              <span className="t-label">
                 {t.historia.etiqueta}
               </span>
               {t.historia.parrafos.map((p, i) => (
-                <p key={i} style={{ color: "rgba(255,255,255,.75)", fontSize: ".97rem", lineHeight: 1.85, marginTop: i > 0 ? "1.25rem" : 0 }}>{p}</p>
+                <p key={i} className="t-body" style={{ color: "rgba(255,255,255,.75)", marginTop: i > 0 ? "1.25rem" : 0 }}>{p}</p>
               ))}
-              <p style={{ marginTop: "2rem", color: "#4D9FEC", fontWeight: 700, fontSize: ".88rem", fontStyle: "italic" }}>
+              <p className="t-small" style={{ marginTop: "2rem", color: "#4D9FEC", fontWeight: 700, fontStyle: "italic" }}>
                 {t.historia.firma}
               </p>
             </div>
@@ -449,10 +447,11 @@ export default function SobreNosotros() {
         {/* ══ MISIÓN ════════════════════════════════════════════════════ */}
         <section style={{ background: "#0F1628", padding: "80px 24px" }}>
           <div style={{ maxWidth: 720, margin: "0 auto", textAlign: "center" }}>
-            <span style={{ display: "block", fontSize: ".7rem", fontWeight: 700, letterSpacing: ".15em", textTransform: "uppercase" as const, color: "#4D9FEC", marginBottom: ".75rem" }}>
+            <span className="t-label">
               {t.mision.etiqueta}
             </span>
             <h2
+              className="t-h2"
               style={{
                 background: "linear-gradient(135deg,#ffffff 0%,#4D9FEC 40%,#1B4FD8 70%,#ffffff 100%)",
                 backgroundSize: "300% 300%",
@@ -460,15 +459,12 @@ export default function SobreNosotros() {
                 WebkitTextFillColor: "transparent",
                 backgroundClip: "text",
                 animation: "snGrad 6s ease infinite",
-                fontSize: "clamp(1.7rem,3.5vw,2.6rem)",
-                fontWeight: 800,
-                lineHeight: 1.2,
                 marginBottom: "1.5rem",
               }}
             >
               {t.mision.titulo}
             </h2>
-            <p style={{ color: "rgba(255,255,255,.65)", fontSize: "1.02rem", lineHeight: 1.9 }}>
+            <p className="t-body" style={{ color: "rgba(255,255,255,.65)" }}>
               {t.mision.texto}
             </p>
           </div>
@@ -478,10 +474,11 @@ export default function SobreNosotros() {
         <section style={{ background: "#0A0E1A", padding: "80px 24px 160px" }}>
           <div style={{ maxWidth: 1100, margin: "0 auto" }}>
             <div style={{ textAlign: "center", marginBottom: "4rem" }}>
-              <span style={{ display: "block", fontSize: ".7rem", fontWeight: 700, letterSpacing: ".15em", textTransform: "uppercase" as const, color: "#4D9FEC", marginBottom: ".75rem" }}>
+              <span className="t-label">
                 {t.valores.etiqueta}
               </span>
               <h2
+                className="t-h2"
                 style={{
                   background: "linear-gradient(135deg,#ffffff 0%,#4D9FEC 40%,#1B4FD8 70%,#ffffff 100%)",
                   backgroundSize: "300% 300%",
@@ -489,9 +486,6 @@ export default function SobreNosotros() {
                   WebkitTextFillColor: "transparent",
                   backgroundClip: "text",
                   animation: "snGrad 6s ease infinite",
-                  fontSize: "clamp(1.7rem,3.5vw,2.6rem)",
-                  fontWeight: 800,
-                  lineHeight: 1.2,
                 }}
               >
                 {t.valores.titulo}
@@ -507,6 +501,7 @@ export default function SobreNosotros() {
         <section style={{ background: "#070A12", padding: "80px 24px", textAlign: "center", borderTop: "1px solid rgba(255,255,255,.06)" }}>
           <div style={{ maxWidth: 600, margin: "0 auto" }}>
             <h2
+              className="t-h2"
               style={{
                 background: "linear-gradient(135deg,#ffffff 0%,#4D9FEC 40%,#1B4FD8 70%,#ffffff 100%)",
                 backgroundSize: "300% 300%",
@@ -514,15 +509,12 @@ export default function SobreNosotros() {
                 WebkitTextFillColor: "transparent",
                 backgroundClip: "text",
                 animation: "snGrad 6s ease infinite",
-                fontSize: "clamp(1.7rem,3.5vw,2.6rem)",
-                fontWeight: 800,
-                lineHeight: 1.2,
                 marginBottom: "1.25rem",
               }}
             >
               {t.cta.titulo}
             </h2>
-            <p style={{ color: "rgba(255,255,255,.55)", fontSize: "1rem", lineHeight: 1.8, marginBottom: "2.5rem" }}>
+            <p className="t-body" style={{ color: "rgba(255,255,255,.55)", marginBottom: "2.5rem" }}>
               {t.cta.subtitulo}
             </p>
             <div style={{ display: "flex", gap: "1rem", justifyContent: "center", flexWrap: "wrap" }}>

@@ -214,16 +214,16 @@ export default function AvisoLegal() {
       <Navbar />
       <section className="pt-32 pb-12 px-6 bg-[#0A0E1A]">
         <div className="max-w-3xl mx-auto">
-          <span className="inline-block text-xs font-semibold tracking-widest text-[#4D9FEC] uppercase mb-4 border border-[#4D9FEC]/30 px-3 py-1 rounded-full">Legal</span>
-          <h1 className="text-4xl md:text-5xl font-bold text-white mb-4">{s.title}</h1>
-          <p className="text-white/40 text-sm">{s.updated}</p>
-          {s.intro && <p className="text-white/60 text-lg mt-6 leading-relaxed">{s.intro}</p>}
+          <span className="t-label">Legal</span>
+          <h1 className="t-h1 text-white mb-4">{s.title}</h1>
+          <p className="t-small text-white/40">{s.updated}</p>
+          {s.intro && <p className="t-lead text-white/60 mt-6">{s.intro}</p>}
         </div>
       </section>
       <section className="px-6 pb-8 bg-[#0A0E1A]">
         <div className="max-w-3xl mx-auto flex flex-wrap gap-2">
           {s.items.map(item => (
-            <a key={item.id} href={"#" + item.id} className="text-xs text-white/40 hover:text-[#4D9FEC] border border-white/10 hover:border-[#4D9FEC]/30 px-3 py-1.5 rounded-full transition-all">
+            <a key={item.id} href={"#" + item.id} className="t-small text-white/40 hover:text-[#4D9FEC] border border-white/10 hover:border-[#4D9FEC]/30 px-3 py-1.5 rounded-full transition-all">
               {item.title.split(" · ")[1]}
             </a>
           ))}
@@ -233,7 +233,7 @@ export default function AvisoLegal() {
         <div className="max-w-3xl mx-auto space-y-4">
           {s.items.map(item => (
             <div key={item.id} id={item.id} className="legal-card bg-[#0F1628] border border-white/8 rounded-xl p-7 scroll-mt-24">
-              <h2 className="text-xs font-bold text-[#4D9FEC] mb-4 tracking-wide uppercase">{item.title}</h2>
+              <h2 className="t-h3 text-[#4D9FEC] mb-4">{item.title}</h2>
               <LegalText text={item.content} />
             </div>
           ))}

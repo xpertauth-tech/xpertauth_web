@@ -212,10 +212,10 @@ export default function BlogPost() {
           to   { opacity: 1; transform: translateY(0); }
         }
         .fade-up { animation: fadeUp 0.5s ease forwards; }
-        .prose-content { color: rgba(255,255,255,0.80); font-size: 1.0625rem; line-height: 1.85; }
+        .prose-content { color: rgba(255,255,255,0.80); font-family: "Inter", sans-serif; font-size: 16px; line-height: 1.65; }
         .prose-content p { margin-bottom: 1.4rem; }
-        .prose-content h2 { color: #fff; font-weight: 700; font-size: 1.5rem; margin-top: 2.5rem; margin-bottom: 1rem; }
-        .prose-content h3 { color: #fff; font-weight: 700; font-size: 1.25rem; margin-top: 2rem; margin-bottom: 0.75rem; }
+        .prose-content h2 { color: #fff; font-family: "Sora", sans-serif; font-weight: 700; font-size: 28px; line-height: 1.2; margin-top: 2.5rem; margin-bottom: 1rem; }
+        .prose-content h3 { color: #fff; font-family: "Sora", sans-serif; font-weight: 600; font-size: 20px; line-height: 1.3; margin-top: 2rem; margin-bottom: 0.75rem; }
         .prose-content a { color: #4D9FEC; text-decoration: underline; text-underline-offset: 3px; }
         .prose-content a:hover { color: #fff; }
         .prose-content ul { list-style-type: disc; padding-left: 1.5rem; margin-bottom: 1.4rem; }
@@ -233,7 +233,7 @@ export default function BlogPost() {
         <div className="max-w-3xl mx-auto">
           <button
             onClick={() => { window.location.href = "/" + locale + "/blog"; }}
-            className="text-sm text-white/40 hover:text-[#4D9FEC] transition-colors"
+            className="t-small text-white/40 hover:text-[#4D9FEC] transition-colors"
           >
             {t.backLabel}
           </button>
@@ -249,14 +249,14 @@ export default function BlogPost() {
           {/* CABECERA */}
           <header className="px-6 pb-12 bg-[#0A0E1A]">
             <div className="max-w-3xl mx-auto fade-up">
-              <span className="inline-block text-xs font-semibold tracking-widest text-[#4D9FEC] uppercase mb-5 border border-[#4D9FEC]/30 px-3 py-1 rounded-full">
+              <span className="t-label">
                 {t.tag}
               </span>
-              <h1 className="text-3xl md:text-4xl font-bold text-white mb-5 leading-tight">
+              <h1 className="t-h1 text-white mb-5">
                 {post.title}
               </h1>
-              <p className="text-white/55 text-lg mb-6 leading-relaxed">{post.excerpt}</p>
-              <div className="flex items-center gap-3 text-sm text-white/30">
+              <p className="t-lead text-white/55 mb-6">{post.excerpt}</p>
+              <div className="flex items-center gap-3 t-small text-white/30">
                 <span>📅 {formatDate(post.published_at, locale)}</span>
                 {post.author && <span>· {t.by} {post.author}</span>}
               </div>
@@ -282,8 +282,8 @@ export default function BlogPost() {
           {/* CTA */}
           <section className="py-14 px-6 bg-[#0A0E1A]">
             <div className="max-w-3xl mx-auto bg-[#0F1628] border border-[#1B4FD8]/30 rounded-xl p-8 text-center">
-              <h3 className="text-xl font-bold text-white mb-2">{t.ctaTitle}</h3>
-              <p className="text-white/50 text-sm mb-6">{t.ctaSubtitle}</p>
+              <h3 className="t-h3 text-white mb-2">{t.ctaTitle}</h3>
+              <p className="t-small text-white/50 mb-6">{t.ctaSubtitle}</p>
               <button
                 onClick={() => setContactOpen(true)}
                 className="bg-[#1B4FD8] hover:bg-[#1B4FD8]/80 text-white font-semibold px-6 py-3 rounded-lg text-sm transition-colors"
@@ -299,8 +299,8 @@ export default function BlogPost() {
       {SHOW_SUBSCRIPTION && (
         <section className="py-16 px-6 bg-[#070A12]">
           <div className="max-w-xl mx-auto text-center">
-            <h2 className="text-2xl font-bold text-white mb-3">{t.subscribeTitle}</h2>
-            <p className="text-white/50 text-sm mb-8">{t.subscribeSubtitle}</p>
+            <h2 className="t-h2 text-white mb-3">{t.subscribeTitle}</h2>
+            <p className="t-small text-white/50 mb-8">{t.subscribeSubtitle}</p>
             {subStatus === "ok" ? (
               <p className="text-[#4D9FEC] font-medium">{t.successMsg}</p>
             ) : (

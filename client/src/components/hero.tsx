@@ -53,7 +53,7 @@ export default function Hero() {
             </span>
           </div>
 
-          <h1 className="font-heading font-bold text-pure text-4xl sm:text-5xl md:text-6xl lg:text-6xl xl:text-7xl leading-tight tracking-tight">
+          <h1 className="t-h1-hero text-pure tracking-tight">
             {t("title1")}
             <br />
             <span
@@ -74,7 +74,7 @@ export default function Hero() {
             <HeroSketch />
           </div>
 
-          <p className="mt-6 sm:mt-8 text-white/60 text-base sm:text-lg md:text-xl max-w-2xl lg:max-w-4xl mx-auto leading-relaxed font-light">{t("subtitle").split("\n").map((line, i) => (
+          <p className="mt-6 sm:mt-8 t-lead text-white/60 max-w-2xl lg:max-w-4xl mx-auto">{t("subtitle").split("\n").map((line, i) => (
               <span key={i}>
                 {i > 0 && (
                   <>

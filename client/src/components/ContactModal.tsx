@@ -109,7 +109,7 @@ export default function ContactModal({ open, onClose }: ContactModalProps) {
               {status === "ok" ? (
                 <div className="text-center py-6">
                   <CheckCircle className="w-12 h-12 text-arctic mx-auto mb-4" />
-                  <h3 className="font-heading font-bold text-pure text-xl mb-2">{t("successTitle")}</h3>
+                  <h3 className="t-h3 text-pure mb-2">{t("successTitle")}</h3>
                   <p className="text-white/60 text-sm">{t("successMessage")}</p>
                   <button
                     onClick={handleClose}
@@ -120,7 +120,7 @@ export default function ContactModal({ open, onClose }: ContactModalProps) {
                 </div>
               ) : (
                 <>
-                  <h3 className="font-heading font-bold text-pure text-xl mb-1">{t("title")}</h3>
+                  <h3 className="t-h3 text-pure mb-1">{t("title")}</h3>
                   <p className="text-white/50 text-sm mb-6">{t("subtitle")}</p>
 
                   <div className="space-y-4">

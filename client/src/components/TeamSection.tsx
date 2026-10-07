@@ -192,16 +192,16 @@ export default function TeamSection() {
           transition={{ duration: 0.6 }}
           className="text-center mb-16"
         >
-          <span className="text-arctic text-xs font-semibold tracking-widest uppercase">
+          <span className="t-label">
             {sectionLabel[lang]}
           </span>
           <h2
-            className="font-heading font-bold text-3xl sm:text-4xl mt-4"
+            className="t-h2"
             style={gradientStyle}
           >
             {sectionTitle[lang]}
           </h2>
-          <p className="mt-4 text-white/50 text-base max-w-xl mx-auto">
+          <p className="mt-4 t-lead text-white/50 max-w-xl mx-auto">
             {sectionSubtitle[lang]}
           </p>
         </motion.div>
@@ -230,14 +230,14 @@ export default function TeamSection() {
                 </span>
               )}
 
-              <h3 className="font-heading font-bold text-pure text-base leading-tight mb-1">
+              <h3 className="t-h3 text-pure mb-1">
                 {member.name}
               </h3>
-              <p className={`text-xs font-medium mb-3 ${member.numberColor}`}>
+              <p className={`t-small mb-3 ${member.numberColor}`}>
                 {member.role[lang]}
               </p>
 
-              <p className="text-white/80 text-sm leading-relaxed flex-grow mb-6">
+              <p className="t-small text-white/80 flex-grow mb-6">
                 {member.description[lang]}
               </p>
 

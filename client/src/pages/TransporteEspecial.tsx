@@ -263,10 +263,10 @@ function TiltCard({
           {icon}
         </div>
         <div className="flex-grow">
-          <h3 className="font-heading font-bold text-pure text-xl mb-3">{title}</h3>
-          <p className="text-white/60 text-sm leading-relaxed">{description}</p>
+          <h3 className="t-h3 text-pure mb-3">{title}</h3>
+          <p className="t-small text-white/60">{description}</p>
         </div>
-        <div className="flex items-center gap-2 text-sm font-semibold" style={{ color: accentColor }}>
+        <div className="flex items-center gap-2 t-small font-semibold" style={{ color: accentColor }}>
           <span>{openLabel}</span>
           <ExternalLink className="w-4 h-4" />
         </div>
@@ -306,8 +306,8 @@ function ServiceCard({
         </div>
         <div>
           <span className="text-xpertblue text-xs font-bold tracking-widest font-mono">{number}</span>
-          <h3 className="font-heading font-semibold text-pure text-base mt-1 mb-2">{title}</h3>
-          <p className="text-white/60 text-sm leading-relaxed">{description}</p>
+          <h3 className="t-h3 text-pure mt-1 mb-2">{title}</h3>
+          <p className="t-small text-white/60">{description}</p>
         </div>
       </div>
 
@@ -320,7 +320,7 @@ function ServiceCard({
           overflow: "hidden",
         }}
       >
-        <p className="text-arctic text-xs italic leading-relaxed pt-2 border-t border-arctic/20">
+        <p className="text-arctic t-small italic pt-2 border-t border-arctic/20">
           — {claim}
         </p>
       </div>
@@ -351,13 +351,13 @@ export default function TransporteEspecial() {
       {/* ── HERO ─────────────────────────────────────────────────────────────── */}
       <section className="pt-32 pb-20 px-4 sm:px-6 lg:px-8 bg-obsidian">
         <div className="max-w-4xl mx-auto text-center">
-          <span className="inline-block text-arctic text-xs font-semibold tracking-widest uppercase mb-6">
+          <span className="t-label">
             {t.badge}
           </span>
-          <h1 className="font-heading font-bold text-4xl sm:text-5xl lg:text-6xl leading-tight mb-6" style={gradientStyle}>
+          <h1 className="t-h1 mb-6" style={gradientStyle}>
             {t.heroTitle}
           </h1>
-          <p className="text-white/60 text-lg max-w-2xl mx-auto leading-relaxed mb-10">
+          <p className="t-lead text-white/60 max-w-2xl mx-auto mb-10">
             {t.heroSubtitle}
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
@@ -382,11 +382,11 @@ export default function TransporteEspecial() {
       <section className="py-20 px-4 sm:px-6 lg:px-8 bg-obsidian border-t border-white/[0.05]">
         <div className="max-w-5xl mx-auto">
           <div className="text-center mb-14">
-            <span className="text-arctic text-xs font-semibold tracking-widest uppercase">{t.servicesLabel}</span>
-            <h2 className="font-heading font-bold text-3xl sm:text-4xl mt-4" style={gradientStyle}>
+            <span className="t-label">{t.servicesLabel}</span>
+            <h2 className="t-h2" style={gradientStyle}>
               {t.servicesTitle}
             </h2>
-            <p className="mt-4 text-white/60 max-w-xl mx-auto">{t.servicesSubtitle}</p>
+            <p className="mt-4 t-lead text-white/60 max-w-xl mx-auto">{t.servicesSubtitle}</p>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
             <ServiceCard number="01" icon={<FileCheck className="w-5 h-5 text-xpertblue" />} title={t.s01title} description={t.s01desc} claim={t.s01claim} />
@@ -400,11 +400,11 @@ export default function TransporteEspecial() {
       <section className="py-20 px-4 sm:px-6 lg:px-8 bg-obsidian border-t border-white/[0.05]">
         <div className="max-w-5xl mx-auto">
           <div className="text-center mb-14">
-            <span className="text-arctic text-xs font-semibold tracking-widest uppercase">{t.sctLabel}</span>
-            <h2 className="font-heading font-bold text-3xl sm:text-4xl mt-4" style={gradientStyle}>
+            <span className="t-label">{t.sctLabel}</span>
+            <h2 className="t-h2" style={gradientStyle}>
               {t.sctTitle}
             </h2>
-            <p className="mt-4 text-white/60 max-w-xl mx-auto">{t.sctSubtitle}</p>
+            <p className="mt-4 t-lead text-white/60 max-w-xl mx-auto">{t.sctSubtitle}</p>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6" style={{ perspective: "1200px" }}>
             <TiltCard
@@ -440,12 +440,12 @@ export default function TransporteEspecial() {
         <div className="max-w-5xl mx-auto">
           <div className="flex flex-col lg:flex-row gap-10 items-center">
             <div className="flex-1">
-              <span className="text-arctic text-xs font-semibold tracking-widest uppercase">{t.lexLabel}</span>
-              <h2 className="font-heading font-bold text-3xl sm:text-4xl mt-4 mb-5" style={gradientStyle}>
+              <span className="t-label">{t.lexLabel}</span>
+              <h2 className="t-h2 mb-5" style={gradientStyle}>
                 {t.lexTitle}
               </h2>
-              <p className="text-white/60 leading-relaxed mb-4">{t.lexDesc1}</p>
-              <p className="text-white/60 leading-relaxed mb-8">{t.lexDesc2}</p>
+              <p className="t-body text-white/60 mb-4">{t.lexDesc1}</p>
+              <p className="t-body text-white/60 mb-8">{t.lexDesc2}</p>
               <button
                 onClick={() => abrirAgente("LEX")}
                 className="px-7 py-3.5 bg-xpertblue hover:bg-xpertblue/90 text-pure font-semibold rounded-lg transition-all duration-200 flex items-center gap-2"
@@ -462,7 +462,7 @@ export default function TransporteEspecial() {
                   <div className="w-8 h-8 rounded-full bg-xpertblue flex items-center justify-center">
                     <span className="text-pure text-xs font-bold">L</span>
                   </div>
-                  <span className="text-pure font-semibold text-sm">LEX · XpertAuth</span>
+                  <span className="text-pure font-semibold t-small">LEX · XpertAuth</span>
                   <span className="ml-auto px-2 py-0.5 bg-green-500/20 text-green-400 text-xs rounded-full">Activo</span>
                 </div>
                 <div className="space-y-3">
@@ -470,13 +470,13 @@ export default function TransporteEspecial() {
                     <button
                       key={i}
                       onClick={() => abrirAgente("LEX")}
-                      className="w-full text-left px-4 py-3 rounded-lg bg-white/[0.04] border border-white/[0.06] text-white/60 text-sm hover:border-xpertblue/30 hover:text-white/80 transition-all duration-200"
+                      className="w-full text-left px-4 py-3 rounded-lg bg-white/[0.04] border border-white/[0.06] t-small text-white/60 hover:border-xpertblue/30 hover:text-white/80 transition-all duration-200"
                     >
                       {q}
                     </button>
                   ))}
                 </div>
-                <p className="mt-4 text-white/30 text-xs text-center">Ejemplos de consultas · Haz clic para preguntar</p>
+                <p className="mt-4 t-small text-white/30 text-center">Ejemplos de consultas · Haz clic para preguntar</p>
               </div>
             </div>
           </div>
@@ -486,10 +486,10 @@ export default function TransporteEspecial() {
       {/* ── CTA FINAL ────────────────────────────────────────────────────────── */}
       <section className="py-24 px-4 sm:px-6 lg:px-8 bg-obsidian border-t border-white/[0.05]">
         <div className="max-w-3xl mx-auto text-center">
-          <h2 className="font-heading font-bold text-3xl sm:text-4xl mb-5" style={gradientStyle}>
+          <h2 className="t-h2 mb-5" style={gradientStyle}>
             {t.ctaTitle}
           </h2>
-          <p className="text-white/60 text-lg mb-10 max-w-xl mx-auto">{t.ctaSubtitle}</p>
+          <p className="t-lead text-white/60 mb-10 max-w-xl mx-auto">{t.ctaSubtitle}</p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <button
               onClick={() => window.location.href = `/${locale}/sobre-nosotros`}

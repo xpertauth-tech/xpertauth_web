@@ -32,7 +32,7 @@ export default function CtaFinal() {
           transition={{ duration: 0.8 }}
         >
           <h2
-            className="font-heading font-bold text-3xl sm:text-4xl md:text-5xl leading-tight"
+            className="t-h2"
             style={gradientStyle}
           >
             {t("title1")}<br />

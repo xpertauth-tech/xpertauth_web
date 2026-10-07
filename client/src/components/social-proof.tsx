@@ -39,14 +39,14 @@ export default function SocialProof() {
           transition={{ duration: 0.6 }}
           className="text-center mb-16"
         >
-          <span className="text-arctic text-xs font-semibold tracking-widest uppercase">{m.label}</span>
+          <span className="t-label">{m.label}</span>
           <h2
-            className="font-heading font-bold text-3xl sm:text-4xl mt-4"
+            className="t-h2"
             style={gradientStyle}
           >
             {m.title}
           </h2>
-          <p className="mt-4 text-white/50 text-base max-w-xl mx-auto">{m.subtitle}</p>
+          <p className="mt-4 t-lead text-white/50 max-w-xl mx-auto">{m.subtitle}</p>
         </motion.div>
 
         {/* Stats */}
@@ -62,7 +62,7 @@ export default function SocialProof() {
               data-testid={`stat-${i}`}
             >
               <div className="font-heading font-bold text-pure text-5xl sm:text-6xl">{stat.value}</div>
-              <div className="mt-2 text-white/50 text-sm">{stat.label}</div>
+              <div className="mt-2 t-small text-white/50">{stat.label}</div>
             </motion.div>
           ))}
         </div>
@@ -98,10 +98,10 @@ export default function SocialProof() {
                 <div className="absolute inset-0 bg-gradient-to-t from-obsidian via-obsidian/70 to-transparent" />
 
                 <div className="relative z-10 p-6 sm:p-7">
-                  <p className="text-arctic text-[0.7rem] font-semibold tracking-wide uppercase mb-3">
+                  <p className="t-label">
                     {c.label}
                   </p>
-                  <p className="text-white/85 text-sm leading-relaxed">{c.text}</p>
+                  <p className="t-small text-white/85">{c.text}</p>
                 </div>
               </motion.div>
             );

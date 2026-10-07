@@ -69,7 +69,7 @@ function Block({ block }: { block: string }) {
 export default function LegalText({ text, className = "" }: { text: string; className?: string }) {
   if (!text) return null;
   return (
-    <div className={`text-white/65 text-sm leading-relaxed space-y-3 ${className}`}>
+    <div className={`t-body text-white/65 space-y-3 ${className}`}>
       {text.split(/\n\s*\n/).map((b, i) => (
         <Block key={i} block={b} />
       ))}

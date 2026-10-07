@@ -84,17 +84,17 @@ export default function HowItWorks() {
         <div className="relative z-10 h-full flex flex-col">
           {/* Header */}
           <div className="pt-10 sm:pt-16 lg:pt-20 pb-3 sm:pb-6 text-center px-4 sm:px-6 lg:px-8">
-            <span className="text-arctic text-xs font-semibold tracking-widest uppercase">
+            <span className="t-label">
               {m.label}
             </span>
             <h2
-              className="font-heading font-bold text-2xl sm:text-3xl lg:text-4xl mt-2 sm:mt-3"
+              className="t-h2"
               style={gradientStyle}
             >
               {m.title}
             </h2>
             {m.subtitle && (
-              <p className="mt-2 sm:mt-3 text-white/50 text-xs sm:text-sm lg:text-base max-w-xl mx-auto">
+              <p className="mt-2 t-small text-white/50 max-w-xl mx-auto">
                 {m.subtitle}
               </p>
             )}
@@ -186,15 +186,15 @@ export default function HowItWorks() {
                   className="text-center"
                   data-testid={`step-info-${activeStep}`}
                 >
-                  <h3 className="font-heading text-[20px] sm:text-[24px] font-bold" style={{ color: "#FFFFFF" }}>
+                  <h3 className="t-h3" style={{ color: "#FFFFFF" }}>
                     {steps[activeStep]?.title}
                   </h3>
                   {steps[activeStep]?.subtitle && (
-                    <span className="text-[13px] sm:text-[14px] font-medium" style={{ color: "#4D9FEC" }}>
+                    <span className="t-small" style={{ color: "#4D9FEC" }}>
                       {steps[activeStep].subtitle}
                     </span>
                   )}
-                  <p className="mt-2 text-[14px] sm:text-[16px] max-w-lg mx-auto" style={{ color: "#CBD5E1", lineHeight: 1.6 }}>
+                  <p className="mt-2 t-body max-w-lg mx-auto" style={{ color: "#CBD5E1" }}>
                     {steps[activeStep]?.description}
                   </p>
                 </motion.div>

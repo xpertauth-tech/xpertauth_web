@@ -249,13 +249,13 @@ export default function Blog() {
       {/* HERO */}
       <section className="pt-32 pb-16 px-6 text-center bg-[#0A0E1A]">
         <div className="max-w-3xl mx-auto fade-up">
-          <span className="inline-block text-xs font-semibold tracking-widest text-[#4D9FEC] uppercase mb-4 border border-[#4D9FEC]/30 px-3 py-1 rounded-full">
+          <span className="t-label">
             {t.tag}
           </span>
-          <h1 className="text-5xl md:text-6xl font-bold mb-6" style={gradientStyle}>
+          <h1 className="t-h1 mb-6" style={gradientStyle}>
             {t.heroTitle}
           </h1>
-          <p className="text-lg text-white/60 max-w-xl mx-auto leading-relaxed">
+          <p className="t-lead text-white/60 max-w-xl mx-auto">
             {t.heroSubtitle}
           </p>
         </div>
@@ -289,21 +289,21 @@ export default function Blog() {
                     )}
                     <div className="flex-1 p-6 flex flex-col justify-between">
                       <div>
-                        <h2 className="text-xl font-semibold text-white mb-3 leading-snug">
+                        <h2 className="t-h3 text-white mb-3">
                           {post.title}
                         </h2>
-                        <p className="text-white/50 text-sm leading-relaxed line-clamp-2">
+                        <p className="t-small text-white/50 line-clamp-2">
                           {post.excerpt}
                         </p>
                       </div>
                       <div className="flex items-center justify-between mt-5">
-                        <div className="flex items-center gap-2 text-xs text-white/30">
+                        <div className="flex items-center gap-2 t-small text-white/30">
                           <span>📅 {formatDate(post.published_at, locale)}</span>
                           {post.author && (
                             <span>· {t.by} {post.author}</span>
                           )}
                         </div>
-                        <span className="text-[#4D9FEC] text-sm font-medium">
+                        <span className="text-[#4D9FEC] t-small font-medium">
                           {t.readMore}
                         </span>
                       </div>
@@ -324,7 +324,7 @@ export default function Blog() {
               >
                 {t.prev}
               </button>
-              <span className="text-white/40 text-sm">
+              <span className="t-small text-white/40">
                 {t.page} {currentPage} {t.of} {totalPages}
               </span>
               <button
@@ -343,8 +343,8 @@ export default function Blog() {
       {SHOW_SUBSCRIPTION && (
         <section className="py-16 px-6 bg-[#070A12]">
           <div className="max-w-xl mx-auto text-center">
-            <h2 className="text-2xl font-bold text-white mb-3">{t.subscribeTitle}</h2>
-            <p className="text-white/50 text-sm mb-8">{t.subscribeSubtitle}</p>
+            <h2 className="t-h2 text-white mb-3">{t.subscribeTitle}</h2>
+            <p className="t-small text-white/50 mb-8">{t.subscribeSubtitle}</p>
             {subStatus === "ok" ? (
               <p className="text-[#4D9FEC] font-medium">{t.successMsg}</p>
             ) : (
