@@ -30,7 +30,7 @@ const texts = {
   toolsTitle: {
     es: "Sus herramientas",
     ca: "Les seves eines",
-    en: "Their tools",
+    en: "His tools",
     fr: "Ses outils",
   },
   lex: {
@@ -50,6 +50,12 @@ const texts = {
     ca: "Pregunta a LEX",
     en: "Ask LEX",
     fr: "Demandez à LEX",
+  },
+  novaCta: {
+    es: "Pregunta a NOVA",
+    ca: "Pregunta a NOVA",
+    en: "Ask NOVA",
+    fr: "Demandez à NOVA",
   },
 };
 
@@ -127,23 +133,28 @@ export default function TeamSection() {
         >
           <p className="t-label text-center">{texts.toolsTitle[lang]}</p>
           <div className="mt-4 grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-8">
-            <div>
+            <div className="flex flex-col">
               <h3 className="t-h3 text-pure">LEX</h3>
-              <p className="t-small text-white/70 mt-1">{texts.lex[lang]}</p>
+              <p className="t-small text-white/70 mt-1 flex-grow">{texts.lex[lang]}</p>
+              <button
+                onClick={() => abrirAgente("LEX")}
+                className="btn btn-primary w-full mt-4"
+                data-testid="button-team-lex"
+              >
+                {texts.lexCta[lang]}
+              </button>
             </div>
-            <div>
+            <div className="flex flex-col">
               <h3 className="t-h3 text-pure">NOVA</h3>
-              <p className="t-small text-white/70 mt-1">{texts.nova[lang]}</p>
+              <p className="t-small text-white/70 mt-1 flex-grow">{texts.nova[lang]}</p>
+              <button
+                onClick={() => abrirAgente("NOVA")}
+                className="btn btn-primary w-full mt-4"
+                data-testid="button-team-nova"
+              >
+                {texts.novaCta[lang]}
+              </button>
             </div>
-          </div>
-          <div className="mt-6 flex justify-center">
-            <button
-              onClick={() => abrirAgente("LEX")}
-              className="btn btn-primary"
-              data-testid="button-team-lex"
-            >
-              {texts.lexCta[lang]}
-            </button>
           </div>
         </motion.div>
       </div>
