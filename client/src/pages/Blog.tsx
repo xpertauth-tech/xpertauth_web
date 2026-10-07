@@ -320,7 +320,7 @@ export default function Blog() {
               <button
                 onClick={() => goToPage(currentPage - 1)}
                 disabled={currentPage === 1}
-                className="px-4 py-2 text-sm rounded-lg border border-white/20 text-white/60 hover:border-[#4D9FEC]/50 hover:text-white disabled:opacity-30 disabled:cursor-not-allowed transition-all"
+                className="btn btn-secondary btn-small disabled:opacity-30 disabled:cursor-not-allowed"
               >
                 {t.prev}
               </button>
@@ -330,7 +330,7 @@ export default function Blog() {
               <button
                 onClick={() => goToPage(currentPage + 1)}
                 disabled={currentPage === totalPages}
-                className="px-4 py-2 text-sm rounded-lg border border-white/20 text-white/60 hover:border-[#4D9FEC]/50 hover:text-white disabled:opacity-30 disabled:cursor-not-allowed transition-all"
+                className="btn btn-secondary btn-small disabled:opacity-30 disabled:cursor-not-allowed"
               >
                 {t.next}
               </button>
@@ -360,7 +360,7 @@ export default function Blog() {
                 <button
                   onClick={handleSubscribe}
                   disabled={subLoading}
-                  className="bg-[#1B4FD8] hover:bg-[#1B4FD8]/80 text-white font-semibold px-6 py-3 rounded-lg text-sm transition-colors disabled:opacity-50 whitespace-nowrap"
+                  className="btn btn-primary disabled:opacity-50 whitespace-nowrap"
                 >
                   {subLoading ? "..." : t.subscribeBtn}
                 </button>

@@ -17,7 +17,6 @@ const gradientStyle: React.CSSProperties = {
 };
 
 // Prueba de diseño: los tres botones con el mismo estilo (relleno Arctic #4D9FEC).
-const CTA_ARCTIC = "bg-arctic text-obsidian hover:bg-arctic/90";
 
 const teamMembers = [
   {
@@ -48,7 +47,6 @@ const teamMembers = [
     accentColor: "border-arctic/30",
     numberColor: "text-arctic",
     numberBg: "bg-arctic/10",
-    ctaStyle: CTA_ARCTIC,
     avatarFallback: "JL",
   },
   {
@@ -79,7 +77,6 @@ const teamMembers = [
     accentColor: "border-xpertblue/30",
     numberColor: "text-xpertblue",
     numberBg: "bg-xpertblue/25",
-    ctaStyle: CTA_ARCTIC,
     avatarFallback: "L",
   },
   {
@@ -110,7 +107,6 @@ const teamMembers = [
     accentColor: "border-arctic/30",
     numberColor: "text-arctic",
     numberBg: "bg-arctic/25",
-    ctaStyle: CTA_ARCTIC,
     avatarFallback: "N",
   },
 ];
@@ -243,7 +239,7 @@ export default function TeamSection() {
 
               <button
                 onClick={() => handleCta(member)}
-                className={`w-full py-2.5 rounded-md text-sm font-semibold transition-all duration-200 ${member.ctaStyle}`}
+                className="btn btn-primary w-full"
                 data-testid={`button-team-${member.id}`}
               >
                 {member.cta[lang]}

@@ -88,11 +88,11 @@ export default function Hero() {
           </p>
 
           <div className="mt-12 sm:mt-14 flex flex-col sm:flex-row items-center justify-center gap-4">
-            <button onClick={() => navigate(`/${locale}/sobre-nosotros`)} className="group px-8 py-3.5 bg-xpertblue text-pure font-semibold rounded-md text-sm sm:text-base transition-all duration-300 flex items-center gap-2 w-full sm:w-auto justify-center" data-testid="button-hero-proyecto">
+            <button onClick={() => navigate(`/${locale}/sobre-nosotros`)} className="btn btn-primary group" data-testid="button-hero-proyecto">
               {t("cta1")}
               <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
             </button>
-            <button onClick={() => scrollTo("#como-funciona")} className="px-8 py-3.5 border border-white/20 text-pure/90 font-medium rounded-md text-sm sm:text-base transition-all duration-300 w-full sm:w-auto" data-testid="button-hero-como-funciona">
+            <button onClick={() => scrollTo("#como-funciona")} className="btn btn-secondary" data-testid="button-hero-como-funciona">
               {t("cta2")}
             </button>
           </div>

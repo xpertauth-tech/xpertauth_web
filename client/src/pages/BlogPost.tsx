@@ -286,7 +286,7 @@ export default function BlogPost() {
               <p className="t-small text-white/50 mb-6">{t.ctaSubtitle}</p>
               <button
                 onClick={() => setContactOpen(true)}
-                className="bg-[#1B4FD8] hover:bg-[#1B4FD8]/80 text-white font-semibold px-6 py-3 rounded-lg text-sm transition-colors"
+                className="btn btn-primary"
               >
                 {t.ctaBtn}
               </button>
@@ -316,7 +316,7 @@ export default function BlogPost() {
                 <button
                   onClick={handleSubscribe}
                   disabled={subLoading}
-                  className="bg-[#1B4FD8] hover:bg-[#1B4FD8]/80 text-white font-semibold px-6 py-3 rounded-lg text-sm transition-colors disabled:opacity-50 whitespace-nowrap"
+                  className="btn btn-primary disabled:opacity-50 whitespace-nowrap"
                 >
                   {subLoading ? "..." : t.subscribeBtn}
                 </button>

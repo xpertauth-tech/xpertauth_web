@@ -363,14 +363,14 @@ export default function TransporteEspecial() {
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <button
               onClick={() => abrirAgente("LEX")}
-              className="px-7 py-3.5 bg-xpertblue hover:bg-xpertblue/90 text-pure font-semibold rounded-lg transition-all duration-200 flex items-center justify-center gap-2"
+              className="btn btn-primary"
             >
               <MessageSquare className="w-4 h-4" />
               {t.lexCta}
             </button>
             <button
               onClick={() => setContactOpen(true)}
-              className="px-7 py-3.5 bg-white/[0.06] hover:bg-white/[0.10] border border-white/10 text-pure font-semibold rounded-lg transition-all duration-200"
+              className="btn btn-secondary"
             >
               {t.ctaContacta}
             </button>
@@ -448,7 +448,7 @@ export default function TransporteEspecial() {
               <p className="t-body text-white/60 mb-8">{t.lexDesc2}</p>
               <button
                 onClick={() => abrirAgente("LEX")}
-                className="px-7 py-3.5 bg-xpertblue hover:bg-xpertblue/90 text-pure font-semibold rounded-lg transition-all duration-200 flex items-center gap-2"
+                className="btn btn-primary"
               >
                 <MessageSquare className="w-4 h-4" />
                 {t.lexCta}
@@ -493,13 +493,13 @@ export default function TransporteEspecial() {
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <button
               onClick={() => window.location.href = `/${locale}/sobre-nosotros`}
-              className="px-7 py-3.5 bg-xpertblue hover:bg-xpertblue/90 text-pure font-semibold rounded-lg transition-all duration-200 flex items-center justify-center gap-2"
+              className="btn btn-primary"
             >
               {t.ctaProyecto} <ArrowRight className="w-4 h-4" />
             </button>
             <button
               onClick={() => setContactOpen(true)}
-              className="px-7 py-3.5 bg-white/[0.06] hover:bg-white/[0.10] border border-white/10 text-pure font-semibold rounded-lg transition-all duration-200"
+              className="btn btn-secondary"
             >
               {t.ctaContacta}
             </button>
@@ -507,7 +507,7 @@ export default function TransporteEspecial() {
               href="https://calendar.app.google/q54rranYyoyCfcu77"
               target="_blank"
               rel="noopener noreferrer"
-              className="px-7 py-3.5 border border-[#4D9FEC]/40 text-[#4D9FEC] font-semibold rounded-lg transition-all duration-200 hover:bg-[#4D9FEC]/10 hover:border-[#4D9FEC]/60 flex items-center gap-2"
+              className="btn btn-secondary"
             >
               <Calendar className="w-4 h-4" />
               Reserva tu cita

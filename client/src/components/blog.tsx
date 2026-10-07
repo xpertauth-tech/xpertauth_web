@@ -260,7 +260,7 @@ export default function BlogSection() {
             <div className="mt-12 text-center">
               <a
                 href={`/${locale}/blog`}
-                className="inline-flex items-center gap-2 px-6 py-3 rounded-lg bg-arctic text-obsidian text-sm font-semibold transition-colors hover:bg-arctic/90"
+                className="btn btn-primary"
                 data-testid="link-blog-see-all"
               >
                 {m.seeAll}

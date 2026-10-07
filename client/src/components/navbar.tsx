@@ -266,7 +266,7 @@ export default function Navbar() {
                 <div className="flex items-center gap-2 ml-3">
                   <button
                     onClick={handleGoogleLogin}
-                    className="flex items-center gap-2 px-4 py-2 text-sm text-white/70 font-medium border border-white/20 rounded-md hover:border-white/40 hover:text-white transition-all duration-200"
+                    className="btn btn-secondary btn-small"
                     data-testid="button-google-login"
                   >
                     <svg className="w-4 h-4" viewBox="0 0 24 24">
@@ -331,7 +331,7 @@ export default function Navbar() {
                   ) : (
                     <button
                       onClick={handleGoogleLogin}
-                      className="flex items-center justify-center gap-2 w-full px-4 py-3 rounded-md text-sm font-medium text-white/70 border border-white/20"
+                      className="btn btn-secondary btn-small !w-full"
                     >
                       <svg className="w-4 h-4" viewBox="0 0 24 24">
                         <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/>

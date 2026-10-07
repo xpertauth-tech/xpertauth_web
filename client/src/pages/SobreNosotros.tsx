@@ -520,17 +520,13 @@ export default function SobreNosotros() {
             <div style={{ display: "flex", gap: "1rem", justifyContent: "center", flexWrap: "wrap" }}>
               <button
                 onClick={() => { window.location.href = `/${locale}/servicios/transporte-especial`; }}
-                style={{ background: "#1B4FD8", color: "#fff", border: "none", borderRadius: ".5rem", padding: ".875rem 2rem", fontFamily: "'Sora',sans-serif", fontWeight: 600, fontSize: ".95rem", cursor: "pointer", transition: "background .2s,transform .2s" }}
-                onMouseEnter={(e) => { e.currentTarget.style.background = "#1641b0"; e.currentTarget.style.transform = "translateY(-2px)"; }}
-                onMouseLeave={(e) => { e.currentTarget.style.background = "#1B4FD8"; e.currentTarget.style.transform = "translateY(0)"; }}
+                className="btn btn-primary"
               >
                 {t.cta.boton1}
               </button>
               <button
                 onClick={() => setContactOpen(true)}
-                style={{ background: "transparent", color: "#fff", border: "1.5px solid rgba(255,255,255,.4)", borderRadius: ".5rem", padding: ".875rem 2rem", fontFamily: "'Sora',sans-serif", fontWeight: 600, fontSize: ".95rem", cursor: "pointer", transition: "border-color .2s,background .2s,transform .2s" }}
-                onMouseEnter={(e) => { e.currentTarget.style.borderColor = "#fff"; e.currentTarget.style.background = "rgba(255,255,255,.07)"; e.currentTarget.style.transform = "translateY(-2px)"; }}
-                onMouseLeave={(e) => { e.currentTarget.style.borderColor = "rgba(255,255,255,.4)"; e.currentTarget.style.background = "transparent"; e.currentTarget.style.transform = "translateY(0)"; }}
+                className="btn btn-secondary"
               >
                 {t.cta.boton2}
               </button>

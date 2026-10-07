@@ -113,7 +113,7 @@ export default function ContactModal({ open, onClose }: ContactModalProps) {
                   <p className="text-white/60 text-sm">{t("successMessage")}</p>
                   <button
                     onClick={handleClose}
-                    className="mt-6 px-6 py-2.5 bg-xpertblue hover:bg-xpertblue/90 text-pure text-sm font-semibold rounded-md transition-colors"
+                    className="btn btn-primary btn-small mt-6"
                   >
                     {t("close")}
                   </button>
@@ -199,7 +199,7 @@ export default function ContactModal({ open, onClose }: ContactModalProps) {
                     <button
                       onClick={handleSubmit}
                       disabled={status === "sending"}
-                      className="w-full py-3 bg-xpertblue hover:bg-xpertblue/90 text-pure text-sm font-semibold rounded-md transition-all duration-200 flex items-center justify-center gap-2 disabled:opacity-60 disabled:cursor-not-allowed"
+                      className="btn btn-primary w-full disabled:opacity-60 disabled:cursor-not-allowed"
                     >
                       {status === "sending" ? (
                         <><Loader2 className="w-4 h-4 animate-spin" /> {t("sending")}</>

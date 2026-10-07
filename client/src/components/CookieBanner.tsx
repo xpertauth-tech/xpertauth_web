@@ -69,7 +69,7 @@ export default function CookieBanner() {
             </p>
             <button
               onClick={entendido}
-              className="px-6 py-2.5 bg-xpertblue text-pure text-xs sm:text-sm font-semibold rounded-md hover:bg-xpertblue/90 transition-colors sm:flex-shrink-0"
+              className="btn btn-primary btn-small sm:flex-shrink-0"
               data-testid="button-cookies-accept"
             >
               {t("button")}

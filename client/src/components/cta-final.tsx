@@ -43,7 +43,7 @@ export default function CtaFinal() {
           <div className="mt-10 sm:mt-12 flex flex-col sm:flex-row items-center justify-center gap-4">
             <button
               onClick={() => setContactOpen(true)}
-              className="px-8 py-4 bg-arctic text-obsidian font-semibold rounded-md text-sm sm:text-base transition-all duration-300 w-full sm:w-auto text-center hover:bg-arctic/90"
+              className="btn btn-primary"
               data-testid="button-cta-contacto"
             >
               {t("cta2")}
@@ -53,7 +53,7 @@ export default function CtaFinal() {
               href="https://calendar.app.google/q54rranYyoyCfcu77"
               target="_blank"
               rel="noopener noreferrer"
-              className="px-8 py-4 bg-xpertblue text-pure font-semibold rounded-md text-sm sm:text-base transition-all duration-300 w-full sm:w-auto flex items-center justify-center gap-2 hover:bg-xpertblue-light"
+              className="btn btn-secondary"
             >
               <Calendar className="w-4 h-4" />
               {t("cta3")}
