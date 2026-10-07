@@ -21,7 +21,7 @@ const data: Record<string, Doc> = {
       {
         "id": "oferta",
         "title": "02 · Qué ofrece esta web",
-        "content": "- **LEX:** orientación sobre la normativa del transporte especial por carretera, basada en una base normativa propia.\n- **NOVA:** ideas prácticas para usar la inteligencia artificial en una pyme de transporte.\n- **Blog:** artículos sobre normativa y sobre la realidad del sector.\n- **Contacto y citas:** para plantear un caso concreto.\n\n**Lo que XpertAuth no hace:**\n- No tramita nada ante la administración (DGT, SCT ni ningún otro organismo). Orienta; el trámite lo haces tú o tu gestor.\n- No redacta ni firma informes, recursos o pliegos con responsabilidad legal. Esos documentos los prepara y firma un profesional habilitado."
+        "content": "- **LEX:** orientación sobre la normativa del transporte especial por carretera, basada en una base normativa propia.\n- **NOVA:** ideas prácticas para usar la inteligencia artificial en una pyme de transporte.\n- **Blog:** artículos sobre normativa y sobre la realidad del sector.\n- **Contacto y citas:** para plantear un caso concreto.\n\n**Lo que XpertAuth no hace:**\n- No tramita nada ante la administración (DGT, SCT ni ningún otro organismo). Orienta; el trámite lo haces tú o tu gestor.\n- No redacta ni firma informes, recursos o pliegos de descargo con responsabilidad legal. Esos documentos los prepara y firma un profesional habilitado."
       },
       {
         "id": "lex-nova",
@@ -68,7 +68,7 @@ const data: Record<string, Doc> = {
       {
         "id": "oferta",
         "title": "02 · Què ofereix aquest web",
-        "content": "- **LEX:** orientació sobre la normativa del transport especial per carretera, basada en una base normativa pròpia.\n- **NOVA:** idees pràctiques per fer servir la intel·ligència artificial en una pime de transport.\n- **Blog:** articles sobre normativa i sobre la realitat del sector.\n- **Contacte i cites:** per plantejar un cas concret.\n\n**El que XpertAuth no fa:**\n- No tramita res davant l'administració (DGT, SCT ni cap altre organisme). Orienta; el tràmit el fas tu o el teu gestor.\n- No redacta ni signa informes, recursos o plecs amb responsabilitat legal. Aquests documents els prepara i els signa un professional habilitat."
+        "content": "- **LEX:** orientació sobre la normativa del transport especial per carretera, basada en una base normativa pròpia.\n- **NOVA:** idees pràctiques per fer servir la intel·ligència artificial en una pime de transport.\n- **Blog:** articles sobre normativa i sobre la realitat del sector.\n- **Contacte i cites:** per plantejar un cas concret.\n\n**El que XpertAuth no fa:**\n- No tramita res davant l'administració (DGT, SCT ni cap altre organisme). Orienta; el tràmit el fas tu o el teu gestor.\n- No redacta ni signa informes, recursos o plecs de descàrrecs amb responsabilitat legal. Aquests documents els prepara i els signa un professional habilitat."
       },
       {
         "id": "lex-nova",
@@ -115,7 +115,7 @@ const data: Record<string, Doc> = {
       {
         "id": "oferta",
         "title": "02 · What this website offers",
-        "content": "- **LEX:** guidance on road special transport regulations, based on our own regulatory database.\n- **NOVA:** practical ideas for using artificial intelligence in a transport SME.\n- **Blog:** articles on regulations and on the reality of the sector.\n- **Contact and appointments:** to raise a specific case.\n\n**What XpertAuth does not do:**\n- It does not handle any procedure with the authorities (DGT, SCT or any other body). It gives guidance; the procedure is done by you or your administrative agent (gestor).\n- It does not draft or sign reports, appeals or tender documents with legal liability. Those documents are prepared and signed by a qualified professional."
+        "content": "- **LEX:** guidance on road special transport regulations, based on our own regulatory database.\n- **NOVA:** practical ideas for using artificial intelligence in a transport SME.\n- **Blog:** articles on regulations and on the reality of the sector.\n- **Contact and appointments:** to raise a specific case.\n\n**What XpertAuth does not do:**\n- It does not handle any procedure with the authorities (DGT, SCT or any other body). It gives guidance; the procedure is done by you or your administrative agent (gestor).\n- It does not draft or sign reports, appeals or statements of defence against fines with legal liability. Those documents are prepared and signed by a qualified professional."
       },
       {
         "id": "lex-nova",
@@ -162,7 +162,7 @@ const data: Record<string, Doc> = {
       {
         "id": "oferta",
         "title": "02 · Ce que propose ce site",
-        "content": "- **LEX :** orientation sur la réglementation du transport spécial par route, fondée sur une base réglementaire propre.\n- **NOVA :** idées pratiques pour utiliser l'intelligence artificielle dans une PME de transport.\n- **Blog :** articles sur la réglementation et sur la réalité du secteur.\n- **Contact et rendez-vous :** pour exposer un cas concret.\n\n**Ce que XpertAuth ne fait pas :**\n- Il n'effectue aucune démarche auprès de l'administration (DGT, SCT ou tout autre organisme). Il oriente ; la démarche, c'est vous ou votre gestionnaire (gestor) qui l'effectuez.\n- Il ne rédige ni ne signe de rapports, de recours ou de cahiers des charges engageant une responsabilité légale. Ces documents sont préparés et signés par un professionnel habilité."
+        "content": "- **LEX :** orientation sur la réglementation du transport spécial par route, fondée sur une base réglementaire propre.\n- **NOVA :** idées pratiques pour utiliser l'intelligence artificielle dans une PME de transport.\n- **Blog :** articles sur la réglementation et sur la réalité du secteur.\n- **Contact et rendez-vous :** pour exposer un cas concret.\n\n**Ce que XpertAuth ne fait pas :**\n- Il n'effectue aucune démarche auprès de l'administration (DGT, SCT ou tout autre organisme). Il oriente ; la démarche, c'est vous ou votre gestionnaire (gestor) qui l'effectuez.\n- Il ne rédige ni ne signe de rapports, de recours ou de mémoires en défense contre des sanctions engageant une responsabilité légale. Ces documents sont préparés et signés par un professionnel habilité."
       },
       {
         "id": "lex-nova",
