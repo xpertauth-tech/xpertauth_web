@@ -27,7 +27,7 @@ export default function CtaFinal() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-100px" }}
           transition={{ duration: 0.8 }}
-          className="relative overflow-hidden rounded-2xl bg-obsidian-light border border-white/10 p-12 md:p-24 text-center"
+          className="relative overflow-hidden rounded-2xl bg-obsidian-light border border-white/10 p-8 md:p-24 text-center"
           data-testid="panel-cta-final"
         >
           {CTA_PANEL_BG && (
