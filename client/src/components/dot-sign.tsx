@@ -17,9 +17,10 @@ const ROWS = 8; // 1 de acento + 7 de letra
 const GAP = 1; // columnas entre caracteres
 const LINE_GAP = 2; // filas entre líneas
 const MARGIN_X = 3;
-const MARGIN_Y = 2;
+const MARGIN_Y = 1;
 const SPACE_W = 3;
-const PIC = ROWS * 2 + LINE_GAP; // el pictograma ocupa la altura de las dos líneas
+const TEXT_H = ROWS * 2 + LINE_GAP; // altura de las dos líneas de texto (18)
+const PIC = 20; // pictograma de 20×20; con MARGIN_Y = 1 el cartel mide 22 filas
 const PIC_GAP = 4; // columnas entre pictograma y texto (o filas, en vertical)
 const PITCH = 6; // px por celda a tamaño de escritorio
 const R = 0.38; // radio del punto
@@ -28,7 +29,7 @@ const EMBER = "#E8620A";
 // Colores reales de las señales (excepción a la paleta, solo en el pictograma)
 const RED = "#D8232A";
 const WHITE = "#F4F4F2";
-const BLACK = "#05070C";
+const BLACK = "#1C2436"; // "negro" de las señales: gris azulado oscuro; único sitio para cambiarlo (negro puro: #05070C)
 const BLUE = "#0A58C9";
 
 const HOLD_MS = 3000;
@@ -119,56 +120,68 @@ const cells = (fn: (x: number, y: number) => string | null): Cell[] => {
 
 const inSet = (set: string[], x: number, y: number, ox = 0, oy = 0) => set[y - oy]?.[x - ox] === "1";
 
-/** 1 · Peligro (triángulo): borde rojo, fondo blanco, exclamación negra */
+/** 1 · Peligro (triángulo): borde rojo de 2 puntos, fondo blanco, exclamación negra */
 function pictoDanger(): Cell[] {
-  const A = [9, 0.3], B = [17.7, 16.7], C = [0.3, 16.7];
-  const G = [9, 11.47], k = 0.58;
+  const f = PIC / 18;
+  const A = [PIC / 2, 0.3 * f], B = [PIC - 0.3 * f, 16.7 * f], C = [0.3 * f, 16.7 * f];
+  // Triángulo interior: el exterior reducido hacia su incentro (borde ≈ 1,6 puntos)
+  const la = Math.hypot(B[0] - C[0], B[1] - C[1]);
+  const lb = Math.hypot(A[0] - C[0], A[1] - C[1]);
+  const lc = Math.hypot(A[0] - B[0], A[1] - B[1]);
+  const G = [(la * A[0] + lb * B[0] + lc * C[0]) / (la + lb + lc), (la * A[1] + lb * B[1] + lc * C[1]) / (la + lb + lc)];
+  const area = Math.abs((B[0] - A[0]) * (C[1] - A[1]) - (C[0] - A[0]) * (B[1] - A[1])) / 2;
+  const inr = area / ((la + lb + lc) / 2);
+  const k = (inr - 1.6) / inr;
   const sc = (p: number[]) => [G[0] + (p[0] - G[0]) * k, G[1] + (p[1] - G[1]) * k];
   const [ia, ib, ic] = [sc(A), sc(B), sc(C)];
   return cells((x, y) => {
     const px = x + 0.5, py = y + 0.5;
     if (!pointInTri(px, py, A, B, C)) return null;
     if (!pointInTri(px, py, ia, ib, ic)) return RED;
-    if ((x === 8 || x === 9) && ((y >= 7 && y <= 10) || y === 12 || y === 13)) return BLACK;
+    if ((x === 9 || x === 10) && ((y >= 7 && y <= 12) || y === 14 || y === 15)) return BLACK;
     return WHITE;
   });
 }
 
 const ring = (x: number, y: number) => Math.hypot(x + 0.5 - PIC / 2, y + 0.5 - PIC / 2);
+const RING_OUT = PIC / 2; // aro rojo de 2 puntos: radio exterior 10, interior 8
+const RING_IN = RING_OUT - 2;
 
-/** 2 · Anchura máxima: círculo, dos flechas enfrentadas en horizontal */
+/** 2 · Anchura máxima: círculo, dos flechas enfrentadas con un hueco de 2 puntos */
 function pictoWidth(): Cell[] {
-  const head: Record<number, [number, number]> = { 6: [7, 10], 7: [8, 9] };
+  // Flecha izquierda (la derecha es su espejo): eje 4×2 y cabeza triangular de 3 columnas
+  const head: Record<number, [number, number]> = { 6: [7, 12], 7: [8, 11], 8: [9, 10] };
   const arrow = (x: number, y: number) => {
-    if (x >= 3 && x <= 5 && (y === 8 || y === 9)) return true;
+    if (x >= 2 && x <= 5 && (y === 9 || y === 10)) return true;
     const h = head[x];
     return !!h && y >= h[0] && y <= h[1];
   };
   return cells((x, y) => {
     const r = ring(x, y);
-    if (r > 9) return null;
-    if (r > 6.6) return RED;
+    if (r > RING_OUT) return null;
+    if (r > RING_IN) return RED;
     return arrow(x, y) || arrow(PIC - 1 - x, y) ? BLACK : WHITE;
   });
 }
 
+// Camión de perfil: cabina baja a la izquierda, caja, chasis y dos ruedas
 const TRUCK = [
   "....#######",
-  "....#######",
-  "..##.######",
-  ".###.######",
+  ".##.#######",
+  "###.#######",
   "###########",
-  ".##.....##.",
-  ".##.....##.",
+  "###########",
+  ".##....##..",
+  ".##....##..",
 ].map((r) => r.replace(/#/g, "1").replace(/\./g, "0"));
 
 /** 3 · Entrada prohibida a vehículos de mercancías: círculo con camión */
 function pictoTruck(): Cell[] {
   return cells((x, y) => {
     const r = ring(x, y);
-    if (r > 9) return null;
-    if (r > 6.6) return RED;
-    return inSet(TRUCK, x, y, 3, 5) ? BLACK : WHITE;
+    if (r > RING_OUT) return null;
+    if (r > RING_IN) return RED;
+    return inSet(TRUCK, x, y, 4, 6) ? BLACK : WHITE;
   });
 }
 
@@ -176,10 +189,10 @@ function pictoTruck(): Cell[] {
 function pictoInfo(): Cell[] {
   return cells((x, y) => {
     if ((x === 0 || x === PIC - 1) && (y === 0 || y === PIC - 1)) return null;
-    const dot = (x === 8 || x === 9) && (y === 3 || y === 4);
-    const stem = (x === 8 || x === 9) && y >= 7 && y <= 13;
-    const flag = y === 7 && x >= 7 && x <= 9;
-    const foot = y === 14 && x >= 6 && x <= 11;
+    const dot = (x === 9 || x === 10) && (y === 4 || y === 5);
+    const stem = (x === 9 || x === 10) && y >= 8 && y <= 15;
+    const flag = y === 8 && x >= 8 && x <= 10;
+    const foot = y === 16 && x >= 7 && x <= 12;
     return dot || stem || flag || foot ? WHITE : BLUE;
   });
 }
@@ -245,9 +258,9 @@ export default function DotSign({ messages }: { messages: string[][] }) {
     const textCols = Math.max(...maps.flat().map((l) => l.cols));
     const side = !vertical;
     const cols = side ? MARGIN_X * 2 + PIC + PIC_GAP + textCols : MARGIN_X * 2 + Math.max(PIC, textCols);
-    const rows = side ? MARGIN_Y * 2 + PIC : MARGIN_Y * 2 + PIC + PIC_GAP + PIC;
+    const rows = side ? MARGIN_Y * 2 + PIC : MARGIN_Y * 2 + PIC + PIC_GAP + TEXT_H;
     const textX = side ? MARGIN_X + PIC + PIC_GAP : MARGIN_X + Math.floor((cols - MARGIN_X * 2 - textCols) / 2);
-    const textY = side ? MARGIN_Y : MARGIN_Y + PIC + PIC_GAP;
+    const textY = side ? MARGIN_Y + (PIC - TEXT_H) / 2 : MARGIN_Y + PIC + PIC_GAP;
     const picX = side ? MARGIN_X : Math.floor((cols - PIC) / 2);
     return { maps, textCols, cols, rows, textX, textY, picX, picY: MARGIN_Y };
   }, [messages, vertical]);
