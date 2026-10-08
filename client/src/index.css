@@ -410,6 +410,3 @@
 @media (prefers-reduced-motion: reduce) {
   .hc-d, .hc-f { animation: none; }
 }
-/* Variante decorativa (panel de cierre de la Home): un solo color, sin animación */
-.hc-deco :is(path, circle, rect, line) { stroke: #4D9FEC; }
-.hc-deco .hc-d, .hc-deco .hc-f { animation: none; stroke-dasharray: none; }

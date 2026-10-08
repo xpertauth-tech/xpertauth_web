@@ -2,7 +2,6 @@ import { useState } from "react";
 import { motion } from "framer-motion";
 import { Calendar } from "lucide-react";
 import { useTranslations } from "@/i18n/context";
-import HeroSketch from "./hero-sketch";
 import ContactModal from "./ContactModal";
 
 export default function CtaFinal() {
@@ -25,11 +24,6 @@ export default function CtaFinal() {
           className="relative overflow-hidden rounded-2xl bg-obsidian-light border border-white/10 p-8 md:p-24 text-center"
           data-testid="panel-cta-final"
         >
-          {/* Croquis decorativo: esquina inferior derecha en ordenador; en móvil solo la vista lateral, abajo y por detrás del texto */}
-          <div className="absolute bottom-2 right-3 w-[280px] lg:w-[300px] max-md:left-1/2 max-md:right-auto max-md:-translate-x-1/2 max-md:w-[260px] max-md:bottom-2 opacity-25 pointer-events-none">
-            <HeroSketch decorativo />
-          </div>
-
           <div className="relative z-10">
           <h2
             className="t-h2 text-pure"
