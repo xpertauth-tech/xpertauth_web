@@ -75,8 +75,12 @@ const fr = {
     seeAll: "Voir tous les articles",
   },
   ctaFinal: {
-    sign1: "RACONTEZ-NOUS",
-    sign2: "VOTRE CAS",
+    signs: [
+      ["ATTENTION", "CHARGE SPÉCIALE"],
+      ["PERMIS ?", "ESCORTE ?"],
+      ["ROULER", "LE VENDREDI ?"],
+      ["RACONTEZ-NOUS", "VOTRE CAS"],
+    ],
     title1: "Parlez-nous de votre cas.",
     title2: "Les connaissances dont vous avez besoin,",
     title3: "quand vous en avez besoin.",

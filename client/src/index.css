@@ -381,7 +381,9 @@
   100% { background-position: 0% 50%; }
 }
 
-/* Cartel de puntos del panel de cierre (dot-sign.tsx): se enciende una sola vez, columna a columna */
+/* Cartel de puntos del panel de cierre (dot-sign.tsx).
+   .sign-on: primer encendido, columna a columna, una sola vez.
+   .sign-now: cambios de mensaje, todo de golpe. Sin clase: apagado. */
 @keyframes signLit {
   from { opacity: 0.08; }
   to   { opacity: 1; }
@@ -389,6 +391,7 @@
 .sign-lit { filter: drop-shadow(0 0 0.5px rgba(232,98,10,0.9)); }
 .sign-dot { opacity: 0.08; }
 .sign-on .sign-dot { animation: signLit 160ms ease-out var(--d) both; }
+.sign-now .sign-dot { opacity: 1; }
 @media (prefers-reduced-motion: reduce) {
   .sign-dot, .sign-on .sign-dot { opacity: 1; animation: none; }
 }

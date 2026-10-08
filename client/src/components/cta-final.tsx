@@ -6,7 +6,7 @@ import DotSign from "./dot-sign";
 import ContactModal from "./ContactModal";
 
 export default function CtaFinal() {
-  const { t } = useTranslations("ctaFinal");
+  const { t, messages } = useTranslations("ctaFinal");
   const [contactOpen, setContactOpen] = useState(false);
 
   return (
@@ -27,7 +27,7 @@ export default function CtaFinal() {
         >
           <div className="relative z-10">
           <h2 className="sr-only">{t("title1")}</h2>
-          <DotSign lines={[t("sign1"), t("sign2")]} />
+          <DotSign messages={messages.signs} />
 
           <p className="t-h3 text-pure mt-8 sm:mt-10">
             {t("title2")}<br />
