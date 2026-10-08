@@ -75,6 +75,8 @@ const es = {
     seeAll: "Ver todos los artículos",
   },
   ctaFinal: {
+    sign1: "CUÉNTANOS",
+    sign2: "TU CASO",
     title1: "Cuéntanos tu caso.",
     title2: "El conocimiento que necesitas,",
     title3: "cuando lo necesitas.",

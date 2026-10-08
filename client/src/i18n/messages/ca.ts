@@ -75,6 +75,8 @@ const ca = {
     seeAll: "Veure tots els articles",
   },
   ctaFinal: {
+    sign1: "EXPLICA'NS",
+    sign2: "EL TEU CAS",
     title1: "Explica'ns el teu cas.",
     title2: "El coneixement que necessites,",
     title3: "quan el necessites.",

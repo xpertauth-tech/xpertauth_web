@@ -2,6 +2,7 @@ import { useState } from "react";
 import { motion } from "framer-motion";
 import { Calendar } from "lucide-react";
 import { useTranslations } from "@/i18n/context";
+import DotSign from "./dot-sign";
 import ContactModal from "./ContactModal";
 
 export default function CtaFinal() {
@@ -25,13 +26,13 @@ export default function CtaFinal() {
           data-testid="panel-cta-final"
         >
           <div className="relative z-10">
-          <h2
-            className="t-h2 text-pure"
-          >
-            {t("title1")}<br />
+          <h2 className="sr-only">{t("title1")}</h2>
+          <DotSign lines={[t("sign1"), t("sign2")]} />
+
+          <p className="t-h3 text-pure mt-8 sm:mt-10">
             {t("title2")}<br />
             {t("title3")}
-          </h2>
+          </p>
 
           <div className="mt-10 sm:mt-12 flex flex-col sm:flex-row items-center justify-center gap-4">
             <button
