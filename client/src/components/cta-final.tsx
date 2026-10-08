@@ -2,13 +2,8 @@ import { useState } from "react";
 import { motion } from "framer-motion";
 import { Calendar } from "lucide-react";
 import { useTranslations } from "@/i18n/context";
+import HeroSketch from "./hero-sketch";
 import ContactModal from "./ContactModal";
-
-// Foto de fondo del panel (URL de Supabase Storage). null = sin foto todavía.
-// Cuando se ponga una, se dibuja bajo una capa oscura para que el texto se lea.
-// Imagen del bucket blog-images servida redimensionada por Storage (no se sube nada).
-const CTA_PANEL_BG: string | null =
-  "https://supabase.xpertauth.com/storage/v1/render/image/public/blog-images/Gemini_Generated_Image_j326soj326soj326.png?width=1600&quality=70";
 
 export default function CtaFinal() {
   const { t } = useTranslations("ctaFinal");
@@ -30,18 +25,10 @@ export default function CtaFinal() {
           className="relative overflow-hidden rounded-2xl bg-obsidian-light border border-white/10 p-8 md:p-24 text-center"
           data-testid="panel-cta-final"
         >
-          {CTA_PANEL_BG && (
-            <>
-              {/* Encuadre (.cta-photo en index.css): ampliado y llevado abajo a la derecha para dejar fuera los rótulos y la marca de agua de la imagen */}
-              <img
-                src={CTA_PANEL_BG}
-                alt=""
-                aria-hidden="true"
-                className="cta-photo"
-              />
-              <div className="cta-overlay" />
-            </>
-          )}
+          {/* Croquis decorativo: esquina inferior derecha en ordenador; en móvil solo la vista lateral, abajo y por detrás del texto */}
+          <div className="absolute bottom-2 right-3 w-[280px] lg:w-[300px] max-md:left-1/2 max-md:right-auto max-md:-translate-x-1/2 max-md:w-[260px] max-md:bottom-2 opacity-25 pointer-events-none">
+            <HeroSketch decorativo />
+          </div>
 
           <div className="relative z-10">
           <h2

@@ -11,6 +11,9 @@ import { useTranslations } from "@/i18n/context";
  * cotas) con CSS (.hc-d / .hc-f en index.css); con prefers-reduced-motion se
  * muestra terminado.
  *
+ * Variante `decorativo` (panel de cierre de la Home): todo en Arctic, sin
+ * animación ni rótulos de vista y oculto a lectores de pantalla (.hc-deco).
+ *
  * Escala común de las dos vistas: 1 unidad ≈ 3,8 cm; suelo en y = 190.
  */
 
@@ -141,7 +144,7 @@ const T_EXC = 1400;
 const T_ROT = 2300;
 const T_COT = 2600;
 
-export default function HeroSketch() {
+export default function HeroSketch({ decorativo = false }: { decorativo?: boolean }) {
   const { t } = useTranslations("hero");
   const chain = [10, ...AXLES_TRACTOR, ...AXLES_TRAILER, 584];
   const spans: [number, number][] = [
@@ -150,8 +153,8 @@ export default function HeroSketch() {
   ];
 
   return (
-    <figure className="m-0 w-full max-w-[640px] mx-auto">
-      <span className="sr-only">{t("sketchAlt")}</span>
+    <figure className={`m-0 w-full max-w-[640px] mx-auto${decorativo ? " hc-deco" : ""}`} aria-hidden={decorativo || undefined}>
+      {!decorativo && <span className="sr-only">{t("sketchAlt")}</span>}
 
       <div className="flex items-start w-full" aria-hidden="true">
         {/* Vista lateral */}
@@ -195,9 +198,11 @@ export default function HeroSketch() {
               ))}
             </g>
           </svg>
-          <p className="hc-f mt-1 text-[0.7rem] sm:text-xs text-white/40" style={fade(T_EXC)}>
-            {t("viewSide")}
-          </p>
+          {!decorativo && (
+            <p className="hc-f mt-1 text-[0.7rem] sm:text-xs text-white/40" style={fade(T_EXC)}>
+              {t("viewSide")}
+            </p>
+          )}
         </div>
 
         {/* Vista frontal (oculta en móvil) */}
@@ -220,9 +225,11 @@ export default function HeroSketch() {
               <Letter x={58} y={219} at={T_COT + 1300}>W</Letter>
             </g>
           </svg>
-          <p className="hc-f mt-1 text-[0.7rem] sm:text-xs text-white/40" style={fade(T_EXC + 300)}>
-            {t("viewFront")}
-          </p>
+          {!decorativo && (
+            <p className="hc-f mt-1 text-[0.7rem] sm:text-xs text-white/40" style={fade(T_EXC + 300)}>
+              {t("viewFront")}
+            </p>
+          )}
         </div>
       </div>
     </figure>
