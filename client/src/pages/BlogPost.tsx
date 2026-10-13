@@ -268,7 +268,7 @@ export default function BlogPost() {
       <Navbar />
 
       <div className="pt-28 pb-6 px-6 bg-[#0A0E1A]">
-        <div className="max-w-3xl mx-auto">
+        <div className="max-w-[680px] mx-auto">
           <button
             onClick={() => { window.location.href = "/" + locale + "/blog"; }}
             className="t-small text-white/70 hover:text-[#4D9FEC] transition-colors"
@@ -286,7 +286,7 @@ export default function BlogPost() {
         <>
           {/* CABECERA */}
           <header className="px-6 pb-12 bg-[#0A0E1A]">
-            <div className="max-w-3xl mx-auto fade-up">
+            <div className="max-w-[680px] mx-auto fade-up">
               <span className="t-label">
                 {t.tag}
               </span>
@@ -304,7 +304,7 @@ export default function BlogPost() {
           {/* IMAGEN */}
           {post.image_url && (
             <div className="px-6 pb-12 bg-[#0A0E1A]">
-              <div className="max-w-3xl mx-auto">
+              <div className="max-w-[680px] mx-auto">
                 <img src={post.image_url} alt={post.title} className="w-full rounded-xl object-cover max-h-96" />
               </div>
             </div>
@@ -312,14 +312,14 @@ export default function BlogPost() {
 
           {/* CONTENIDO */}
           <section className="px-6 pb-16 md:pb-24 bg-[#0A0E1A]">
-            <div className="max-w-3xl mx-auto">
+            <div className="max-w-[680px] mx-auto">
               {renderContent(post.content, post.title)}
             </div>
           </section>
 
           {/* CTA */}
           <section className="section-y px-6 bg-[#0A0E1A]">
-            <div className="card max-w-3xl mx-auto border-[#1B4FD8]/30 text-center">
+            <div className="card max-w-[680px] mx-auto border-[#1B4FD8]/30 text-center">
               <h3 className="t-h3 text-white mb-2">{t.ctaTitle}</h3>
               <p className="t-small text-white/70 mb-6">{t.ctaSubtitle}</p>
               <button
