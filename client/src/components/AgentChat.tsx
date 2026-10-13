@@ -213,9 +213,9 @@ function renderMarkdown(texto: string): React.ReactNode[] {
   while (i < lineas.length) {
     const linea = lineas[i];
     if (linea.startsWith("## ")) {
-      nodos.push(<p key={i} className="font-bold text-white mt-3 mb-1" style={{ fontSize: "0.82rem" }}>{linea.replace(/^## /, "")}</p>);
+      nodos.push(<p key={i} className="font-bold text-white mt-3 mb-1" style={{ fontSize: "0.9375rem" }}>{linea.replace(/^## /, "")}</p>);
     } else if (linea.startsWith("### ")) {
-      nodos.push(<p key={i} className="font-semibold mt-2 mb-0.5" style={{ fontSize: "0.78rem", color: "rgba(255,255,255,0.75)" }}>{linea.replace(/^### /, "")}</p>);
+      nodos.push(<p key={i} className="font-semibold mt-2 mb-0.5" style={{ fontSize: "0.875rem", color: "rgba(255,255,255,0.75)" }}>{linea.replace(/^### /, "")}</p>);
     } else if (/^[-*] /.test(linea)) {
       nodos.push(<div key={i} className="flex gap-2 my-0.5"><span className="flex-shrink-0 mt-1.5 w-1 h-1 rounded-full bg-white/40" /><span className="text-sm leading-relaxed" style={{ color: "rgba(255,255,255,0.85)" }}>{parsearInline(linea.replace(/^[-*] /, ""))}</span></div>);
     } else if (/^\d+\. /.test(linea)) {
@@ -549,7 +549,7 @@ export default function AgentChat({
             >
               {t.limitePre}<strong style={{ color: "#fff" }}>{t.limiteNegrita(limite)}</strong>{t.limitePost}
               <br />
-              <span style={{ color: "rgba(255,255,255,0.70)", fontSize: "0.75rem" }}>
+              <span style={{ color: "rgba(255,255,255,0.70)", fontSize: "0.875rem" }}>
                 {t.limiteRestaura}
               </span>
             </div>

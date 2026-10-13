@@ -40,7 +40,7 @@ export default function Hero() {
         <motion.div initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8, ease: "easeOut" }}>
           <div className="inline-flex items-center gap-1.5 sm:gap-2 px-2.5 sm:px-4 py-1.5 max-w-full rounded-xl sm:rounded-full border border-white/10 bg-white/5 mb-8">
             <div className="w-1.5 h-1.5 sm:w-2 sm:h-2 rounded-full bg-arctic animate-pulse shrink-0" />
-            <span className="text-white/70 text-[0.46rem] sm:text-xs font-medium tracking-normal sm:tracking-wide uppercase leading-snug">
+            <span className="text-white/70 text-xs font-medium tracking-normal sm:tracking-wide uppercase leading-snug">
               {badgeParts.length === 2 ? (
                 <>
                   <span className="block sm:inline">{badgeParts[0]}</span>

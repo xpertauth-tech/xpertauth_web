@@ -252,7 +252,7 @@
   .t-small { font-family: "Inter", sans-serif; font-weight: 400; font-size: 14px; line-height: 1.5; }
   .t-label {
     display: block; margin-bottom: 8px;
-    font-family: "Inter", sans-serif; font-weight: 600; font-size: 12px; line-height: 1.4;
+    font-family: "Inter", sans-serif; font-weight: 600; font-size: 14px; line-height: 1.4;
     text-transform: uppercase; letter-spacing: 0.14em; color: #4D9FEC;
   }
   @media (min-width: 768px) {
@@ -260,7 +260,7 @@
     .t-h1-hero { font-size: 56px; }
     .t-h2 { font-size: 40px; }
     .t-h3 { font-size: 20px; }
-    .t-lead { font-size: 20px; }
+    .t-lead { font-size: 18px; }
   }
   @media (min-width: 1024px) {
     .t-h1-hero { font-size: 72px; }

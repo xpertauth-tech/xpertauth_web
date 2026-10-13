@@ -5,6 +5,11 @@ export default {
   content: ["./client/index.html", "./client/src/**/*.{js,jsx,ts,tsx}"],
   theme: {
     extend: {
+      // Mínimo de la web: 14 px (xs) y 16 px (sm, texto normal y menú)
+      fontSize: {
+        xs: ["14px", { lineHeight: "1.45" }],
+        sm: ["16px", { lineHeight: "1.5" }],
+      },
       borderRadius: {
         lg: ".5625rem",
         md: ".375rem",
