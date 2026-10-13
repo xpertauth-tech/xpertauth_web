@@ -476,3 +476,10 @@
 @media (max-width: 767px) {
   p.t-lead.ficha-entrada { text-align: center; }
 }
+
+/* Sobre nosotros, pantalla 1: en ordenador el encabezado ocupa exactamente una pantalla
+   (alto de la ventana; los 80 px de arriba son la barra de menú) con el contenido centrado. */
+.sn-pantalla-1 { display: flex; align-items: center; min-height: 55vh; padding-top: 112px; padding-bottom: 64px; }
+@media (min-width: 768px) {
+  .sn-pantalla-1 { min-height: 100vh; min-height: 100dvh; padding-top: 80px; padding-bottom: 0; }
+}

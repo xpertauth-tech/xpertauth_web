@@ -359,7 +359,7 @@ export default function SobreNosotros() {
       <main>
 
         {/* ══ HERO ══════════════════════════════════════════════════════ */}
-        <section className="page-top pb-16 md:pb-24 px-6" style={{ background: "#0A0E1A", minHeight: "55vh", display: "flex", alignItems: "center" }}>
+        <section className="sn-pantalla-1 px-6" style={{ background: "#0A0E1A" }}>
           <div style={{ maxWidth: 760, margin: "0 auto", textAlign: "center" }}>
             <h1
               className="t-h1 grad-title title-gap"
