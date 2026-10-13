@@ -70,6 +70,7 @@ const GLYPHS: Record<string, string[]> = {
 };
 // Letras con acento: letra base + fila superior
 const ACCENTS: Record<string, [string, string]> = {
+  Á: ["A", "00010"],
   É: ["E", "00010"],
   Í: ["I", "00010"],
   Ó: ["O", "00010"],

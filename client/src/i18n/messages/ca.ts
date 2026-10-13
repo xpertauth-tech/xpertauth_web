@@ -78,7 +78,7 @@ const ca = {
     signs: [
       ["PRECAUCIÓ", "CÀRREGA ESPECIAL"],
       ["PERMÍS?", "ESCORTA?"],
-      ["PUC CIRCULAR", "EL DIVENDRES?"],
+      ["RESTRICCIONS", "DE CIRCULACIÓ?"],
       ["EXPLICA'NS", "EL TEU CAS"],
     ],
     title1: "Explica'ns el teu cas.",

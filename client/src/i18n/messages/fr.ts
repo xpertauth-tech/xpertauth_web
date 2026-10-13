@@ -78,7 +78,7 @@ const fr = {
     signs: [
       ["ATTENTION", "CHARGE SPÉCIALE"],
       ["PERMIS ?", "ESCORTE ?"],
-      ["ROULER", "LE VENDREDI ?"],
+      ["RESTRICTIONS", "DE TRAFIC ?"],
       ["RACONTEZ-NOUS", "VOTRE CAS"],
     ],
     title1: "Parlez-nous de votre cas.",

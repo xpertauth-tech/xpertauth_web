@@ -78,7 +78,7 @@ const es = {
     signs: [
       ["PRECAUCIÓN", "CARGA ESPECIAL"],
       ["¿PERMISO?", "¿ESCOLTA?"],
-      ["¿CIRCULO", "EL VIERNES?"],
+      ["¿RESTRICCIÓN", "DE TRÁFICO?"],
       ["CUÉNTANOS", "TU CASO"],
     ],
     title1: "Cuéntanos tu caso.",

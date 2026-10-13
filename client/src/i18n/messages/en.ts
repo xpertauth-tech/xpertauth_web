@@ -78,7 +78,7 @@ const en = {
     signs: [
       ["CAUTION", "ABNORMAL LOAD"],
       ["PERMIT?", "ESCORT?"],
-      ["CAN I DRIVE", "ON FRIDAY?"],
+      ["TRAFFIC", "BANS?"],
       ["TELL US", "YOUR CASE"],
     ],
     title1: "Tell us about your case.",
