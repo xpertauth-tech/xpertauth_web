@@ -49,10 +49,10 @@ export default function CookieBanner() {
           animate={{ y: 0, opacity: 1 }}
           exit={{ y: 100, opacity: 0 }}
           transition={{ duration: 0.4, ease: "easeOut" }}
-          className="fixed bottom-0 left-0 right-0 z-[9999] p-4 sm:p-6"
+          className="fixed bottom-0 left-0 right-0 z-[9999] sm:p-6"
           data-testid="cookie-banner"
         >
-          <div className="card !bg-[#0F1628] hover:border-white/10 max-w-4xl mx-auto shadow-2xl flex flex-col sm:flex-row sm:items-center gap-4">
+          <div className="card !bg-[#0F1628] hover:border-white/10 max-w-4xl mx-auto shadow-2xl flex flex-row items-center gap-3 sm:gap-4 max-sm:!rounded-none max-sm:!border-x-0 max-sm:!border-b-0 max-sm:!px-4 max-sm:!py-2 max-sm:shadow-none">
             <p className="flex-1 t-small text-white/70">
               {t("description")}{" "}
               <a
@@ -69,7 +69,7 @@ export default function CookieBanner() {
             </p>
             <button
               onClick={entendido}
-              className="btn btn-primary btn-small sm:flex-shrink-0"
+              className="btn btn-primary btn-small flex-shrink-0"
               data-testid="button-cookies-accept"
             >
               {t("button")}
