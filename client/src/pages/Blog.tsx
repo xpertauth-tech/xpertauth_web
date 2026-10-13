@@ -330,7 +330,7 @@ export default function Blog() {
       {SHOW_SUBSCRIPTION && (
         <section className="section-y px-6 bg-[#070A12]">
           <div className="max-w-xl mx-auto text-center">
-            <h2 className="t-h2 text-white mb-3">{t.subscribeTitle}</h2>
+            <h2 className="t-h2 text-white title-gap">{t.subscribeTitle}</h2>
             <p className="t-small text-white/70 mb-8">{t.subscribeSubtitle}</p>
             {subStatus === "ok" ? (
               <p className="text-[#4D9FEC] font-medium">{t.successMsg}</p>

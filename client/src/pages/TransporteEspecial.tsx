@@ -424,7 +424,7 @@ export default function TransporteEspecial() {
           <div className="flex flex-col lg:flex-row gap-10 items-center">
             <div className="flex-1">
               <span className="t-label">{t.lexLabel}</span>
-              <h2 className="t-h2 text-pure mb-4">
+              <h2 className="t-h2 text-pure title-gap">
                 {t.lexTitle}
               </h2>
               <p className="t-body text-white/70 mb-4">{t.lexDesc1}</p>
@@ -469,7 +469,7 @@ export default function TransporteEspecial() {
       {/* ── CTA FINAL ────────────────────────────────────────────────────────── */}
       <section className="section-y px-4 sm:px-6 lg:px-8 bg-obsidian border-t border-white/[0.05]">
         <div className="max-w-3xl mx-auto text-center">
-          <h2 className="t-h2 text-pure mb-4">
+          <h2 className="t-h2 text-pure title-gap">
             {t.ctaTitle}
           </h2>
           <p className="t-lead text-white/70 mb-10 max-w-xl mx-auto">{t.ctaSubtitle}</p>

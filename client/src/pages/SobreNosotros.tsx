@@ -413,8 +413,8 @@ export default function SobreNosotros() {
         <section className="page-top pb-16 md:pb-24 px-6" style={{ background: "#0A0E1A", minHeight: "55vh", display: "flex", alignItems: "center" }}>
           <div style={{ maxWidth: 760, margin: "0 auto", textAlign: "center" }}>
             <h1
-              className="t-h1 grad-title"
-              style={{ marginBottom: "1.5rem", whiteSpace: "pre-line" }}
+              className="t-h1 grad-title title-gap"
+              style={{ whiteSpace: "pre-line" }}
             >
               {t.hero.titulo}
             </h1>
@@ -425,7 +425,7 @@ export default function SobreNosotros() {
         </section>
 
         {/* ══ HISTORIA ══════════════════════════════════════════════════ */}
-        <section className="section-y px-6" style={{ background: "#0A0E1A" }}>
+        <section className="section-y section-y-firma px-6" style={{ background: "#0A0E1A" }}>
           <div
             style={{
               maxWidth: 1100,
@@ -459,7 +459,7 @@ export default function SobreNosotros() {
               {t.historia.parrafos.map((p, i) => (
                 <p key={i} className="t-body" style={{ color: "rgba(255,255,255,.75)", marginTop: i > 0 ? "1.25rem" : 0 }}>{p}</p>
               ))}
-              <p className="t-small" style={{ marginTop: "2rem", color: "#4D9FEC", fontWeight: 700, fontStyle: "italic" }}>
+              <p className="t-small" style={{ marginTop: "48px", color: "#4D9FEC", fontWeight: 700, fontStyle: "italic" }}>
                 {t.historia.firma}
               </p>
             </div>
@@ -473,8 +473,7 @@ export default function SobreNosotros() {
               {t.mision.etiqueta}
             </span>
             <h2
-              className="t-h2 text-pure"
-              style={{ marginBottom: "1.5rem" }}
+              className="t-h2 text-pure title-gap"
             >
               {t.mision.titulo}
             </h2>
@@ -507,8 +506,7 @@ export default function SobreNosotros() {
         <section className="section-y px-6" style={{ background: "#0A0E1A", textAlign: "center", borderTop: "1px solid rgba(255,255,255,.06)" }}>
           <div style={{ maxWidth: 600, margin: "0 auto" }}>
             <h2
-              className="t-h2 text-pure"
-              style={{ marginBottom: "1.25rem" }}
+              className="t-h2 text-pure title-gap"
             >
               {t.cta.titulo}
             </h2>

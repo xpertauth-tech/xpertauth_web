@@ -290,16 +290,21 @@
   @media (min-width: 768px) { .card { padding: 24px; } }
 
   /* Espaciado (todo múltiplo de 8) */
-  .section-y { padding-top: 80px; padding-bottom: 80px; }
-  .section-y-cta { padding-top: 80px; padding-bottom: 80px; }
+  .section-y { padding-top: 96px; padding-bottom: 96px; }
+  .section-y-cta { padding-top: 96px; padding-bottom: 96px; }
+  .section-y-firma { padding-bottom: 112px; } /* sección con firma al final: 16 px más abajo */
   .page-top { padding-top: 112px; }
   .head-gap { margin-bottom: 32px; }
-  .lead-gap { margin-top: 16px; }
+  .lead-gap { margin-top: 24px; }  /* separación título → texto */
+  .title-gap { margin-bottom: 24px; }
   @media (min-width: 768px) {
-    .section-y { padding-top: 128px; padding-bottom: 128px; }
-    .section-y-cta { padding-top: 160px; padding-bottom: 160px; }
+    .section-y { padding-top: 144px; padding-bottom: 144px; }
+    .section-y-cta { padding-top: 176px; padding-bottom: 176px; }
+    .section-y-firma { padding-bottom: 160px; }
     .page-top { padding-top: 128px; }
     .head-gap { margin-bottom: 64px; }
+    .lead-gap { margin-top: 32px; }
+    .title-gap { margin-bottom: 32px; }
   }
 }
 
