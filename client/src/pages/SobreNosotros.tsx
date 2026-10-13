@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useI18n } from "../i18n/context";
 import Navbar from "@/components/navbar";
 import Footer from "@/components/footer";
@@ -34,6 +34,7 @@ const translations = {
     valores: {
       etiqueta: "Valores",
       titulo: "Lo que nos define",
+      hint: "Haz clic en una tarjeta para leerla",
       items: [
         {
           num: "01",
@@ -93,6 +94,7 @@ const translations = {
     valores: {
       etiqueta: "Valors",
       titulo: "El que ens defineix",
+      hint: "Fes clic en una targeta per llegir-la",
       items: [
         {
           num: "01",
@@ -152,6 +154,7 @@ const translations = {
     valores: {
       etiqueta: "Values",
       titulo: "What defines us",
+      hint: "Click a card to read it",
       items: [
         {
           num: "01",
@@ -211,6 +214,7 @@ const translations = {
     valores: {
       etiqueta: "Valeurs",
       titulo: "Ce qui nous définit",
+      hint: "Cliquez sur une carte pour la lire",
       items: [
         {
           num: "01",
@@ -248,23 +252,135 @@ const translations = {
 const FOTO_URL =
   "https://supabase.xpertauth.com/storage/v1/object/public/web-images/equipo/sobre-nosotros_cafe-jose-luis_v1.webp";
 
-// ─── VALORES ──────────────────────────────────────────────────────────────────
-// Todas las tarjetas a la vista y en orden (01, 02, 03, 04); el hover suave es de .card
+// ─── COLORES TARJETAS POR SLOT ────────────────────────────────────────────────
+const SLOT_BG = [
+  "#0F1628",
+  "#0F1628",
+  "#0F1628",
+  "#0F1628",
+];
+const SLOT_BORDER = [
+  "rgba(255,255,255,0.1)",
+  "rgba(255,255,255,0.1)",
+  "rgba(255,255,255,0.1)",
+  "rgba(255,255,255,0.1)",
+];
+const SLOT_SHADOW = [
+  "0 12px 48px rgba(27,79,216,0.45), 0 0 0 1px rgba(77,159,236,0.2)",
+  "0 6px 24px rgba(0,0,0,0.4)",
+  "0 4px 16px rgba(0,0,0,0.35)",
+  "0 2px 8px rgba(0,0,0,0.3)",
+];
+
+// ─── DISPLAY CARDS ────────────────────────────────────────────────────────────
 
 interface ValorItem { num: string; titulo: string; texto: string; }
 
-function ValoresGrid({ items }: { items: ValorItem[] }) {
+function ValoresStack({ items, hint }: { items: ValorItem[]; hint: string }) {
+  const [order, setOrder] = useState([0, 1, 2, 3]);
+
+  function traerAlFrente(idx: number) {
+    setOrder((prev) => [idx, ...prev.filter((i) => i !== idx)]);
+  }
+
+  const CARD_W = 448;
+  const CARD_H = 210;
+  const OFFSET_X = 32;
+  const OFFSET_Y = 22;
+
   return (
-    <div className="grid gap-4 md:grid-cols-2 md:gap-6">
-      {items.map((item) => (
-        <div key={item.num} className="card">
-          <span className="t-label">{item.num}</span>
-          <h3 className="t-h3 text-pure">{item.titulo}</h3>
-          <p className="t-body text-white/70 mt-3">{item.texto}</p>
-        </div>
-      ))}
+    <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: "1.5rem" }}>
+      <div style={{ position: "relative", width: CARD_W + OFFSET_X * 3 + 16, height: CARD_H + OFFSET_Y * 3 + 16 }}>
+        {[...order].reverse().map((itemIdx) => {
+          const slot = order.indexOf(itemIdx);
+          const isFrente = slot === 0;
+          const item = items[itemIdx];
+
+          return (
+            <div
+              key={itemIdx}
+              onClick={() => !isFrente && traerAlFrente(itemIdx)}
+              style={{
+                position: "absolute",
+                left: (3 - slot) * OFFSET_X,
+                top: (3 - slot) * OFFSET_Y,
+                width: CARD_W,
+                height: CARD_H,
+                zIndex: slot + 1,
+                cursor: isFrente ? "default" : "pointer",
+                transform: "skewY(-5deg)",
+                transition: "left 0.45s cubic-bezier(0.34,1.4,0.64,1), top 0.45s cubic-bezier(0.34,1.4,0.64,1), box-shadow 0.3s, background 0.3s",
+                borderRadius: "12px",
+                border: `1px solid ${SLOT_BORDER[slot]}`,
+                background: SLOT_BG[slot],
+                boxShadow: SLOT_SHADOW[slot],
+                backdropFilter: "blur(10px)",
+                padding: "24px",
+                display: "flex",
+                flexDirection: "column",
+                justifyContent: "space-between",
+                filter: slot === 0 ? "none" : `brightness(${1 - slot * 0.12})`,
+              }}
+            >
+              <span className="t-label" style={{ marginBottom: 0 }}>
+                {item.num}
+              </span>
+              <p className="t-h3" style={{ color: "#ffffff" }}>
+                {item.titulo}
+              </p>
+              <p className="t-small" style={{ color: "#ffffff" }}>
+                {item.texto}
+              </p>
+            </div>
+          );
+        })}
+      </div>
+
+      {/* Indicadores */}
+      <div style={{ display: "flex", gap: "0.5rem", marginTop: "0.5rem" }}>
+        {items.map((_, idx) => (
+          <button
+            key={idx}
+            onClick={() => traerAlFrente(idx)}
+            style={{
+              width: order[0] === idx ? "2.25rem" : "0.5rem",
+              height: "0.5rem",
+              borderRadius: "9999px",
+              background: order[0] === idx ? "#1B4FD8" : "rgba(255,255,255,0.25)",
+              border: "none",
+              cursor: "pointer",
+              transition: "width 0.35s ease, background 0.35s ease",
+              padding: 0,
+            }}
+          />
+        ))}
+      </div>
+
+      <p className="t-small" style={{ color: "rgba(255,255,255,0.70)", letterSpacing: "0.06em", marginTop: "0.1rem" }}>
+        {hint}
+      </p>
     </div>
   );
+}
+
+// En móvil la pila se reduce con transform: scale (no cambia el alto que ocupa
+// en el flujo). Se compensa con un margen negativo igual a lo que se encoge.
+const STACK_MOBILE_SCALE = 0.58;
+function useStackScaleGap(ref: React.RefObject<HTMLDivElement>) {
+  useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+    const apply = () => {
+      if (window.innerWidth <= 768) {
+        el.style.marginBottom = `-${Math.round(el.offsetHeight * (1 - STACK_MOBILE_SCALE))}px`;
+      } else {
+        el.style.marginBottom = "";
+      }
+    };
+    apply();
+    window.addEventListener("resize", apply);
+    return () => window.removeEventListener("resize", apply);
+  }, [ref]);
 }
 
 // ─── COMPONENTE PRINCIPAL ─────────────────────────────────────────────────────
@@ -275,6 +391,8 @@ export default function SobreNosotros() {
   const t = translations[lang] ?? translations.es;
 
   const [contactOpen, setContactOpen] = useState(false);
+  const stackRef = useRef<HTMLDivElement>(null);
+  useStackScaleGap(stackRef);
 
   return (
     <div className="min-h-screen">
@@ -370,7 +488,9 @@ export default function SobreNosotros() {
                 {t.valores.titulo}
               </h2>
             </div>
-            <ValoresGrid items={t.valores.items} />
+            <div ref={stackRef} className="sn-stack-scale" style={{ display: "flex", justifyContent: "center" }}>
+              <ValoresStack items={t.valores.items} hint={t.valores.hint} />
+            </div>
           </div>
         </section>
 
@@ -422,6 +542,7 @@ export default function SobreNosotros() {
         @media(max-width: 768px){
           .sn-grid-historia { grid-template-columns: 1fr !important; }
           .sn-foto { max-width: 200px !important; margin: 0 auto; }
+          .sn-stack-scale { transform: scale(${STACK_MOBILE_SCALE}) !important; transform-origin: top center; }
         }
       `}</style>
     </div>
