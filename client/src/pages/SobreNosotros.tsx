@@ -3,6 +3,7 @@ import { useI18n } from "../i18n/context";
 import Navbar from "@/components/navbar";
 import Footer from "@/components/footer";
 import ContactModal from "@/components/ContactModal";
+import FichaProyecto from "@/components/FichaProyecto";
 
 // ─── TRADUCCIONES ─────────────────────────────────────────────────────────────
 
@@ -371,6 +372,9 @@ export default function SobreNosotros() {
             </p>
           </div>
         </section>
+
+        {/* ══ FICHA DEL PROYECTO ═════════════════════════════════════════ */}
+        <FichaProyecto />
 
         {/* ══ MISIÓN ════════════════════════════════════════════════════ */}
         <section className="section-y px-6" style={{ background: "#0F1628" }}>
