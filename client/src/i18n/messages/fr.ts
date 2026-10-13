@@ -126,6 +126,10 @@ const fr = {
     errorRequired: "Veuillez remplir tous les champs.",
     errorPrivacy: "Vous devez accepter la politique de confidentialité.",
   },
+  notFound: {
+    title: "404 · Page introuvable",
+    button: "Retour à l'accueil",
+  },
   cookies: {
     description: "Ce site n'utilise pas de cookies. Il enregistre seulement votre langue et, si vous vous connectez avec Google, votre session. Nous mesurons les visites de façon anonyme, sans vous suivre.",
     button: "Compris",

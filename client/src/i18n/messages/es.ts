@@ -126,6 +126,10 @@ const es = {
     errorRequired: "Por favor, rellena todos los campos.",
     errorPrivacy: "Debes aceptar la política de privacidad.",
   },
+  notFound: {
+    title: "404 · Página no encontrada",
+    button: "Volver al inicio",
+  },
   cookies: {
     description: "Esta web no usa cookies. Solo guarda tu idioma y, si entras con Google, tu sesión. Medimos las visitas de forma anónima, sin rastrearte.",
     button: "Entendido",

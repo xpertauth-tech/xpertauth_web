@@ -1,21 +1,24 @@
-import { Card, CardContent } from "@/components/ui/card";
-import { AlertCircle } from "lucide-react";
+import { useLocation } from "wouter";
+import Navbar from "@/components/navbar";
+import Footer from "@/components/footer";
+import { useTranslations } from "@/i18n/context";
 
 export default function NotFound() {
-  return (
-    <div className="min-h-screen w-full flex items-center justify-center bg-gray-50">
-      <Card className="w-full max-w-md mx-4">
-        <CardContent className="pt-6">
-          <div className="flex mb-4 gap-2">
-            <AlertCircle className="h-8 w-8 text-red-500" />
-            <h1 className="text-2xl font-bold text-gray-900">404 Page Not Found</h1>
-          </div>
+  const { t, locale } = useTranslations("notFound");
+  const [, navigate] = useLocation();
 
-          <p className="mt-4 text-sm text-gray-600">
-            Did you forget to add the page to the router?
-          </p>
-        </CardContent>
-      </Card>
+  return (
+    <div className="min-h-screen bg-obsidian">
+      <Navbar />
+      <main className="page-top pb-16 md:pb-24 px-6 flex items-center justify-center" style={{ minHeight: "70vh" }}>
+        <div className="max-w-xl mx-auto text-center">
+          <h1 className="t-h2 text-pure mb-8">{t("title")}</h1>
+          <button onClick={() => navigate(`/${locale}`)} className="btn btn-primary" data-testid="button-404-home">
+            {t("button")}
+          </button>
+        </div>
+      </main>
+      <Footer />
     </div>
   );
 }
