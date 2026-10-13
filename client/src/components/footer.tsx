@@ -57,12 +57,12 @@ export default function Footer() {
               </span>
             </div>
             <p className="text-white/70 t-small  mb-6">{m.description}</p>
-            <div className="flex items-center gap-3">
+            <div className="flex items-center gap-3 max-md:gap-4">
               <a
                 href="https://www.linkedin.com/in/jl-echezarreta-fabregó"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-9 h-9 rounded-md bg-white/[0.05] flex items-center justify-center text-white/70 hover:text-arctic transition-colors"
+                className="w-9 h-9 max-md:w-11 max-md:h-11 rounded-md bg-white/[0.05] flex items-center justify-center text-white/70 hover:text-arctic transition-colors"
                 data-testid="link-linkedin"
                 aria-label="LinkedIn"
               >
@@ -72,7 +72,7 @@ export default function Footer() {
                 href="https://www.instagram.com/xpertauth_association/"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-9 h-9 rounded-md bg-white/[0.05] flex items-center justify-center text-white/70 hover:text-[#E1306C] transition-colors"
+                className="w-9 h-9 max-md:w-11 max-md:h-11 rounded-md bg-white/[0.05] flex items-center justify-center text-white/70 hover:text-[#E1306C] transition-colors"
                 data-testid="link-instagram"
                 aria-label="Instagram"
               >
@@ -82,7 +82,7 @@ export default function Footer() {
                 href="https://wa.me/34625897546?text=Hola%2C%20te%20escribo%20desde%20xpertauth.com"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-9 h-9 rounded-md bg-white/[0.05] flex items-center justify-center text-white/70 hover:text-[#25D366] transition-colors"
+                className="w-9 h-9 max-md:w-11 max-md:h-11 rounded-md bg-white/[0.05] flex items-center justify-center text-white/70 hover:text-[#25D366] transition-colors"
                 data-testid="link-whatsapp"
                 aria-label="WhatsApp"
               >
@@ -96,12 +96,12 @@ export default function Footer() {
             <h4 className="font-heading font-semibold text-pure t-small mb-4 uppercase tracking-wider">
               {m.quickLinks}
             </h4>
-            <ul className="space-y-2.5">
+            <ul className="space-y-2.5 max-md:space-y-1">
               {quickLinks.map((link) => (
                 <li key={link.href}>
                   <button
                     onClick={() => handleLink(link.href, link.isExternal)}
-                    className="text-white/70 t-small hover:text-white/80 transition-colors"
+                    className="text-white/70 t-small hover:text-white/80 transition-colors max-md:inline-flex max-md:items-center max-md:min-h-[44px]"
                     data-testid={`link-footer-${link.href.replace("#", "").replace("/es/", "")}`}
                   >
                     {link.label}
@@ -121,7 +121,7 @@ export default function Footer() {
                 <Mail className="w-4 h-4 text-arctic flex-shrink-0" />
                 <a
                   href="mailto:info@xpertauth.com"
-                  className="text-white/70 t-small hover:text-white/80 transition-colors"
+                  className="text-white/70 t-small hover:text-white/80 transition-colors max-md:inline-flex max-md:items-center max-md:min-h-[44px]"
                   data-testid="link-footer-email"
                 >
                   info@xpertauth.com
@@ -131,7 +131,7 @@ export default function Footer() {
                 <Phone className="w-4 h-4 text-arctic flex-shrink-0" />
                 <a
                   href="tel:+34625897546"
-                  className="text-white/70 t-small hover:text-white/80 transition-colors"
+                  className="text-white/70 t-small hover:text-white/80 transition-colors max-md:inline-flex max-md:items-center max-md:min-h-[44px]"
                   data-testid="link-footer-phone"
                 >
                   +34 625 897 546
@@ -178,16 +178,16 @@ export default function Footer() {
 
         {/* Barra inferior */}
         <div className="pt-8 flex flex-col md:flex-row items-center justify-between gap-4">
-          <div className="flex flex-wrap items-center justify-center gap-4 text-white/70 t-small">
-            <a href={"/" + locale + "/politica-de-privacidad"} className="hover:text-white transition-colors" data-testid="link-privacy">
+          <div className="flex flex-wrap items-center justify-center gap-x-4 gap-y-1 text-white/70 t-small">
+            <a href={"/" + locale + "/politica-de-privacidad"} className="hover:text-white transition-colors max-md:inline-flex max-md:items-center max-md:min-h-[44px]" data-testid="link-privacy">
               {m.privacy}
             </a>
             <span>|</span>
-            <a href={"/" + locale + "/aviso-legal"} className="hover:text-white transition-colors" data-testid="link-legal">
+            <a href={"/" + locale + "/aviso-legal"} className="hover:text-white transition-colors max-md:inline-flex max-md:items-center max-md:min-h-[44px]" data-testid="link-legal">
               {m.legal}
             </a>
             <span>|</span>
-            <a href={"/" + locale + "/cookies"} className="hover:text-white transition-colors" data-testid="link-cookies">
+            <a href={"/" + locale + "/cookies"} className="hover:text-white transition-colors max-md:inline-flex max-md:items-center max-md:min-h-[44px]" data-testid="link-cookies">
               {m.cookies}
             </a>
           </div>

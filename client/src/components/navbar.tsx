@@ -286,7 +286,7 @@ export default function Navbar() {
             <LocaleSwitcher />
             <button
               onClick={() => setMobileOpen(!mobileOpen)}
-              className="p-2 text-white/80"
+              className="flex items-center justify-center min-w-[44px] min-h-[44px] text-white/80"
               data-testid="button-mobile-menu"
               aria-label="Abrir menú"
             >
@@ -304,7 +304,7 @@ export default function Navbar() {
             exit={{ opacity: 0, height: 0 }}
             className="md:hidden bg-obsidian border-t border-white/10"
           >
-            <div className="px-4 py-4 space-y-1">
+            <div className="px-4 py-4 space-y-2">
               {navLinks.map((link) => (
                 <button
                   key={link.href}

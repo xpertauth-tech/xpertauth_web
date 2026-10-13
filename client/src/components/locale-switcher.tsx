@@ -39,7 +39,7 @@ export default function LocaleSwitcher() {
     <div ref={ref} className="relative" data-testid="locale-switcher">
       <button
         onClick={() => setOpen(!open)}
-        className="flex items-center gap-1.5 px-3 py-2 text-sm text-white/70 rounded-md transition-colors"
+        className="flex items-center gap-1.5 px-3 py-2 min-h-[44px] text-sm text-white/70 rounded-md transition-colors"
         data-testid="button-locale-toggle"
         aria-label="Cambiar idioma"
       >
@@ -67,7 +67,7 @@ export default function LocaleSwitcher() {
                     setLocale(loc);
                     setOpen(false);
                   }}
-                  className={`flex items-center gap-2.5 w-full px-3 py-2 text-sm transition-colors ${
+                  className={`flex items-center gap-2.5 w-full px-3 py-2 min-h-[44px] text-sm transition-colors ${
                     isActive ? "text-arctic bg-white/[0.05]" : "text-white/70"
                   }`}
                   data-testid={`button-locale-${loc}`}
