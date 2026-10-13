@@ -128,6 +128,7 @@ const fr = {
   },
   notFound: {
     title: "404 · Page introuvable",
+    message: "La page que vous cherchez n'existe pas ou a été déplacée.",
     button: "Retour à l'accueil",
   },
   cookies: {

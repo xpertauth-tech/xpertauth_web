@@ -128,6 +128,7 @@ const ca = {
   },
   notFound: {
     title: "404 · Pàgina no trobada",
+    message: "La pàgina que busques no existeix o ha canviat de lloc.",
     button: "Tornar a l'inici",
   },
   cookies: {

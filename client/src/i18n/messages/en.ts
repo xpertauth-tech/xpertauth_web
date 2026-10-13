@@ -128,6 +128,7 @@ const en = {
   },
   notFound: {
     title: "404 · Page not found",
+    message: "The page you're looking for doesn't exist or has moved.",
     button: "Back to home",
   },
   cookies: {

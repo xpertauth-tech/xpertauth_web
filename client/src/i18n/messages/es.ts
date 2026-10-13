@@ -128,6 +128,7 @@ const es = {
   },
   notFound: {
     title: "404 · Página no encontrada",
+    message: "La página que buscas no existe o ha cambiado de sitio.",
     button: "Volver al inicio",
   },
   cookies: {
