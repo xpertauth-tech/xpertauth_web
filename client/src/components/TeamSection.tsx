@@ -115,7 +115,7 @@ export default function TeamSection() {
             <p className="t-body text-white/70 mt-2">{texts.bio[lang]}</p>
             <div className="mt-4">
               <button
-                onClick={() => navigate(`/${locale}/sobre-nosotros#historia`)}
+                onClick={() => navigate(`/${locale}/mi-historia`)}
                 className="btn btn-secondary"
                 data-testid="button-team-jose-luis"
               >
