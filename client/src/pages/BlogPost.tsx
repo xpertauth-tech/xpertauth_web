@@ -137,7 +137,10 @@ function renderContent(content: string, title: string) {
   let lines = content.split("\n");
   // Si el texto empieza repitiendo el título, no se muestra
   const first = lines.findIndex((l) => l.trim());
-  if (first >= 0 && normalizar(lines[first]) === normalizar(title)) lines = lines.slice(first + 1);
+  if (first >= 0 && normalizar(lines[first]) === normalizar(title)) {
+    lines = lines.slice(first + 1);
+    while (lines.length && !lines[0].trim()) lines.shift(); // sin hueco al principio
+  }
   // Tras un subtítulo de fuentes, las líneas son una lista con viñetas hasta el siguiente subtítulo
   const nodos: JSX.Element[] = [];
   let fuentes = false;
