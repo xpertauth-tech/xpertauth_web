@@ -199,7 +199,7 @@ export default function AgentModal({ agente, onClose }: AgentModalProps) {
           </button>
 
           {/* Consentimiento */}
-          <p className="mt-4 text-white/70 text-xs leading-relaxed text-center">
+          <p className="mt-4 text-white/70 text-xs leading-relaxed text-left">
             {t.consentPre}
             <a
               href={`/${locale}/politica-de-privacidad`}
