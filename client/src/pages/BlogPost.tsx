@@ -290,7 +290,7 @@ export default function BlogPost() {
               <span className="t-label">
                 {t.tag}
               </span>
-              <h1 className="t-h1 text-white mb-6">
+              <h1 className="t-h2 text-white mb-6">
                 {post.title}
               </h1>
               <p className="t-lead text-white/70 mb-6">{post.excerpt}</p>
