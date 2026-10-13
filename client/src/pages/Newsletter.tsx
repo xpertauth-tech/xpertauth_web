@@ -253,7 +253,7 @@ export default function Newsletter() {
           <h1 className="text-5xl md:text-6xl font-bold mb-6" style={gradientStyle}>
             {t.heroTitle}
           </h1>
-          <p className="text-lg text-white/60 max-w-xl mx-auto leading-relaxed">
+          <p className="text-lg text-white/70 max-w-xl mx-auto leading-relaxed">
             {t.heroSubtitle}
           </p>
         </div>
@@ -263,9 +263,9 @@ export default function Newsletter() {
       <section className="py-12 px-6 bg-[#0A0E1A]">
         <div className="max-w-4xl mx-auto">
           {loading ? (
-            <p className="text-center text-white/40 py-20">{t.loading}</p>
+            <p className="text-center text-white/70 py-20">{t.loading}</p>
           ) : paginatedItems.length === 0 ? (
-            <p className="text-center text-white/40 py-20">{t.noItems}</p>
+            <p className="text-center text-white/70 py-20">{t.noItems}</p>
           ) : (
             <div className="space-y-5">
               {paginatedItems.map((item, i) => (
@@ -297,7 +297,7 @@ export default function Newsletter() {
                         </h2>
                       </div>
                       <div className="flex items-center justify-between mt-5">
-                        <span className="text-xs text-white/30">
+                        <span className="text-xs text-white/70">
                           📅 {formatDate(item.scheduled_at, locale)}
                         </span>
                         <span className="text-[#E8620A] text-sm font-medium">
@@ -317,17 +317,17 @@ export default function Newsletter() {
               <button
                 onClick={() => goToPage(currentPage - 1)}
                 disabled={currentPage === 1}
-                className="px-4 py-2 text-sm rounded-lg border border-white/20 text-white/60 hover:border-[#E8620A]/50 hover:text-white disabled:opacity-30 disabled:cursor-not-allowed transition-all"
+                className="px-4 py-2 text-sm rounded-lg border border-white/20 text-white/70 hover:border-[#E8620A]/50 hover:text-white disabled:opacity-30 disabled:cursor-not-allowed transition-all"
               >
                 {t.prev}
               </button>
-              <span className="text-white/40 text-sm">
+              <span className="text-white/70 text-sm">
                 {t.page} {currentPage} {t.of} {totalPages}
               </span>
               <button
                 onClick={() => goToPage(currentPage + 1)}
                 disabled={currentPage === totalPages}
-                className="px-4 py-2 text-sm rounded-lg border border-white/20 text-white/60 hover:border-[#E8620A]/50 hover:text-white disabled:opacity-30 disabled:cursor-not-allowed transition-all"
+                className="px-4 py-2 text-sm rounded-lg border border-white/20 text-white/70 hover:border-[#E8620A]/50 hover:text-white disabled:opacity-30 disabled:cursor-not-allowed transition-all"
               >
                 {t.next}
               </button>
@@ -341,7 +341,7 @@ export default function Newsletter() {
         <section className="py-16 px-6 bg-[#070A12]">
           <div className="max-w-xl mx-auto text-center">
             <h2 className="text-2xl font-bold text-white mb-3">{t.subscribeTitle}</h2>
-            <p className="text-white/50 text-sm mb-8">{t.subscribeSubtitle}</p>
+            <p className="text-white/70 text-sm mb-8">{t.subscribeSubtitle}</p>
             {subStatus === "ok" ? (
               <p className="text-[#E8620A] font-medium">{t.successMsg}</p>
             ) : (

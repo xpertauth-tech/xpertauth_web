@@ -336,14 +336,14 @@ export default function PoliticaCookies() {
         <div className="max-w-3xl mx-auto">
           <span className="t-label">Legal</span>
           <h1 className="t-h1 text-white mb-4">{s.title}</h1>
-          <p className="t-small text-white/40">{s.updated}</p>
-          {s.intro && <p className="t-lead text-white/60 mt-6">{s.intro}</p>}
+          <p className="t-small text-white/70">{s.updated}</p>
+          {s.intro && <p className="t-lead text-white/70 mt-6">{s.intro}</p>}
         </div>
       </section>
       <section className="px-6 pb-8 bg-[#0A0E1A]">
         <div className="max-w-3xl mx-auto flex flex-wrap gap-2">
           {s.items.map(item => (
-            <a key={item.id} href={"#" + item.id} className="t-small text-white/40 hover:text-[#4D9FEC] border border-white/10 hover:border-[#4D9FEC]/30 px-3 py-1.5 rounded-full transition-all">
+            <a key={item.id} href={"#" + item.id} className="t-small text-white/70 hover:text-[#4D9FEC] border border-white/10 hover:border-[#4D9FEC]/30 px-3 py-1.5 rounded-full transition-all">
               {item.title.split(" · ")[1]}
             </a>
           ))}
@@ -357,13 +357,13 @@ export default function PoliticaCookies() {
               <LegalText text={item.content} />
               {item.table && (
                 <div className="my-4 bg-[#0A0E1A] border border-white/8 rounded-lg overflow-hidden">
-                  <div className="grid grid-cols-3 bg-white/5 px-4 sm:px-5 py-3 text-xs font-bold text-white/40 uppercase tracking-wider gap-3 sm:gap-4">
+                  <div className="grid grid-cols-3 bg-white/5 px-4 sm:px-5 py-3 text-xs font-bold text-white/70 uppercase tracking-wider gap-3 sm:gap-4">
                     {item.table.headers.map((h, i) => (
                       <span key={i}>{h}</span>
                     ))}
                   </div>
                   {item.table.rows.map((row, i) => (
-                    <div key={i} className="grid grid-cols-3 px-4 sm:px-5 py-3.5 border-t border-white/5 t-small text-white/60 gap-3 sm:gap-4">
+                    <div key={i} className="grid grid-cols-3 px-4 sm:px-5 py-3.5 border-t border-white/5 t-small text-white/70 gap-3 sm:gap-4">
                       <span className="text-white/80 font-medium break-words"><Inline text={row[0]} /></span>
                       <span>{row[1]}</span>
                       <span className="text-[#4D9FEC]">{row[2]}</span>

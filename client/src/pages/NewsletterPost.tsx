@@ -217,7 +217,7 @@ export default function NewsletterPost() {
         .prose-content ul { list-style-type: disc; padding-left: 1.5rem; margin-bottom: 1.4rem; }
         .prose-content ol { list-style-type: decimal; padding-left: 1.5rem; margin-bottom: 1.4rem; }
         .prose-content li { margin-bottom: 0.5rem; }
-        .prose-content blockquote { border-left: 3px solid #E8620A; padding-left: 1.25rem; margin: 1.5rem 0; color: rgba(255,255,255,0.55); font-style: italic; }
+        .prose-content blockquote { border-left: 3px solid #E8620A; padding-left: 1.25rem; margin: 1.5rem 0; color: rgba(255,255,255,0.70); font-style: italic; }
         .prose-content strong { color: #fff; }
         .prose-content code { background: rgba(232,98,10,0.12); color: #E8620A; padding: 0.15rem 0.4rem; border-radius: 4px; font-size: 0.9em; }
         .prose-content img { border-radius: 10px; max-width: 100%; margin: 1.5rem 0; }
@@ -230,7 +230,7 @@ export default function NewsletterPost() {
         <div className="max-w-3xl mx-auto">
           <button
             onClick={() => { window.location.href = "/" + locale + "/newsletter"; }}
-            className="text-sm text-white/40 hover:text-[#E8620A] transition-colors"
+            className="text-sm text-white/70 hover:text-[#E8620A] transition-colors"
           >
             {t.backLabel}
           </button>
@@ -238,9 +238,9 @@ export default function NewsletterPost() {
       </div>
 
       {loading ? (
-        <div className="text-center text-white/40 py-32">{t.loading}</div>
+        <div className="text-center text-white/70 py-32">{t.loading}</div>
       ) : notFound || !item ? (
-        <div className="text-center text-white/40 py-32">{t.notFound}</div>
+        <div className="text-center text-white/70 py-32">{t.notFound}</div>
       ) : (
         <>
           {/* CABECERA */}
@@ -259,7 +259,7 @@ export default function NewsletterPost() {
               <h1 className="text-3xl md:text-4xl font-bold text-white mb-6 leading-tight">
                 {item.title}
               </h1>
-              <div className="text-sm text-white/30">
+              <div className="text-sm text-white/70">
                 📅 {formatDate(item.published_at, locale)}
               </div>
             </div>
@@ -289,7 +289,7 @@ export default function NewsletterPost() {
           <section className="py-14 px-6 bg-[#0A0E1A]">
             <div className="max-w-3xl mx-auto bg-[#0F1628] border border-[#E8620A]/30 rounded-xl p-8 text-center">
               <h3 className="text-xl font-bold text-white mb-2">{t.ctaTitle}</h3>
-              <p className="text-white/50 text-sm mb-6">{t.ctaSubtitle}</p>
+              <p className="text-white/70 text-sm mb-6">{t.ctaSubtitle}</p>
               <button
                 onClick={() => setContactOpen(true)}
                 className="bg-[#E8620A] hover:bg-[#E8620A]/80 text-white font-semibold px-6 py-3 rounded-lg text-sm transition-colors"
@@ -306,7 +306,7 @@ export default function NewsletterPost() {
         <section className="py-16 px-6 bg-[#070A12]">
           <div className="max-w-xl mx-auto text-center">
             <h2 className="text-2xl font-bold text-white mb-3">{t.subscribeTitle}</h2>
-            <p className="text-white/50 text-sm mb-8">{t.subscribeSubtitle}</p>
+            <p className="text-white/70 text-sm mb-8">{t.subscribeSubtitle}</p>
             {subStatus === "ok" ? (
               <p className="text-[#E8620A] font-medium">{t.successMsg}</p>
             ) : (

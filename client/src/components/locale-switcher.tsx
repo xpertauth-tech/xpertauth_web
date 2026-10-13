@@ -68,7 +68,7 @@ export default function LocaleSwitcher() {
                     setOpen(false);
                   }}
                   className={`flex items-center gap-2.5 w-full px-3 py-2 text-sm transition-colors ${
-                    isActive ? "text-arctic bg-white/[0.05]" : "text-white/60"
+                    isActive ? "text-arctic bg-white/[0.05]" : "text-white/70"
                   }`}
                   data-testid={`button-locale-${loc}`}
                 >

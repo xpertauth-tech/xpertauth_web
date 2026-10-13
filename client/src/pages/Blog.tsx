@@ -242,7 +242,7 @@ export default function Blog() {
           <h1 className="t-h1 grad-title mb-6">
             {t.heroTitle}
           </h1>
-          <p className="t-lead text-white/60 max-w-xl mx-auto">
+          <p className="t-lead text-white/70 max-w-xl mx-auto">
             {t.heroSubtitle}
           </p>
         </div>
@@ -252,9 +252,9 @@ export default function Blog() {
       <section className="pt-4 pb-16 md:pb-24 px-6 bg-[#0A0E1A]">
         <div className="max-w-4xl mx-auto">
           {loading ? (
-            <p className="text-center text-white/40 py-20">{t.loading}</p>
+            <p className="text-center text-white/70 py-20">{t.loading}</p>
           ) : paginatedPosts.length === 0 ? (
-            <p className="text-center text-white/40 py-20">{t.noPosts}</p>
+            <p className="text-center text-white/70 py-20">{t.noPosts}</p>
           ) : (
             <div className="space-y-4 md:space-y-6">
               {paginatedPosts.map((post, i) => (
@@ -279,12 +279,12 @@ export default function Blog() {
                         <h2 className="t-h3 text-white mb-3">
                           {post.title}
                         </h2>
-                        <p className="t-small text-white/50 line-clamp-2">
+                        <p className="t-small text-white/70 line-clamp-2">
                           {post.excerpt}
                         </p>
                       </div>
                       <div className="flex items-center justify-between mt-4">
-                        <div className="flex items-center gap-2 t-small text-white/30">
+                        <div className="flex items-center gap-2 t-small text-white/70">
                           <span>📅 {formatDate(post.published_at, locale)}</span>
                           {post.author && (
                             <span>· {t.by} {post.author}</span>
@@ -311,7 +311,7 @@ export default function Blog() {
               >
                 {t.prev}
               </button>
-              <span className="t-small text-white/40">
+              <span className="t-small text-white/70">
                 {t.page} {currentPage} {t.of} {totalPages}
               </span>
               <button
@@ -331,7 +331,7 @@ export default function Blog() {
         <section className="section-y px-6 bg-[#070A12]">
           <div className="max-w-xl mx-auto text-center">
             <h2 className="t-h2 text-white mb-3">{t.subscribeTitle}</h2>
-            <p className="t-small text-white/50 mb-8">{t.subscribeSubtitle}</p>
+            <p className="t-small text-white/70 mb-8">{t.subscribeSubtitle}</p>
             {subStatus === "ok" ? (
               <p className="text-[#4D9FEC] font-medium">{t.successMsg}</p>
             ) : (

@@ -356,7 +356,7 @@ function ValoresStack({ items, hint }: { items: ValorItem[]; hint: string }) {
         ))}
       </div>
 
-      <p className="t-small" style={{ color: "rgba(255,255,255,0.28)", letterSpacing: "0.06em", marginTop: "0.1rem" }}>
+      <p className="t-small" style={{ color: "rgba(255,255,255,0.70)", letterSpacing: "0.06em", marginTop: "0.1rem" }}>
         {hint}
       </p>
     </div>
@@ -409,7 +409,7 @@ export default function SobreNosotros() {
             >
               {t.hero.titulo}
             </h1>
-            <p className="t-lead" style={{ color: "rgba(255,255,255,.6)", maxWidth: 620, margin: "0 auto" }}>
+            <p className="t-lead" style={{ color: "rgba(255,255,255,0.70)", maxWidth: 620, margin: "0 auto" }}>
               {t.hero.subtitulo}
             </p>
           </div>
@@ -469,7 +469,7 @@ export default function SobreNosotros() {
             >
               {t.mision.titulo}
             </h2>
-            <p className="t-body" style={{ color: "rgba(255,255,255,.65)" }}>
+            <p className="t-body" style={{ color: "rgba(255,255,255,0.70)" }}>
               {t.mision.texto}
             </p>
           </div>
@@ -503,7 +503,7 @@ export default function SobreNosotros() {
             >
               {t.cta.titulo}
             </h2>
-            <p className="t-body" style={{ color: "rgba(255,255,255,.55)", marginBottom: "2.5rem" }}>
+            <p className="t-body" style={{ color: "rgba(255,255,255,0.70)", marginBottom: "2.5rem" }}>
               {t.cta.subtitulo}
             </p>
             <div style={{ display: "flex", gap: "1rem", justifyContent: "center", flexWrap: "wrap" }}>

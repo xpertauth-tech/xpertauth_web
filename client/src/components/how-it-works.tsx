@@ -84,7 +84,7 @@ export default function HowItWorks() {
               {m.title}
             </h2>
             {m.subtitle && (
-              <p className="mt-2 t-small text-white/50 max-w-xl mx-auto">
+              <p className="mt-2 t-small text-white/70 max-w-xl mx-auto">
                 {m.subtitle}
               </p>
             )}

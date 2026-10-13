@@ -226,7 +226,7 @@ export default function Navbar() {
                         className="text-xs font-semibold px-2 py-0.5 rounded-full"
                         style={{
                           backgroundColor: restantes <= 5 ? "rgba(239,68,68,0.15)" : "rgba(255,255,255,0.08)",
-                          color: restantes <= 5 ? "#f87171" : "rgba(255,255,255,0.40)",
+                          color: restantes <= 5 ? "#f87171" : "rgba(255,255,255,0.70)",
                           border: `1px solid ${restantes <= 5 ? "rgba(239,68,68,0.30)" : "rgba(255,255,255,0.10)"}`,
                         }}
                       >
@@ -244,9 +244,9 @@ export default function Navbar() {
                         className="absolute right-0 mt-2 w-48 bg-[#0F1628] border border-white/10 rounded-lg shadow-xl overflow-hidden"
                       >
                         <div className="px-4 py-3 border-b border-white/10">
-                          <p className="text-xs text-white/50 truncate">{user.email}</p>
+                          <p className="text-xs text-white/70 truncate">{user.email}</p>
                           {restantes !== null && (
-                            <p className="text-xs mt-1" style={{ color: restantes <= 5 ? "#f87171" : "rgba(255,255,255,0.30)" }}>
+                            <p className="text-xs mt-1" style={{ color: restantes <= 5 ? "#f87171" : "rgba(255,255,255,0.70)" }}>
                               {restantes} {t("consultasRestantes")}
                             </p>
                           )}
@@ -320,7 +320,7 @@ export default function Navbar() {
                 <div className="pt-2 border-t border-white/10 mt-2">
                   {user ? (
                     <div className="space-y-1">
-                      <div className="px-4 py-2 text-xs text-white/40">{user.email}</div>
+                      <div className="px-4 py-2 text-xs text-white/70">{user.email}</div>
                       <button
                         onClick={handleLogout}
                         className="block w-full text-left px-4 py-3 rounded-md text-sm text-white/70"

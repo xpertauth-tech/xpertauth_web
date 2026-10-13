@@ -40,7 +40,7 @@ export default function Hero() {
         <motion.div initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8, ease: "easeOut" }}>
           <div className="inline-flex items-center gap-1.5 sm:gap-2 px-2.5 sm:px-4 py-1.5 max-w-full rounded-xl sm:rounded-full border border-white/10 bg-white/5 mb-8">
             <div className="w-1.5 h-1.5 sm:w-2 sm:h-2 rounded-full bg-arctic animate-pulse shrink-0" />
-            <span className="text-white/60 text-[0.46rem] sm:text-xs font-medium tracking-normal sm:tracking-wide uppercase leading-snug">
+            <span className="text-white/70 text-[0.46rem] sm:text-xs font-medium tracking-normal sm:tracking-wide uppercase leading-snug">
               {badgeParts.length === 2 ? (
                 <>
                   <span className="block sm:inline">{badgeParts[0]}</span>
@@ -74,7 +74,7 @@ export default function Hero() {
             <HeroSketch />
           </div>
 
-          <p className="mt-6 sm:mt-8 t-lead text-white/60 max-w-2xl lg:max-w-4xl mx-auto">{t("subtitle").split("\n").map((line, i) => (
+          <p className="mt-6 sm:mt-8 t-lead text-white/70 max-w-2xl lg:max-w-4xl mx-auto">{t("subtitle").split("\n").map((line, i) => (
               <span key={i}>
                 {i > 0 && (
                   <>
@@ -99,7 +99,7 @@ export default function Hero() {
         </motion.div>
 
         <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 1.2, duration: 0.8 }} className="absolute bottom-8 left-1/2 -translate-x-1/2">
-          <button onClick={() => scrollTo("#problema-solucion")} className="text-white/30 animate-bounce" aria-label="Desplazar hacia abajo" data-testid="button-scroll-down">
+          <button onClick={() => scrollTo("#problema-solucion")} className="text-white/70 animate-bounce" aria-label="Desplazar hacia abajo" data-testid="button-scroll-down">
             <ChevronDown className="w-6 h-6" />
           </button>
         </motion.div>

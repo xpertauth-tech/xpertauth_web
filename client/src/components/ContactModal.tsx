@@ -99,7 +99,7 @@ export default function ContactModal({ open, onClose }: ContactModalProps) {
               {/* Cerrar */}
               <button
                 onClick={handleClose}
-                className="absolute top-4 right-4 text-white/40 hover:text-white transition-colors"
+                className="absolute top-4 right-4 text-white/70 hover:text-white transition-colors"
                 aria-label="Cerrar"
               >
                 <X className="w-5 h-5" />
@@ -110,7 +110,7 @@ export default function ContactModal({ open, onClose }: ContactModalProps) {
                 <div className="text-center py-6">
                   <CheckCircle className="w-12 h-12 text-arctic mx-auto mb-4" />
                   <h3 className="t-h3 text-pure mb-2">{t("successTitle")}</h3>
-                  <p className="text-white/60 text-sm">{t("successMessage")}</p>
+                  <p className="text-white/70 text-sm">{t("successMessage")}</p>
                   <button
                     onClick={handleClose}
                     className="btn btn-primary btn-small mt-6"
@@ -121,7 +121,7 @@ export default function ContactModal({ open, onClose }: ContactModalProps) {
               ) : (
                 <>
                   <h3 className="t-h3 text-pure mb-1">{t("title")}</h3>
-                  <p className="text-white/50 text-sm mb-6">{t("subtitle")}</p>
+                  <p className="text-white/70 text-sm mb-6">{t("subtitle")}</p>
 
                   <div className="space-y-4">
                     {/* Nombre */}
@@ -132,7 +132,7 @@ export default function ContactModal({ open, onClose }: ContactModalProps) {
                         value={form.nombre}
                         onChange={(e) => setForm({ ...form, nombre: e.target.value })}
                         placeholder={t("namePlaceholder")}
-                        className="w-full px-3 py-2.5 rounded-md bg-white/[0.05] border border-white/10 text-pure text-sm placeholder:text-white/30 focus:outline-none focus:border-arctic/50 transition-colors"
+                        className="w-full px-3 py-2.5 rounded-md bg-white/[0.05] border border-white/10 text-pure text-sm placeholder:text-white/70 focus:outline-none focus:border-arctic/50 transition-colors"
                       />
                     </div>
 
@@ -144,7 +144,7 @@ export default function ContactModal({ open, onClose }: ContactModalProps) {
                         value={form.email}
                         onChange={(e) => setForm({ ...form, email: e.target.value })}
                         placeholder={t("emailPlaceholder")}
-                        className="w-full px-3 py-2.5 rounded-md bg-white/[0.05] border border-white/10 text-pure text-sm placeholder:text-white/30 focus:outline-none focus:border-arctic/50 transition-colors"
+                        className="w-full px-3 py-2.5 rounded-md bg-white/[0.05] border border-white/10 text-pure text-sm placeholder:text-white/70 focus:outline-none focus:border-arctic/50 transition-colors"
                       />
                     </div>
 
@@ -156,7 +156,7 @@ export default function ContactModal({ open, onClose }: ContactModalProps) {
                         onChange={(e) => setForm({ ...form, mensaje: e.target.value })}
                         placeholder={t("messagePlaceholder")}
                         rows={4}
-                        className="w-full px-3 py-2.5 rounded-md bg-white/[0.05] border border-white/10 text-pure text-sm placeholder:text-white/30 focus:outline-none focus:border-arctic/50 transition-colors resize-none"
+                        className="w-full px-3 py-2.5 rounded-md bg-white/[0.05] border border-white/10 text-pure text-sm placeholder:text-white/70 focus:outline-none focus:border-arctic/50 transition-colors resize-none"
                       />
                     </div>
 
@@ -181,7 +181,7 @@ export default function ContactModal({ open, onClose }: ContactModalProps) {
                           )}
                         </div>
                       </div>
-                      <span className="text-white/50 text-xs leading-relaxed">
+                      <span className="text-white/70 text-xs leading-relaxed">
                         {t("privacyText")}{" "}
                         <a href={`/${locale}/politica-de-privacidad`} className="text-arctic hover:underline">{t("privacyLink")}</a>
                       </span>

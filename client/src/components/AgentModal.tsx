@@ -151,7 +151,7 @@ export default function AgentModal({ agente, onClose }: AgentModalProps) {
           {/* Botón cerrar */}
           <button
             onClick={onClose}
-            className="absolute top-5 right-5 text-white/40 hover:text-white/80 transition-colors"
+            className="absolute top-5 right-5 text-white/70 hover:text-white/80 transition-colors"
             aria-label={t.cerrar}
           >
             <X size={20} />
@@ -199,7 +199,7 @@ export default function AgentModal({ agente, onClose }: AgentModalProps) {
           </button>
 
           {/* Consentimiento */}
-          <p className="mt-4 text-white/50 text-xs leading-relaxed text-center">
+          <p className="mt-4 text-white/70 text-xs leading-relaxed text-center">
             {t.consentPre}
             <a
               href={`/${locale}/politica-de-privacidad`}

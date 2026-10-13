@@ -236,14 +236,14 @@ export default function PoliticaPrivacidad() {
         <div className="max-w-3xl mx-auto">
           <span className="t-label">Legal</span>
           <h1 className="t-h1 text-white mb-4">{s.title}</h1>
-          <p className="t-small text-white/40">{s.updated}</p>
-          {s.intro && <p className="t-lead text-white/60 mt-6">{s.intro}</p>}
+          <p className="t-small text-white/70">{s.updated}</p>
+          {s.intro && <p className="t-lead text-white/70 mt-6">{s.intro}</p>}
         </div>
       </section>
       <section className="px-6 pb-8 bg-[#0A0E1A]">
         <div className="max-w-3xl mx-auto flex flex-wrap gap-2">
           {s.items.map(item => (
-            <a key={item.id} href={"#" + item.id} className="t-small text-white/40 hover:text-[#4D9FEC] border border-white/10 hover:border-[#4D9FEC]/30 px-3 py-1.5 rounded-full transition-all">
+            <a key={item.id} href={"#" + item.id} className="t-small text-white/70 hover:text-[#4D9FEC] border border-white/10 hover:border-[#4D9FEC]/30 px-3 py-1.5 rounded-full transition-all">
               {item.title.split(" · ")[1]}
             </a>
           ))}

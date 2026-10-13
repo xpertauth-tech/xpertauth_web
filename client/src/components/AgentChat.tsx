@@ -220,7 +220,7 @@ function renderMarkdown(texto: string): React.ReactNode[] {
       nodos.push(<div key={i} className="flex gap-2 my-0.5"><span className="flex-shrink-0 mt-1.5 w-1 h-1 rounded-full bg-white/40" /><span className="text-sm leading-relaxed" style={{ color: "rgba(255,255,255,0.85)" }}>{parsearInline(linea.replace(/^[-*] /, ""))}</span></div>);
     } else if (/^\d+\. /.test(linea)) {
       const num = linea.match(/^(\d+)\. /)?.[1];
-      nodos.push(<div key={i} className="flex gap-2 my-0.5"><span className="flex-shrink-0 text-xs font-medium" style={{ color: "rgba(255,255,255,0.40)", minWidth: "1rem" }}>{num}.</span><span className="text-sm leading-relaxed" style={{ color: "rgba(255,255,255,0.85)" }}>{parsearInline(linea.replace(/^\d+\. /, ""))}</span></div>);
+      nodos.push(<div key={i} className="flex gap-2 my-0.5"><span className="flex-shrink-0 text-xs font-medium" style={{ color: "rgba(255,255,255,0.70)", minWidth: "1rem" }}>{num}.</span><span className="text-sm leading-relaxed" style={{ color: "rgba(255,255,255,0.85)" }}>{parsearInline(linea.replace(/^\d+\. /, ""))}</span></div>);
     } else if (linea.trim() === "") {
       nodos.push(<div key={i} className="h-1.5" />);
     } else {
@@ -507,7 +507,7 @@ export default function AgentChat({
 
           <button
             onClick={onClose}
-            className="flex-shrink-0 text-white/40 hover:text-white/80 transition-colors ml-1"
+            className="flex-shrink-0 text-white/70 hover:text-white/80 transition-colors ml-1"
             aria-label={t.cerrar}
           >
             <X size={18} />
@@ -532,8 +532,8 @@ export default function AgentChat({
                 className="px-4 py-3 rounded-2xl flex items-center gap-2"
                 style={{ backgroundColor: "rgba(255,255,255,0.06)", borderTopLeftRadius: 4 }}
               >
-                <Loader2 size={14} className="animate-spin text-white/50" />
-                <span className="text-white/40 text-sm">{t.pensando}</span>
+                <Loader2 size={14} className="animate-spin text-white/70" />
+                <span className="text-white/70 text-sm">{t.pensando}</span>
               </div>
             </div>
           )}
@@ -549,7 +549,7 @@ export default function AgentChat({
             >
               {t.limitePre}<strong style={{ color: "#fff" }}>{t.limiteNegrita(limite)}</strong>{t.limitePost}
               <br />
-              <span style={{ color: "rgba(255,255,255,0.50)", fontSize: "0.75rem" }}>
+              <span style={{ color: "rgba(255,255,255,0.70)", fontSize: "0.75rem" }}>
                 {t.limiteRestaura}
               </span>
             </div>
@@ -596,7 +596,7 @@ export default function AgentChat({
           </div>
 
           {/* Aviso IA (igual en los dos agentes) */}
-          <p className="text-center text-white/50 text-xs mt-2 leading-snug px-1">
+          <p className="text-center text-white/70 text-xs mt-2 leading-snug px-1">
             {t.disclaimer(agente)}
           </p>
         </div>

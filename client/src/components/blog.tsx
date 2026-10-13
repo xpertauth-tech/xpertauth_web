@@ -81,13 +81,13 @@ function CardInner({ post }: { post: Post }) {
       </div>
       <div className="flex flex-col flex-grow p-4 md:p-6">
         <div className="flex items-center gap-2 mb-2">
-          <Calendar className="w-3.5 h-3.5 text-white/40" />
-          <span className="t-small text-white/40">{formatDate(post.published_at)}</span>
+          <Calendar className="w-3.5 h-3.5 text-white/70" />
+          <span className="t-small text-white/70">{formatDate(post.published_at)}</span>
         </div>
         <h3 className="t-h3 text-pure mb-2 group-hover:text-arctic transition-colors">
           {post.title}
         </h3>
-        <p className="t-small text-white/55 line-clamp-3">{post.excerpt}</p>
+        <p className="t-small text-white/70 line-clamp-3">{post.excerpt}</p>
       </div>
     </>
   );
@@ -237,7 +237,7 @@ export default function BlogSection() {
           <h2 className="t-h2 text-pure">
             {m.title}
           </h2>
-          <p className="lead-gap t-lead text-white/60 max-w-2xl mx-auto">{m.subtitle}</p>
+          <p className="lead-gap t-lead text-white/70 max-w-2xl mx-auto">{m.subtitle}</p>
         </motion.div>
 
         {loaded && posts.length > 0 && (

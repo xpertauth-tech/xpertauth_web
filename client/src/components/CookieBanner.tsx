@@ -53,7 +53,7 @@ export default function CookieBanner() {
           data-testid="cookie-banner"
         >
           <div className="card !bg-[#0F1628] hover:border-white/10 max-w-4xl mx-auto shadow-2xl flex flex-col sm:flex-row sm:items-center gap-4">
-            <p className="flex-1 t-small text-white/60">
+            <p className="flex-1 t-small text-white/70">
               {t("description")}{" "}
               <a
                 href={rutaCookies}

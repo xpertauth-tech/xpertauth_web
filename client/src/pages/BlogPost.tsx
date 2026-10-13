@@ -221,7 +221,7 @@ export default function BlogPost() {
         .prose-content ul { list-style-type: disc; padding-left: 1.5rem; margin-bottom: 1.4rem; }
         .prose-content ol { list-style-type: decimal; padding-left: 1.5rem; margin-bottom: 1.4rem; }
         .prose-content li { margin-bottom: 0.5rem; }
-        .prose-content blockquote { border-left: 3px solid #4D9FEC; padding-left: 1.25rem; margin: 1.5rem 0; color: rgba(255,255,255,0.55); font-style: italic; }
+        .prose-content blockquote { border-left: 3px solid #4D9FEC; padding-left: 1.25rem; margin: 1.5rem 0; color: rgba(255,255,255,0.70); font-style: italic; }
         .prose-content strong { color: #fff; }
         .prose-content code { background: rgba(77,159,236,0.12); color: #4D9FEC; padding: 0.15rem 0.4rem; border-radius: 4px; font-size: 0.9em; }
         .prose-content img { border-radius: 10px; max-width: 100%; margin: 1.5rem 0; }
@@ -233,7 +233,7 @@ export default function BlogPost() {
         <div className="max-w-3xl mx-auto">
           <button
             onClick={() => { window.location.href = "/" + locale + "/blog"; }}
-            className="t-small text-white/40 hover:text-[#4D9FEC] transition-colors"
+            className="t-small text-white/70 hover:text-[#4D9FEC] transition-colors"
           >
             {t.backLabel}
           </button>
@@ -241,9 +241,9 @@ export default function BlogPost() {
       </div>
 
       {loading ? (
-        <div className="text-center text-white/40 py-32">{t.loading}</div>
+        <div className="text-center text-white/70 py-32">{t.loading}</div>
       ) : notFound || !post ? (
-        <div className="text-center text-white/40 py-32">{t.notFound}</div>
+        <div className="text-center text-white/70 py-32">{t.notFound}</div>
       ) : (
         <>
           {/* CABECERA */}
@@ -255,8 +255,8 @@ export default function BlogPost() {
               <h1 className="t-h1 text-white mb-6">
                 {post.title}
               </h1>
-              <p className="t-lead text-white/55 mb-6">{post.excerpt}</p>
-              <div className="flex items-center gap-3 t-small text-white/30">
+              <p className="t-lead text-white/70 mb-6">{post.excerpt}</p>
+              <div className="flex items-center gap-3 t-small text-white/70">
                 <span>📅 {formatDate(post.published_at, locale)}</span>
                 {post.author && <span>· {t.by} {post.author}</span>}
               </div>
@@ -283,7 +283,7 @@ export default function BlogPost() {
           <section className="section-y px-6 bg-[#0A0E1A]">
             <div className="card max-w-3xl mx-auto border-[#1B4FD8]/30 text-center">
               <h3 className="t-h3 text-white mb-2">{t.ctaTitle}</h3>
-              <p className="t-small text-white/50 mb-6">{t.ctaSubtitle}</p>
+              <p className="t-small text-white/70 mb-6">{t.ctaSubtitle}</p>
               <button
                 onClick={() => setContactOpen(true)}
                 className="btn btn-primary"
@@ -300,7 +300,7 @@ export default function BlogPost() {
         <section className="section-y px-6 bg-[#070A12]">
           <div className="max-w-xl mx-auto text-center">
             <h2 className="t-h2 text-white mb-3">{t.subscribeTitle}</h2>
-            <p className="t-small text-white/50 mb-8">{t.subscribeSubtitle}</p>
+            <p className="t-small text-white/70 mb-8">{t.subscribeSubtitle}</p>
             {subStatus === "ok" ? (
               <p className="text-[#4D9FEC] font-medium">{t.successMsg}</p>
             ) : (

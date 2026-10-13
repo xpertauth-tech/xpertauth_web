@@ -255,7 +255,7 @@ function TiltCard({
         </div>
         <div className="flex-grow">
           <h3 className="t-h3 text-pure mb-3">{title}</h3>
-          <p className="t-small text-white/60">{description}</p>
+          <p className="t-small text-white/70">{description}</p>
         </div>
         <div className="flex items-center gap-2 t-small font-semibold" style={{ color: accentColor }}>
           <span>{openLabel}</span>
@@ -298,7 +298,7 @@ function ServiceCard({
         <div>
           <span className="text-xpertblue text-xs font-bold tracking-widest font-mono">{number}</span>
           <h3 className="t-h3 text-pure mt-1 mb-2">{title}</h3>
-          <p className="t-small text-white/60">{description}</p>
+          <p className="t-small text-white/70">{description}</p>
         </div>
       </div>
 
@@ -340,7 +340,7 @@ export default function TransporteEspecial() {
           <h1 className="t-h1 grad-title mb-6">
             {t.heroTitle}
           </h1>
-          <p className="t-lead text-white/60 max-w-2xl mx-auto mb-10">
+          <p className="t-lead text-white/70 max-w-2xl mx-auto mb-10">
             {t.heroSubtitle}
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
@@ -369,7 +369,7 @@ export default function TransporteEspecial() {
             <h2 className="t-h2 text-pure">
               {t.servicesTitle}
             </h2>
-            <p className="lead-gap t-lead text-white/60 max-w-xl mx-auto">{t.servicesSubtitle}</p>
+            <p className="lead-gap t-lead text-white/70 max-w-xl mx-auto">{t.servicesSubtitle}</p>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6">
             <ServiceCard number="01" icon={<FileCheck className="w-5 h-5 text-xpertblue" />} title={t.s01title} description={t.s01desc} claim={t.s01claim} />
@@ -387,7 +387,7 @@ export default function TransporteEspecial() {
             <h2 className="t-h2 text-pure">
               {t.sctTitle}
             </h2>
-            <p className="lead-gap t-lead text-white/60 max-w-xl mx-auto">{t.sctSubtitle}</p>
+            <p className="lead-gap t-lead text-white/70 max-w-xl mx-auto">{t.sctSubtitle}</p>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6" style={{ perspective: "1200px" }}>
             <TiltCard
@@ -427,8 +427,8 @@ export default function TransporteEspecial() {
               <h2 className="t-h2 text-pure mb-4">
                 {t.lexTitle}
               </h2>
-              <p className="t-body text-white/60 mb-4">{t.lexDesc1}</p>
-              <p className="t-body text-white/60 mb-8">{t.lexDesc2}</p>
+              <p className="t-body text-white/70 mb-4">{t.lexDesc1}</p>
+              <p className="t-body text-white/70 mb-8">{t.lexDesc2}</p>
               <button
                 onClick={() => abrirAgente("LEX")}
                 className="btn btn-primary"
@@ -453,13 +453,13 @@ export default function TransporteEspecial() {
                     <button
                       key={i}
                       onClick={() => abrirAgente("LEX")}
-                      className="w-full text-left px-4 py-3 rounded-lg bg-white/[0.04] border border-white/[0.06] t-small text-white/60 hover:border-xpertblue/30 hover:text-white/80 transition-all duration-200"
+                      className="w-full text-left px-4 py-3 rounded-lg bg-white/[0.04] border border-white/[0.06] t-small text-white/70 hover:border-xpertblue/30 hover:text-white/80 transition-all duration-200"
                     >
                       {q}
                     </button>
                   ))}
                 </div>
-                <p className="mt-4 t-small text-white/30 text-center">Ejemplos de consultas · Haz clic para preguntar</p>
+                <p className="mt-4 t-small text-white/70 text-center">Ejemplos de consultas · Haz clic para preguntar</p>
               </div>
             </div>
           </div>
@@ -472,7 +472,7 @@ export default function TransporteEspecial() {
           <h2 className="t-h2 text-pure mb-4">
             {t.ctaTitle}
           </h2>
-          <p className="t-lead text-white/60 mb-10 max-w-xl mx-auto">{t.ctaSubtitle}</p>
+          <p className="t-lead text-white/70 mb-10 max-w-xl mx-auto">{t.ctaSubtitle}</p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <button
               onClick={() => window.location.href = `/${locale}/sobre-nosotros`}

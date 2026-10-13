@@ -36,7 +36,7 @@ export default function SocialProof() {
           >
             {m.title}
           </h2>
-          <p className="lead-gap t-lead text-white/50 max-w-xl mx-auto">{m.subtitle}</p>
+          <p className="lead-gap t-lead text-white/70 max-w-xl mx-auto">{m.subtitle}</p>
         </motion.div>
 
         {/* Stats */}
@@ -52,7 +52,7 @@ export default function SocialProof() {
               data-testid={`stat-${i}`}
             >
               <div className="font-heading font-bold text-pure text-5xl sm:text-6xl">{stat.value}</div>
-              <div className="mt-2 t-small text-white/50">{stat.label}</div>
+              <div className="mt-2 t-small text-white/70">{stat.label}</div>
             </motion.div>
           ))}
         </div>
@@ -107,11 +107,11 @@ export default function SocialProof() {
           transition={{ delay: 0.4 }}
           className="mt-12 text-center"
         >
-          <p className="text-white/30 text-xs uppercase tracking-widest mb-6">{m.partnersLabel}</p>
+          <p className="text-white/70 text-xs uppercase tracking-widest mb-6">{m.partnersLabel}</p>
           <div className="flex items-center justify-center gap-8 flex-wrap">
             {["Partner 1", "Partner 2", "Partner 3", "Partner 4"].map((p, i) => (
               <div key={i} className="w-24 h-10 rounded-md bg-white/[0.04] flex items-center justify-center">
-                <span className="text-white/20 text-xs font-medium">{p}</span>
+                <span className="text-white/70 text-xs font-medium">{p}</span>
               </div>
             ))}
           </div>
