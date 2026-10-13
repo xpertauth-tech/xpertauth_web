@@ -277,10 +277,15 @@ const SLOT_SHADOW = [
 interface ValorItem { num: string; titulo: string; texto: string; }
 
 function ValoresStack({ items, hint }: { items: ValorItem[]; hint: string }) {
-  const [order, setOrder] = useState([0, 1, 2, 3]);
+  // Delante va la tarjeta `frente`; detrás, las siguientes en orden (01 → 02 → 03 → 04 → 01)
+  const [frente, setFrente] = useState(0);
+  const order = items.map((_, k) => (frente + k) % items.length);
 
   function traerAlFrente(idx: number) {
-    setOrder((prev) => [idx, ...prev.filter((i) => i !== idx)]);
+    setFrente(idx);
+  }
+  function siguiente() {
+    setFrente((f) => (f + 1) % items.length);
   }
 
   const CARD_W = 448;
@@ -299,7 +304,7 @@ function ValoresStack({ items, hint }: { items: ValorItem[]; hint: string }) {
           return (
             <div
               key={itemIdx}
-              onClick={() => !isFrente && traerAlFrente(itemIdx)}
+              onClick={() => !isFrente && siguiente()}
               style={{
                 position: "absolute",
                 left: (3 - slot) * OFFSET_X,
