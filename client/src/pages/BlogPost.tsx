@@ -111,16 +111,25 @@ function formatDate(dateStr: string, locale: string): string {
   }
 }
 
-function renderContent(content: string) {
+/** Normaliza para comparar: sin mayúsculas, espacios repetidos ni puntuación final */
+function normalizar(t: string): string {
+  return t.trim().toLowerCase().replace(/\s+/g, " ").replace(/[\s.,;:!?¡¿…]+$/, "");
+}
+
+function renderContent(content: string, title: string) {
   const isHtml = /<[a-z][\s\S]*>/i.test(content);
   if (isHtml) {
     return (
       <div className="prose-content" dangerouslySetInnerHTML={{ __html: content }} />
     );
   }
+  let lines = content.split("\n");
+  // Si el texto empieza repitiendo el título, no se muestra
+  const first = lines.findIndex((l) => l.trim());
+  if (first >= 0 && normalizar(lines[first]) === normalizar(title)) lines = lines.slice(first + 1);
   return (
     <div className="prose-content">
-      {content.split("\n").map((paragraph, i) =>
+      {lines.map((paragraph, i) =>
         paragraph.trim() ? <p key={i}>{paragraph}</p> : <br key={i} />
       )}
     </div>
@@ -275,7 +284,7 @@ export default function BlogPost() {
           {/* CONTENIDO */}
           <section className="px-6 pb-16 md:pb-24 bg-[#0A0E1A]">
             <div className="max-w-3xl mx-auto">
-              {renderContent(post.content)}
+              {renderContent(post.content, post.title)}
             </div>
           </section>
 
