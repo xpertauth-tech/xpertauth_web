@@ -300,6 +300,9 @@ function ValoresStack({ items, hint }: { items: ValorItem[]; hint: string }) {
           const slot = order.indexOf(itemIdx);
           const isFrente = slot === 0;
           const item = items[itemIdx];
+          // Posición dibujada: la tarjeta de delante (slot 0) ocupa la posición visual de arriba
+          // (la de mayor z-index); las siguientes quedan detrás, en orden
+          const v = items.length - 1 - slot;
 
           return (
             <div
@@ -307,24 +310,24 @@ function ValoresStack({ items, hint }: { items: ValorItem[]; hint: string }) {
               onClick={() => !isFrente && siguiente()}
               style={{
                 position: "absolute",
-                left: (3 - slot) * OFFSET_X,
-                top: (3 - slot) * OFFSET_Y,
+                left: (3 - v) * OFFSET_X,
+                top: (3 - v) * OFFSET_Y,
                 width: CARD_W,
                 height: CARD_H,
-                zIndex: slot + 1,
+                zIndex: v + 1,
                 cursor: isFrente ? "default" : "pointer",
                 transform: "skewY(-5deg)",
                 transition: "left 0.45s cubic-bezier(0.34,1.4,0.64,1), top 0.45s cubic-bezier(0.34,1.4,0.64,1), box-shadow 0.3s, background 0.3s",
                 borderRadius: "12px",
-                border: `1px solid ${SLOT_BORDER[slot]}`,
-                background: SLOT_BG[slot],
-                boxShadow: SLOT_SHADOW[slot],
+                border: `1px solid ${SLOT_BORDER[v]}`,
+                background: SLOT_BG[v],
+                boxShadow: SLOT_SHADOW[v],
                 backdropFilter: "blur(10px)",
                 padding: "24px",
                 display: "flex",
                 flexDirection: "column",
                 justifyContent: "space-between",
-                filter: slot === 0 ? "none" : `brightness(${1 - slot * 0.12})`,
+                filter: v === 0 ? "none" : `brightness(${1 - v * 0.12})`,
               }}
             >
               <span className="t-label" style={{ marginBottom: 0 }}>
