@@ -122,6 +122,11 @@ function esSubtitulo(linea: string): boolean {
   return t.length > 0 && t.length <= 70 && t === t.toUpperCase() && t !== t.toLowerCase() && !t.endsWith(".");
 }
 
+/** Subtítulo de fuentes en ES, CA, EN o FR (p. ej. "FUENTES UTILIZADAS EN ESTE ARTÍCULO") */
+function esFuentes(linea: string): boolean {
+  return /^(fuentes|fonts|sources)\b/.test(linea.trim().toLowerCase());
+}
+
 function renderContent(content: string, title: string) {
   const isHtml = /<[a-z][\s\S]*>/i.test(content);
   if (isHtml) {
@@ -133,15 +138,29 @@ function renderContent(content: string, title: string) {
   // Si el texto empieza repitiendo el título, no se muestra
   const first = lines.findIndex((l) => l.trim());
   if (first >= 0 && normalizar(lines[first]) === normalizar(title)) lines = lines.slice(first + 1);
-  return (
-    <div className="prose-content">
-      {lines.map((paragraph, i) =>
-        paragraph.trim() ? (
-          esSubtitulo(paragraph) ? <h2 key={i} className="post-sub">{paragraph.trim()}</h2> : <p key={i}>{paragraph}</p>
-        ) : <br key={i} />
-      )}
-    </div>
-  );
+  // Tras un subtítulo de fuentes, las líneas son una lista con viñetas hasta el siguiente subtítulo
+  const nodos: JSX.Element[] = [];
+  let fuentes = false;
+  let items: string[] = [];
+  const cerrarLista = () => {
+    if (items.length) nodos.push(<ul key={`ul${nodos.length}`}>{items.map((it, k) => <li key={k}>{it.trim()}</li>)}</ul>);
+    items = [];
+  };
+  lines.forEach((linea, i) => {
+    if (esSubtitulo(linea)) {
+      cerrarLista();
+      fuentes = esFuentes(linea);
+      nodos.push(<h2 key={i} className="post-sub">{linea.trim()}</h2>);
+    } else if (!linea.trim()) {
+      if (!fuentes) nodos.push(<br key={i} />);
+    } else if (fuentes) {
+      items.push(linea);
+    } else {
+      nodos.push(<p key={i}>{linea}</p>);
+    }
+  });
+  cerrarLista();
+  return <div className="prose-content">{nodos}</div>;
 }
 
 export default function BlogPost() {
