@@ -1,11 +1,12 @@
 import { useEffect, useRef, useState } from "react";
-import { useInView } from "framer-motion";
 import { useTranslations } from "@/i18n/context";
 
 type Resp = "yes" | "no" | "study";
 interface Fila { q: string; a: Resp; note: string }
 
-const PASO_MS = 300; // una casilla cada ~0,3 s
+const INICIO_MS = 800; // pausa antes de la primera casilla
+const PASO_MS = 600; // entre casilla y casilla (en total, unos 5 s)
+const VISIBLE_MIN = 0.6; // el impreso debe verse al menos en un 60 %
 
 // Ficha del proyecto: impreso con casillas. Los textos están en messages/*.ts (sección "ficha").
 // Las casillas son decorativas (aria-hidden): cada fila se lee como "pregunta — respuesta — aclaración".
@@ -15,14 +16,36 @@ export default function FichaProyecto() {
   const opciones = m.options as Record<Resp, string>;
 
   const ref = useRef<HTMLDivElement>(null);
-  const visto = useInView(ref, { once: true, amount: 0.25 });
+  const [visto, setVisto] = useState(false);
   const [reducir] = useState(() => typeof window !== "undefined" && window.matchMedia("(prefers-reduced-motion: reduce)").matches);
   const [marcadas, setMarcadas] = useState(reducir ? filas.length : 0);
 
-  // Al entrar el impreso en pantalla, las casillas se marcan una a una, una sola vez
+  // Se considera visto cuando se ve el 60 % del impreso o, si es más alto que la ventana (móvil),
+  // cuando ocupa el 60 % del alto de la ventana. Una sola vez.
+  useEffect(() => {
+    const el = ref.current;
+    if (reducir || !el || !("IntersectionObserver" in window)) {
+      setVisto(true);
+      return;
+    }
+    const obs = new IntersectionObserver(
+      ([e]) => {
+        const referencia = Math.min(e.boundingClientRect.height, e.rootBounds?.height ?? window.innerHeight);
+        if (e.isIntersecting && e.intersectionRect.height >= VISIBLE_MIN * referencia) {
+          setVisto(true);
+          obs.disconnect();
+        }
+      },
+      { threshold: Array.from({ length: 21 }, (_, i) => i / 20) }
+    );
+    obs.observe(el);
+    return () => obs.disconnect();
+  }, [reducir]);
+
+  // Una vez visto: pausa inicial y las casillas se marcan una a una
   useEffect(() => {
     if (reducir || !visto) return;
-    const ids = filas.map((_, i) => window.setTimeout(() => setMarcadas(i + 1), PASO_MS * (i + 1)));
+    const ids = filas.map((_, i) => window.setTimeout(() => setMarcadas(i + 1), INICIO_MS + PASO_MS * i));
     return () => ids.forEach((id) => window.clearTimeout(id));
   }, [visto, reducir, filas.length]);
 
