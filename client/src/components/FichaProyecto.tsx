@@ -27,12 +27,12 @@ export default function FichaProyecto() {
   }, [visto, reducir, filas.length]);
 
   return (
-    <section className="section-y px-6" style={{ background: "#0A0E1A" }}>
-      <div style={{ maxWidth: 980, margin: "0 auto" }}>
-        <div className="head-gap text-center">
+    <section className="ficha-seccion px-6">
+      <div style={{ maxWidth: 980, width: "100%", margin: "0 auto" }}>
+        <div className="ficha-head">
           <span className="t-label">{m.label}</span>
           <h2 className="t-h2 text-pure">{m.title}</h2>
-          <p className="t-lead ficha-entrada text-white/70 lead-gap">{m.intro}</p>
+          <p className="t-lead ficha-entrada text-white/70">{m.intro}</p>
         </div>
 
         <div className="ficha-impreso" ref={ref}>

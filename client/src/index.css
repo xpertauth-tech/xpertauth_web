@@ -291,36 +291,42 @@
 
 
   /* Ficha del proyecto (Sobre nosotros): impreso en Mist, cabecera XpertBlue, casillas con tic */
+  .ficha-seccion { padding-top: 56px; padding-bottom: 56px; background: #0A0E1A; }
+  .ficha-head { margin-bottom: 24px; text-align: center; }
+  .ficha-head .ficha-entrada { margin-top: 12px; }
   .ficha-impreso {
     background: #F4F6FA; color: #0A0E1A; border: 2px solid #0A0E1A; border-radius: 4px; overflow: hidden;
     box-shadow: 0 0 0 1px rgba(255,255,255,0.08), 0 24px 60px rgba(0,0,0,0.45);
   }
   .ficha-cab {
-    background: #1B4FD8; color: #FFFFFF; padding: 14px 16px; border-bottom: 3px solid #0A0E1A;
+    background: #1B4FD8; color: #FFFFFF; padding: 12px 14px; border-bottom: 3px solid #0A0E1A;
     font-family: "Inter", sans-serif; font-weight: 700; font-size: 14px; line-height: 1.4;
     letter-spacing: 0.14em; text-transform: uppercase;
   }
   .ficha-fila { position: relative; display: grid; grid-template-columns: 1fr; border-top: 1px solid rgba(10,14,26,0.22); }
   .ficha-cab + [role="list"] > .ficha-fila:first-child { border-top: 0; }
-  .ficha-celda { padding: 14px 16px; }
+  .ficha-celda { padding: 10px 14px; }
   .ficha-celda + .ficha-celda { border-top: 1px solid rgba(10,14,26,0.12); }
-  .ficha-pregunta { font-family: "Inter", sans-serif; font-weight: 600; font-size: 16px; line-height: 1.4; }
-  .ficha-nota { font-family: "Inter", sans-serif; font-size: 14px; line-height: 1.5; color: rgba(10,14,26,0.78); }
-  .ficha-opciones { display: flex; flex-wrap: wrap; align-items: center; gap: 12px 24px; }
-  .ficha-op { display: inline-flex; align-items: center; gap: 8px; min-height: 28px; font-family: "Inter", sans-serif; font-size: 16px; line-height: 1.2; color: rgba(10,14,26,0.72); }
+  .ficha-pregunta { font-family: "Inter", sans-serif; font-weight: 600; font-size: 15px; line-height: 1.35; }
+  .ficha-nota { font-family: "Inter", sans-serif; font-size: 14px; line-height: 1.4; color: rgba(10,14,26,0.78); }
+  .ficha-opciones { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 20px; }
+  .ficha-op { display: inline-flex; align-items: center; gap: 8px; min-height: 26px; font-family: "Inter", sans-serif; font-size: 15px; line-height: 1.2; color: rgba(10,14,26,0.72); }
   .ficha-caja { position: relative; flex: 0 0 auto; width: 20px; height: 20px; border: 1.5px solid #0A0E1A; border-radius: 3px; background: #FFFFFF; transition: background-color .2s, border-color .2s; }
   .ficha-caja svg { position: absolute; inset: 0; width: 100%; height: 100%; }
   .ficha-caja path { fill: none; stroke: #FFFFFF; stroke-width: 2.4; stroke-linecap: round; stroke-linejoin: round; stroke-dasharray: 1; stroke-dashoffset: 1; }
   .ficha-op.marcada { color: #0A0E1A; font-weight: 700; }
   .ficha-op.marcada .ficha-caja { background: #1B4FD8; border-color: #1B4FD8; }
   .ficha-op.marcada .ficha-caja path { stroke-dashoffset: 0; transition: stroke-dashoffset .25s ease .05s; }
-  .ficha-pie { padding: 14px 16px; border-top: 3px solid #0A0E1A; font-family: "Inter", sans-serif; font-size: 14px; line-height: 1.5; color: rgba(10,14,26,0.78); }
+  .ficha-pie { padding: 10px 14px; border-top: 3px solid #0A0E1A; font-family: "Inter", sans-serif; font-size: 14px; line-height: 1.5; color: rgba(10,14,26,0.78); }
   @media (min-width: 768px) {
-    .ficha-cab { padding: 16px 24px; font-size: 15px; }
+    .ficha-seccion { min-height: calc(100vh - 80px); display: flex; flex-direction: column; justify-content: center; padding-top: 16px; padding-bottom: 16px; }
+    .ficha-head { margin-bottom: 20px; }
+    .ficha-cab { padding: 10px 20px; }
     .ficha-fila { grid-template-columns: 38% 26% 36%; }
-    .ficha-celda { display: flex; align-items: center; padding: 18px 24px; }
+    .ficha-celda { display: flex; align-items: center; padding: 8px 20px; }
     .ficha-celda + .ficha-celda { border-top: 0; border-left: 1px solid rgba(10,14,26,0.12); }
-    .ficha-pie { padding: 16px 24px; }
+    .ficha-opciones { gap: 6px 16px; }
+    .ficha-pie { padding: 8px 20px; }
   }
 
   /* Espaciado (todo múltiplo de 8) */
