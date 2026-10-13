@@ -184,12 +184,12 @@ export default function Navbar() {
             </span>
           </button>
 
-          <div className="hidden md:flex items-center gap-1">
+          <div className="hidden min-[1100px]:flex items-center gap-1">
             {navLinks.map((link) => (
               <button
                 key={link.href}
                 onClick={() => handleNavLink(link.href, link.isRoute)}
-                className="px-4 py-2 text-sm text-white/70 font-medium transition-colors duration-200 rounded-md hover:text-white"
+                className="px-2 xl:px-4 py-2 text-sm text-white/70 font-medium whitespace-nowrap transition-colors duration-200 rounded-md hover:text-white"
                 data-testid={link.testId ?? `link-${link.href.replace("#", "").replace(`/${locale}/`, "")}`}
               >
                 {link.label}
@@ -217,7 +217,7 @@ export default function Navbar() {
                         {getInitials(user.nombre)}
                       </div>
                     )}
-                    <span className="text-sm text-white/80 font-medium max-w[120px] truncate">
+                    <span className="text-sm text-white/80 font-medium max-w-[120px] truncate">
                       {user.nombre.split(" ")[0]}
                     </span>
                     {/* Consultas restantes este mes */}
@@ -282,7 +282,7 @@ export default function Navbar() {
             )}
           </div>
 
-          <div className="md:hidden flex items-center gap-2">
+          <div className="min-[1100px]:hidden flex items-center gap-2">
             <LocaleSwitcher />
             <button
               onClick={() => setMobileOpen(!mobileOpen)}
@@ -302,7 +302,7 @@ export default function Navbar() {
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: "auto" }}
             exit={{ opacity: 0, height: 0 }}
-            className="md:hidden bg-obsidian border-t border-white/10"
+            className="min-[1100px]:hidden bg-obsidian border-t border-white/10"
           >
             <div className="px-4 py-4 space-y-2">
               {navLinks.map((link) => (
