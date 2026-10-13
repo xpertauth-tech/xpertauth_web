@@ -295,10 +295,12 @@ function ValoresStack({ items, hint }: { items: ValorItem[]; hint: string }) {
 
   return (
     <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: "1.5rem" }}>
-      <div style={{ position: "relative", width: CARD_W + OFFSET_X * 3 + 16, height: CARD_H + OFFSET_Y * 3 + 16 }}>
+      <div
+        onClick={siguiente}
+        style={{ position: "relative", width: CARD_W + OFFSET_X * 3 + 16, height: CARD_H + OFFSET_Y * 3 + 16 }}
+      >
         {[...order].reverse().map((itemIdx) => {
           const slot = order.indexOf(itemIdx);
-          const isFrente = slot === 0;
           const item = items[itemIdx];
           // Posición dibujada: la tarjeta de delante (slot 0) ocupa la posición visual de arriba
           // (la de mayor z-index); las siguientes quedan detrás, en orden
@@ -307,15 +309,14 @@ function ValoresStack({ items, hint }: { items: ValorItem[]; hint: string }) {
           return (
             <div
               key={itemIdx}
-              onClick={() => !isFrente && siguiente()}
-              style={{
+                            style={{
                 position: "absolute",
                 left: (3 - v) * OFFSET_X,
                 top: (3 - v) * OFFSET_Y,
                 width: CARD_W,
                 height: CARD_H,
                 zIndex: v + 1,
-                cursor: isFrente ? "default" : "pointer",
+                cursor: "pointer",
                 transform: "skewY(-5deg)",
                 transition: "left 0.45s cubic-bezier(0.34,1.4,0.64,1), top 0.45s cubic-bezier(0.34,1.4,0.64,1), box-shadow 0.3s, background 0.3s",
                 borderRadius: "12px",
