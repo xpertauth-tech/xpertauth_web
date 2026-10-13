@@ -291,7 +291,10 @@
 
 
   /* Ficha del proyecto (Sobre nosotros): impreso en Mist, cabecera XpertBlue, casillas con tic */
-  .ficha-seccion { padding-top: 56px; padding-bottom: 56px; background: #0A0E1A; }
+  /* La sección = la "pantalla" de la ficha (.ficha-pantalla, con su propio alto y padding) + el espacio
+     de debajo, que suma el .section-y normal (96 / 144 px) para separar la ficha de Misión. */
+  .ficha-seccion { padding-bottom: 96px; background: #0A0E1A; }
+  .ficha-pantalla { padding-top: 56px; }
   .ficha-head { margin-bottom: 24px; text-align: center; }
   .ficha-head .ficha-entrada { margin-top: 12px; }
   .ficha-impreso {
@@ -319,7 +322,8 @@
   .ficha-op.marcada .ficha-caja path { stroke-dashoffset: 0; transition: stroke-dashoffset .25s ease .05s; }
   .ficha-pie { padding: 10px 14px; border-top: 3px solid #0A0E1A; font-family: "Inter", sans-serif; font-size: 14px; line-height: 1.5; color: rgba(10,14,26,0.78); }
   @media (min-width: 768px) {
-    .ficha-seccion { min-height: calc(100vh - 80px); display: flex; flex-direction: column; justify-content: center; padding-top: 16px; padding-bottom: 16px; }
+    .ficha-seccion { padding-bottom: calc(144px - 16px); }
+    .ficha-pantalla { min-height: calc(100vh - 80px); display: flex; flex-direction: column; justify-content: center; padding-top: 16px; padding-bottom: 16px; }
     .ficha-head { margin-bottom: 20px; }
     .ficha-cab { padding: 10px 20px; }
     .ficha-fila { grid-template-columns: 38% 26% 36%; }

@@ -51,6 +51,7 @@ export default function FichaProyecto() {
 
   return (
     <section className="ficha-seccion px-6">
+      <div className="ficha-pantalla">
       <div style={{ maxWidth: 980, width: "100%", margin: "0 auto" }}>
         <div className="ficha-head">
           <span className="t-label">{m.label}</span>
@@ -88,6 +89,7 @@ export default function FichaProyecto() {
           </div>
           <div className="ficha-pie">{m.footer}</div>
         </div>
+      </div>
       </div>
     </section>
   );
