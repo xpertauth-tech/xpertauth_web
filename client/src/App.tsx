@@ -10,7 +10,7 @@ import CustomCursor from "@/components/CustomCursor";
 import CookieBanner from "@/components/CookieBanner";
 import AgentModal, { type ModalObjetivo } from "@/components/AgentModal";
 import AgentChat from "@/components/AgentChat";
-import { useEffect, useState, createContext, useContext } from "react";
+import { useEffect, useRef, useState, createContext, useContext } from "react";
 import { useLocation } from "wouter";
 import { supabase, tomarAgentePendiente, type Agente } from "@/lib/supabase";
 import SobreNosotros from "@/pages/SobreNosotros";
@@ -53,11 +53,19 @@ function AuthCallback() {
 }
 
 // ─── Posición de la página al navegar ─────────────────────────────────────────
+// Al cambiar de página se abre arriba del todo (no al cambiar solo de idioma ni al recargar).
 // Si el enlace trae ancla (#historia), se coloca en esa sección; la ancla debe ser un id simple.
 
 function ScrollManager() {
   const [location] = useLocation();
+  const anterior = useRef<string | null>(null);
   useEffect(() => {
+    const pagina = location.replace(/^\/(es|ca|en|fr)(?=\/|$)/, "");
+    if (anterior.current !== null && anterior.current !== pagina) {
+      window.scrollTo({ top: 0, left: 0, behavior: "instant" as ScrollBehavior });
+    }
+    anterior.current = pagina;
+
     const hash = window.location.hash;
     if (!/^#[\w-]+$/.test(hash)) return;
     let intentos = 0;
