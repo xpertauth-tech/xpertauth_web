@@ -116,6 +116,12 @@ function normalizar(t: string): string {
   return t.trim().toLowerCase().replace(/\s+/g, " ").replace(/[\s.,;:!?¡¿…]+$/, "");
 }
 
+/** Subtítulo: todo en mayúsculas, hasta ~70 caracteres y sin punto final */
+function esSubtitulo(linea: string): boolean {
+  const t = linea.trim();
+  return t.length > 0 && t.length <= 70 && t === t.toUpperCase() && t !== t.toLowerCase() && !t.endsWith(".");
+}
+
 function renderContent(content: string, title: string) {
   const isHtml = /<[a-z][\s\S]*>/i.test(content);
   if (isHtml) {
@@ -130,7 +136,9 @@ function renderContent(content: string, title: string) {
   return (
     <div className="prose-content">
       {lines.map((paragraph, i) =>
-        paragraph.trim() ? <p key={i}>{paragraph}</p> : <br key={i} />
+        paragraph.trim() ? (
+          esSubtitulo(paragraph) ? <h2 key={i} className="post-sub">{paragraph.trim()}</h2> : <p key={i}>{paragraph}</p>
+        ) : <br key={i} />
       )}
     </div>
   );
@@ -224,6 +232,8 @@ export default function BlogPost() {
         .prose-content { color: rgba(255,255,255,0.80); font-family: "Inter", sans-serif; font-size: 16px; line-height: 1.65; }
         .prose-content p { margin-bottom: 1.4rem; }
         .prose-content h2 { color: #fff; font-family: "Sora", sans-serif; font-weight: 700; font-size: 28px; line-height: 1.2; margin-top: 2.5rem; margin-bottom: 1rem; }
+        .prose-content h2.post-sub { font-size: 22px; line-height: 1.25; margin-top: 3rem; margin-bottom: 1.25rem; }
+        @media (min-width: 768px) { .prose-content h2.post-sub { font-size: 24px; } }
         .prose-content h3 { color: #fff; font-family: "Sora", sans-serif; font-weight: 600; font-size: 20px; line-height: 1.3; margin-top: 2rem; margin-bottom: 0.75rem; }
         .prose-content a { color: #4D9FEC; text-decoration: underline; text-underline-offset: 3px; }
         .prose-content a:hover { color: #fff; }
