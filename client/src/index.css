@@ -431,6 +431,9 @@
   .hc-d, .hc-f { animation: none; }
 }
 
+/* Ancla de "Nuestra historia": deja la etiqueta justo debajo de la barra de menú (64/80 px) */
+#historia { scroll-margin-top: 104px; }
+
 /* Párrafos de varias líneas, alineados a la izquierda en móvil y tablet pequeña
    (títulos y frases cortas siguen centrados donde ya lo estaban). Sin @layer a
    propósito: debe ganar a la utilidad text-center de Tailwind. */

@@ -436,6 +436,7 @@ export default function SobreNosotros() {
               alignItems: "start",
             }}
             className="sn-grid-historia"
+            id="historia"
           >
             <div style={{ display: "flex", justifyContent: "center" }}>
               <img

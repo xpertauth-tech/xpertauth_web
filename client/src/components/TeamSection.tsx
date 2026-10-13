@@ -1,4 +1,5 @@
 import { motion } from "framer-motion";
+import { useLocation } from "wouter";
 import { useI18n } from "@/i18n/context";
 import { useAgent } from "@/App";
 
@@ -61,6 +62,7 @@ const texts = {
 
 export default function TeamSection() {
   const { locale } = useI18n();
+  const [, navigate] = useLocation();
   const { abrirAgente } = useAgent();
   const lang: Lang = (["es", "ca", "en", "fr"] as const).includes(locale as Lang) ? (locale as Lang) : "es";
 
@@ -113,7 +115,7 @@ export default function TeamSection() {
             <p className="t-body text-white/70 mt-2">{texts.bio[lang]}</p>
             <div className="mt-4">
               <button
-                onClick={() => { window.location.href = `/${locale}/sobre-nosotros`; }}
+                onClick={() => navigate(`/${locale}/sobre-nosotros#historia`)}
                 className="btn btn-secondary"
                 data-testid="button-team-jose-luis"
               >

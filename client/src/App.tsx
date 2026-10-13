@@ -11,6 +11,7 @@ import CookieBanner from "@/components/CookieBanner";
 import AgentModal, { type ModalObjetivo } from "@/components/AgentModal";
 import AgentChat from "@/components/AgentChat";
 import { useEffect, useState, createContext, useContext } from "react";
+import { useLocation } from "wouter";
 import { supabase, tomarAgentePendiente, type Agente } from "@/lib/supabase";
 import SobreNosotros from "@/pages/SobreNosotros";
 import TransporteEspecial from "@/pages/TransporteEspecial";
@@ -48,6 +49,25 @@ function AuthCallback() {
       });
     }
   }, []);
+  return null;
+}
+
+// ─── Posición de la página al navegar ─────────────────────────────────────────
+// Si el enlace trae ancla (#historia), se coloca en esa sección; la ancla debe ser un id simple.
+
+function ScrollManager() {
+  const [location] = useLocation();
+  useEffect(() => {
+    const hash = window.location.hash;
+    if (!/^#[\w-]+$/.test(hash)) return;
+    let intentos = 0;
+    const ir = () => {
+      const el = document.querySelector(hash);
+      if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
+      else if (intentos++ < 20) window.setTimeout(ir, 50);
+    };
+    ir();
+  }, [location]);
   return null;
 }
 
@@ -134,6 +154,7 @@ function App() {
         <I18nProvider>
           <AgentContext.Provider value={{ abrirAgente, abrirRegistro }}>
             <AuthCallback />
+            <ScrollManager />
             <CustomCursor />
             <CookieBanner />
             <Toaster />
