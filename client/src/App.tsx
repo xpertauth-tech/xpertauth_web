@@ -14,6 +14,7 @@ import { useEffect, useRef, useState, createContext, useContext } from "react";
 import { useLocation } from "wouter";
 import { supabase, tomarAgentePendiente, type Agente } from "@/lib/supabase";
 import SobreNosotros from "@/pages/SobreNosotros";
+import MiHistoria from "@/pages/MiHistoria";
 import TransporteEspecial from "@/pages/TransporteEspecial";
 import Blog from "@/pages/Blog";
 import BlogPost from "@/pages/BlogPost";
@@ -86,6 +87,7 @@ function Router() {
     <Switch>
       <Route path="/:locale/servicios/transporte-especial" component={TransporteEspecial} />
       <Route path="/:locale/sobre-nosotros" component={SobreNosotros} />
+      <Route path="/:locale/mi-historia" component={MiHistoria} />
       <Route path="/:locale/blog/:slug" component={BlogPost} />
       <Route path="/:locale/blog" component={Blog} />
       <Route path="/:locale/newsletter/:concept_id" component={NewsletterPost} />
