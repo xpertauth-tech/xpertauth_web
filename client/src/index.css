@@ -471,3 +471,8 @@
 @media (max-width: 767px) {
   p.t-lead, p.t-body, p.t-small, p.text-lg { text-align: left; }
 }
+
+/* La entrada de la ficha va centrada también en móvil (son dos líneas como mucho) */
+@media (max-width: 767px) {
+  p.t-lead.ficha-entrada { text-align: center; }
+}
