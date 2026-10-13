@@ -55,7 +55,7 @@ function AuthCallback() {
 
 // ─── Posición de la página al navegar ─────────────────────────────────────────
 // Al cambiar de página se abre arriba del todo (no al cambiar solo de idioma ni al recargar).
-// Si el enlace trae ancla (#historia), se coloca en esa sección; la ancla debe ser un id simple.
+// Si el enlace trae ancla (p. ej. #blog), se coloca en esa sección; la ancla debe ser un id simple.
 
 function ScrollManager() {
   const [location] = useLocation();
