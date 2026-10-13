@@ -320,15 +320,15 @@ function ValoresStack({ items, hint }: { items: ValorItem[]; hint: string }) {
                 transform: "skewY(-5deg)",
                 transition: "left 0.45s cubic-bezier(0.34,1.4,0.64,1), top 0.45s cubic-bezier(0.34,1.4,0.64,1), box-shadow 0.3s, background 0.3s",
                 borderRadius: "12px",
-                border: `1px solid ${SLOT_BORDER[v]}`,
-                background: SLOT_BG[v],
-                boxShadow: SLOT_SHADOW[v],
+                border: `1px solid ${SLOT_BORDER[slot]}`,
+                background: SLOT_BG[slot],
+                boxShadow: SLOT_SHADOW[slot],
                 backdropFilter: "blur(10px)",
                 padding: "24px",
                 display: "flex",
                 flexDirection: "column",
                 justifyContent: "space-between",
-                filter: v === 0 ? "none" : `brightness(${1 - v * 0.12})`,
+                filter: slot === 0 ? "none" : `brightness(${1 - slot * 0.12})`,
               }}
             >
               <span className="t-label" style={{ marginBottom: 0 }}>
