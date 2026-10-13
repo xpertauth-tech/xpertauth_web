@@ -186,7 +186,7 @@ export default function AgentModal({ agente, onClose }: AgentModalProps) {
           {/* Único acceso: Google */}
           <button
             onClick={() => entrarConGoogle(locale, esRegistro ? null : agente)}
-            className="w-full flex items-center justify-center gap-3 py-3 rounded-xl font-semibold text-sm bg-white text-[#1f1f1f] transition-opacity hover:opacity-90 active:opacity-80"
+            className="w-full flex items-center justify-center gap-3 py-3 rounded-xl font-semibold text-sm bg-white text-obsidian transition-opacity hover:opacity-90 active:opacity-80"
             data-testid="button-google-agent"
           >
             <svg className="w-4 h-4" viewBox="0 0 24 24" aria-hidden="true">

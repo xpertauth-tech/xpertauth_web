@@ -446,7 +446,7 @@ export default function TransporteEspecial() {
                     <span className="text-pure text-xs font-bold">L</span>
                   </div>
                   <span className="text-pure font-semibold t-small">LEX · XpertAuth</span>
-                  <span className="ml-auto px-2 py-0.5 bg-green-500/20 text-green-400 text-xs rounded-full">Activo</span>
+                  <span className="ml-auto px-2 py-0.5 bg-arctic/20 text-arctic text-xs rounded-full">Activo</span>
                 </div>
                 <div className="space-y-3">
                   {t.lexSamples.map((q, i) => (

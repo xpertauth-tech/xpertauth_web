@@ -184,7 +184,7 @@ export default function HowItWorks() {
                       {steps[activeStep].subtitle}
                     </span>
                   )}
-                  <p className="mt-2 t-body max-w-lg mx-auto" style={{ color: "#CBD5E1" }}>
+                  <p className="mt-2 t-body max-w-lg mx-auto" style={{ color: "rgba(255,255,255,0.80)" }}>
                     {steps[activeStep]?.description}
                   </p>
                 </motion.div>

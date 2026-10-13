@@ -81,7 +81,7 @@ export default function SocialProof() {
                     className="absolute inset-0"
                     style={{
                       background:
-                        "linear-gradient(150deg, #12213f 0%, #0d1830 45%, #0a1122 100%)",
+                        "linear-gradient(150deg, #0F1628 0%, #0F1628 45%, #0A0E1A 100%)",
                     }}
                   />
                 )}

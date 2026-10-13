@@ -225,9 +225,9 @@ export default function Navbar() {
                       <span
                         className="text-xs font-semibold px-2 py-0.5 rounded-full"
                         style={{
-                          backgroundColor: restantes <= 5 ? "rgba(239,68,68,0.15)" : "rgba(255,255,255,0.08)",
+                          backgroundColor: restantes <= 5 ? "rgba(248,113,113,0.15)" : "rgba(255,255,255,0.08)",
                           color: restantes <= 5 ? "#f87171" : "rgba(255,255,255,0.70)",
-                          border: `1px solid ${restantes <= 5 ? "rgba(239,68,68,0.30)" : "rgba(255,255,255,0.10)"}`,
+                          border: `1px solid ${restantes <= 5 ? "rgba(248,113,113,0.30)" : "rgba(255,255,255,0.10)"}`,
                         }}
                       >
                         {restantes} {t("consultasRestantes")}
