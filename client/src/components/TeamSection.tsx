@@ -28,16 +28,16 @@ const texts = {
     fr: "Découvrez mon histoire",
   },
   lex: {
-    es: "Resuelve tus dudas de normativa al momento.",
-    ca: "Resol els teus dubtes de normativa al moment.",
-    en: "Answers your regulation questions instantly.",
-    fr: "Répond à vos questions de réglementation sur-le-champ.",
+    es: "Responde al momento a tus dudas sobre normativa de transporte especial. Consulta una base normativa del sector y te dice de dónde sale cada respuesta.",
+    ca: "Respon a l'instant els teus dubtes sobre normativa de transport especial. Consulta una base normativa del sector i et diu d'on surt cada resposta.",
+    en: "Answers your questions on special transport regulations instantly. It consults a regulatory knowledge base for the sector and tells you where each answer comes from.",
+    fr: "Répond instantanément à vos questions sur la réglementation du transport exceptionnel. Il consulte une base réglementaire du secteur et vous indique d'où vient chaque réponse.",
   },
   nova: {
-    es: "Ideas para usar la IA en tu empresa de transporte.",
-    ca: "Idees per usar la IA a la teva empresa de transport.",
-    en: "Ideas for using AI in your transport business.",
-    fr: "Des idées pour utiliser l'IA dans votre entreprise de transport.",
+    es: "Te da ideas prácticas para usar la inteligencia artificial en tu empresa de transporte, explicadas sin tecnicismos.",
+    ca: "Et dona idees pràctiques per fer servir la intel·ligència artificial a la teva empresa de transport, explicades sense tecnicismes.",
+    en: "Gives you practical ideas for using artificial intelligence in your transport company, explained without jargon.",
+    fr: "Vous donne des idées pratiques pour utiliser l'intelligence artificielle dans votre entreprise de transport, expliquées sans jargon.",
   },
 };
 
