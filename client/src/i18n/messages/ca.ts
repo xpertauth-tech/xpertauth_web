@@ -39,7 +39,7 @@ const ca = {
       {
         num: "03",
         title: "Una persona, quan cal",
-        description: "LEX respon a l'instant, i es pot equivocar. Si el teu cas és delicat o la resposta no et basta, el revisa algú amb trenta anys d'ofici: escriu-nos o demana cita.",
+        description: "LEX respon a l'instant, i es pot equivocar. Si el teu cas és delicat o la resposta no et basta, escriu-nos o demana cita i ho analitzem amb tu.",
       },
       {
         num: "04",

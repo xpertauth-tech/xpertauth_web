@@ -39,7 +39,7 @@ const es = {
       {
         num: "03",
         title: "Una persona, cuando hace falta",
-        description: "LEX responde al momento, y puede equivocarse. Si tu caso es delicado o la respuesta no te basta, lo revisa alguien con treinta años de oficio: escríbenos o pide cita.",
+        description: "LEX responde al momento, y puede equivocarse. Si tu caso es delicado o la respuesta no te basta, escríbenos o pide cita y lo analizamos contigo.",
       },
       {
         num: "04",

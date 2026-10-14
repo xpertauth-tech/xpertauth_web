@@ -39,7 +39,7 @@ const en = {
       {
         num: "03",
         title: "A person, when needed",
-        description: "LEX answers instantly, and it can be wrong. If your case is sensitive or the answer isn't enough, someone with thirty years in the trade will review it: write to us or book an appointment.",
+        description: "LEX answers instantly, and it can be wrong. If your case is sensitive or the answer isn't enough, write to us or book an appointment and we'll look into it with you.",
       },
       {
         num: "04",
