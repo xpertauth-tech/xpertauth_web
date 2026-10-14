@@ -17,9 +17,8 @@ const texts: Record<Idioma, {
   novaCta: string;
   novaLine: string;
   fuentes: string;
-  captionPre: string;
-  captionLink: string;
-  captionPost: string;
+  caption: string;
+  captionBtn: string;
 }> = {
   es: {
     title: "LEX en acción",
@@ -30,9 +29,8 @@ const texts: Record<Idioma, {
     novaCta: "Pregunta a NOVA",
     novaLine: "Ideas para usar la IA en tu empresa de transporte.",
     fuentes: "Fuentes:",
-    captionPre: "Ejemplo de respuesta real de LEX. LEX es IA y puede equivocarse: si no lo ves claro, ",
-    captionLink: "cuéntanos tu caso",
-    captionPost: ".",
+    caption: "Ejemplo de respuesta real de LEX. LEX es IA y puede equivocarse. Si no lo ves claro:",
+    captionBtn: "Cuéntanos tu caso",
   },
   ca: {
     title: "LEX en acció",
@@ -43,9 +41,8 @@ const texts: Record<Idioma, {
     novaCta: "Pregunta a NOVA",
     novaLine: "Idees per usar la IA a la teva empresa de transport.",
     fuentes: "Fonts:",
-    captionPre: "Exemple de resposta real de LEX. LEX és IA i es pot equivocar: si no ho veus clar, ",
-    captionLink: "explica'ns el teu cas",
-    captionPost: ".",
+    caption: "Exemple de resposta real de LEX. LEX és IA i es pot equivocar. Si no ho veus clar:",
+    captionBtn: "Explica'ns el teu cas",
   },
   en: {
     title: "LEX in action",
@@ -56,9 +53,8 @@ const texts: Record<Idioma, {
     novaCta: "Ask NOVA",
     novaLine: "Ideas for using AI in your transport business.",
     fuentes: "Sources:",
-    captionPre: "Example of a real LEX answer. LEX is AI and can be wrong: if you're not sure, ",
-    captionLink: "tell us about your case",
-    captionPost: ".",
+    caption: "Example of a real LEX answer. LEX is AI and can make mistakes. If it isn't clear to you:",
+    captionBtn: "Tell us about your case",
   },
   fr: {
     title: "LEX en action",
@@ -69,9 +65,8 @@ const texts: Record<Idioma, {
     novaCta: "Demandez à NOVA",
     novaLine: "Des idées pour utiliser l'IA dans votre entreprise de transport.",
     fuentes: "Sources :",
-    captionPre: "Exemple de réponse réelle de LEX. LEX est une IA et peut se tromper : si ce n'est pas clair, ",
-    captionLink: "racontez-nous votre cas",
-    captionPost: ".",
+    caption: "Exemple de réponse réelle de LEX. LEX est une IA et peut se tromper. Si ce n'est pas clair pour vous :",
+    captionBtn: "Racontez-nous votre cas",
   },
 };
 
@@ -225,18 +220,6 @@ export default function LexEnAccion() {
 
         <div className="grid grid-cols-1 lg:grid-cols-[7fr_4fr] gap-4 lg:gap-12 items-start">
           <div>
-            <p className="mb-3 t-small text-white/60">
-              {tx.captionPre}
-              <button
-                type="button"
-                onClick={() => setContactOpen(true)}
-                className="text-arctic underline underline-offset-2 hover:text-pure transition-colors"
-                data-testid="link-lex-cuentanos"
-              >
-                {tx.captionLink}
-              </button>
-              {tx.captionPost}
-            </p>
             {/* La zona reserva la altura del estado final (ventana invisible) y la ventana viva se dibuja encima:
                 así la ventana no tiene hueco vacío mientras se escribe y la página no salta. */}
             <div ref={zonaRef} className="relative">
@@ -248,6 +231,15 @@ export default function LexEnAccion() {
               </div>
               <p className="sr-only">{tx.question}</p>
             </div>
+            <p className="mt-3 t-small text-white/60">{tx.caption}</p>
+            <button
+              type="button"
+              onClick={() => setContactOpen(true)}
+              className="btn btn-secondary btn-small mt-3"
+              data-testid="link-lex-cuentanos"
+            >
+              {tx.captionBtn}
+            </button>
           </div>
 
           <div className="flex flex-col gap-4 lg:self-center mt-6 lg:mt-0">
