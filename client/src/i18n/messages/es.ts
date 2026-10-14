@@ -16,7 +16,7 @@ const es = {
     title1: "Transporte especial,",
     title2: "con criterio real.",
     subtitle: "Treinta años de oficio en transporte especial.\nHoy, con la inteligencia artificial como herramienta.",
-    cta1: "Conoce el proyecto",
+    cta1: "Pregunta a LEX",
     cta2: "Cómo funciona",
     viewSide: "Vista lateral",
     viewFront: "Vista frontal",

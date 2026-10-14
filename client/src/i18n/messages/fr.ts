@@ -16,7 +16,7 @@ const fr = {
     title1: "Transport spécial,",
     title2: "avec un vrai discernement.",
     subtitle: "Trente ans de métier dans le transport spécial.\nAujourd'hui, avec l'intelligence artificielle comme outil.",
-    cta1: "Découvrir le projet",
+    cta1: "Demandez à LEX",
     cta2: "Comment ça marche",
     viewSide: "Vue latérale",
     viewFront: "Vue de face",

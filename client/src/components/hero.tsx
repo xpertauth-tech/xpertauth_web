@@ -1,12 +1,12 @@
 import { motion } from "framer-motion";
 import { ArrowRight, ChevronDown } from "lucide-react";
 import { useTranslations } from "@/i18n/context";
-import { useLocation } from "wouter";
 import HeroSketch from "@/components/hero-sketch";
+import { useAgent } from "@/App";
 
 export default function Hero() {
-  const { t, locale } = useTranslations("hero");
-  const [, navigate] = useLocation();
+  const { t } = useTranslations("hero");
+  const { abrirAgente } = useAgent();
   const scrollTo = (href: string) => {
     const el = document.querySelector(href);
     if (el) el.scrollIntoView({ behavior: "smooth" });
@@ -88,7 +88,7 @@ export default function Hero() {
           </p>
 
           <div className="mt-12 sm:mt-14 flex flex-col sm:flex-row items-center justify-center gap-4">
-            <button onClick={() => navigate(`/${locale}/sobre-nosotros`)} className="btn btn-primary group" data-testid="button-hero-proyecto">
+            <button onClick={() => abrirAgente("LEX")} className="btn btn-primary group" data-testid="button-hero-lex">
               {t("cta1")}
               <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
             </button>

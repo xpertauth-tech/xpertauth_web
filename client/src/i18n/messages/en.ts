@@ -16,7 +16,7 @@ const en = {
     title1: "Special transport,",
     title2: "with real judgement.",
     subtitle: "Thirty years of experience in special transport.\nToday, with artificial intelligence as a tool.",
-    cta1: "About the project",
+    cta1: "Ask LEX",
     cta2: "How it works",
     viewSide: "Side view",
     viewFront: "Front view",

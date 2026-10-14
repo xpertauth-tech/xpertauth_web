@@ -16,7 +16,7 @@ const ca = {
     title1: "Transport especial,",
     title2: "amb criteri real.",
     subtitle: "Trenta anys d'ofici en transport especial.\nAvui, amb la intel·ligència artificial com a eina.",
-    cta1: "Coneix el projecte",
+    cta1: "Pregunta a LEX",
     cta2: "Com funciona",
     viewSide: "Vista lateral",
     viewFront: "Vista frontal",
