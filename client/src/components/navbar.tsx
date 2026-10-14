@@ -33,10 +33,10 @@ export default function Navbar() {
 
   const navLinks = [
     { label: t("inicio"), href: `/${locale}`, isRoute: true, testId: "link-inicio" },
+    { label: footerT("aboutProject"), href: `/${locale}/sobre-nosotros`, isRoute: true },
     { label: t("servicios"), href: `/${locale}/servicios/transporte-especial`, isRoute: true },
     { label: t("comoFunciona"), href: "#como-funciona" },
     { label: t("blog"), href: "#blog" },
-    { label: footerT("aboutProject"), href: `/${locale}/sobre-nosotros`, isRoute: true },
   ];
 
   useEffect(() => {
