@@ -27,6 +27,13 @@ const texts: Record<string, {
   sctTitle: string;
   sctSubtitle: string;
   sctOpen: string;
+  dgtLabel: string;
+  dgt1Title: string;
+  dgt1Desc: string;
+  dgt2Title: string;
+  dgt2Desc: string;
+  dgt3Title: string;
+  dgt3Desc: string;
   visorTitle: string; visorDesc: string;
   mctTitle: string; mctDesc: string;
   restricTitle: string; restricDesc: string;
@@ -62,6 +69,13 @@ const texts: Record<string, {
     sctTitle: "Herramientas oficiales de la Generalitat",
     sctSubtitle: "Consulta itinerarios y el estado del tráfico en tiempo real directamente desde las plataformas oficiales de la SCT.",
     sctOpen: "Abrir herramienta",
+    dgtLabel: "Resto de España",
+    dgt1Title: "Autorizaciones especiales (ACC)",
+    dgt1Desc: "Sede de la DGT para pedir la autorización complementaria de circulación y comunicar el inicio del viaje.",
+    dgt2Title: "Restricciones a la circulación",
+    dgt2Desc: "Calendario y mapa oficial de los días y tramos en que no pueden circular los vehículos especiales y con ACC.",
+    dgt3Title: "Tráfico en tiempo real",
+    dgt3Desc: "Mapa de incidencias de la DGT: obras, retenciones y cortes antes de salir.",
     visorTitle: "Visor d'Itineraris SCT",
     visorDesc: "Consulta y planifica itinerarios de transporte especial en Catalunya. Verifica rutas, restricciones de paso y condiciones específicas por tramo.",
     mctTitle: "Mapa Continu de Trànsit",
@@ -104,6 +118,13 @@ const texts: Record<string, {
     sctTitle: "Eines oficials de la Generalitat",
     sctSubtitle: "Consulta itineraris i l'estat del trànsit en temps real directament des de les plataformes oficials de la SCT.",
     sctOpen: "Obrir eina",
+    dgtLabel: "Resta d'Espanya",
+    dgt1Title: "Autoritzacions especials (ACC)",
+    dgt1Desc: "Seu de la DGT per demanar l'autorització complementària de circulació i comunicar l'inici del viatge.",
+    dgt2Title: "Restriccions a la circulació",
+    dgt2Desc: "Calendari i mapa oficial dels dies i trams en què no poden circular els vehicles especials i amb ACC.",
+    dgt3Title: "Trànsit en temps real",
+    dgt3Desc: "Mapa d'incidències de la DGT: obres, retencions i talls abans de sortir.",
     visorTitle: "Visor d'Itineraris SCT",
     visorDesc: "Consulta i planifica itineraris de transport especial a Catalunya. Verifica rutes, restriccions de pas i condicions específiques per tram.",
     mctTitle: "Mapa Continu de Trànsit",
@@ -146,6 +167,13 @@ const texts: Record<string, {
     sctTitle: "Official Generalitat tools",
     sctSubtitle: "Check itineraries and live traffic conditions directly from the official SCT platforms.",
     sctOpen: "Open tool",
+    dgtLabel: "Rest of Spain",
+    dgt1Title: "Special permits (ACC)",
+    dgt1Desc: "DGT online office to apply for the supplementary traffic permit (ACC) and notify the start of the journey.",
+    dgt2Title: "Traffic restrictions",
+    dgt2Desc: "Official calendar and map of the days and road sections where special vehicles and vehicles with an ACC cannot run.",
+    dgt3Title: "Live traffic",
+    dgt3Desc: "DGT incident map: roadworks, delays and closures before you set off.",
     visorTitle: "SCT Itinerary Viewer",
     visorDesc: "Check and plan special transport itineraries in Catalunya. Verify routes, passage restrictions and specific conditions by section.",
     mctTitle: "Continuous Traffic Map",
@@ -188,6 +216,13 @@ const texts: Record<string, {
     sctTitle: "Outils officiels de la Generalitat",
     sctSubtitle: "Consultez les itinéraires et l'état du trafic en temps réel directement depuis les plateformes officielles de la SCT.",
     sctOpen: "Ouvrir l'outil",
+    dgtLabel: "Reste de l'Espagne",
+    dgt1Title: "Autorisations spéciales (ACC)",
+    dgt1Desc: "Site de la DGT pour demander l'autorisation complémentaire de circulation (ACC) et déclarer le début du trajet.",
+    dgt2Title: "Restrictions de circulation",
+    dgt2Desc: "Calendrier et carte officiels des jours et tronçons où les véhicules spéciaux et ceux sous ACC ne peuvent pas circuler.",
+    dgt3Title: "Trafic en temps réel",
+    dgt3Desc: "Carte des incidents de la DGT : travaux, bouchons et fermetures avant de partir.",
     visorTitle: "Visionneuse d'itinéraires SCT",
     visorDesc: "Consultez et planifiez des itinéraires de transport spécial en Catalogne. Vérifiez les routes, les restrictions de passage et les conditions spécifiques par tronçon.",
     mctTitle: "Carte Continue de Trafic",
@@ -208,6 +243,9 @@ const texts: Record<string, {
     ctaSubtitle: "Découvrez le projet ou contactez-nous directement pour un accompagnement sans engagement.",
   },
 };
+
+// La sede de la DGT tiene la misma página en estos idiomas.
+const DGT_SEDE_LANG: Record<string, string> = { es: "es", ca: "ca", en: "en", fr: "fr" };
 
 // ─── Tilt 3D Card ─────────────────────────────────────────────────────────────
 function TiltCard({
@@ -416,6 +454,35 @@ export default function TransporteEspecial() {
               url="https://transit.gencat.cat/ca/informacio-viaria/professionals-transport/mesures-especials/consulta-restriccions/"
               accentColor="#E8620A"
               icon={<ShieldCheck className="w-6 h-6 text-[#E8620A]" />}
+              openLabel={t.sctOpen}
+            />
+          </div>
+
+          {/* Resto de España: tarjetas oficiales de la DGT */}
+          <p className="t-label text-center mt-12 md:mt-16 mb-6 md:mb-8" data-testid="label-dgt">{t.dgtLabel}</p>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6" style={{ perspective: "1200px" }}>
+            <TiltCard
+              title={t.dgt1Title}
+              description={t.dgt1Desc}
+              url={`https://sede.dgt.gob.es/${DGT_SEDE_LANG[locale] ?? "es"}/movilidad/autorizaciones-especiales/`}
+              accentColor="#1B4FD8"
+              icon={<FileCheck className="w-6 h-6 text-xpertblue" />}
+              openLabel={t.sctOpen}
+            />
+            <TiltCard
+              title={t.dgt2Title}
+              description={t.dgt2Desc}
+              url="https://www.dgt.es/conoce-el-estado-del-trafico/restricciones-a-la-circulacion/"
+              accentColor="#E8620A"
+              icon={<ShieldCheck className="w-6 h-6 text-[#E8620A]" />}
+              openLabel={t.sctOpen}
+            />
+            <TiltCard
+              title={t.dgt3Title}
+              description={t.dgt3Desc}
+              url="https://infocar.dgt.es/etraffic/"
+              accentColor="#4D9FEC"
+              icon={<Map className="w-6 h-6 text-arctic" />}
               openLabel={t.sctOpen}
             />
           </div>
