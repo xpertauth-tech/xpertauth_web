@@ -1,7 +1,6 @@
 import { motion } from "framer-motion";
 import { useLocation } from "wouter";
 import { useI18n } from "@/i18n/context";
-import { useAgent } from "@/App";
 
 const SUPABASE_BASE = "https://supabase.xpertauth.com/storage/v1/object/public/web-images";
 const JOSE_LUIS_PHOTO = `${SUPABASE_BASE}/equipo/equipo_jose-luis-avatar_v1.webp`;
@@ -28,12 +27,6 @@ const texts = {
     en: "Read my story",
     fr: "Découvrez mon histoire",
   },
-  toolsTitle: {
-    es: "Sus herramientas",
-    ca: "Les seves eines",
-    en: "His tools",
-    fr: "Ses outils",
-  },
   lex: {
     es: "Resuelve tus dudas de normativa al momento.",
     ca: "Resol els teus dubtes de normativa al moment.",
@@ -46,24 +39,11 @@ const texts = {
     en: "Ideas for using AI in your transport business.",
     fr: "Des idées pour utiliser l'IA dans votre entreprise de transport.",
   },
-  lexCta: {
-    es: "Pregunta a LEX",
-    ca: "Pregunta a LEX",
-    en: "Ask LEX",
-    fr: "Demandez à LEX",
-  },
-  novaCta: {
-    es: "Pregunta a NOVA",
-    ca: "Pregunta a NOVA",
-    en: "Ask NOVA",
-    fr: "Demandez à NOVA",
-  },
 };
 
 export default function TeamSection() {
   const { locale } = useI18n();
   const [, navigate] = useLocation();
-  const { abrirAgente } = useAgent();
   const lang: Lang = (["es", "ca", "en", "fr"] as const).includes(locale as Lang) ? (locale as Lang) : "es";
 
   return (
@@ -125,38 +105,21 @@ export default function TeamSection() {
           </div>
         </motion.div>
 
-        {/* Herramientas: franja discreta, sin fotos ni tarjetas */}
+        {/* Herramientas: presentación breve, sin botones */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-50px" }}
           transition={{ duration: 0.5 }}
-          className="mt-10 md:mt-16 pt-8 border-t border-white/10"
+          className="mt-10 md:mt-16 pt-8 border-t border-white/10 grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8"
         >
-          <p className="t-label text-center">{texts.toolsTitle[lang]}</p>
-          <div className="mt-4 grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-8">
-            <div className="flex flex-col">
-              <h3 className="t-h3 text-pure">LEX</h3>
-              <p className="t-small text-white/70 mt-1 flex-grow">{texts.lex[lang]}</p>
-              <button
-                onClick={() => abrirAgente("LEX")}
-                className="btn btn-primary w-full mt-4"
-                data-testid="button-team-lex"
-              >
-                {texts.lexCta[lang]}
-              </button>
-            </div>
-            <div className="flex flex-col">
-              <h3 className="t-h3 text-pure">NOVA</h3>
-              <p className="t-small text-white/70 mt-1 flex-grow">{texts.nova[lang]}</p>
-              <button
-                onClick={() => abrirAgente("NOVA")}
-                className="btn btn-primary w-full mt-4"
-                data-testid="button-team-nova"
-              >
-                {texts.novaCta[lang]}
-              </button>
-            </div>
+          <div>
+            <h3 className="t-h3 text-pure">LEX</h3>
+            <p className="t-small text-white/70 mt-1">{texts.lex[lang]}</p>
+          </div>
+          <div>
+            <h3 className="t-h3 text-pure">NOVA</h3>
+            <p className="t-small text-white/70 mt-1">{texts.nova[lang]}</p>
           </div>
         </motion.div>
       </div>
