@@ -1,6 +1,7 @@
 import { useEffect } from "react";
 import Navbar from "@/components/navbar";
 import Hero from "@/components/hero";
+import LexEnAccion from "@/components/lex-en-accion";
 import TeamSection from "@/components/TeamSection";
 import HowItWorks from "@/components/how-it-works";
 import SocialProof from "@/components/social-proof";
@@ -24,6 +25,7 @@ export default function Home() {
     <div className="min-h-screen">
       <Navbar />
       <Hero />
+      <LexEnAccion />
       <TeamSection />
       <HowItWorks />
       <SocialProof />

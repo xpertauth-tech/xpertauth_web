@@ -7,12 +7,12 @@ import { useI18n } from "@/i18n/context";
 
 // ─── Tipos ───────────────────────────────────────────────────────────────────
 
-type Agente = "LEX" | "NOVA";
+export type Agente = "LEX" | "NOVA";
 
 // Avatares ilustrados (los mismos que usa la sección Equipo)
 const AVATAR_BASE = "https://supabase.xpertauth.com/storage/v1/object/public/web-images/equipo";
 
-interface Mensaje {
+export interface Mensaje {
   role: "user" | "assistant";
   content: string;
   agente?: Agente;
@@ -25,11 +25,11 @@ interface AgentChatProps {
   onSesionRequerida: () => void;
 }
 
-type Idioma = "es" | "ca" | "en" | "fr";
+export type Idioma = "es" | "ca" | "en" | "fr";
 
 // ─── Config por agente ───────────────────────────────────────────────────────
 
-const AGENTE_CONFIG: Record<Agente, {
+export const AGENTE_CONFIG: Record<Agente, {
   color: string;
   colorBg: string;
   colorBorder: string;
@@ -51,7 +51,7 @@ const AGENTE_CONFIG: Record<Agente, {
 
 // ─── Textos por idioma ───────────────────────────────────────────────────────
 
-const TEXTOS: Record<Idioma, {
+export const TEXTOS: Record<Idioma, {
   taglineLex: string;
   taglineNova: string;
   bienvenidaLex: string;
@@ -245,7 +245,7 @@ function parsearInline(texto: string): React.ReactNode {
   });
 }
 
-function Burbuja({
+export function Burbuja({
   mensaje,
   config,
   labelCita,

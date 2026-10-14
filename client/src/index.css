@@ -493,3 +493,18 @@
 @media (min-width: 768px) {
   .sn-pantalla-1 { min-height: 100vh; min-height: 100dvh; padding-top: 80px; padding-bottom: 0; }
 }
+
+/* LEX en acción (lex-en-accion.tsx): cursor al escribir, aparición de los mensajes y marca del texto de prueba */
+.lex-caret {
+  display: inline-block; width: 1.5px; height: 1em; margin-left: 1px; vertical-align: text-bottom;
+  background: #4D9FEC; animation: lexBlink 1s steps(1) infinite;
+}
+@keyframes lexBlink { 50% { opacity: 0; } }
+.lex-pop { animation: lexPop .45s ease-out both; }
+@keyframes lexPop { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: none; } }
+@media (prefers-reduced-motion: reduce) { .lex-pop, .lex-caret { animation: none; } }
+/* TEMPORAL: el texto de prueba de la respuesta se ve claramente marcado hasta que haya una respuesta real */
+.lex-demo .rounded-2xl > p:first-child {
+  border: 1.5px dashed #E8620A; background: rgba(232,98,10,.12); border-radius: 8px; padding: 8px 10px;
+  color: #FFC9A3 !important; font-weight: 600;
+}
