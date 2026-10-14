@@ -1,4 +1,5 @@
 import { Fragment } from "react";
+import ExternalMark from "@/components/external-mark";
 
 // Texto legal con marcado mínimo: **negrita**, `código`, [texto](url), bloques separados por
 // línea en blanco y viñetas con "- ". Los enlaces externos se abren en pestaña nueva.
@@ -25,6 +26,7 @@ function Inline({ text }: { text: string }) {
           className="text-[#4D9FEC] underline hover:text-[#4D9FEC]/80 transition-colors"
         >
           {m[3]}
+          {externo && <ExternalMark icon={false} />}
         </a>
       );
     }

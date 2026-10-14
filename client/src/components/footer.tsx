@@ -1,3 +1,4 @@
+import ExternalMark from "@/components/external-mark";
 import { Mail, Phone, MapPin, Clock } from "lucide-react";
 import { SiLinkedin, SiInstagram, SiWhatsapp } from "react-icons/si";
 import { useTranslations } from "@/i18n/context";
@@ -67,6 +68,7 @@ export default function Footer() {
                 aria-label="LinkedIn"
               >
                 <SiLinkedin className="w-4 h-4" />
+                <ExternalMark icon={false} />
               </a>
               <a
                 href="https://www.instagram.com/xpertauth_association/"
@@ -77,6 +79,7 @@ export default function Footer() {
                 aria-label="Instagram"
               >
                 <SiInstagram className="w-4 h-4" />
+                <ExternalMark icon={false} />
               </a>
               <a
                 href="https://wa.me/34625897546?text=Hola%2C%20te%20escribo%20desde%20xpertauth.com"
@@ -87,6 +90,7 @@ export default function Footer() {
                 aria-label="WhatsApp"
               >
                 <SiWhatsapp className="w-4 h-4" />
+                <ExternalMark icon={false} />
               </a>
             </div>
           </div>

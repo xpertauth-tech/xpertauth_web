@@ -1,3 +1,4 @@
+import ExternalMark from "@/components/external-mark";
 import { useState } from "react";
 import { motion } from "framer-motion";
 import { Calendar } from "lucide-react";
@@ -51,6 +52,7 @@ export default function CtaFinal() {
             >
               <Calendar className="w-4 h-4" />
               {t("cta3")}
+              <ExternalMark />
             </a>
           </div>
           </div>

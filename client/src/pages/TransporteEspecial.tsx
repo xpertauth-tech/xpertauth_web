@@ -497,6 +497,7 @@ export default function TransporteEspecial() {
             >
               <Calendar className="w-4 h-4" />
               Reserva tu cita
+              <ExternalMark />
             </a>
           </div>
         </div>
