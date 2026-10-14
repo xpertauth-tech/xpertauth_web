@@ -1,10 +1,11 @@
-import ExternalMark from "@/components/external-mark";
+import ExternalMark, { useExternalLinkProps } from "@/components/external-mark";
 import { Mail, Phone, MapPin, Clock } from "lucide-react";
 import { SiLinkedin, SiInstagram, SiWhatsapp } from "react-icons/si";
 import { useTranslations } from "@/i18n/context";
 import { useLocation } from "wouter";
 
 export default function Footer() {
+  const externalProps = useExternalLinkProps();
   const { messages, locale } = useTranslations("footer");
   const [, navigate] = useLocation();
   const m = messages as any;
@@ -61,8 +62,7 @@ export default function Footer() {
             <div className="flex items-center gap-3 max-md:gap-4">
               <a
                 href="https://www.linkedin.com/in/jl-echezarreta-fabregó"
-                target="_blank"
-                rel="noopener noreferrer"
+                {...externalProps}
                 className="w-9 h-9 max-md:w-11 max-md:h-11 rounded-md bg-white/[0.05] flex items-center justify-center text-white/70 hover:text-arctic transition-colors"
                 data-testid="link-linkedin"
                 aria-label="LinkedIn"
@@ -72,8 +72,7 @@ export default function Footer() {
               </a>
               <a
                 href="https://www.instagram.com/xpertauth_association/"
-                target="_blank"
-                rel="noopener noreferrer"
+                {...externalProps}
                 className="w-9 h-9 max-md:w-11 max-md:h-11 rounded-md bg-white/[0.05] flex items-center justify-center text-white/70 hover:text-[#E1306C] transition-colors"
                 data-testid="link-instagram"
                 aria-label="Instagram"
@@ -83,8 +82,7 @@ export default function Footer() {
               </a>
               <a
                 href="https://wa.me/34625897546?text=Hola%2C%20te%20escribo%20desde%20xpertauth.com"
-                target="_blank"
-                rel="noopener noreferrer"
+                {...externalProps}
                 className="w-9 h-9 max-md:w-11 max-md:h-11 rounded-md bg-white/[0.05] flex items-center justify-center text-white/70 hover:text-[#25D366] transition-colors"
                 data-testid="link-whatsapp"
                 aria-label="WhatsApp"

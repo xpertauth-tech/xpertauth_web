@@ -1,4 +1,4 @@
-import ExternalMark from "@/components/external-mark";
+import ExternalMark, { useExternalLinkProps } from "@/components/external-mark";
 import { useState } from "react";
 import { motion } from "framer-motion";
 import { Calendar } from "lucide-react";
@@ -7,6 +7,7 @@ import DotSign from "./dot-sign";
 import ContactModal from "./ContactModal";
 
 export default function CtaFinal() {
+  const externalProps = useExternalLinkProps();
   const { t, messages } = useTranslations("ctaFinal");
   const [contactOpen, setContactOpen] = useState(false);
 
@@ -46,8 +47,7 @@ export default function CtaFinal() {
 
             <a
               href="https://calendar.app.google/q54rranYyoyCfcu77"
-              target="_blank"
-              rel="noopener noreferrer"
+              {...externalProps}
               className="btn btn-secondary bg-obsidian/60"
             >
               <Calendar className="w-4 h-4" />

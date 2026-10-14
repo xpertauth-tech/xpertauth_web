@@ -1,6 +1,7 @@
 const en = {
   a11y: {
     newTab: "opens in a new tab",
+    externalSite: "opens an external website",
   },
   nav: {
     inicio: "Home",

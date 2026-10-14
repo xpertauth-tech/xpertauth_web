@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from "react";
-import ExternalMark from "@/components/external-mark";
+import ExternalMark, { useExternalLinkProps } from "@/components/external-mark";
 import { X, Send, Loader2, Calendar } from "lucide-react";
 import ContactModal from "./ContactModal";
 import { supabase } from "@/lib/supabase";
@@ -257,6 +257,7 @@ function Burbuja({
   onCita: () => void;
 }) {
   const esAsistente = mensaje.role === "assistant";
+  const externalProps = useExternalLinkProps();
   const { textoLimpio, botones } = parsearBotones(mensaje.content);
 
   return (
@@ -300,8 +301,7 @@ function Burbuja({
                   <a
                     key={i}
                     href={btn.url}
-                    target="_blank"
-                    rel="noopener noreferrer"
+                    {...externalProps}
                     className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium transition-opacity hover:opacity-80"
                     style={{
                       backgroundColor: "rgba(27,79,216,0.15)",

@@ -1,6 +1,7 @@
 const es = {
   a11y: {
     newTab: "se abre en una pestaña nueva",
+    externalSite: "abre una web externa",
   },
   nav: {
     inicio: "Inicio",

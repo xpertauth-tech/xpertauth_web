@@ -1,6 +1,7 @@
 const ca = {
   a11y: {
     newTab: "s'obre en una pestanya nova",
+    externalSite: "obre una web externa",
   },
   nav: {
     inicio: "Inici",

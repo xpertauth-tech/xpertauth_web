@@ -1,6 +1,7 @@
 const fr = {
   a11y: {
     newTab: "s'ouvre dans un nouvel onglet",
+    externalSite: "ouvre un site externe",
   },
   nav: {
     inicio: "Accueil",

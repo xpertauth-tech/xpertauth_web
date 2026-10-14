@@ -4,7 +4,7 @@ import Footer from "@/components/footer";
 import ContactModal from "@/components/ContactModal";
 import { useAgent } from "@/App";
 import { useI18n } from "@/i18n/context";
-import ExternalMark from "@/components/external-mark";
+import ExternalMark, { useExternalLinkProps } from "@/components/external-mark";
 import { ArrowRight, ExternalLink, FileCheck, Map, MessageSquare, ShieldCheck, BookOpen, Calendar } from "lucide-react";
 
 // ─── Paleta ───────────────────────────────────────────────────────────────────
@@ -217,6 +217,7 @@ function TiltCard({
   icon: React.ReactNode; accentColor: string; openLabel: string;
 }) {
   const cardRef = useRef<HTMLAnchorElement>(null);
+  const externalProps = useExternalLinkProps();
   const [transform, setTransform] = useState("perspective(800px) rotateX(0deg) rotateY(0deg) scale3d(1,1,1)");
   const [shine, setShine] = useState({ x: 50, y: 50, opacity: 0 });
 
@@ -241,8 +242,7 @@ function TiltCard({
     <a
       ref={cardRef}
       href={url}
-      target="_blank"
-      rel="noopener noreferrer"
+      {...externalProps}
       onMouseMove={handleMouseMove}
       onMouseLeave={handleMouseLeave}
       style={{ transform, transition: "transform 0.15s ease-out", transformStyle: "preserve-3d" }}
@@ -324,6 +324,7 @@ function ServiceCard({
 
 // ─── Página principal ──────────────────────────────────────────────────────────
 export default function TransporteEspecial() {
+  const externalProps = useExternalLinkProps();
   const [contactOpen, setContactOpen] = useState(false);
   const { abrirAgente } = useAgent();
   const { locale } = useI18n();
@@ -491,8 +492,7 @@ export default function TransporteEspecial() {
             </button>
             <a
               href="https://calendar.app.google/q54rranYyoyCfcu77"
-              target="_blank"
-              rel="noopener noreferrer"
+              {...externalProps}
               className="btn btn-secondary"
             >
               <Calendar className="w-4 h-4" />

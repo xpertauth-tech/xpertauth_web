@@ -1,11 +1,12 @@
 import { Fragment } from "react";
-import ExternalMark from "@/components/external-mark";
+import ExternalMark, { useExternalLinkProps } from "@/components/external-mark";
 
 // Texto legal con marcado mínimo: **negrita**, `código`, [texto](url), bloques separados por
 // línea en blanco y viñetas con "- ". Los enlaces externos se abren en pestaña nueva.
 const INLINE = /\*\*(.+?)\*\*|`([^`]+)`|\[([^\]]+)\]\(([^)]+)\)/g;
 
 function Inline({ text }: { text: string }) {
+  const externalProps = useExternalLinkProps();
   const out: React.ReactNode[] = [];
   let last = 0;
   let m: RegExpExecArray | null;
@@ -22,7 +23,7 @@ function Inline({ text }: { text: string }) {
         <a
           key={m.index}
           href={m[4]}
-          {...(externo ? { target: "_blank", rel: "noopener noreferrer" } : {})}
+          {...(externo ? externalProps : {})}
           className="text-[#4D9FEC] underline hover:text-[#4D9FEC]/80 transition-colors"
         >
           {m[3]}
