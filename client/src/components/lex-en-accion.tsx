@@ -97,7 +97,7 @@ function ChatWindow({ fase, idioma, pregunta, escribiendo }: { fase: Fase; idiom
 
   return (
     <div
-      className="flex flex-col rounded-2xl overflow-hidden shadow-2xl"
+      className="flex flex-col h-full rounded-2xl overflow-hidden shadow-2xl"
       style={{ backgroundColor: "#0A0E1A", border: `1px solid ${config.colorBorder}` }}
     >
       <div
@@ -113,7 +113,7 @@ function ChatWindow({ fase, idioma, pregunta, escribiendo }: { fase: Fase; idiom
         </div>
       </div>
 
-      <div className="px-4 py-5 space-y-4 lex-demo">
+      <div className="px-4 py-5 space-y-4 lex-demo flex-1">
         {mensajes.map((m, i) => (
           <div key={m.role} className={i === mensajes.length - 1 && escribiendo ? "lex-pop" : ""}>
             <Burbuja mensaje={m} config={config} labelCita={t.botonCita} onCita={() => {}} />
@@ -225,18 +225,7 @@ export default function LexEnAccion() {
 
         <div className="grid grid-cols-1 lg:grid-cols-[7fr_4fr] gap-4 lg:gap-12 items-start">
           <div>
-            {/* La zona reserva la altura del estado final (ventana invisible) y la ventana viva se dibuja encima:
-                así la ventana no tiene hueco vacío mientras se escribe y la página no salta. */}
-            <div ref={zonaRef} className="relative">
-              <div className="invisible" aria-hidden="true">
-                <ChatWindow fase={FINAL} idioma={idioma} pregunta={tx.question} escribiendo={false} />
-              </div>
-              <div className="absolute top-0 left-0 right-0" aria-hidden="true">
-                <ChatWindow fase={fase} idioma={idioma} pregunta={tx.question} escribiendo={escribiendo} />
-              </div>
-              <p className="sr-only">{tx.question}</p>
-            </div>
-            <p className="mt-3 t-small text-white/60">
+            <p className="mb-3 t-small text-white/60">
               {tx.captionPre}
               <button
                 type="button"
@@ -248,6 +237,17 @@ export default function LexEnAccion() {
               </button>
               {tx.captionPost}
             </p>
+            {/* La zona reserva la altura del estado final (ventana invisible) y la ventana viva se dibuja encima:
+                así la ventana no tiene hueco vacío mientras se escribe y la página no salta. */}
+            <div ref={zonaRef} className="relative">
+              <div className="invisible" aria-hidden="true">
+                <ChatWindow fase={FINAL} idioma={idioma} pregunta={tx.question} escribiendo={false} />
+              </div>
+              <div className="absolute inset-0" aria-hidden="true">
+                <ChatWindow fase={fase} idioma={idioma} pregunta={tx.question} escribiendo={escribiendo} />
+              </div>
+              <p className="sr-only">{tx.question}</p>
+            </div>
           </div>
 
           <div className="flex flex-col gap-4 lg:self-center mt-6 lg:mt-0">
