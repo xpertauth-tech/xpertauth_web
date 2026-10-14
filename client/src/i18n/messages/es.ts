@@ -16,8 +16,6 @@ const es = {
     title1: "Transporte especial,",
     title2: "con criterio real.",
     subtitle: "Treinta años de oficio en transporte especial.\nHoy, con la inteligencia artificial como herramienta.",
-    cta1: "Pregunta a LEX",
-    cta2: "Cómo funciona",
     viewSide: "Vista lateral",
     viewFront: "Vista frontal",
     sketchAlt: "Croquis técnico de un transporte especial: tractora y góndola con una excavadora, en vista lateral y frontal.",

@@ -87,7 +87,7 @@ export default function Hero() {
         </motion.div>
 
         <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 1.2, duration: 0.8 }} className="mt-10 flex justify-center">
-          <button onClick={() => scrollTo("#problema-solucion")} className="text-white/70 animate-bounce" aria-label="Desplazar hacia abajo" data-testid="button-scroll-down">
+          <button onClick={() => scrollTo("#servicios")} className="text-white/70 animate-bounce" aria-label="Desplazar hacia abajo" data-testid="button-scroll-down">
             <ChevronDown className="w-6 h-6" />
           </button>
         </motion.div>
