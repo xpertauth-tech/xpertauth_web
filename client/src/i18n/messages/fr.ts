@@ -1,4 +1,7 @@
 const fr = {
+  a11y: {
+    newTab: "s'ouvre dans un nouvel onglet",
+  },
   nav: {
     inicio: "Accueil",
     servicios: "Services",

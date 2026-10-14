@@ -1,4 +1,7 @@
 const en = {
+  a11y: {
+    newTab: "opens in a new tab",
+  },
   nav: {
     inicio: "Home",
     servicios: "Services",

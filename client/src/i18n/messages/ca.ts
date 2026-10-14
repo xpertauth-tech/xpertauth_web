@@ -1,4 +1,7 @@
 const ca = {
+  a11y: {
+    newTab: "s'obre en una pestanya nova",
+  },
   nav: {
     inicio: "Inici",
     servicios: "Serveis",

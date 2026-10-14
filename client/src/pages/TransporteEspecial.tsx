@@ -4,6 +4,7 @@ import Footer from "@/components/footer";
 import ContactModal from "@/components/ContactModal";
 import { useAgent } from "@/App";
 import { useI18n } from "@/i18n/context";
+import ExternalMark from "@/components/external-mark";
 import { ArrowRight, ExternalLink, FileCheck, Map, MessageSquare, ShieldCheck, BookOpen, Calendar } from "lucide-react";
 
 // ─── Paleta ───────────────────────────────────────────────────────────────────
@@ -215,11 +216,11 @@ function TiltCard({
   title: string; description: string; url: string;
   icon: React.ReactNode; accentColor: string; openLabel: string;
 }) {
-  const cardRef = useRef<HTMLDivElement>(null);
+  const cardRef = useRef<HTMLAnchorElement>(null);
   const [transform, setTransform] = useState("perspective(800px) rotateX(0deg) rotateY(0deg) scale3d(1,1,1)");
   const [shine, setShine] = useState({ x: 50, y: 50, opacity: 0 });
 
-  const handleMouseMove = useCallback((e: React.MouseEvent<HTMLDivElement>) => {
+  const handleMouseMove = useCallback((e: React.MouseEvent<HTMLAnchorElement>) => {
     const card = cardRef.current;
     if (!card) return;
     const rect = card.getBoundingClientRect();
@@ -237,11 +238,13 @@ function TiltCard({
   }, []);
 
   return (
-    <div
+    <a
       ref={cardRef}
+      href={url}
+      target="_blank"
+      rel="noopener noreferrer"
       onMouseMove={handleMouseMove}
       onMouseLeave={handleMouseLeave}
-      onClick={() => window.open(url, "_blank", "noopener noreferrer")}
       style={{ transform, transition: "transform 0.15s ease-out", transformStyle: "preserve-3d" }}
       className="relative flex flex-col justify-between p-4 md:p-6 rounded-xl overflow-hidden cursor-pointer"
     >
@@ -259,10 +262,10 @@ function TiltCard({
         </div>
         <div className="flex items-center gap-2 t-small font-semibold" style={{ color: accentColor }}>
           <span>{openLabel}</span>
-          <ExternalLink className="w-4 h-4" />
+          <ExternalMark />
         </div>
       </div>
-    </div>
+    </a>
   );
 }
 

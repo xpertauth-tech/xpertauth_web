@@ -1,5 +1,6 @@
 import { useState, useEffect, useRef } from "react";
-import { X, Send, Loader2, ExternalLink, Calendar } from "lucide-react";
+import ExternalMark from "@/components/external-mark";
+import { X, Send, Loader2, Calendar } from "lucide-react";
 import ContactModal from "./ContactModal";
 import { supabase } from "@/lib/supabase";
 import { useI18n } from "@/i18n/context";
@@ -308,8 +309,8 @@ function Burbuja({
                       color: "#4D9FEC",
                     }}
                   >
-                    <ExternalLink size={12} />
                     {btn.label}
+                    <ExternalMark className="w-3 h-3" />
                   </a>
                 );
               }
