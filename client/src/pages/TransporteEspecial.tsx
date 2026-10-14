@@ -28,6 +28,8 @@ const texts: Record<string, {
   sctSubtitle: string;
   sctOpen: string;
   dgtLabel: string;
+  dgtTitle: string;
+  dgtSubtitle: string;
   dgt1Title: string;
   dgt1Desc: string;
   dgt2Title: string;
@@ -69,7 +71,9 @@ const texts: Record<string, {
     sctTitle: "Herramientas oficiales de la Generalitat",
     sctSubtitle: "Consulta itinerarios y el estado del tráfico en tiempo real directamente desde las plataformas oficiales de la SCT.",
     sctOpen: "Abrir herramienta",
-    dgtLabel: "Resto de España",
+    dgtLabel: "DGT",
+    dgtTitle: "Herramientas oficiales de la DGT",
+    dgtSubtitle: "Autorizaciones, restricciones y tráfico en tiempo real en las carreteras que gestiona la DGT (toda España salvo Cataluña, País Vasco y Navarra).",
     dgt1Title: "Autorizaciones especiales (ACC)",
     dgt1Desc: "Sede de la DGT para pedir la autorización complementaria de circulación y comunicar el inicio del viaje.",
     dgt2Title: "Restricciones a la circulación",
@@ -118,7 +122,9 @@ const texts: Record<string, {
     sctTitle: "Eines oficials de la Generalitat",
     sctSubtitle: "Consulta itineraris i l'estat del trànsit en temps real directament des de les plataformes oficials de la SCT.",
     sctOpen: "Obrir eina",
-    dgtLabel: "Resta d'Espanya",
+    dgtLabel: "DGT",
+    dgtTitle: "Eines oficials de la DGT",
+    dgtSubtitle: "Autoritzacions, restriccions i trànsit en temps real a les carreteres que gestiona la DGT (tot Espanya excepte Catalunya, el País Basc i Navarra).",
     dgt1Title: "Autoritzacions especials (ACC)",
     dgt1Desc: "Seu de la DGT per demanar l'autorització complementària de circulació i comunicar l'inici del viatge.",
     dgt2Title: "Restriccions a la circulació",
@@ -167,7 +173,9 @@ const texts: Record<string, {
     sctTitle: "Official Generalitat tools",
     sctSubtitle: "Check itineraries and live traffic conditions directly from the official SCT platforms.",
     sctOpen: "Open tool",
-    dgtLabel: "Rest of Spain",
+    dgtLabel: "DGT",
+    dgtTitle: "Official DGT tools",
+    dgtSubtitle: "Permits, restrictions and live traffic on the roads managed by the DGT (all of Spain except Catalonia, the Basque Country and Navarre).",
     dgt1Title: "Special permits (ACC)",
     dgt1Desc: "DGT online office to apply for the supplementary traffic permit (ACC) and notify the start of the journey.",
     dgt2Title: "Traffic restrictions",
@@ -216,7 +224,9 @@ const texts: Record<string, {
     sctTitle: "Outils officiels de la Generalitat",
     sctSubtitle: "Consultez les itinéraires et l'état du trafic en temps réel directement depuis les plateformes officielles de la SCT.",
     sctOpen: "Ouvrir l'outil",
-    dgtLabel: "Reste de l'Espagne",
+    dgtLabel: "DGT",
+    dgtTitle: "Outils officiels de la DGT",
+    dgtSubtitle: "Autorisations, restrictions et trafic en temps réel sur les routes gérées par la DGT (toute l'Espagne sauf la Catalogne, le Pays basque et la Navarre).",
     dgt1Title: "Autorisations spéciales (ACC)",
     dgt1Desc: "Site de la DGT pour demander l'autorisation complémentaire de circulation (ACC) et déclarer le début du trajet.",
     dgt2Title: "Restrictions de circulation",
@@ -457,9 +467,19 @@ export default function TransporteEspecial() {
               openLabel={t.sctOpen}
             />
           </div>
+        </div>
+      </section>
 
-          {/* Resto de España: tarjetas oficiales de la DGT */}
-          <p className="t-label text-center mt-12 md:mt-16 mb-6 md:mb-8" data-testid="label-dgt">{t.dgtLabel}</p>
+      {/* ── HERRAMIENTAS DGT ─────────────────────────────────────────────────── */}
+      <section className="section-y px-4 sm:px-6 lg:px-8 bg-obsidian border-t border-white/[0.05]" data-testid="section-dgt">
+        <div className="max-w-5xl mx-auto">
+          <div className="text-center head-gap">
+            <span className="t-label">{t.dgtLabel}</span>
+            <h2 className="t-h2 text-pure">
+              {t.dgtTitle}
+            </h2>
+            <p className="lead-gap t-lead text-white/70 max-w-xl mx-auto">{t.dgtSubtitle}</p>
+          </div>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6" style={{ perspective: "1200px" }}>
             <TiltCard
               title={t.dgt1Title}
