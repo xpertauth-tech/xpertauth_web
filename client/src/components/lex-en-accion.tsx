@@ -6,11 +6,13 @@ import ContactModal from "./ContactModal";
 import { AGENTE_CONFIG, Burbuja, TEXTOS, type Idioma, type Mensaje } from "./AgentChat";
 
 // Sección "LEX en acción": ventana de chat que escribe sola, una vez, una pregunta real y muestra
-// una respuesta de muestra. La respuesta es TEXTO DE PRUEBA hasta que haya una respuesta real de LEX.
+// una respuesta real de LEX (pregunta y respuesta tal cual salieron de LEX en cada idioma).
 
 const texts: Record<Idioma, {
   title: string;
   question: string;
+  answer: string;
+  sources: string[];
   line1: string;
   line2: string;
   lexCta: string;
@@ -22,7 +24,9 @@ const texts: Record<Idioma, {
 }> = {
   es: {
     title: "LEX en acción",
-    question: "¿Necesito coche piloto con 3,20 m de ancho?",
+    question: "Llevo una excavadora sobre góndola y me paso de ancho. ¿Qué papel necesito y quién me lo da?",
+    answer: "Si te pasas de ancho con la excavadora sobre góndola, necesitas una **autorización de transporte especial**.\n\n**Quién te la da depende de dónde circules:**\n\n- **En Catalunya:** la pide el SCT (Servei Català de Trànsit)\n- **En el resto de España:** la pide la DGT (Dirección General de Tráfico)\n\n**Qué tipo de autorización necesitas:**\n\n- **Hasta 3,50 m de ancho:** autorización genérica (sin itinerario fijo)\n- **De 3,51 m hasta 4,99 m de ancho:** autorización específica (con itinerario concreto)\n- **5 m o más de ancho:** autorización excepcional (con itinerario concreto)\n\nSi solo te pasas un poco del ancho (por ejemplo, 3,30 m), con la genérica puedes circular. Si llegas a 3,60 m, ya necesitas la específica con ruta definida.\n\n¿Cuánto mide de ancho tu excavadora cargada?",
+    sources: ["PARALELO 07 Tipos de autorizacion y vehiculos piloto (José Luis) (resumen IA)"],
     line1: "Resuelve tus dudas de normativa al momento.",
     line2: "LEX consulta la base normativa propia y localiza lo que aplica a tu caso, con la fuente citada.",
     lexCta: "Pregunta a LEX",
@@ -34,7 +38,9 @@ const texts: Record<Idioma, {
   },
   ca: {
     title: "LEX en acció",
-    question: "Necessito cotxe pilot amb 3,20 m d'ample?",
+    question: "Porto una excavadora sobre una góndola i em passo d'amplada. Quin paper necessito i qui me'l dona?",
+    answer: "Si et passes d'amplada amb l'excavadora sobre la góndola, necessites una **autorització de transport especial**.\n\nQui te la dona depèn de per on circularàs:\n\n- **SCT (Servei Català de Trànsit)**: si el teu itinerari és només per carreteres de Catalunya (xarxa viària interurbana catalana).\n\n- **DGT (Direcció General de Trànsit)**: si surts de Catalunya o circules per carreteres estatals.\n\nPer demanar-la necessitaràs les dades del vehicle, del remolc, de la càrrega i l'itinerari concret (origen i destí).\n\nSi necessites orientació sobre el teu cas concret o ajuda amb el tràmit, pots contactar amb José Luis.\n\n[BOTON_SCT:Tràmits SCT:https://transit.gencat.cat/ca/gestions/autoritzacions-especials-exempcions/autoritzacions-especials-te-ve/index.html]\n[BOTON_SCT:Autorizaciones DGT:https://sede.dgt.gob.es/es/movilidad/autorizaciones-especiales/]",
+    sources: ["SCT Autoritzacions Especials Procediments 2025-2026"],
     line1: "Resol els teus dubtes de normativa al moment.",
     line2: "LEX consulta la base normativa pròpia i localitza el que aplica al teu cas, amb la font citada.",
     lexCta: "Pregunta a LEX",
@@ -46,7 +52,9 @@ const texts: Record<Idioma, {
   },
   en: {
     title: "LEX in action",
-    question: "Do I need a pilot car for a 3.20 m wide load?",
+    question: "I'm carrying an excavator on a low-loader and I'm over the width limit. What permit do I need and who issues it?",
+    answer: "If you're over 2.55 metres wide, you need a special transport authorisation.\n\n**Who issues it depends on your route:**\n- **If you're travelling only in Catalonia:** the SCT (Servei Català de Trànsit) issues it.\n- **If you're travelling outside Catalonia or crossing into other regions:** the DGT (Dirección General de Tráfico) issues it.\n\n**What type of authorisation:**\n- **Up to 3.50 m wide:** generic authorisation (no fixed route).\n- **Between 3.50 m and 5 m wide:** specific authorisation (with a concrete route).\n- **5 m or more wide:** exceptional authorisation (with a concrete route).\n\nIf you're between 3 and 5 metres wide, you'll also need a front escort vehicle. If you reach 5 metres, you'll need two escort vehicles.\n\nTo apply or check routes:\n\n[BOTON_SCT:SCT Route Viewer:https://transit.gencat.cat/ca/gestions/autoritzacions-especials-exempcions/visor-itineraris/index.html]\n[BOTON_SCT:SCT Procedures:https://transit.gencat.cat/ca/gestions/autoritzacions-especials-exempcions/autoritzacions-especials-te-ve/index.html]\n[BOTON_SCT:DGT Authorisations:https://sede.dgt.gob.es/es/movilidad/autorizaciones-especiales/]",
+    sources: ["PARALELO 01 Dimensiones Masas Cuando Necesito Permiso (AI summary)", "PARALELO 06 Referencias Normativas Exactas LEX (AI summary)", "PARALELO 07 Tipos de autorizacion y vehiculos piloto (José Luis) (AI summary)"],
     line1: "Answers your regulation questions instantly.",
     line2: "LEX checks our own regulatory base and finds what applies to your case, with the source cited.",
     lexCta: "Ask LEX",
@@ -58,7 +66,9 @@ const texts: Record<Idioma, {
   },
   fr: {
     title: "LEX en action",
-    question: "Ai-je besoin d'un véhicule pilote pour une largeur de 3,20 m ?",
+    question: "Je transporte une pelleteuse sur un porte-engins et je dépasse la largeur. De quel document ai-je besoin et qui le délivre ?",
+    answer: "Si vous dépassez 2,55 mètres de largeur avec votre ensemble (porte-engins + pelleteuse), vous avez besoin d'une **autorisation de transport spécial**.\n\n**Qui la délivre :**\n- **SCT (Servei Català de Trànsit)** si vous circulez en Catalogne\n- **DGT (Dirección General de Tráfico)** si vous circulez dans le reste de l'Espagne\n\n**Type d'autorisation selon votre largeur :**\n- Jusqu'à 3,50 m de large : autorisation **générique** (sans itinéraire fixe)\n- Entre 3,50 m et 5 m de large : autorisation **spécifique** (avec itinéraire concret)\n- 5 m ou plus de large : autorisation **exceptionnelle** (avec itinéraire concret)\n\n**Important :** Si vous dépassez 3 mètres de large, vous devrez également circuler avec un **véhicule pilote** à l'avant.\n\nVous devez avoir ce document dans la cabine pendant le transport, accompagné du permis de circulation, de l'ITV en vigueur, de l'assurance obligatoire et du permis de conduire.\n\nQuelle est la largeur totale de votre ensemble ?\n\n[BOTON_SCT:Tràmits SCT:https://transit.gencat.cat/ca/gestions/autoritzacions-especials-exempcions/autoritzacions-especials-te-ve/index.html]\n[BOTON_SCT:Autorizaciones DGT:https://sede.dgt.gob.es/es/movilidad/autorizaciones-especiales/]",
+    sources: ["PARALELO 07 Tipos de autorizacion y vehiculos piloto (José Luis) (résumé IA)", "PARALELO 02 Permisos DGT SCT Quien Pide Que (résumé IA)", "PARALELO 06 Referencias Normativas Exactas LEX (résumé IA)"],
     line1: "Répond à vos questions de réglementation sur-le-champ.",
     line2: "LEX consulte notre propre base réglementaire et trouve ce qui s'applique à votre cas, avec la source citée.",
     lexCta: "Demandez à LEX",
@@ -69,10 +79,6 @@ const texts: Record<Idioma, {
     captionBtn: "Racontez-nous votre cas",
   },
 };
-
-// Texto provisional (marcado para que no pase por real). Se sustituirá por una respuesta real de LEX.
-const MUESTRA = "[TEXTO DE PRUEBA — se sustituirá por una respuesta real de LEX]";
-const MUESTRA_FUENTE = "[FUENTE DE PRUEBA — se sustituirá por la fuente que cite LEX]";
 
 type Fase = { escrito: string; enviado: boolean; pensando: boolean; respuesta: 0 | 1 | 2 };
 const INICIAL: Fase = { escrito: "", enviado: false, pensando: false, respuesta: 0 };
@@ -85,7 +91,7 @@ function ChatWindow({ fase, idioma, pregunta, escribiendo }: { fase: Fase; idiom
 
   // Mismo formato que construye hoy el servidor: texto + "\n\n**Fuentes:**\n- documento".
   const respuesta =
-    fase.respuesta === 2 ? `${MUESTRA}\n\n**${tx.fuentes}**\n- ${MUESTRA_FUENTE}` : MUESTRA;
+    fase.respuesta === 2 ? `${tx.answer}\n\n**${tx.fuentes}**\n${tx.sources.map((f) => `- ${f}`).join("\n")}` : tx.answer;
   const mensajes: Mensaje[] = [];
   if (fase.enviado) mensajes.push({ role: "user", content: pregunta });
   if (fase.respuesta > 0) mensajes.push({ role: "assistant", content: respuesta, agente: "LEX" });
