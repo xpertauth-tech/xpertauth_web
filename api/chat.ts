@@ -84,6 +84,7 @@ Reglas:
 - Lenguaje práctico de transportista: qué necesita, qué tiene que hacer y qué le puede pasar.
 - No cites artículos, reales decretos, órdenes, instrucciones ni números de norma, aunque aparezcan en los fragmentos.
 - No escribas un apartado de fuentes ni nombres documentos en el texto: el sistema añade la lista de fuentes al final.
+- Si para responder bien faltan datos del transporte (medidas, ruta, fechas), pídelos en vez de suponerlos.
 - Respuestas breves y directas. Si el tema es complejo, explícalo por pasos.
 - Para las comunicaciones previas a las autoridades, di siempre "comunicar la salida", nunca "avisar".
 - Cuando proceda, recuerda que lo que diga el permiso concreto (SCT o DGT) prevalece sobre la regla general.
@@ -92,7 +93,11 @@ Reglas:
 
 1. Los fragmentos responden a la pregunta: responde solo con ellos.
 2. Los fragmentos responden solo a una parte: responde esa parte, di claramente qué parte no está en tu base normativa y añade [BOTON_CITA:Consultar con José Luis].
-3. Los fragmentos no responden a la pregunta: di, en el idioma de la respuesta, "Esta consulta concreta no está en mi base normativa. Prefiero no responder de memoria: consúltalo directamente con José Luis." y añade [BOTON_CITA:Consultar con José Luis]. No añadas nada más.
+3. Los fragmentos no responden a la pregunta: responde con el texto literal del idioma de la respuesta, sin traducirlo ni reescribirlo, y añade [BOTON_CITA:Consultar con José Luis]. No añadas nada más. Los textos son:
+- es: Eso no lo tengo en mi base normativa y prefiero no responderte de memoria. Si necesitas orientación, puedes contactar con José Luis.
+- ca: Això no ho tinc a la meva base normativa i prefereixo no respondre't de memòria. Si necessites orientació, pots contactar amb en José Luis.
+- en: That isn't in my regulatory base, and I'd rather not answer from memory. If you need guidance, you can contact José Luis.
+- fr: Cela ne figure pas dans ma base réglementaire et je préfère ne pas vous répondre de mémoire. Si vous avez besoin d'être orienté, vous pouvez contacter José Luis.
 
 ## FRAGMENTOS USADOS
 
@@ -350,10 +355,10 @@ function registrarConsultaLex(
 
 // Respuesta fija cuando el RAG no aporta nada (0 fragmentos o error)
 const RESPUESTA_SIN_RAG: Record<Idioma, string> = {
-  es: "No tengo información sobre esta consulta en mi base normativa, así que prefiero no responder de memoria. Plantéasela directamente a José Luis y te orienta él.\n\n[BOTON_CITA:Consultar con José Luis]",
-  ca: "No tinc informació sobre aquesta consulta a la meva base normativa, així que prefereixo no respondre de memòria. Planteja-la directament a en José Luis i t'orienta ell.\n\n[BOTON_CITA:Consultar amb José Luis]",
-  en: "I don't have information on this query in my regulatory base, so I'd rather not answer from memory. Raise it directly with José Luis and he'll guide you.\n\n[BOTON_CITA:Consult José Luis]",
-  fr: "Je n'ai pas d'information sur cette question dans ma base réglementaire, je préfère donc ne pas répondre de mémoire. Posez-la directement à José Luis, il vous orientera.\n\n[BOTON_CITA:Consulter José Luis]",
+  es: "Eso no lo tengo en mi base normativa y prefiero no responderte de memoria. Si necesitas orientación, puedes contactar con José Luis.\n\n[BOTON_CITA:Consultar con José Luis]",
+  ca: "Això no ho tinc a la meva base normativa i prefereixo no respondre't de memòria. Si necessites orientació, pots contactar amb en José Luis.\n\n[BOTON_CITA:Consultar amb José Luis]",
+  en: "That isn't in my regulatory base, and I'd rather not answer from memory. If you need guidance, you can contact José Luis.\n\n[BOTON_CITA:Consult José Luis]",
+  fr: "Cela ne figure pas dans ma base réglementaire et je préfère ne pas vous répondre de mémoire. Si vous avez besoin d'être orienté, vous pouvez contacter José Luis.\n\n[BOTON_CITA:Consulter José Luis]",
 };
 
 // Respuesta fija cuando no hay fragmentos y la pregunta no tiene que ver con el transporte (sin botón de José Luis)
