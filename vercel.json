@@ -9,6 +9,16 @@
       "source": "/:locale(es|ca|en|fr)/servicios/ia-pymes",
       "destination": "/:locale/servicios/transporte-especial",
       "permanent": true
+    },
+    {
+      "source": "/:locale(es|ca|en|fr)/socios",
+      "destination": "/:locale/sobre-nosotros",
+      "permanent": true
+    },
+    {
+      "source": "/:locale(es|ca|en|fr)/servicios/formacion-senior",
+      "destination": "/:locale",
+      "permanent": true
     }
   ],
   "rewrites": [
