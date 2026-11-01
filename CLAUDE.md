@@ -46,39 +46,21 @@
   avisarlo en el informe.
 
 ## Estado actual
-(Al cerrar cada sesión, sustituir esta sección entera por la versión al
-día; el resto de secciones no se tocan.)
+(Al cerrar cada sesión, sustituir esta sección entera por la versión al día; el resto de secciones no se tocan.)
 
 OBJETIVO: web nueva publicada en xpertauth.com el miércoles 4/11/2026.
 
-Hecho:
-- Página propia «Conoce mi historia», mejoras de la plantilla del blog y
-  revisión de las traducciones de los textos legales.
+Hecho (1/11):
+- Repaso de subpáginas cerrado.
+- LEX ajustada y probada: umbral 0,45, 10 fragmentos; clasificador FUERA_DE_TEMA / SIN_COBERTURA cuando hay 0 fragmentos; texto nuevo de «no lo sé» en 4 idiomas; tasa de la DGT con enlace oficial sin escalar; regla de posición del vehículo piloto; documento PARALELO_07 en la base (ids 1408-1410). No se hacen más ajustes a LEX antes de publicar: lo pendiente va al proyecto de fiabilidad.
+- «LEX en acción» con la respuesta real de la pregunta 2 en 4 idiomas, altura fija y botón de respuesta completa.
+- Imagen y etiquetas para compartir el enlace (og-image.png e index.html).
 
 Pendiente antes de publicar, por este orden:
-1. Prueba comparativa de LEX, antigua contra nueva, con 10 preguntas
-   (algunas con trampa, que pondrá José Luis).
-2. Repaso de detalles de las subpáginas con José Luis.
-3. Imagen y textos para compartir el enlace (igual que en Altitud):
-   - En index.html: descripción de unos 150 caracteres, etiquetas Open
-     Graph y Twitter (título, descripción, url https://www.xpertauth.com,
-     imagen, site_name, locale es_ES) y enlace canónico.
-   - Imagen de 1200x630 (PNG, menos de 300 KB) con la identidad visual de
-     la web: logo XpertAuth y una frase corta legible en el móvil.
-     Enseñársela a José Luis antes del commit.
-   - EXCEPCIÓN a la regla de imágenes: esta imagen sí se puede crear, y es
-     la única. Va en client/public, no en Supabase Storage.
-   - Al publicar, comprobar la vista previa en LinkedIn (Post Inspector)
-     y en WhatsApp.
-4. Seguridad: renovar la clave service_role de Helsinki, rotar el secreto
-   de Google OAuth y borrar los datos de prueba. ATENCIÓN: la service_role
-   de Helsinki la comparten otras apps (Altitud, LinkedIn de Carla y
-   otras). Antes de renovarla, hacer la lista de todos los sitios donde se
-   usa (Vercel, n8n, .env locales) y enseñarla. No se cambia nada sin el
-   visto bueno de José Luis.
-5. Guardar la web antigua para poder consultarla (etiqueta o rama en
-   GitHub a partir del main actual).
-6. Pasar rebuild/web-nueva a main, publicar en Vercel y comprobar la web
-   en producción.
+1. Seguridad: renovar la clave service_role de Helsinki, rotar el secreto de Google OAuth. ATENCIÓN: la service_role de Helsinki la comparten otras apps (Altitud, LinkedIn de Carla y otras). Antes de renovarla, hacer la lista de todos los sitios donde se usa (Vercel, n8n, .env locales) y enseñarla. No se cambia nada sin el visto bueno de José Luis.
+2. Borrar los datos de prueba: web.contacto (ids 1-3), cuentas de prueba y las consultas de prueba de LEX del 1/11 en web.consultas_agente. Enseñar la lista antes de borrar.
+3. Guardar la web antigua: etiqueta web-antigua-2026-10 en a68a083 (main actual).
+4. Pasar rebuild/web-nueva a main, publicar en Vercel y comprobar la web en producción.
+5. Comprobar la vista previa del enlace en LinkedIn (Post Inspector) y en WhatsApp.
 
-Después: web social (social.xpertauth.com) para ALMA.
+Después: web social (social.xpertauth.com) para ALMA, y proyecto de fiabilidad de LEX y NOVA.
