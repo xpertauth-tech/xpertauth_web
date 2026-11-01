@@ -209,8 +209,8 @@ const NOMBRE_IDIOMA: Record<Idioma, string> = {
 
 // ─── RAG: recuperar fragmentos de Supabase ───────────────────────────────────
 
-const RAG_THRESHOLD = 0.55;
-const RAG_COUNT = 10;
+const RAG_THRESHOLD = 0.45;
+const RAG_COUNT = 15;
 
 async function recuperarFragmentos(
   pregunta: string
