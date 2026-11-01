@@ -90,10 +90,6 @@ const texts: Record<Idioma, {
   },
 };
 
-// Altura fija (px) de la zona de mensajes de la ventana de muestra, igual en los 4 idiomas: la respuesta se corta
-// por abajo con un degradado y el botón «Ver respuesta completa» la despliega.
-const ALTO_MUESTRA = 330;
-
 type Fase = { escrito: string; enviado: boolean; pensando: boolean; respuesta: 0 | 1 | 2 };
 const INICIAL: Fase = { escrito: "", enviado: false, pensando: false, respuesta: 0 };
 const FINAL: Fase = { escrito: "", enviado: true, pensando: false, respuesta: 2 };
@@ -129,10 +125,9 @@ function ChatWindow({ fase, idioma, pregunta, escribiendo, expandido }: { fase: 
       </div>
 
       <div className="relative flex-1">
-        <div
-          className="px-4 py-5 space-y-4 lex-demo"
-          style={expandido ? undefined : { height: ALTO_MUESTRA, overflow: "hidden" }}
-        >
+        {/* Plegada: altura fija igual en los 4 idiomas (330 px; 440 px en móvil, ver .lex-demo-plegado en index.css);
+            la respuesta se corta por abajo con un degradado y el botón «Ver respuesta completa» la despliega. */}
+        <div className={`px-4 py-5 space-y-4 lex-demo${expandido ? "" : " lex-demo-plegado"}`}>
           {mensajes.map((m, i) => (
             <div key={m.role} className={i === mensajes.length - 1 && escribiendo ? "lex-pop" : ""}>
               <Burbuja mensaje={m} config={config} labelCita={t.botonCita} onCita={() => {}} />

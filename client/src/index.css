@@ -503,3 +503,5 @@
 .lex-pop { animation: lexPop .45s ease-out both; }
 @keyframes lexPop { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: none; } }
 @media (prefers-reduced-motion: reduce) { .lex-pop, .lex-caret { animation: none; } }
+.lex-demo-plegado { height: 330px; overflow: hidden; }
+@media (max-width: 767px) { .lex-demo-plegado { height: 440px; } }
