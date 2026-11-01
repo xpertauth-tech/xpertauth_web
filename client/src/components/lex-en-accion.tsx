@@ -21,6 +21,8 @@ const texts: Record<Idioma, {
   fuentes: string;
   caption: string;
   captionBtn: string;
+  verMas: string;
+  verMenos: string;
 }> = {
   es: {
     title: "LEX en acción",
@@ -35,6 +37,8 @@ const texts: Record<Idioma, {
     fuentes: "Fuentes:",
     caption: "Ejemplo de respuesta real de LEX. LEX es IA y puede equivocarse. Si no lo ves claro:",
     captionBtn: "Cuéntanos tu caso",
+    verMas: "Ver respuesta completa",
+    verMenos: "Ver menos",
   },
   ca: {
     title: "LEX en acció",
@@ -49,6 +53,8 @@ const texts: Record<Idioma, {
     fuentes: "Fonts:",
     caption: "Exemple de resposta real de LEX. LEX és IA i es pot equivocar. Si no ho veus clar:",
     captionBtn: "Explica'ns el teu cas",
+    verMas: "Veure la resposta completa",
+    verMenos: "Veure'n menys",
   },
   en: {
     title: "LEX in action",
@@ -63,6 +69,8 @@ const texts: Record<Idioma, {
     fuentes: "Sources:",
     caption: "Example of a real LEX answer. LEX is AI and can make mistakes. If it isn't clear to you:",
     captionBtn: "Tell us about your case",
+    verMas: "See full answer",
+    verMenos: "See less",
   },
   fr: {
     title: "LEX en action",
@@ -77,14 +85,20 @@ const texts: Record<Idioma, {
     fuentes: "Sources :",
     caption: "Exemple de réponse réelle de LEX. LEX est une IA et peut se tromper. Si ce n'est pas clair pour vous :",
     captionBtn: "Racontez-nous votre cas",
+    verMas: "Voir la réponse complète",
+    verMenos: "Voir moins",
   },
 };
+
+// Altura fija (px) de la zona de mensajes de la ventana de muestra, igual en los 4 idiomas: la respuesta se corta
+// por abajo con un degradado y el botón «Ver respuesta completa» la despliega.
+const ALTO_MUESTRA = 330;
 
 type Fase = { escrito: string; enviado: boolean; pensando: boolean; respuesta: 0 | 1 | 2 };
 const INICIAL: Fase = { escrito: "", enviado: false, pensando: false, respuesta: 0 };
 const FINAL: Fase = { escrito: "", enviado: true, pensando: false, respuesta: 2 };
 
-function ChatWindow({ fase, idioma, pregunta, escribiendo }: { fase: Fase; idioma: Idioma; pregunta: string; escribiendo: boolean }) {
+function ChatWindow({ fase, idioma, pregunta, escribiendo, expandido }: { fase: Fase; idioma: Idioma; pregunta: string; escribiendo: boolean; expandido: boolean }) {
   const config = AGENTE_CONFIG.LEX;
   const t = TEXTOS[idioma];
   const tx = texts[idioma];
@@ -114,22 +128,33 @@ function ChatWindow({ fase, idioma, pregunta, escribiendo }: { fase: Fase; idiom
         </div>
       </div>
 
-      <div className="px-4 py-5 space-y-4 lex-demo flex-1">
-        {mensajes.map((m, i) => (
-          <div key={m.role} className={i === mensajes.length - 1 && escribiendo ? "lex-pop" : ""}>
-            <Burbuja mensaje={m} config={config} labelCita={t.botonCita} onCita={() => {}} />
-          </div>
-        ))}
-        {fase.pensando && (
-          <div className="flex gap-3 justify-start lex-pop">
-            <div className="w-8 h-8 rounded-lg overflow-hidden flex-shrink-0" style={{ backgroundColor: config.colorBg, border: `1px solid ${config.colorBorder}` }}>
-              <img src={config.avatar} alt="" className="w-full h-full object-cover" />
+      <div className="relative flex-1">
+        <div
+          className="px-4 py-5 space-y-4 lex-demo"
+          style={expandido ? undefined : { height: ALTO_MUESTRA, overflow: "hidden" }}
+        >
+          {mensajes.map((m, i) => (
+            <div key={m.role} className={i === mensajes.length - 1 && escribiendo ? "lex-pop" : ""}>
+              <Burbuja mensaje={m} config={config} labelCita={t.botonCita} onCita={() => {}} />
             </div>
-            <div className="px-4 py-3 rounded-2xl flex items-center gap-2" style={{ backgroundColor: "rgba(255,255,255,0.06)", borderTopLeftRadius: 4 }}>
-              <Loader2 size={14} className="animate-spin text-white/70" />
-              <span className="text-white/70 text-sm">{t.pensando}</span>
+          ))}
+          {fase.pensando && (
+            <div className="flex gap-3 justify-start lex-pop">
+              <div className="w-8 h-8 rounded-lg overflow-hidden flex-shrink-0" style={{ backgroundColor: config.colorBg, border: `1px solid ${config.colorBorder}` }}>
+                <img src={config.avatar} alt="" className="w-full h-full object-cover" />
+              </div>
+              <div className="px-4 py-3 rounded-2xl flex items-center gap-2" style={{ backgroundColor: "rgba(255,255,255,0.06)", borderTopLeftRadius: 4 }}>
+                <Loader2 size={14} className="animate-spin text-white/70" />
+                <span className="text-white/70 text-sm">{t.pensando}</span>
+              </div>
             </div>
-          </div>
+          )}
+        </div>
+        {!expandido && (
+          <div
+            className="pointer-events-none absolute inset-x-0 bottom-0 h-20"
+            style={{ background: "linear-gradient(to bottom, rgba(10,14,26,0), #0A0E1A)" }}
+          />
         )}
       </div>
 
@@ -167,6 +192,7 @@ export default function LexEnAccion() {
   const [fase, setFase] = useState<Fase>(reducir ? FINAL : INICIAL);
   const [escribiendo, setEscribiendo] = useState(false);
   const [contactOpen, setContactOpen] = useState(false);
+  const [expandido, setExpandido] = useState(false);
   const zonaRef = useRef<HTMLDivElement>(null);
   const hecho = useRef(false);
 
@@ -230,14 +256,24 @@ export default function LexEnAccion() {
                 así la ventana no tiene hueco vacío mientras se escribe y la página no salta. */}
             <div ref={zonaRef} className="relative">
               <div className="invisible" aria-hidden="true">
-                <ChatWindow fase={FINAL} idioma={idioma} pregunta={tx.question} escribiendo={false} />
+                <ChatWindow fase={FINAL} idioma={idioma} pregunta={tx.question} escribiendo={false} expandido={expandido} />
               </div>
               <div className="absolute inset-0" aria-hidden="true">
-                <ChatWindow fase={fase} idioma={idioma} pregunta={tx.question} escribiendo={escribiendo} />
+                <ChatWindow fase={fase} idioma={idioma} pregunta={tx.question} escribiendo={escribiendo} expandido={expandido} />
               </div>
               <p className="sr-only">{tx.question}</p>
             </div>
-            <p className="mt-3 t-small text-white/60">{tx.caption}</p>
+            <button
+              type="button"
+              onClick={() => setExpandido((v) => !v)}
+              aria-expanded={expandido}
+              className="btn btn-secondary btn-small mt-3"
+              style={{ borderColor: "rgba(255,255,255,0.28)", color: "rgba(255,255,255,0.8)" }}
+              data-testid="button-lex-respuesta-completa"
+            >
+              {expandido ? tx.verMenos : tx.verMas}
+            </button>
+            <p className="mt-4 t-small text-white/60">{tx.caption}</p>
             <button
               type="button"
               onClick={() => setContactOpen(true)}
