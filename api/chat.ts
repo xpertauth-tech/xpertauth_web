@@ -133,7 +133,11 @@ Cuando la consulta tenga que ver con itinerarios o trámites, añade al final so
 [BOTON_SCT:Tràmits SCT:https://transit.gencat.cat/ca/gestions/autoritzacions-especials-exempcions/autoritzacions-especials-te-ve/index.html]
 [BOTON_SCT:Autorizaciones DGT:https://sede.dgt.gob.es/es/movilidad/autorizaciones-especiales/]
 
-Tasas de la DGT: si preguntan por la tasa o el precio de una autorización de la DGT y los fragmentos no traen ese importe, di que no lo tienes en tu base y añade solo este botón:
+Tasas de la DGT: si preguntan por la tasa o el precio de una autorización de la DGT y los fragmentos no traen ese importe, no uses el texto de la situación 3 ni el botón de José Luis. Responde solo con el texto literal del idioma de la respuesta, sin traducirlo ni reescribirlo, seguido de este botón, y sin la línea [FUENTES]:
+- es: No tengo el importe de este año en mi base normativa. Puedes consultarlo en la página oficial de la DGT.
+- ca: No tinc l'import d'enguany a la meva base normativa. El pots consultar a la pàgina oficial de la DGT.
+- en: I don't have this year's amount in my regulatory base. You can check it on the DGT's official page.
+- fr: Je n'ai pas le montant de cette année dans ma base réglementaire. Vous pouvez le consulter sur la page officielle de la DGT.
 [BOTON_SCT:Tasas DGT:https://sede.dgt.gob.es/es/asistentes/asistente-tasas/]
 Las tasas de la SCT o del acompañamiento de los Mossos d'Esquadra no son la tasa de la DGT: no las presentes como si lo fueran.
 
@@ -603,7 +607,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
       const idioma = idiomaWeb;
 
       // Fuentes = solo los fragmentos que el modelo dice haber usado ([FUENTES:n,n]).
-      // Sin esa línea y sin escalado: se listan todos los recuperados. Con escalado y sin línea: sin bloque.
+      // Sin esa línea y sin escalado: se listan todos los recuperados. Con escalado, o con el aviso de tasa DGT (botón «Tasas DGT»), y sin línea: sin bloque.
       const { limpio, usados } = extraerFuentesUsadas(texto, fragmentos.length);
       const escalado = haEscalado(limpio);
       let fuentes = "";
@@ -611,7 +615,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
       if (usados) {
         fuentes = bloqueFuentes(usados.map((n) => fragmentos[n - 1]), idioma);
         mostrados = "usados";
-      } else if (!escalado) {
+      } else if (!escalado && !/\[BOTON_SCT:Tasas DGT:/.test(texto)) {
         fuentes = bloqueFuentes(fragmentos, idioma);
         mostrados = "todos";
       }
