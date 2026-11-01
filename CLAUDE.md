@@ -48,19 +48,20 @@
 ## Estado actual
 (Al cerrar cada sesión, sustituir esta sección entera por la versión al día; el resto de secciones no se tocan.)
 
-OBJETIVO: web nueva publicada en xpertauth.com el miércoles 4/11/2026.
+Web nueva publicada en producción (xpertauth.com) el 1/11/2026: main = rebuild/web-nueva. Despliegue de vuelta atrás: dpl_SczWD5fLb42TE98W5JGqKkmQiNz7 (web antigua). La web antigua también está en la etiqueta web-antigua-2026-10 (a68a083).
 
 Hecho (1/11):
-- Repaso de subpáginas cerrado.
-- LEX ajustada y probada: umbral 0,45, 10 fragmentos; clasificador FUERA_DE_TEMA / SIN_COBERTURA cuando hay 0 fragmentos; texto nuevo de «no lo sé» en 4 idiomas; tasa de la DGT con enlace oficial sin escalar; regla de posición del vehículo piloto; documento PARALELO_07 en la base (ids 1408-1410). No se hacen más ajustes a LEX antes de publicar: lo pendiente va al proyecto de fiabilidad.
-- «LEX en acción» con la respuesta real de la pregunta 2 en 4 idiomas, altura fija y botón de respuesta completa.
-- Imagen y etiquetas para compartir el enlace (og-image.png e index.html).
+- Web nueva publicada. Redirecciones de rutas antiguas en vercel.json (ia-pymes, socios, formacion-senior).
+- LEX ajustada y probada: umbral 0,45, 10 fragmentos; clasificador FUERA_DE_TEMA / SIN_COBERTURA; no se hacen más ajustes a LEX: lo pendiente va al proyecto de fiabilidad.
+- Datos de prueba borrados (46 filas de web.contacto y web.consultas_agente); copia en ~/Desktop/limpieza_datos_prueba_2026-11-01.csv.
+- Secreto de Google rotado el 1/11 (ahora …51mc; borrados …J_p4 y …733K en Google).
+- Secret scanning y push protection activados en los repos públicos de GitHub.
 
-Pendiente antes de publicar, por este orden:
-1. Seguridad: renovar la clave service_role de Helsinki, rotar el secreto de Google OAuth. ATENCIÓN: la service_role de Helsinki la comparten otras apps (Altitud, LinkedIn de Carla y otras). Antes de renovarla, hacer la lista de todos los sitios donde se usa (Vercel, n8n, .env locales) y enseñarla. No se cambia nada sin el visto bueno de José Luis.
-2. Borrar los datos de prueba: web.contacto (ids 1-3), cuentas de prueba y las consultas de prueba de LEX del 1/11 en web.consultas_agente. Enseñar la lista antes de borrar.
-3. Guardar la web antigua: etiqueta web-antigua-2026-10 en a68a083 (main actual).
-4. Pasar rebuild/web-nueva a main, publicar en Vercel y comprobar la web en producción.
-5. Comprobar la vista previa del enlace en LinkedIn (Post Inspector) y en WhatsApp.
+Pendiente:
+- Martes 3/11 desde las 9:00: rotar la service_role de Helsinki (y con ella la anon), según el inventario del 1/11. ATENCIÓN: la comparten otras apps (Altitud, LinkedIn de Carla y otras); no se cambia nada sin el visto bueno de José Luis. Decidir entonces qué hacer con las 4 copias del .env del servidor que tienen el secreto viejo de Google y con .env.bak-google-20261101.
+- Comprobar el enlace en LinkedIn (Post Inspector) y en WhatsApp.
+- Borrar ~/Desktop/limpieza_datos_prueba_2026-11-01.csv cuando José Luis lo diga.
+
+Modo de trabajo desde ahora: main es producción. Cada cambio se prueba en rebuild/web-nueva y luego se pasa a main en avance rápido (git merge --ff-only).
 
 Después: web social (social.xpertauth.com) para ALMA, y proyecto de fiabilidad de LEX y NOVA.
