@@ -1,14 +1,18 @@
 import { motion } from "framer-motion";
 import { useTranslations } from "@/i18n/context";
+import { imagenReducida, srcSetReducido } from "@/lib/imagenes";
 
 const SUPABASE_BASE = "https://supabase.xpertauth.com/storage/v1/object/public/web-images";
 
 // Foto de fondo por caso (B/N → color al hover). null = sin foto disponible
 // en Storage; la tarjeta usa un fondo degradado de marca.
-const caseBgs: (string | null)[] = [
-  `${SUPABASE_BASE}/testimonials/carlos_bg_v1.webp`, // carretera
-  `${SUPABASE_BASE}/testimonials/maria_bg_v1.webp`,  // oficina
-  `${SUPABASE_BASE}/testimonials/casos_convoy-amanecer_v1.webp`, // convoy al amanecer (logo del vehículo difuminado)
+// anchos: versiones reducidas que pide cada pantalla (la tarjeta mide 340 px de alto y la foto se recorta
+// con cover, así que el ancho útil es ~640 px la apaisada y ~360 px la cuadrada); sizes lo fija a ese ancho.
+type CaseBg = { url: string; anchos: number[]; original?: number; sizes: string };
+const caseBgs: (CaseBg | null)[] = [
+  { url: `${SUPABASE_BASE}/testimonials/carlos_bg_v1.webp`, anchos: [720, 1280, 1920], sizes: "640px" }, // carretera
+  { url: `${SUPABASE_BASE}/testimonials/maria_bg_v1.webp`, anchos: [720, 1280, 1920], sizes: "640px" },  // oficina
+  { url: `${SUPABASE_BASE}/testimonials/casos_convoy-amanecer_v1.webp`, anchos: [400, 720], original: 1024, sizes: "360px" }, // convoy al amanecer (logo del vehículo difuminado)
 ];
 
 // Franja de colaboraciones: desactivada hasta que haya colaboradores reales.
@@ -73,7 +77,9 @@ export default function SocialProof() {
               >
                 {bg ? (
                   <img
-                    src={bg}
+                    src={imagenReducida(bg.url, bg.anchos[1] ?? bg.anchos[0])}
+                    srcSet={srcSetReducido(bg.url, bg.anchos, bg.original)}
+                    sizes={bg.sizes}
                     alt=""
                     width={1408}
                     height={768}
