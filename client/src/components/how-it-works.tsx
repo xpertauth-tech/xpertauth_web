@@ -1,6 +1,7 @@
 import { useRef, useEffect, useState, useCallback } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useTranslations } from "@/i18n/context";
+import { imagenReducida, srcSetReducido } from "@/lib/imagenes";
 
 const SUPABASE_BASE = "https://supabase.xpertauth.com/storage/v1/object/public/web-images";
 
@@ -129,7 +130,9 @@ export default function HowItWorks() {
                     data-testid={`step-image-${i}`}
                   >
                     <img
-                      src={src}
+                      src={imagenReducida(src, 720)}
+                      srcSet={srcSetReducido(src, [720, 1080], 1408)}
+                      sizes="(max-width: 767px) calc(100vw - 50px), (min-width: 1536px) 745px, 50vw"
                       alt=""
                       width={1408}
                       height={768}
