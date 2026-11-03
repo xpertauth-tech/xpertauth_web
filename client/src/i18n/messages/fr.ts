@@ -154,7 +154,7 @@ const fr = {
   cookies: {
     description: "Ce site n'utilise pas de cookies. Il enregistre seulement votre langue et, si vous vous connectez avec Google, votre session. Nous mesurons les visites de façon anonyme, sans vous suivre.",
     button: "Compris",
-    learnMore: "En savoir plus",
+    learnMore: "Plus d'informations sur les cookies",
   },
 };
 
