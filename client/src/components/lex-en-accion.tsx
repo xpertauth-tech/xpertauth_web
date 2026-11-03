@@ -162,7 +162,7 @@ function ChatWindow({ fase, idioma, pregunta, escribiendo, expandido }: { fase: 
                 <span className="lex-caret" />
               </span>
             ) : (
-              <span className="text-white/30">{t.placeholderLex}</span>
+              <span className="text-white/60">{t.placeholderLex}</span>
             )}
           </div>
           <div

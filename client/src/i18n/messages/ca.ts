@@ -154,7 +154,7 @@ const ca = {
   cookies: {
     description: "Aquest web no fa servir galetes. Només guarda el teu idioma i, si entres amb Google, la teva sessió. Mesurem les visites de manera anònima, sense rastrejar-te.",
     button: "Entesos",
-    learnMore: "Més informació",
+    learnMore: "Més informació sobre galetes",
   },
 };
 
