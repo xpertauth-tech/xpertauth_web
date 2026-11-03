@@ -4,6 +4,7 @@ import Navbar from "@/components/navbar";
 import Footer from "@/components/footer";
 import ContactModal from "@/components/ContactModal";
 import FichaProyecto from "@/components/FichaProyecto";
+import { useSeo } from "@/lib/seo";
 
 // ─── TRADUCCIONES ─────────────────────────────────────────────────────────────
 
@@ -344,6 +345,7 @@ function useStackScaleGap(ref: React.RefObject<HTMLDivElement>) {
 // ─── COMPONENTE PRINCIPAL ─────────────────────────────────────────────────────
 
 export default function SobreNosotros() {
+  useSeo("sobre");
   const { locale } = useI18n();
   const lang = locale as keyof typeof translations;
   const t = translations[lang] ?? translations.es;

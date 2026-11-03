@@ -3,6 +3,7 @@ import { useParams } from "wouter";
 import Navbar from "@/components/navbar";
 import Footer from "@/components/footer";
 import LegalText, { Inline } from "@/components/legal-text";
+import { useSeo } from "@/lib/seo";
 
 type Item = { id: string; title: string; content: string };
 type Doc = { title: string; updated: string; intro: string; items: Item[] };
@@ -199,6 +200,7 @@ const data: Record<string, Doc> = {
 };
 
 export default function AvisoLegal() {
+  useSeo("aviso");
   const params = useParams<{ locale: string }>();
   const locale = params.locale && data[params.locale] ? params.locale : "es";
   const s = data[locale];

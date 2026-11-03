@@ -5,6 +5,8 @@ import Footer from "@/components/footer";
 import { SHOW_SUBSCRIPTION } from "@/lib/features";
 import ContactModal from "@/components/ContactModal";
 import { portadaImg } from "@/lib/imagenes";
+import { useSeoPropio } from "@/lib/seo";
+import type { Locale } from "@/i18n/context";
 
 interface Post {
   id: string;
@@ -15,6 +17,8 @@ interface Post {
   image_url: string | null;
   author: string;
   published_at: string;
+  meta_title: string | null;
+  meta_description: string | null;
 }
 
 const texts: Record<string, {
@@ -181,6 +185,22 @@ export default function BlogPost() {
   const [subLoading, setSubLoading] = useState(false);
   const [contactOpen, setContactOpen] = useState(false);
 
+  // Cada artículo usa su meta_title y meta_description (si faltan, su título y su resumen). El texto
+  // del artículo existe solo en español, así que todas las versiones de idioma apuntan al canonical /es.
+  useSeoPropio(
+    post
+      ? {
+          title: post.meta_title || post.title,
+          description: post.meta_description || post.excerpt,
+          locale: locale as Locale,
+          ruta: "/blog/" + post.slug,
+          alternativas: false,
+          canonicoEn: "es",
+          tipo: "article",
+        }
+      : null
+  );
+
   useEffect(() => {
     const fetchPost = async () => {
       setLoading(true);
@@ -190,7 +210,7 @@ export default function BlogPost() {
       const url =
         SUPABASE_URL +
         "/rest/v1/posts" +
-        "?select=id,title,slug,excerpt,content,image_url,author,published_at" +
+        "?select=id,title,slug,excerpt,content,image_url,author,published_at,meta_title,meta_description" +
         "&slug=eq." + encodeURIComponent(slug) +
         "&is_published=eq.true" +
         "&limit=1";

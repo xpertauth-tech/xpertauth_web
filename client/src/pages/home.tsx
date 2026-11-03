@@ -8,8 +8,10 @@ import SocialProof from "@/components/social-proof";
 import BlogSection from "@/components/blog";
 import CtaFinal from "@/components/cta-final";
 import Footer from "@/components/footer";
+import { useSeo } from "@/lib/seo";
 
 export default function Home() {
+  useSeo("home");
   useEffect(() => {
     const hash = window.location.hash;
     if (!hash) return;

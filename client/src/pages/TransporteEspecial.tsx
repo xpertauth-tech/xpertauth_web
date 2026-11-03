@@ -6,6 +6,7 @@ import { useAgent } from "@/App";
 import { useI18n } from "@/i18n/context";
 import ExternalMark, { useExternalLinkProps } from "@/components/external-mark";
 import { ArrowRight, ExternalLink, FileCheck, Map, MessageSquare, ShieldCheck, BookOpen, Calendar } from "lucide-react";
+import { useSeo } from "@/lib/seo";
 
 // ─── Paleta ───────────────────────────────────────────────────────────────────
 // ─── Textos por idioma ────────────────────────────────────────────────────────
@@ -372,6 +373,7 @@ function ServiceCard({
 
 // ─── Página principal ──────────────────────────────────────────────────────────
 export default function TransporteEspecial() {
+  useSeo("servicios");
   const externalProps = useExternalLinkProps();
   const [contactOpen, setContactOpen] = useState(false);
   const { abrirAgente } = useAgent();
