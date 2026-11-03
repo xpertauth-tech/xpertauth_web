@@ -60,6 +60,7 @@ Hecho (1/11):
 Hecho (3/11): rotación de JWT_SECRET, anon y service_role de Helsinki, corte a las 10:25 (hora peninsular). Claves nuevas: anon …AA8g, service_role …nqAM (las viejas, …MQBg y …vAi8, dan 401). Las nuevas están en ~/rotacion_supabase_20261103.env y en /root/rotacion-20261103/ del servidor. Copia previa: /opt/supabase/docker/.env.antes-rotacion-20261103 y dumps pre-rotacion-20261103 en /root/backups; script de vuelta atrás en /root/rotacion-20261103/rollback.sh.
 - Actualizado: .env del servidor, ajuste app.settings.jwt_secret de la base y contenedores recreados; n8n (credencial «Supabase Service Role», Vigía Ingestar y Paralelos LEX; n8n reiniciado); Vercel altitud, deca-app-xpertauth y SUPABASE_SERVICE_KEY de xpertauth-web; ecografías (commit 27ca589 en xpertauth-tech/ultrasound_results; la veterinaria usa ultrasound-results-six.vercel.app); .env.local, scripts de MASTER skills, .mcp.json, register_post.sh y ~/.zshrc.
 - Anon de xpertauth-web resuelta (3/11, redespliegue de producción a las 11:05): José Luis la borró y la creó de nuevo con la anon nueva; www.xpertauth.com sirve …AA8g y el blog funciona. En este proyecto VITE_SUPABASE_ANON_KEY es de tipo Config (Production y Preview): Vercel no deja guardar como secreta una variable VITE_.
+- Limpieza tras la rotación hecha (3/11): borradas en el servidor las 6 copias .env.* antiguas, .env.antes-rotacion-20261103, /root/copias-seguridad-20261029/env.bak, /root/rotacion-20261103/ (incluido el rollback y la copia de n8n) y vaciado /root/.bash_history; en el Mac, ~/rotacion_supabase_20261103.env y los dos migrar_storage de Descargas. Ya no hay vuelta atrás con un comando a las claves viejas. Supabase sano (12 contenedores, REST 200 con las claves nuevas).
 
 Pendiente (rotación):
 - URL antigua de ecografías (ultrasound-results.vercel.app, cuenta antigua de Vercel): el proyecto quedó desconectado del repo tras moverlo a xpertauth-tech y sigue con la anon vieja; reconectarlo o dejarlo.
@@ -67,8 +68,8 @@ Pendiente (rotación):
 - Pasar a credenciales de n8n la service_role del Vigía Ingestar (hoy escrita en sus 2 nodos Code) y las claves de OpenAI y Anthropic escritas en el nodo «Ingestar 2».
 - Flujo «Conocimiento a RAG (RGPD)»: no se activa por «Cannot find module 'pdf-parse'» (anterior a la rotación).
 - Credenciales de n8n «Supabase RGPD» y «Supabase account»: apuntan a otros proyectos de supabase.com, uno de ellos el abandonado; decidir qué hacer.
-- Decidir qué borrar: los .env.* viejos, .bash_history, env.bak y dumps antiguos con el secreto viejo del servidor; /root/rotacion-20261103/n8n-work/n8n_database_antes.sqlite; ~/rotacion_supabase_20261103.env y su copia del servidor; ~/Downloads/migrar_storage*.py (llevan la clave vieja); historiales y transcripciones (zsh, ~/.claude, Antigravity, Claude) con claves viejas.
-- Decidir si se borran ~/Downloads/migrar_storage.py y ~/Downloads/migrar_storage_resto.py (llevan la clave vieja).
+- 10/11: borrar el dump de la rotación del 3/11 si todo sigue bien (/root/backups/pre-rotacion-20261103_085236.dump y los de _supabase y _globals, en el servidor).
+- Historiales y transcripciones con claves viejas (zsh, ~/.claude, Antigravity, Claude): decidido no tocarlos.
 
 Pendiente (resto):
 - Miércoles 4/11: revisar el L1 (commit 5507cb0, solo en rebuild/web-nueva, no está en main): probar la regla «comparar antes de concluir» en el preview con la consulta de 22 m · 2,70 m · 4,05 m · 45 t por Catalunya y C. Valenciana, decidir si basta ampliar el PARALELO_07 en vez de crear uno nuevo (borrador en ~/Desktop/PARALELO_DGT_borrador.md) y etiquetar el resumen VERTE (fragmento id 1) para que no se confunda con la genérica.
