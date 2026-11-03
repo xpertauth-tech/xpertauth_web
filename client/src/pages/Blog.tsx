@@ -4,6 +4,7 @@ import Navbar from "@/components/navbar";
 import Footer from "@/components/footer";
 import { SHOW_SUBSCRIPTION } from "@/lib/features";
 import ContactModal from "@/components/ContactModal";
+import { portadaImg } from "@/lib/imagenes";
 
 const PAGE_SIZE = 10;
 
@@ -234,7 +235,7 @@ export default function Blog() {
       <Navbar />
 
       {/* HERO */}
-      <section className="cabecera-pantalla px-6 text-center bg-[#0A0E1A]">
+      <section className="cabecera-corta px-6 text-center bg-[#0A0E1A]">
         <div className="max-w-3xl mx-auto fade-up">
           <span className="t-label">
             {t.tag}
@@ -268,7 +269,7 @@ export default function Blog() {
                     {post.image_url && (
                       <div className="md:w-52 md:flex-shrink-0">
                         <img
-                          src={post.image_url}
+                          {...portadaImg(post.image_url, "(min-width: 768px) 570px, calc((100vw - 50px) * 1.5)")}
                           alt={post.title}
                           width={208}
                           height={176}

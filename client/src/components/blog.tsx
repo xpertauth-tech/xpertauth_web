@@ -2,6 +2,7 @@ import { useState, useEffect, useRef } from "react";
 import { motion } from "framer-motion";
 import { FileText, ArrowRight, Calendar } from "lucide-react";
 import { useTranslations } from "@/i18n/context";
+import { portadaImg } from "@/lib/imagenes";
 
 const SUPABASE_URL = import.meta.env.VITE_SUPABASE_URL;
 
@@ -68,7 +69,7 @@ function CardInner({ post }: { post: Post }) {
       <div className="aspect-[16/10] w-full overflow-hidden bg-white/[0.04]">
         {post.image_url ? (
           <img
-            src={post.image_url}
+            {...portadaImg(post.image_url, "(min-width: 1024px) 495px, (min-width: 768px) 370px, calc((100vw - 34px) * 1.65)")}
             alt=""
             width={800}
             height={500}
