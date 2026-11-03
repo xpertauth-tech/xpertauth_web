@@ -116,7 +116,7 @@ function ChatWindow({ fase, idioma, pregunta, escribiendo, expandido }: { fase: 
         style={{ borderBottom: "1px solid rgba(255,255,255,0.07)", background: `linear-gradient(135deg, ${config.colorBg} 0%, transparent 100%)` }}
       >
         <div className="w-9 h-9 rounded-xl overflow-hidden flex-shrink-0" style={{ backgroundColor: config.colorBg, border: `1px solid ${config.colorBorder}` }}>
-          <img src={config.avatar} alt="" width={64} height={64} className="w-full h-full object-cover" />
+          <img src={config.avatar} alt="" width={64} height={64} loading="lazy" decoding="async" className="w-full h-full object-cover" />
         </div>
         <div className="flex-1 min-w-0">
           <p className="text-white font-bold text-sm leading-tight">LEX</p>
@@ -136,7 +136,7 @@ function ChatWindow({ fase, idioma, pregunta, escribiendo, expandido }: { fase: 
           {fase.pensando && (
             <div className="flex gap-3 justify-start lex-pop">
               <div className="w-8 h-8 rounded-lg overflow-hidden flex-shrink-0" style={{ backgroundColor: config.colorBg, border: `1px solid ${config.colorBorder}` }}>
-                <img src={config.avatar} alt="" width={64} height={64} className="w-full h-full object-cover" />
+                <img src={config.avatar} alt="" width={64} height={64} loading="lazy" decoding="async" className="w-full h-full object-cover" />
               </div>
               <div className="px-4 py-3 rounded-2xl flex items-center gap-2" style={{ backgroundColor: "rgba(255,255,255,0.06)", borderTopLeftRadius: 4 }}>
                 <Loader2 size={14} className="animate-spin text-white/70" />
@@ -297,7 +297,7 @@ export default function LexEnAccion() {
               className="w-10 h-10 rounded-xl overflow-hidden flex-shrink-0"
               style={{ backgroundColor: AGENTE_CONFIG.NOVA.colorBg, border: `1px solid ${AGENTE_CONFIG.NOVA.colorBorder}` }}
             >
-              <img src={AGENTE_CONFIG.NOVA.avatar} alt="" width={64} height={64} className="w-full h-full object-cover" />
+              <img src={AGENTE_CONFIG.NOVA.avatar} alt="" width={64} height={64} loading="lazy" decoding="async" className="w-full h-full object-cover" />
             </div>
             <div>
               <h3 className="t-h3 text-pure">NOVA</h3>

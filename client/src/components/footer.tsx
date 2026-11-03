@@ -3,6 +3,7 @@ import { Mail, Phone, MapPin, Clock } from "lucide-react";
 import { SiLinkedin, SiInstagram, SiWhatsapp } from "react-icons/si";
 import { useTranslations } from "@/i18n/context";
 import { useLocation } from "wouter";
+import { imagenReducida } from "@/lib/imagenes";
 
 export default function Footer() {
   const externalProps = useExternalLinkProps();
@@ -48,10 +49,12 @@ export default function Footer() {
           <div>
             <div className="flex items-center gap-2.5 mb-4">
               <img
-                src="https://supabase.xpertauth.com/storage/v1/object/public/web-images/logo/logo_xpertauth_icon_v1.png"
+                src={imagenReducida("https://supabase.xpertauth.com/storage/v1/object/public/web-images/logo/logo_xpertauth_icon_v1.png", 96)}
                 alt="XpertAuth"
                 width={32}
                 height={32}
+                loading="lazy"
+                decoding="async"
                 className="rounded-md"
               />
               <span className="t-h3 text-pure">

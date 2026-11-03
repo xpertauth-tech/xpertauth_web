@@ -308,7 +308,7 @@ export default function BlogPost() {
           {post.image_url && (
             <div className="px-6 pb-12 bg-[#0A0E1A]">
               <div className="max-w-[680px] mx-auto">
-                <img src={post.image_url} alt={post.title} width={1200} height={630} className="w-full rounded-xl object-cover max-h-96" />
+                <img src={post.image_url} alt={post.title} width={1200} height={630} decoding="async" className="w-full rounded-xl object-cover max-h-96" />
               </div>
             </div>
           )}

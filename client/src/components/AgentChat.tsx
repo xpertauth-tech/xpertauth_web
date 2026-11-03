@@ -4,6 +4,7 @@ import { X, Send, Loader2, Calendar } from "lucide-react";
 import ContactModal from "./ContactModal";
 import { supabase } from "@/lib/supabase";
 import { useI18n } from "@/i18n/context";
+import { imagenReducida } from "@/lib/imagenes";
 
 // ─── Tipos ───────────────────────────────────────────────────────────────────
 
@@ -39,13 +40,13 @@ export const AGENTE_CONFIG: Record<Agente, {
     color: "#1B4FD8",
     colorBg: "rgba(27,79,216,0.10)",
     colorBorder: "rgba(27,79,216,0.25)",
-    avatar: `${AVATAR_BASE}/lex_avatar_v1.webp`,
+    avatar: imagenReducida(`${AVATAR_BASE}/lex_avatar_v1.webp`, 96),
   },
   NOVA: {
     color: "#4D9FEC",
     colorBg: "rgba(77,159,236,0.10)",
     colorBorder: "rgba(77,159,236,0.25)",
-    avatar: `${AVATAR_BASE}/nova_avatar_v1.webp`,
+    avatar: imagenReducida(`${AVATAR_BASE}/nova_avatar_v1.webp`, 96),
   },
 };
 
@@ -267,7 +268,7 @@ export function Burbuja({
           className="flex-shrink-0 w-8 h-8 rounded-lg overflow-hidden mt-0.5"
           style={{ backgroundColor: config.colorBg, border: `1px solid ${config.colorBorder}` }}
         >
-          <img src={config.avatar} alt="" width={64} height={64} className="w-full h-full object-cover" />
+          <img src={config.avatar} alt="" width={64} height={64} decoding="async" className="w-full h-full object-cover" />
         </div>
       )}
 
@@ -496,7 +497,7 @@ export default function AgentChat({
             className="w-9 h-9 rounded-xl overflow-hidden flex-shrink-0"
             style={{ backgroundColor: config.colorBg, border: `1px solid ${config.colorBorder}` }}
           >
-            <img src={config.avatar} alt={agente} width={64} height={64} className="w-full h-full object-cover" />
+            <img src={config.avatar} alt={agente} width={64} height={64} decoding="async" className="w-full h-full object-cover" />
           </div>
 
           <div className="flex-1 min-w-0">
@@ -527,7 +528,7 @@ export default function AgentChat({
                 className="w-8 h-8 rounded-lg overflow-hidden flex-shrink-0"
                 style={{ backgroundColor: config.colorBg, border: `1px solid ${config.colorBorder}` }}
               >
-                <img src={config.avatar} alt="" width={64} height={64} className="w-full h-full object-cover" />
+                <img src={config.avatar} alt="" width={64} height={64} decoding="async" className="w-full h-full object-cover" />
               </div>
               <div
                 className="px-4 py-3 rounded-2xl flex items-center gap-2"

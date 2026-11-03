@@ -112,6 +112,7 @@ export default function MiHistoria() {
                 alt={t.historia.fotoAlt}
                 width={312}
                 height={416}
+                decoding="async"
                 className="sn-foto"
                 onError={(e) => {
                   e.currentTarget.style.display = "none";
