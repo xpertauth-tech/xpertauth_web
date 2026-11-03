@@ -272,6 +272,8 @@ export default function NewsletterPost() {
                 <img
                   src={item.image_url}
                   alt={item.title}
+                  width={1200}
+                  height={630}
                   className="w-full rounded-xl object-cover max-h-96"
                 />
               </div>

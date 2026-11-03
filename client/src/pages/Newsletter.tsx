@@ -281,6 +281,8 @@ export default function Newsletter() {
                         <img
                           src={item.image_url}
                           alt={item.title}
+                          width={208}
+                          height={176}
                           className="w-full h-44 md:h-full object-cover"
                         />
                       </div>

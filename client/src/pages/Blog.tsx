@@ -270,6 +270,8 @@ export default function Blog() {
                         <img
                           src={post.image_url}
                           alt={post.title}
+                          width={208}
+                          height={176}
                           className="w-full h-44 md:h-full object-cover"
                         />
                       </div>

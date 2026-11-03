@@ -131,6 +131,8 @@ export default function HowItWorks() {
                     <img
                       src={src}
                       alt=""
+                      width={1408}
+                      height={768}
                       className="w-full h-full object-cover object-center"
                       style={{
                         filter: hovered ? "grayscale(0)" : "grayscale(1)",
