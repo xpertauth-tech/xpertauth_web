@@ -274,6 +274,7 @@ export default function NewsletterPost() {
                   alt={item.title}
                   width={1200}
                   height={630}
+                  decoding="async"
                   className="w-full rounded-xl object-cover max-h-96"
                 />
               </div>

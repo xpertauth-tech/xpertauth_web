@@ -133,6 +133,8 @@ export default function HowItWorks() {
                       alt=""
                       width={1408}
                       height={768}
+                      loading="lazy"
+                      decoding="async"
                       className="w-full h-full object-cover object-center"
                       style={{
                         filter: hovered ? "grayscale(0)" : "grayscale(1)",

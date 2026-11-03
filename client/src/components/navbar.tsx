@@ -6,8 +6,9 @@ import { useLocation } from "wouter";
 import LocaleSwitcher from "./locale-switcher";
 import { supabase } from "@/lib/supabase";
 import { useAgent } from "@/App";
+import { imagenReducida } from "@/lib/imagenes";
 
-const LOGO_URL = "https://supabase.xpertauth.com/storage/v1/object/public/web-images/logo/logo_xpertauth_icon_v1.png";
+const LOGO_URL = imagenReducida("https://supabase.xpertauth.com/storage/v1/object/public/web-images/logo/logo_xpertauth_icon_v1.png", 96);
 
 type UserProfile = {
   email: string;
@@ -167,6 +168,8 @@ export default function Navbar() {
                 alt="XpertAuth"
                 width={500}
                 height={500}
+                decoding="async"
+                {...{ fetchpriority: "high" }}
                 className="h-9 w-auto object-contain"
                 style={{ maxHeight: "36px" }}
                 onError={(e) => { (e.target as HTMLImageElement).style.display = "none"; setLogoLoaded(false); }}
@@ -177,6 +180,8 @@ export default function Navbar() {
                 alt="XpertAuth"
                 width={500}
                 height={500}
+                decoding="async"
+                {...{ fetchpriority: "high" }}
                 className="h-9 w-auto object-contain"
                 style={{ maxHeight: "36px" }}
                 onLoad={() => setLogoLoaded(true)}
@@ -216,6 +221,7 @@ export default function Navbar() {
                         alt={user.nombre}
                         width={28}
                         height={28}
+                        decoding="async"
                         className="w-7 h-7 rounded-full object-cover"
                       />
                     ) : (

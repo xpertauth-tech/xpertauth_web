@@ -1,6 +1,7 @@
 import { X } from "lucide-react";
 import { useI18n } from "@/i18n/context";
 import { entrarConGoogle } from "@/lib/supabase";
+import { imagenReducida } from "@/lib/imagenes";
 
 // ─── Tipos ───────────────────────────────────────────────────────────────────
 
@@ -10,7 +11,7 @@ export type ModalObjetivo = Agente | "registro";
 
 // Avatares ilustrados (los mismos que usa la sección Equipo)
 const AVATAR_BASE = "https://supabase.xpertauth.com/storage/v1/object/public/web-images/equipo";
-const LOGO_URL = "https://supabase.xpertauth.com/storage/v1/object/public/web-images/logo/logo_xpertauth_icon_v1.png";
+const LOGO_URL = imagenReducida("https://supabase.xpertauth.com/storage/v1/object/public/web-images/logo/logo_xpertauth_icon_v1.png", 96);
 
 interface AgentModalProps {
   agente: ModalObjetivo | null;    // null = modal cerrado
@@ -98,13 +99,13 @@ const AGENTE_CONFIG: Record<Agente, {
     color: "#1B4FD8",
     colorBg: "rgba(27,79,216,0.08)",
     colorBorder: "rgba(27,79,216,0.25)",
-    avatar: `${AVATAR_BASE}/lex_avatar_v1.webp`,
+    avatar: imagenReducida(`${AVATAR_BASE}/lex_avatar_v1.webp`, 96),
   },
   NOVA: {
     color: "#4D9FEC",
     colorBg: "rgba(77,159,236,0.08)",
     colorBorder: "rgba(77,159,236,0.25)",
-    avatar: `${AVATAR_BASE}/nova_avatar_v1.webp`,
+    avatar: imagenReducida(`${AVATAR_BASE}/nova_avatar_v1.webp`, 96),
   },
 };
 
@@ -168,6 +169,7 @@ export default function AgentModal({ agente, onClose }: AgentModalProps) {
                 alt={nombre}
                 width={64}
                 height={64}
+                decoding="async"
                 className={esRegistro ? "w-8 h-8 object-contain" : "w-full h-full object-cover"}
               />
             </div>

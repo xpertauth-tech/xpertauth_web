@@ -72,9 +72,14 @@ export default function SocialProof() {
                 data-testid={`case-${i}`}
               >
                 {bg ? (
-                  <div
-                    className="case-bg absolute inset-0 bg-cover bg-center"
-                    style={{ backgroundImage: `url(${bg})` }}
+                  <img
+                    src={bg}
+                    alt=""
+                    width={1408}
+                    height={768}
+                    loading="lazy"
+                    decoding="async"
+                    className="case-bg absolute inset-0 w-full h-full object-cover object-center"
                   />
                 ) : (
                   <div

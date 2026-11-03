@@ -1,9 +1,10 @@
 import { motion } from "framer-motion";
 import { useLocation } from "wouter";
 import { useI18n } from "@/i18n/context";
+import { imagenReducida } from "@/lib/imagenes";
 
 const SUPABASE_BASE = "https://supabase.xpertauth.com/storage/v1/object/public/web-images";
-const JOSE_LUIS_PHOTO = `${SUPABASE_BASE}/equipo/equipo_jose-luis-avatar_v1.webp`;
+const JOSE_LUIS_PHOTO = imagenReducida(`${SUPABASE_BASE}/equipo/equipo_jose-luis-avatar_v1.webp`, 288);
 
 type Lang = "es" | "ca" | "en" | "fr";
 
@@ -75,6 +76,8 @@ export default function TeamSection() {
                 alt={texts.name}
                 width={400}
                 height={400}
+                loading="lazy"
+                decoding="async"
                 className="w-full h-full rounded-full object-cover border-2 border-arctic/30"
                 onError={(e) => {
                   const target = e.target as HTMLImageElement;
