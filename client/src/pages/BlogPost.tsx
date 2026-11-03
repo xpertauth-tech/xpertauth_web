@@ -4,6 +4,7 @@ import Navbar from "@/components/navbar";
 import Footer from "@/components/footer";
 import { SHOW_SUBSCRIPTION } from "@/lib/features";
 import ContactModal from "@/components/ContactModal";
+import { portadaImg } from "@/lib/imagenes";
 
 interface Post {
   id: string;
@@ -308,7 +309,7 @@ export default function BlogPost() {
           {post.image_url && (
             <div className="px-6 pb-12 bg-[#0A0E1A]">
               <div className="max-w-[680px] mx-auto">
-                <img src={post.image_url} alt={post.title} width={1200} height={630} decoding="async" className="w-full rounded-xl object-cover max-h-96" />
+                <img {...portadaImg(post.image_url, "(min-width: 728px) 1020px, calc((100vw - 48px) * 1.5)")} alt={post.title} width={1200} height={630} decoding="async" className="w-full rounded-xl object-cover max-h-96" />
               </div>
             </div>
           )}

@@ -11,3 +11,13 @@ export function srcSetReducido(url: string, anchos: number[], anchoOriginal?: nu
   if (anchoOriginal) lista.push(`${url} ${anchoOriginal}w`);
   return lista.join(", ");
 }
+
+// Portadas del blog (image_url viene de la base de datos): si son de nuestro Storage se piden en
+// versiones reducidas (nunca se amplía el original); si no, se usa la URL tal cual.
+// Los sizes que se pasan piden ~1,5 veces el tamaño mostrado: así, en pantalla normal (1×), la foto
+// no pierde nitidez al reducirse dos veces (en el servidor y en el navegador).
+const ANCHOS_PORTADA = [400, 720, 1080, 1440];
+export function portadaImg(url: string, sizes: string): { src: string; srcSet?: string; sizes?: string } {
+  if (!/^https:\/\/supabase\.xpertauth\.com\/storage\/v1\/object\/public\//.test(url)) return { src: url };
+  return { src: imagenReducida(url, 720), srcSet: srcSetReducido(url, ANCHOS_PORTADA), sizes };
+}

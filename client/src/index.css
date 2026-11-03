@@ -496,13 +496,17 @@
   p.t-lead.ficha-entrada { text-align: center; }
 }
 
-/* Cabecera de página (Sobre nosotros, Servicios, Blog, Newsletter, textos legales): ocupa exactamente
+/* Cabecera de página a pantalla completa (solo Sobre nosotros y Servicios): ocupa exactamente
    una pantalla (100svh: no la corta la barra del navegador en móvil) con el bloque centrado en
    vertical y en horizontal. El padding-top es el alto de la barra de menú (64 px en móvil, 80 desde 640 px). */
 .cabecera-pantalla { display: flex; align-items: center; justify-content: center; min-height: 100vh; min-height: 100svh; padding-top: 64px; padding-bottom: 24px; }
 .cabecera-pantalla > * { width: 100%; }
 /* Los párrafos de la cabecera van centrados también en móvil (gana a la regla de párrafos a la izquierda, que está antes) */
 .cabecera-pantalla p { text-align: center; }
+
+/* Cabecera corta y centrada (Blog y textos legales): no ocupa pantalla; deja ver el contenido debajo. */
+.cabecera-corta { padding-top: 112px; padding-bottom: 32px; text-align: center; }
+.cabecera-corta p { text-align: center; }
 @media (min-width: 640px) {
   .cabecera-pantalla { padding-top: 80px; padding-bottom: 0; }
 }
