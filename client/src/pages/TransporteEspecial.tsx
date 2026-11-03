@@ -383,6 +383,7 @@ export default function TransporteEspecial() {
   return (
     <div className="min-h-screen bg-obsidian text-pure font-sans">
       <Navbar />
+      <main>
       <ContactModal open={contactOpen} onClose={() => setContactOpen(false)} />
 
       {/* ── HERO ─────────────────────────────────────────────────────────────── */}
@@ -592,6 +593,7 @@ export default function TransporteEspecial() {
         </div>
       </section>
 
+      </main>
       <Footer />
     </div>
   );

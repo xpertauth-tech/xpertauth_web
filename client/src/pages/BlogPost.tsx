@@ -290,6 +290,7 @@ export default function BlogPost() {
       `}</style>
 
       <Navbar />
+      <main>
 
       <div className="pt-28 pb-6 px-6 bg-[#0A0E1A]">
         <div className="max-w-[680px] mx-auto">
@@ -391,6 +392,7 @@ export default function BlogPost() {
         </section>
       )}
 
+      </main>
       <Footer />
       <ContactModal open={contactOpen} onClose={() => setContactOpen(false)} />
     </div>

@@ -334,6 +334,7 @@ export default function PoliticaCookies() {
         .legal-card:hover { border-color: rgba(77,159,236,0.3); }
       `}</style>
       <Navbar />
+      <main>
       <section className="cabecera-corta px-6 text-center bg-[#0A0E1A]">
         <div className="max-w-3xl mx-auto">
           <span className="t-label">Legal</span>
@@ -378,6 +379,7 @@ export default function PoliticaCookies() {
           ))}
         </div>
       </section>
+      </main>
       <Footer />
     </div>
   );

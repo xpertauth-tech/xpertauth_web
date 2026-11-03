@@ -235,6 +235,7 @@ export default function Blog() {
       `}</style>
 
       <Navbar />
+      <main>
 
       {/* HERO */}
       <section className="cabecera-corta px-6 text-center bg-[#0A0E1A]">
@@ -367,6 +368,7 @@ export default function Blog() {
         </section>
       )}
 
+      </main>
       <Footer />
       <ContactModal open={contactOpen} onClose={() => setContactOpen(false)} />
     </div>
