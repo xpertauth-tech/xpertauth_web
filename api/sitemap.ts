@@ -46,6 +46,7 @@ export default async function handler(_req: VercelRequest, res: VercelResponse) 
       .from("posts")
       .select("slug, published_at")
       .eq("is_published", true)
+      .lte("published_at", new Date().toISOString()) // los artículos programados no entran antes de su fecha
       .order("published_at", { ascending: false });
     for (const p of data ?? []) {
       if (!p.slug) continue;
