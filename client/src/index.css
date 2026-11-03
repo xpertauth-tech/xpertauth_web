@@ -496,11 +496,15 @@
   p.t-lead.ficha-entrada { text-align: center; }
 }
 
-/* Sobre nosotros, pantalla 1: en ordenador el encabezado ocupa exactamente una pantalla
-   (alto de la ventana; los 80 px de arriba son la barra de menú) con el contenido centrado. */
-.sn-pantalla-1 { display: flex; align-items: center; min-height: 55vh; padding-top: 112px; padding-bottom: 64px; }
-@media (min-width: 768px) {
-  .sn-pantalla-1 { min-height: 100vh; min-height: 100dvh; padding-top: 80px; padding-bottom: 0; }
+/* Cabecera de página (Sobre nosotros, Servicios, Blog, Newsletter, textos legales): ocupa exactamente
+   una pantalla (100svh: no la corta la barra del navegador en móvil) con el bloque centrado en
+   vertical y en horizontal. El padding-top es el alto de la barra de menú (64 px en móvil, 80 desde 640 px). */
+.cabecera-pantalla { display: flex; align-items: center; justify-content: center; min-height: 100vh; min-height: 100svh; padding-top: 64px; padding-bottom: 24px; }
+.cabecera-pantalla > * { width: 100%; }
+/* Los párrafos de la cabecera van centrados también en móvil (gana a la regla de párrafos a la izquierda, que está antes) */
+.cabecera-pantalla p { text-align: center; }
+@media (min-width: 640px) {
+  .cabecera-pantalla { padding-top: 80px; padding-bottom: 0; }
 }
 
 /* LEX en acción (lex-en-accion.tsx): cursor al escribir, aparición de los mensajes */

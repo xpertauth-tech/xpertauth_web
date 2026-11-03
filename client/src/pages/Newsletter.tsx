@@ -245,7 +245,7 @@ export default function Newsletter() {
       <Navbar />
 
       {/* HERO */}
-      <section className="pt-32 pb-16 px-6 text-center bg-[#0A0E1A]">
+      <section className="cabecera-pantalla px-6 text-center bg-[#0A0E1A]">
         <div className="max-w-3xl mx-auto fade-up">
           <span className="inline-block text-xs font-semibold tracking-widest text-[#E8620A] uppercase mb-4 border border-[#E8620A]/30 px-3 py-1 rounded-full">
             {t.tag}

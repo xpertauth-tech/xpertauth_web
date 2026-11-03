@@ -384,7 +384,7 @@ export default function TransporteEspecial() {
       <ContactModal open={contactOpen} onClose={() => setContactOpen(false)} />
 
       {/* ── HERO ─────────────────────────────────────────────────────────────── */}
-      <section className="page-top pb-16 md:pb-24 px-4 sm:px-6 lg:px-8 bg-obsidian">
+      <section className="cabecera-pantalla px-4 sm:px-6 lg:px-8 bg-obsidian">
         <div className="max-w-4xl mx-auto text-center">
           <span className="t-label">
             {t.badge}
