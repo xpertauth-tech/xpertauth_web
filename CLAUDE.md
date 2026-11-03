@@ -45,6 +45,16 @@
   Privacidad y/o Cookies en el mismo encargo, en los 4 idiomas, y
   avisarlo en el informe.
 
+## Artículos del blog
+- Cómo se publican: Claude Code crea el texto y la imagen (tras el visto bueno de José Luis), sube la imagen a Supabase Storage y registra el artículo en web.posts. La web lo muestra en el blog cuando llega su published_at (las listas filtran published_at <= ahora). LinkedIn lo hace José Luis a mano: no se toca.
+- Metadatos obligatorios de cada artículo (la base de datos rechaza lo que no cumpla, con el error 23514):
+  - meta_title: máximo 60 caracteres.
+  - meta_description: máximo 160 caracteres.
+  - Sin MAYÚSCULAS completas en ninguno de los dos.
+  - Sin «| XpertAuth» ni ningún sufijo de marca (la web ya lo gestiona).
+  - Sin instrucciones de IA dentro del texto (por ejemplo, «sin símbolos markdown»): ni en meta_title, ni en meta_description, ni en el cuerpo.
+- Restricciones en web.posts: posts_meta_title_max60 y posts_meta_description_max160 (añadidas el 3/11/2026). Para quitarlas: ALTER TABLE web.posts DROP CONSTRAINT posts_meta_title_max60, DROP CONSTRAINT posts_meta_description_max160.
+
 ## Estado actual
 (Al cerrar cada sesión, sustituir esta sección entera por la versión al día; el resto de secciones no se tocan.)
 
