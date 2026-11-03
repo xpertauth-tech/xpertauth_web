@@ -5,9 +5,9 @@
   https://supabase.xpertauth.com
 - Las claves (URL, anon, service_role) están en .env.local (gitignored).
   Úsalas siempre de ahí.
-- El proyecto antiguo de supabase.com (dcuvptwwtdhlepvcttvx) está
-  ABANDONADO desde agosto de 2026. Nunca lo consultes ni lo cites,
-  aunque responda. Si algo apunta a él, avísalo.
+- (Histórica) El proyecto antiguo de supabase.com (dcuvptwwtdhlepvcttvx)
+  estuvo abandonado desde agosto de 2026 y fue BORRADO el 3/11/2026:
+  ya no existe. Si algo apunta a él, avísalo.
 - El MCP de Supabase puede mostrar la conexión Postgres como inactiva;
   las llamadas REST con la service_role funcionan. No des por muerta
   la base por eso.
@@ -69,6 +69,7 @@ Hecho (3/11): rotación de JWT_SECRET, anon y service_role de Helsinki, corte a 
 - Conector supabase-postgres de Claude Desktop quitado (3/11): apuntaba al proyecto abandonado de supabase.com y llevaba su contraseña escrita; solo se quitó esa entrada de claude_desktop_config.json (quedan filesystem y github), JSON válido y sin la contraseña. Hay que reiniciar Claude Desktop para que se aplique; después la herramienta mcp__supabase-postgres__query desaparece de las sesiones.
 - Script de Drive Antigravity/Conocimiento LEX/lex_update_tool/index.js: el proyecto de Supabase Cloud al que apuntaba ya no existe (DNS NXDOMAIN) y su contraseña escrita se sustituyó por «<REDACTADO>» (no estaba en ningún otro archivo).
 - Detalles visuales publicados (3/11, commits 1b6eca8, ea5cd08 y 9fabce7 en main): croquis del Hero en móvil con trazos y letras más gruesos y pie «Vista lateral» más claro (solo menos de 640 px); suelo del croquis en XpertBlue #1B4FD8 y vehículo en Mist #F4F6FA al 65 % (constante VEHICLE_OPACITY en hero-sketch.tsx); og-image.png nueva (1200×630, 84.903 bytes). La sección «Casos» se queda oscura, por decisión de José Luis.
+- Supabase antiguo borrado entero (3/11, por José Luis en supabase.com): los 5 proyectos de la org xpertauthtools-blip (xpertauth-db, LEX-Normativa_2, ultrasound_results, deca-app-xpertauth y Twitter_XpertAuth). Antes se comprobó (F8-B) que las copias estaban íntegras y que el Storage y los datos principales estaban en Helsinki. Copias archivadas en ~/Archivo/supabase-antiguo-20261103/ (con LEEME.txt; contienen datos personales y secretos: no subir a ningún repo). La regla del proyecto abandonado dcuvptwwtdhlepvcttvx queda como histórica.
 
 Pendiente (rotación):
 - URL antigua de ecografías (ultrasound-results.vercel.app, cuenta antigua de Vercel): el proyecto quedó desconectado del repo tras moverlo a xpertauth-tech y sigue con la anon vieja; reconectarlo o dejarlo.
@@ -76,7 +77,10 @@ Pendiente (rotación):
 - Vigía Ingestar: pasar a credenciales de n8n sus claves (service_role, OpenAI y Anthropic, hoy escritas en sus nodos Code) y el token del webhook: se hace dentro del proyecto de fiabilidad de LEX (plan del F4-A: copia v2 con nodos HTTP Request; ojo: Kong exige la cabecera apikey en REST, pero no en Storage).
 - 10/11: borrar el dump de la rotación del 3/11 si todo sigue bien (/root/backups/pre-rotacion-20261103_085236.dump y los de _supabase y _globals, en el servidor).
 - Decidir cuándo borrar la copia de la base de n8n del 3/11 (/root/backups/n8n_database_pre-F5C_20261103.sqlite, 668 MB, con secretos): al menos hasta que el Vigía esté rehecho. Quedan además 2 filas huérfanas en webhook_entity del flujo RGPD borrado (inofensivas).
-- Registros de Claude Desktop (~/Library/Logs/Claude: mcp.log, mcp-server-supabase-postgres.log y main3.log) aún contienen la contraseña del proyecto abandonado (ya tachada del script y del conector): decidir si se borran; la contraseña de ese proyecto no sirve de nada porque ya no existe.
+- Registros de Claude Desktop (~/Library/Logs/Claude: mcp.log, mcp-server-supabase-postgres.log y main3.log) aún contienen la contraseña del proyecto ya borrado: se pueden eliminar (no sirve de nada); falta hacerlo.
+- Organización «App - RSS» de supabase.com (1 proyecto): sin revisar.
+- Vigía antiguo: revisar en el proyecto de fiabilidad de LEX los 7 documentos que estaban «pendiente» (fechas de publicación del 6/6 al 1/8; en Helsinki hay 0 pendientes). Están en la copia de xpertauth-db (tabla vigia_pendientes de ~/Archivo/supabase-antiguo-20261103/db_cluster-06-08-2026@10-30-33.backup.gz).
+- Copia de xpertauth-db: 4 usuarios de auth (altas 3/2026–6/2026), sus 4 perfiles y 1 registro de beta_emails_enviados no están en Helsinki; falta que José Luis confirme si eran de prueba o de la beta (los proyectos ya están borrados; solo queda la copia archivada).
 - Historiales y transcripciones con claves viejas (zsh, ~/.claude, Antigravity, Claude): decidido no tocarlos.
 
 Pendiente (resto):
