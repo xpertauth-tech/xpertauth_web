@@ -56,7 +56,7 @@ function Arrow({ x, y, dir, at }: { x: number; y: number; dir: "l" | "r" | "u" |
 
 function Letter({ x, y, at, children }: { x: number; y: number; at: number; children: string }) {
   return (
-    <text x={x} y={y} textAnchor="middle" fill={ARCTIC} stroke="none" fontFamily="'JetBrains Mono', monospace" fontSize={20} className="hc-f" style={fade(at)}>
+    <text x={x} y={y} textAnchor="middle" fill={ARCTIC} stroke="none" fontFamily="'JetBrains Mono', monospace" fontSize={20} className="hc-f hs-letter" style={fade(at)}>
       {children}
     </text>
   );
@@ -157,14 +157,14 @@ export default function HeroSketch() {
         {/* Vista lateral */}
         <div className="min-w-0" style={{ flex: "640 1 0" }}>
           <svg viewBox="0 0 640 232" className="block w-full h-auto" fill="none" strokeLinejoin="round">
-            <g stroke={VEHICLE} strokeWidth={1.6}>
+            <g stroke={VEHICLE} strokeWidth={1.6} className="hs-veh">
               <Traced shapes={SIDE_VEHICLE} start={0} step={32} dur={600} />
             </g>
-            <g stroke={EMBER} strokeWidth={1.8}>
+            <g stroke={EMBER} strokeWidth={1.8} className="hs-exc">
               <Traced shapes={SIDE_EXCAVATOR} start={T_EXC} step={38} dur={550} />
               <Traced shapes={SIDE_BEACON} start={T_ROT} step={0} dur={450} />
             </g>
-            <g stroke={ARCTIC} strokeWidth={1}>
+            <g stroke={ARCTIC} strokeWidth={1} className="hs-dim">
               {/* L — longitud total */}
               <Dim x1={10} y1={108} x2={10} y2={18} at={T_COT} />
               <Dim x1={584} y1={122} x2={584} y2={18} at={T_COT + 60} />
@@ -195,7 +195,7 @@ export default function HeroSketch() {
               ))}
             </g>
           </svg>
-          <p className="hc-f mt-1 text-[0.7rem] sm:text-xs text-white/40" style={fade(T_EXC)}>
+          <p className="hc-f mt-1 text-[0.8125rem] text-white/70 sm:text-xs sm:text-white/40" style={fade(T_EXC)}>
             {t("viewSide")}
           </p>
         </div>
@@ -203,13 +203,13 @@ export default function HeroSketch() {
         {/* Vista frontal (oculta en móvil) */}
         <div className="hidden sm:block min-w-0" style={{ flex: "116 1 0" }}>
           <svg viewBox="0 0 116 232" className="block w-full h-auto" fill="none" strokeLinejoin="round">
-            <g stroke={VEHICLE} strokeWidth={1.6}>
+            <g stroke={VEHICLE} strokeWidth={1.6} className="hs-veh">
               <Traced shapes={FRONT_VEHICLE} start={300} step={32} dur={600} />
             </g>
-            <g stroke={EMBER} strokeWidth={1.8}>
+            <g stroke={EMBER} strokeWidth={1.8} className="hs-exc">
               <Traced shapes={FRONT_EXCAVATOR} start={T_EXC + 300} step={38} dur={550} />
             </g>
-            <g stroke={ARCTIC} strokeWidth={1}>
+            <g stroke={ARCTIC} strokeWidth={1} className="hs-dim">
               {/* W — anchura */}
               <Dim x1={12} y1={194} x2={12} y2={220} at={T_COT + 700} dur={250} />
               <Dim x1={104} y1={194} x2={104} y2={220} at={T_COT + 740} dur={250} />
@@ -220,7 +220,7 @@ export default function HeroSketch() {
               <Letter x={58} y={219} at={T_COT + 1300}>W</Letter>
             </g>
           </svg>
-          <p className="hc-f mt-1 text-[0.7rem] sm:text-xs text-white/40" style={fade(T_EXC + 300)}>
+          <p className="hc-f mt-1 text-[0.8125rem] text-white/70 sm:text-xs sm:text-white/40" style={fade(T_EXC + 300)}>
             {t("viewFront")}
           </p>
         </div>
