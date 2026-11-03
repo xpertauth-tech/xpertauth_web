@@ -6,6 +6,16 @@
   ],
   "redirects": [
     {
+      "source": "/:locale(es|ca|en|fr)/newsletter",
+      "destination": "/:locale/blog",
+      "permanent": true
+    },
+    {
+      "source": "/:locale(es|ca|en|fr)/newsletter/:id",
+      "destination": "/:locale/blog",
+      "permanent": true
+    },
+    {
       "source": "/:locale(es|ca|en|fr)/servicios/ia-pymes",
       "destination": "/:locale/servicios/transporte-especial",
       "permanent": true
