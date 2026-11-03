@@ -212,7 +212,7 @@ export default function AvisoLegal() {
         .legal-card:hover { border-color: rgba(77,159,236,0.3); }
       `}</style>
       <Navbar />
-      <section className="page-top pb-12 px-6 bg-[#0A0E1A]">
+      <section className="cabecera-pantalla px-6 text-center bg-[#0A0E1A]">
         <div className="max-w-3xl mx-auto">
           <span className="t-label">Legal</span>
           <h1 className="t-h1 text-white mb-4">{s.title}</h1>

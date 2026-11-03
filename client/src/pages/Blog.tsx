@@ -234,7 +234,7 @@ export default function Blog() {
       <Navbar />
 
       {/* HERO */}
-      <section className="page-top pb-12 md:pb-16 px-6 text-center bg-[#0A0E1A]">
+      <section className="cabecera-pantalla px-6 text-center bg-[#0A0E1A]">
         <div className="max-w-3xl mx-auto fade-up">
           <span className="t-label">
             {t.tag}

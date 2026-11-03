@@ -359,7 +359,7 @@ export default function SobreNosotros() {
       <main>
 
         {/* ══ HERO ══════════════════════════════════════════════════════ */}
-        <section className="sn-pantalla-1 px-6" style={{ background: "#0A0E1A" }}>
+        <section className="cabecera-pantalla px-6" style={{ background: "#0A0E1A" }}>
           <div style={{ maxWidth: 760, margin: "0 auto", textAlign: "center" }}>
             <h1
               className="t-h1 grad-title title-gap"
@@ -367,7 +367,7 @@ export default function SobreNosotros() {
             >
               {t.hero.titulo}
             </h1>
-            <p className="t-lead" style={{ color: "rgba(255,255,255,0.70)", maxWidth: 620, margin: "0 auto", textAlign: "left" }}>
+            <p className="t-lead" style={{ color: "rgba(255,255,255,0.70)", maxWidth: 620, margin: "0 auto", textAlign: "center" }}>
               {t.hero.subtitulo}
             </p>
           </div>
