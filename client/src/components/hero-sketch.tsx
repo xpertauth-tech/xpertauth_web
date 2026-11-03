@@ -14,10 +14,11 @@ import { useTranslations } from "@/i18n/context";
  * Escala común de las dos vistas: 1 unidad ≈ 3,8 cm; suelo en y = 190.
  */
 
-const VEHICLE = "#7C8DAA";
+const VEHICLE = "#F4F6FA"; // Mist; se dibuja al VEHICLE_OPACITY para que la excavadora (Ember) siga siendo la protagonista
+const VEHICLE_OPACITY = 0.65;
 const EMBER = "#E8620A";
 const ARCTIC = "#4D9FEC";
-const GROUND = "#2A3550";
+const GROUND = "#1B4FD8"; // XpertBlue
 
 type Shape = { k: "path" | "circle" | "rect" | "line"; a: Record<string, string | number> };
 
@@ -67,8 +68,9 @@ function Letter({ x, y, at, children }: { x: number; y: number; at: number; chil
 const AXLES_TRACTOR = [46, 150, 186, 222];
 const AXLES_TRAILER = [450, 486, 522, 558];
 
+const SIDE_GROUND: Shape[] = [l(0, 190, 604, 190)];
+
 const SIDE_VEHICLE: Shape[] = [
-  l(0, 190, 604, 190, { stroke: GROUND }),
   // cabina, ventanilla, puerta, paragolpes
   p("M10 156 L10 114 Q10 104 18 100 L30 94 Q34 92 40 92 L68 92 Q74 92 74 98 L74 156 Z"),
   p("M16 108 L46 108 L46 130 L15 130 Z"),
@@ -118,8 +120,9 @@ const SIDE_BEACON: Shape[] = [p("M36 92 L36 88 Q36 83 41 83 Q46 83 46 88 L46 92"
 
 /* ───────────── Vista frontal ───────────── */
 
+const FRONT_GROUND: Shape[] = [l(0, 190, 116, 190)];
+
 const FRONT_VEHICLE: Shape[] = [
-  l(0, 190, 116, 190, { stroke: GROUND }),
   r(24, 164, 9, 26, 3),
   r(83, 164, 9, 26, 3),
   l(33, 177, 83, 177),
@@ -157,8 +160,11 @@ export default function HeroSketch() {
         {/* Vista lateral */}
         <div className="min-w-0" style={{ flex: "640 1 0" }}>
           <svg viewBox="0 0 640 232" className="block w-full h-auto" fill="none" strokeLinejoin="round">
-            <g stroke={VEHICLE} strokeWidth={1.6} className="hs-veh">
-              <Traced shapes={SIDE_VEHICLE} start={0} step={32} dur={600} />
+            <g stroke={GROUND} strokeWidth={1.6} className="hs-veh">
+              <Traced shapes={SIDE_GROUND} start={0} step={32} dur={600} />
+            </g>
+            <g stroke={VEHICLE} strokeWidth={1.6} opacity={VEHICLE_OPACITY} className="hs-veh">
+              <Traced shapes={SIDE_VEHICLE} start={32} step={32} dur={600} />
             </g>
             <g stroke={EMBER} strokeWidth={1.8} className="hs-exc">
               <Traced shapes={SIDE_EXCAVATOR} start={T_EXC} step={38} dur={550} />
@@ -203,8 +209,11 @@ export default function HeroSketch() {
         {/* Vista frontal (oculta en móvil) */}
         <div className="hidden sm:block min-w-0" style={{ flex: "116 1 0" }}>
           <svg viewBox="0 0 116 232" className="block w-full h-auto" fill="none" strokeLinejoin="round">
-            <g stroke={VEHICLE} strokeWidth={1.6} className="hs-veh">
-              <Traced shapes={FRONT_VEHICLE} start={300} step={32} dur={600} />
+            <g stroke={GROUND} strokeWidth={1.6} className="hs-veh">
+              <Traced shapes={FRONT_GROUND} start={300} step={32} dur={600} />
+            </g>
+            <g stroke={VEHICLE} strokeWidth={1.6} opacity={VEHICLE_OPACITY} className="hs-veh">
+              <Traced shapes={FRONT_VEHICLE} start={332} step={32} dur={600} />
             </g>
             <g stroke={EMBER} strokeWidth={1.8} className="hs-exc">
               <Traced shapes={FRONT_EXCAVATOR} start={T_EXC + 300} step={38} dur={550} />
