@@ -67,7 +67,7 @@ export default function Footer() {
                 data-testid="link-linkedin"
                 aria-label="LinkedIn"
               >
-                <SiLinkedin className="w-4 h-4" />
+                <SiLinkedin className="w-4 h-4" aria-hidden="true" />
                 <ExternalMark icon={false} />
               </a>
               <a
@@ -77,7 +77,7 @@ export default function Footer() {
                 data-testid="link-instagram"
                 aria-label="Instagram"
               >
-                <SiInstagram className="w-4 h-4" />
+                <SiInstagram className="w-4 h-4" aria-hidden="true" />
                 <ExternalMark icon={false} />
               </a>
               <a
@@ -87,7 +87,7 @@ export default function Footer() {
                 data-testid="link-whatsapp"
                 aria-label="WhatsApp"
               >
-                <SiWhatsapp className="w-4 h-4" />
+                <SiWhatsapp className="w-4 h-4" aria-hidden="true" />
                 <ExternalMark icon={false} />
               </a>
             </div>
@@ -95,9 +95,9 @@ export default function Footer() {
 
           {/* Columna 2 — Links rápidos */}
           <div>
-            <h4 className="font-heading font-semibold text-pure t-small mb-4 uppercase tracking-wider">
+            <h2 className="font-heading font-semibold text-pure t-small mb-4 uppercase tracking-wider">
               {m.quickLinks}
-            </h4>
+            </h2>
             <ul className="space-y-2.5 max-md:space-y-1">
               {quickLinks.map((link) => (
                 <li key={link.href}>
@@ -115,9 +115,9 @@ export default function Footer() {
 
           {/* Columna 3 — Contacto */}
           <div>
-            <h4 className="font-heading font-semibold text-pure t-small mb-4 uppercase tracking-wider">
+            <h2 className="font-heading font-semibold text-pure t-small mb-4 uppercase tracking-wider">
               {m.contact}
-            </h4>
+            </h2>
             <ul className="space-y-3">
               <li className="flex items-center gap-3">
                 <Mail className="w-4 h-4 text-arctic flex-shrink-0" />
@@ -148,9 +148,9 @@ export default function Footer() {
 
           {/* Columna 4 — Horario de atención */}
           <div>
-            <h4 className="font-heading font-semibold text-pure t-small mb-4 uppercase tracking-wider">
+            <h2 className="font-heading font-semibold text-pure t-small mb-4 uppercase tracking-wider">
               {m.scheduleTitle}
-            </h4>
+            </h2>
             <ul className="space-y-3 mb-4">
               {schedule.map((item, i) => (
                 <li key={i} className="flex items-start gap-3">

@@ -41,7 +41,7 @@ export default function LocaleSwitcher() {
         onClick={() => setOpen(!open)}
         className="flex items-center gap-1.5 px-3 py-2 min-h-[44px] text-sm text-white/70 rounded-md transition-colors"
         data-testid="button-locale-toggle"
-        aria-label="Cambiar idioma"
+        aria-label={`${localeLabels[locale]}, cambiar idioma`}
       >
         <CurrentFlag className="w-5 h-3.5 rounded-[2px] overflow-hidden" />
         <span className="font-medium text-xs">{localeLabels[locale]}</span>

@@ -24,13 +24,15 @@ export default function Home() {
   return (
     <div className="min-h-screen">
       <Navbar />
-      <Hero />
-      <TeamSection />
-      <LexEnAccion />
-      <HowItWorks />
-      <SocialProof />
-      <BlogSection />
-      <CtaFinal />
+      <main>
+        <Hero />
+        <TeamSection />
+        <LexEnAccion />
+        <HowItWorks />
+        <SocialProof />
+        <BlogSection />
+        <CtaFinal />
+      </main>
       <Footer />
     </div>
   );
