@@ -166,6 +166,8 @@ export default function AgentModal({ agente, onClose }: AgentModalProps) {
               <img
                 src={config.avatar}
                 alt={nombre}
+                width={64}
+                height={64}
                 className={esRegistro ? "w-8 h-8 object-contain" : "w-full h-full object-cover"}
               />
             </div>

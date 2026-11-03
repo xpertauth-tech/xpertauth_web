@@ -165,6 +165,8 @@ export default function Navbar() {
               <img
                 src={LOGO_URL}
                 alt="XpertAuth"
+                width={500}
+                height={500}
                 className="h-9 w-auto object-contain"
                 style={{ maxHeight: "36px" }}
                 onError={(e) => { (e.target as HTMLImageElement).style.display = "none"; setLogoLoaded(false); }}
@@ -173,6 +175,8 @@ export default function Navbar() {
               <img
                 src={LOGO_URL}
                 alt="XpertAuth"
+                width={500}
+                height={500}
                 className="h-9 w-auto object-contain"
                 style={{ maxHeight: "36px" }}
                 onLoad={() => setLogoLoaded(true)}
@@ -210,6 +214,8 @@ export default function Navbar() {
                       <img
                         src={user.avatar_url}
                         alt={user.nombre}
+                        width={28}
+                        height={28}
                         className="w-7 h-7 rounded-full object-cover"
                       />
                     ) : (

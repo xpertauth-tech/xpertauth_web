@@ -110,6 +110,8 @@ export default function MiHistoria() {
               <img
                 src={FOTO_URL}
                 alt={t.historia.fotoAlt}
+                width={312}
+                height={416}
                 className="sn-foto"
                 onError={(e) => {
                   e.currentTarget.style.display = "none";

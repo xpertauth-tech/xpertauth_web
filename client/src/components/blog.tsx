@@ -70,6 +70,8 @@ function CardInner({ post }: { post: Post }) {
           <img
             src={post.image_url}
             alt=""
+            width={800}
+            height={500}
             loading="lazy"
             className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-[1.03]"
           />

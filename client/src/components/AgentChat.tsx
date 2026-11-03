@@ -267,7 +267,7 @@ export function Burbuja({
           className="flex-shrink-0 w-8 h-8 rounded-lg overflow-hidden mt-0.5"
           style={{ backgroundColor: config.colorBg, border: `1px solid ${config.colorBorder}` }}
         >
-          <img src={config.avatar} alt="" className="w-full h-full object-cover" />
+          <img src={config.avatar} alt="" width={64} height={64} className="w-full h-full object-cover" />
         </div>
       )}
 
@@ -496,7 +496,7 @@ export default function AgentChat({
             className="w-9 h-9 rounded-xl overflow-hidden flex-shrink-0"
             style={{ backgroundColor: config.colorBg, border: `1px solid ${config.colorBorder}` }}
           >
-            <img src={config.avatar} alt={agente} className="w-full h-full object-cover" />
+            <img src={config.avatar} alt={agente} width={64} height={64} className="w-full h-full object-cover" />
           </div>
 
           <div className="flex-1 min-w-0">
@@ -527,7 +527,7 @@ export default function AgentChat({
                 className="w-8 h-8 rounded-lg overflow-hidden flex-shrink-0"
                 style={{ backgroundColor: config.colorBg, border: `1px solid ${config.colorBorder}` }}
               >
-                <img src={config.avatar} alt="" className="w-full h-full object-cover" />
+                <img src={config.avatar} alt="" width={64} height={64} className="w-full h-full object-cover" />
               </div>
               <div
                 className="px-4 py-3 rounded-2xl flex items-center gap-2"

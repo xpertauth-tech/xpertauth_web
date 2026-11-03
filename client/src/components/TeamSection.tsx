@@ -73,6 +73,8 @@ export default function TeamSection() {
               <img
                 src={JOSE_LUIS_PHOTO}
                 alt={texts.name}
+                width={400}
+                height={400}
                 className="w-full h-full rounded-full object-cover border-2 border-arctic/30"
                 onError={(e) => {
                   const target = e.target as HTMLImageElement;
