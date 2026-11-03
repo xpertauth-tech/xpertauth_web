@@ -54,13 +54,23 @@ Hecho (1/11):
 - Web nueva publicada. Redirecciones de rutas antiguas en vercel.json (ia-pymes, socios, formacion-senior).
 - LEX ajustada y probada: umbral 0,45, 10 fragmentos; clasificador FUERA_DE_TEMA / SIN_COBERTURA; no se hacen más ajustes a LEX: lo pendiente va al proyecto de fiabilidad.
 - Datos de prueba borrados (46 filas de web.contacto y web.consultas_agente); copia en ~/Desktop/limpieza_datos_prueba_2026-11-01.csv.
-- Secreto de Google rotado el 1/11 (ahora …51mc; borrados …J_p4 y …733K en Google).
+- Secreto de Google rotado y CERRADO: en Google Cloud solo queda el …51mc.
 - Secret scanning y push protection activados en los repos públicos de GitHub.
-- Secreto de Google CERRADO: en Google Cloud solo queda el …51mc; …733K y …J_p4 borrados (confirmado por José Luis). Archivo temporal del Escritorio borrado.
 
-Pendiente:
+Hecho (3/11): rotación de JWT_SECRET, anon y service_role de Helsinki, corte a las 10:25 (hora peninsular). Claves nuevas: anon …AA8g, service_role …nqAM (las viejas, …MQBg y …vAi8, dan 401). Las nuevas están en ~/rotacion_supabase_20261103.env y en /root/rotacion-20261103/ del servidor. Copia previa: /opt/supabase/docker/.env.antes-rotacion-20261103 y dumps pre-rotacion-20261103 en /root/backups; script de vuelta atrás en /root/rotacion-20261103/rollback.sh.
+- Actualizado: .env del servidor, ajuste app.settings.jwt_secret de la base y contenedores recreados; n8n (credencial «Supabase Service Role», Vigía Ingestar y Paralelos LEX; n8n reiniciado); Vercel altitud, deca-app-xpertauth y SUPABASE_SERVICE_KEY de xpertauth-web; ecografías (commit 27ca589 en xpertauth-tech/ultrasound_results; la veterinaria usa ultrasound-results-six.vercel.app); .env.local, scripts de MASTER skills, .mcp.json, register_post.sh y ~/.zshrc.
+
+Pendiente (rotación):
+- URGENTE: VITE_SUPABASE_ANON_KEY de Vercel xpertauth-web NO se cambió (última edición 3/8): la web pública sigue con la anon vieja (…MQBg) y el blog y todo lo que lea con la anon da 401. Cambiarla por la nueva y redesplegar.
+- URL antigua de ecografías (ultrasound-results.vercel.app, cuenta antigua de Vercel): el proyecto quedó desconectado del repo tras moverlo a xpertauth-tech y sigue con la anon vieja; reconectarlo o dejarlo.
+- Kuma: la monitorización «Supabase API (Helsinki)» lleva la anon vieja; actualizarla.
+- Pasar a credenciales de n8n la service_role del Vigía Ingestar (hoy escrita en sus 2 nodos Code) y las claves de OpenAI y Anthropic escritas en el nodo «Ingestar 2».
+- Flujo «Conocimiento a RAG (RGPD)»: no se activa por «Cannot find module 'pdf-parse'» (anterior a la rotación).
+- Credenciales de n8n «Supabase RGPD» y «Supabase account»: apuntan a otros proyectos de supabase.com, uno de ellos el abandonado; decidir qué hacer.
+- Decidir qué borrar: los .env.* viejos, .bash_history, env.bak y dumps antiguos con el secreto viejo del servidor; /root/rotacion-20261103/n8n-work/n8n_database_antes.sqlite; ~/rotacion_supabase_20261103.env y su copia del servidor; ~/Downloads/migrar_storage*.py (llevan la clave vieja); historiales y transcripciones (zsh, ~/.claude, Antigravity, Claude) con claves viejas.
+
+Pendiente (resto):
 - Miércoles 4/11: arreglo urgente de LEX. (1) Documento PARALELO nuevo con los límites de la autorización genérica de la DGT, que son los mismos que los del SCT (valores a confirmar por José Luis antes de ingestar). (2) Regla en el prompt: antes de concluir, comparar cada medida con los límites y que la conclusión cuadre con las cifras (fallo real: con 22 m dijo «itinerario concreto» por superar 18,75 m, mezclando el límite general con el de la genérica). (3) Corregir que en la Comunidad Valenciana autoriza la DGT, no la comunidad. Prueba: 22 m · 2,70 m · 4,05 m · 45 t por Catalunya y C. Valenciana.
-- Martes 3/11 desde las 9:00: rotar la service_role de Helsinki (y con ella la anon), según el inventario del 1/11. ATENCIÓN: la comparten otras apps (Altitud, LinkedIn de Carla y otras); no se cambia nada sin el visto bueno de José Luis. Decidir entonces qué hacer con las 4 copias del .env del servidor que tienen el secreto viejo de Google y con .env.bak-google-20261101.
 - Comprobar el enlace en LinkedIn (Post Inspector) y en WhatsApp.
 - Borrar ~/Desktop/limpieza_datos_prueba_2026-11-01.csv cuando José Luis lo diga.
 
