@@ -53,7 +53,7 @@ Web nueva publicada en producción (xpertauth.com) el 1/11/2026: main = rebuild/
 Hecho (1/11):
 - Web nueva publicada. Redirecciones de rutas antiguas en vercel.json (ia-pymes, socios, formacion-senior).
 - LEX ajustada y probada: umbral 0,45, 10 fragmentos; clasificador FUERA_DE_TEMA / SIN_COBERTURA; no se hacen más ajustes a LEX: lo pendiente va al proyecto de fiabilidad.
-- Datos de prueba borrados (46 filas de web.contacto y web.consultas_agente); copia en ~/Desktop/limpieza_datos_prueba_2026-11-01.csv.
+- Datos de prueba borrados (46 filas de web.contacto y web.consultas_agente); la copia en CSV se borró el 3/11 por decisión de José Luis.
 - Secreto de Google rotado y CERRADO: en Google Cloud solo queda el …51mc.
 - Secret scanning y push protection activados en los repos públicos de GitHub.
 
@@ -76,7 +76,6 @@ Pendiente (resto):
 - Miércoles 4/11: revisar el L1 (commit 5507cb0, solo en rebuild/web-nueva, no está en main): probar la regla «comparar antes de concluir» en el preview con la consulta de 22 m · 2,70 m · 4,05 m · 45 t por Catalunya y C. Valenciana, decidir si basta ampliar el PARALELO_07 en vez de crear uno nuevo (borrador en ~/Desktop/PARALELO_DGT_borrador.md) y etiquetar el resumen VERTE (fragmento id 1) para que no se confunda con la genérica.
 - Miércoles 4/11: arreglo urgente de LEX. (1) Documento PARALELO nuevo con los límites de la autorización genérica de la DGT, que son los mismos que los del SCT (valores a confirmar por José Luis antes de ingestar). (2) Regla en el prompt: antes de concluir, comparar cada medida con los límites y que la conclusión cuadre con las cifras (fallo real: con 22 m dijo «itinerario concreto» por superar 18,75 m, mezclando el límite general con el de la genérica). (3) Corregir que en la Comunidad Valenciana autoriza la DGT, no la comunidad. Prueba: 22 m · 2,70 m · 4,05 m · 45 t por Catalunya y C. Valenciana.
 - Comprobar el enlace en LinkedIn (Post Inspector) y en WhatsApp. Con la og-image nueva: refrescar con Post Inspector para que LinkedIn deje de mostrar la antigua.
-- Borrar ~/Desktop/limpieza_datos_prueba_2026-11-01.csv cuando José Luis lo diga.
 
 Modo de trabajo desde ahora: main es producción. Cada cambio se prueba en rebuild/web-nueva y luego se pasa a main en avance rápido (git merge --ff-only).
 
