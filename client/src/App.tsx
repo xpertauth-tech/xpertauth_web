@@ -21,8 +21,6 @@ const cargas = {
   TransporteEspecial: () => import("@/pages/TransporteEspecial"),
   Blog: () => import("@/pages/Blog"),
   BlogPost: () => import("@/pages/BlogPost"),
-  Newsletter: () => import("@/pages/Newsletter"),
-  NewsletterPost: () => import("@/pages/NewsletterPost"),
   PoliticaPrivacidad: () => import("@/pages/PoliticaPrivacidad"),
   AvisoLegal: () => import("@/pages/AvisoLegal"),
   PoliticaCookies: () => import("@/pages/PoliticaCookies"),
@@ -34,8 +32,6 @@ const MiHistoria = lazy(cargas.MiHistoria);
 const TransporteEspecial = lazy(cargas.TransporteEspecial);
 const Blog = lazy(cargas.Blog);
 const BlogPost = lazy(cargas.BlogPost);
-const Newsletter = lazy(cargas.Newsletter);
-const NewsletterPost = lazy(cargas.NewsletterPost);
 const PoliticaPrivacidad = lazy(cargas.PoliticaPrivacidad);
 const AvisoLegal = lazy(cargas.AvisoLegal);
 const PoliticaCookies = lazy(cargas.PoliticaCookies);
@@ -121,8 +117,6 @@ function Router() {
       <Route path="/:locale/mi-historia" component={MiHistoria} />
       <Route path="/:locale/blog/:slug" component={BlogPost} />
       <Route path="/:locale/blog" component={Blog} />
-      <Route path="/:locale/newsletter/:concept_id" component={NewsletterPost} />
-      <Route path="/:locale/newsletter" component={Newsletter} />
       <Route path="/:locale/politica-de-privacidad" component={PoliticaPrivacidad} />
       <Route path="/:locale/aviso-legal" component={AvisoLegal} />
       <Route path="/:locale/cookies" component={PoliticaCookies} />

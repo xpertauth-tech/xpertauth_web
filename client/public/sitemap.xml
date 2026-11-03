@@ -161,38 +161,6 @@
     <xhtml:link rel="alternate" hreflang="x-default" href="https://www.xpertauth.com/es/blog"/>
   </url>
   <url>
-    <loc>https://www.xpertauth.com/es/newsletter</loc>
-    <xhtml:link rel="alternate" hreflang="es" href="https://www.xpertauth.com/es/newsletter"/>
-    <xhtml:link rel="alternate" hreflang="ca" href="https://www.xpertauth.com/ca/newsletter"/>
-    <xhtml:link rel="alternate" hreflang="en" href="https://www.xpertauth.com/en/newsletter"/>
-    <xhtml:link rel="alternate" hreflang="fr" href="https://www.xpertauth.com/fr/newsletter"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.xpertauth.com/es/newsletter"/>
-  </url>
-  <url>
-    <loc>https://www.xpertauth.com/ca/newsletter</loc>
-    <xhtml:link rel="alternate" hreflang="es" href="https://www.xpertauth.com/es/newsletter"/>
-    <xhtml:link rel="alternate" hreflang="ca" href="https://www.xpertauth.com/ca/newsletter"/>
-    <xhtml:link rel="alternate" hreflang="en" href="https://www.xpertauth.com/en/newsletter"/>
-    <xhtml:link rel="alternate" hreflang="fr" href="https://www.xpertauth.com/fr/newsletter"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.xpertauth.com/es/newsletter"/>
-  </url>
-  <url>
-    <loc>https://www.xpertauth.com/en/newsletter</loc>
-    <xhtml:link rel="alternate" hreflang="es" href="https://www.xpertauth.com/es/newsletter"/>
-    <xhtml:link rel="alternate" hreflang="ca" href="https://www.xpertauth.com/ca/newsletter"/>
-    <xhtml:link rel="alternate" hreflang="en" href="https://www.xpertauth.com/en/newsletter"/>
-    <xhtml:link rel="alternate" hreflang="fr" href="https://www.xpertauth.com/fr/newsletter"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.xpertauth.com/es/newsletter"/>
-  </url>
-  <url>
-    <loc>https://www.xpertauth.com/fr/newsletter</loc>
-    <xhtml:link rel="alternate" hreflang="es" href="https://www.xpertauth.com/es/newsletter"/>
-    <xhtml:link rel="alternate" hreflang="ca" href="https://www.xpertauth.com/ca/newsletter"/>
-    <xhtml:link rel="alternate" hreflang="en" href="https://www.xpertauth.com/en/newsletter"/>
-    <xhtml:link rel="alternate" hreflang="fr" href="https://www.xpertauth.com/fr/newsletter"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.xpertauth.com/es/newsletter"/>
-  </url>
-  <url>
     <loc>https://www.xpertauth.com/es/politica-de-privacidad</loc>
     <xhtml:link rel="alternate" hreflang="es" href="https://www.xpertauth.com/es/politica-de-privacidad"/>
     <xhtml:link rel="alternate" hreflang="ca" href="https://www.xpertauth.com/ca/politica-de-privacidad"/>
