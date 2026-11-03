@@ -5,24 +5,54 @@ import { Toaster } from "@/components/ui/toaster";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { I18nProvider } from "@/i18n/context";
 import Home from "@/pages/home";
-import NotFound from "@/pages/not-found";
 import CustomCursor from "@/components/CustomCursor";
 import CookieBanner from "@/components/CookieBanner";
 import AgentModal, { type ModalObjetivo } from "@/components/AgentModal";
 import AgentChat from "@/components/AgentChat";
-import { useEffect, useRef, useState, createContext, useContext } from "react";
+import { useEffect, useRef, useState, createContext, useContext, lazy, Suspense } from "react";
 import { useLocation } from "wouter";
 import { supabase, tomarAgentePendiente, type Agente } from "@/lib/supabase";
-import SobreNosotros from "@/pages/SobreNosotros";
-import MiHistoria from "@/pages/MiHistoria";
-import TransporteEspecial from "@/pages/TransporteEspecial";
-import Blog from "@/pages/Blog";
-import BlogPost from "@/pages/BlogPost";
-import Newsletter from "@/pages/Newsletter";
-import NewsletterPost from "@/pages/NewsletterPost";
-import PoliticaPrivacidad from "@/pages/PoliticaPrivacidad";
-import AvisoLegal from "@/pages/AvisoLegal";
-import PoliticaCookies from "@/pages/PoliticaCookies";
+
+// ─── Páginas (carga diferida: solo la portada va en el paquete inicial) ───────
+
+const cargas = {
+  SobreNosotros: () => import("@/pages/SobreNosotros"),
+  MiHistoria: () => import("@/pages/MiHistoria"),
+  TransporteEspecial: () => import("@/pages/TransporteEspecial"),
+  Blog: () => import("@/pages/Blog"),
+  BlogPost: () => import("@/pages/BlogPost"),
+  Newsletter: () => import("@/pages/Newsletter"),
+  NewsletterPost: () => import("@/pages/NewsletterPost"),
+  PoliticaPrivacidad: () => import("@/pages/PoliticaPrivacidad"),
+  AvisoLegal: () => import("@/pages/AvisoLegal"),
+  PoliticaCookies: () => import("@/pages/PoliticaCookies"),
+  NotFound: () => import("@/pages/not-found"),
+};
+
+const SobreNosotros = lazy(cargas.SobreNosotros);
+const MiHistoria = lazy(cargas.MiHistoria);
+const TransporteEspecial = lazy(cargas.TransporteEspecial);
+const Blog = lazy(cargas.Blog);
+const BlogPost = lazy(cargas.BlogPost);
+const Newsletter = lazy(cargas.Newsletter);
+const NewsletterPost = lazy(cargas.NewsletterPost);
+const PoliticaPrivacidad = lazy(cargas.PoliticaPrivacidad);
+const AvisoLegal = lazy(cargas.AvisoLegal);
+const PoliticaCookies = lazy(cargas.PoliticaCookies);
+const NotFound = lazy(cargas.NotFound);
+
+// Con la portada ya pintada y el navegador libre, se descargan el resto de páginas
+// para que navegar sea instantáneo, sin pantalla en blanco entre página y página.
+function precargarPaginas() {
+  Object.values(cargas).forEach((cargar) => { cargar().catch(() => {}); });
+}
+if (typeof window !== "undefined") {
+  window.addEventListener("load", () => {
+    const ric = (window as unknown as { requestIdleCallback?: (f: () => void, o?: { timeout: number }) => void }).requestIdleCallback;
+    if (ric) ric(precargarPaginas, { timeout: 4000 });
+    else window.setTimeout(precargarPaginas, 2500);
+  }, { once: true });
+}
 
 // ─── Contexto del agente (accesible desde cualquier componente) ───────────────
 
@@ -84,6 +114,7 @@ function ScrollManager() {
 
 function Router() {
   return (
+    <Suspense fallback={null}>
     <Switch>
       <Route path="/:locale/servicios/transporte-especial" component={TransporteEspecial} />
       <Route path="/:locale/sobre-nosotros" component={SobreNosotros} />
@@ -101,6 +132,7 @@ function Router() {
       </Route>
       <Route component={NotFound} />
     </Switch>
+    </Suspense>
   );
 }
 
