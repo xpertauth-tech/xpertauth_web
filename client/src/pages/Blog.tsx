@@ -5,6 +5,7 @@ import Footer from "@/components/footer";
 import { SHOW_SUBSCRIPTION } from "@/lib/features";
 import ContactModal from "@/components/ContactModal";
 import { portadaImg } from "@/lib/imagenes";
+import { useSeo } from "@/lib/seo";
 
 const PAGE_SIZE = 10;
 
@@ -129,6 +130,7 @@ function formatDate(dateStr: string, locale: string): string {
 }
 
 export default function Blog() {
+  useSeo("blog");
   const params = useParams<{ locale: string }>();
   const locale = params.locale && texts[params.locale] ? params.locale : "es";
   const t = texts[locale];

@@ -1,8 +1,8 @@
-import { useEffect } from "react";
 import { useLocation } from "wouter";
 import { useI18n, useTranslations } from "../i18n/context";
 import Navbar from "@/components/navbar";
 import Footer from "@/components/footer";
+import { useSeo } from "@/lib/seo";
 
 // ─── TRADUCCIONES ─────────────────────────────────────────────────────────────
 
@@ -65,11 +65,12 @@ const translations = {
   },
 };
 
-const TITULOS = {
-  es: "Mi historia — XpertAuth",
-  ca: "La meva història — XpertAuth",
-  en: "My story — XpertAuth",
-  fr: "Mon histoire — XpertAuth",
+// Título de la página para lectores de pantalla y buscadores (h1 oculto: no cambia lo que se ve).
+const TITULO_H1 = {
+  es: "Mi historia: José Luis Echezarreta",
+  ca: "La meva història: José Luis Echezarreta",
+  en: "My story: José Luis Echezarreta",
+  fr: "Mon histoire : José Luis Echezarreta",
 };
 
 // ─── Foto de "Nuestra historia" ───────────────────────────────────────────────
@@ -77,23 +78,20 @@ const FOTO_URL =
   "https://supabase.xpertauth.com/storage/v1/object/public/web-images/equipo/sobre-nosotros_cafe-jose-luis_v1.webp";
 
 export default function MiHistoria() {
+  useSeo("historia");
   const { locale } = useI18n();
   const lang = locale as keyof typeof translations;
   const t = translations[lang] ?? translations.es;
   const { t: tNotFound } = useTranslations("notFound");
   const [, navigate] = useLocation();
 
-  useEffect(() => {
-    const anterior = document.title;
-    document.title = TITULOS[lang] ?? TITULOS.es;
-    return () => { document.title = anterior; };
-  }, [lang]);
 
   return (
     <div className="min-h-screen">
       <Navbar />
 
       <main>
+        <h1 className="sr-only">{TITULO_H1[lang] ?? TITULO_H1.es}</h1>
         <section className="page-top section-y-firma px-6" style={{ background: "#0A0E1A" }}>
           <div
             style={{
