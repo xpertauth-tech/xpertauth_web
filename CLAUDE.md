@@ -56,16 +56,17 @@
 - Restricciones en web.posts: posts_meta_title_max60 y posts_meta_description_max160 (añadidas el 3/11/2026). Para quitarlas: ALTER TABLE web.posts DROP CONSTRAINT posts_meta_title_max60, DROP CONSTRAINT posts_meta_description_max160.
 
 ## LEX — nuevo publicado en producción (desde el 4/11/2026)
-- El LEX nuevo está publicado desde el 4/11/2026 (main = 65c8403; punto de vuelta atrás: etiqueta antes-L15 = d7c43a3, que era la producción anterior). Código: api/_lex.ts (búsqueda y respuesta), api/_lex_prompt.ts (prompt con el núcleo fijo N1–N12) y api/chat.ts (llama a responderLex; NOVA no se tocó).
+- El LEX nuevo está publicado desde el 4/11/2026 (main = 25973df, que es 65c8403 más el arreglo de los imports .js; punto de vuelta atrás: etiqueta antes-L15 = d7c43a3, que era la producción anterior). Código: api/_lex.ts (búsqueda y respuesta), api/_lex_prompt.ts (prompt con el núcleo fijo N1–N12) y api/chat.ts (llama a responderLex; NOVA no se tocó).
 - Cómo funciona: temperatura 0; núcleo fijo en el prompt; búsqueda combinada (pregunta original + pregunta reformulada con Haiku + palabras exactas con la función lex.match_lex_palabras), solo con documentos oficiales (sin paralelos ni resúmenes de IA: se filtran tipo paralelo, PARALELO_* y KT, sin borrarlos de la base), umbral 0,55 y 20 fragmentos; regla de no inventar; LEX no nombra a ninguna persona (la etiqueta de fuente es «Criterio de XpertAuth»).
 - En la web se mantienen los dos avisos del chat de LEX (decisión de José Luis): «LEX está en revisión» arriba y el texto fijo bajo la caja de escribir (client/src/components/AgentChat.tsx). No se quitan sin su orden.
 - **Cualquier cambio en LEX** (prompt, núcleo, búsqueda o datos de la base que lea LEX) **se prueba antes con la batería** (~/Documents/lex-pruebas: l12/run_l12.mjs, las 18 preguntas de bateria.json y la batería de control de 50 preguntas bateria_control.json) **y solo se publica si no empeora** respecto a la versión publicada. Documentos de trabajo en el Escritorio: LEX_nucleo_borrador.md, LEX_bateria.md, LEX_control.md, LEX_prompt_nuevo.txt y LEX_resultados_L14.md.
 - Los fragmentos 1411–1560 de lex.lex_documentos (páginas de la DGT y del SCT y Reglamento (CE) 561/2006) y la función lex.match_lex_palabras son parte de LEX: no tocarlos sin pasar la batería.
+- **api/ es ESM** (package.json lleva "type": "module"): los imports relativos entre archivos de api/ llevan extensión .js (por ejemplo, from "./_lex.js"). El 4/11/2026 la primera publicación (65c8403) dejó /api/chat caído unos minutos por no llevarla (ERR_MODULE_NOT_FOUND); lo arregló 25973df. Antes de publicar cualquier cambio en api/, probar la función en la vista previa de la rama (un POST a /api/chat sin sesión debe dar 401 «Sesión requerida», no 500).
 - Fallos conocidos al publicar (L14): C33 (mezcla las restricciones de la DGT con las de Cataluña), y C6 y C12 incompletas.
 - El L1 (5507cb0) quedó anulado con un commit de reversión (fb0c066, en rebuild/web-nueva y main); no se borra historial.
 - PARALELO_07 es erróneo (dice que las genéricas de la DGT y del SCT tienen los mismos límites; no es así). Los resúmenes de IA confunden a LEX: no se usan.
 - La rama lex-nuevo se conserva como referencia (no borrar).
-- Marcha atrás en un paso: en Vercel, proyecto xpertauth-web, abrir el despliegue dpl_8xkqYZpMHFMauZjZ5juEK1tHYDah (main d7c43a3, el anterior al LEX nuevo) y pulsar «Promote to Production». Alternativa con git: git revert --no-commit b1c440c^..65c8403 en main, commit y push.
+- Marcha atrás en un paso: en Vercel, proyecto xpertauth-web, abrir el despliegue dpl_8xkqYZpMHFMauZjZ5juEK1tHYDah (main d7c43a3, el anterior al LEX nuevo) y pulsar «Promote to Production». Alternativa con git: git revert --no-commit b1c440c^..25973df en main, commit y push.
 - Siguiente proyecto: Vigía 2 (rehacer el Vigía de n8n; punto de partida: Vigia_auditoria.md del Escritorio).
 
 ## Estado actual
