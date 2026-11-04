@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { X, Loader2, CheckCircle, AlertCircle } from "lucide-react";
 import { useTranslations } from "@/i18n/context";
@@ -27,6 +27,16 @@ export default function ContactModal({ open, onClose }: ContactModalProps) {
     reset();
     onClose();
   };
+
+  // Escape cierra el formulario.
+  useEffect(() => {
+    if (!open) return;
+    const alPulsar = (e: KeyboardEvent) => {
+      if (e.key === "Escape") handleClose();
+    };
+    window.addEventListener("keydown", alPulsar);
+    return () => window.removeEventListener("keydown", alPulsar);
+  });
 
   const handleSubmit = async () => {
     if (!form.nombre.trim() || !form.email.trim() || !form.mensaje.trim()) {
