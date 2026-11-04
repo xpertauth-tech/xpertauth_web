@@ -216,16 +216,18 @@ function formatearContexto(frags: Fragmento[]): string {
 
 // Documentos que respaldan cada bloque del núcleo fijo (se muestran en «Fuentes» si el modelo cita su código).
 const CRITERIO_JL: Record<Idioma, string> = {
-  es: "Criterio validado por José Luis (XpertAuth)",
-  ca: "Criteri validat per en José Luis (XpertAuth)",
-  en: "Criterion validated by José Luis (XpertAuth)",
-  fr: "Critère validé par José Luis (XpertAuth)",
+  es: "Criterio de XpertAuth",
+  ca: "Criteri d'XpertAuth",
+  en: "XpertAuth criterion",
+  fr: "Critère d'XpertAuth",
 };
 const D_INSTR = "Instruccion 16 TV-90 Autorizaciones ACC";
 const D_SCT = "SCT Autoritzacions Especials Procediments 2025-2026";
 const D_RGV = "Real Decreto 2822 1998 RGV";
 const D_PJC = "Orden PJC 780 2025 modificacion Anexos RGV";
 const D_ACC_WEB = "DGT Solicitud de Autorización Complementaria de Circulación (web, act. 30-01-2026)";
+const D_SCT_WEB = "SCT Autoritzacions especials de circulació TE-VE (web, act. 04-11-2026)";
+const D_19TV = "Instruccion 19TV-105 Anexo III Velocidad maxima VERTE categoria generica";
 const D_EURO_WEB = "DGT Circulación de conjuntos euromodulares (web, act. 05-05-2026)";
 export const FUENTES_NUCLEO: Record<number, string[] | "criterio"> = {
   1: [D_INSTR, D_SCT],
@@ -237,9 +239,16 @@ export const FUENTES_NUCLEO: Record<number, string[] | "criterio"> = {
   7: "criterio",
   8: ["Real Decreto 1428 2003", "criterio"],
   9: "criterio",
-  10: [D_INSTR, D_SCT, "criterio"],
+  10: [D_INSTR, D_SCT_WEB],
   11: ["Resolucion ISP 300 2026 restricciones circulacion", "Resolucion DGT medidas circulacion 2026"],
-  12: "criterio",
+  12: [D_19TV],
+};
+
+// «Criterio de XpertAuth» solo se muestra si la respuesta trata de verdad del tema del bloque (guarda contra citas erróneas del modelo).
+const TEMA_CRITERIO: Record<number, RegExp> = {
+  7: /seguro/i,
+  8: /amarr|trincaje|sujet|sujec|estiba|cincha/i,
+  9: /itinerario|recorrido|ruta|visor/i,
 };
 
 // Línea [FUENTES:1,3,N2] que escribe el modelo al final: se lee y se quita de la respuesta visible.
@@ -270,21 +279,28 @@ export function extraerFuentesUsadas(
 }
 
 // Fuentes → apartado "Fuentes:" (construido en código, no por el modelo). Una línea por documento, sin duplicados.
-function bloqueFuentes(frags: Fragmento[], nucleo: number[], idioma: Idioma): string {
+function bloqueFuentes(frags: Fragmento[], nucleo: number[], idioma: Idioma, texto: string): string {
   const titulo: Record<Idioma, string> = { es: "Fuentes:", ca: "Fonts:", en: "Sources:", fr: "Sources :" };
   const lineas = new Set<string>();
   for (const f of frags) lineas.add(`- ${nombreLimpio(f)}`);
   for (const n of nucleo) {
     const d = FUENTES_NUCLEO[n];
     if (!d) continue;
-    if (d === "criterio") lineas.add(`- ${CRITERIO_JL[idioma]}`);
-    else for (const x of d) lineas.add(`- ${x === "criterio" ? CRITERIO_JL[idioma] : x}`);
+    const tema = TEMA_CRITERIO[n];
+    const habla = !tema || tema.test(texto);
+    if (d === "criterio") {
+      if (habla) lineas.add(`- ${CRITERIO_JL[idioma]}`);
+    } else for (const x of d) {
+      if (x === "criterio") {
+        if (habla) lineas.add(`- ${CRITERIO_JL[idioma]}`);
+      } else lineas.add(`- ${x}`);
+    }
   }
   if (lineas.size === 0) return "";
   return `\n\n**${titulo[idioma]}**\n${[...lineas].join("\n")}`;
 }
 
-// El modelo añade [BOTON_CITA:...] cuando escala a José Luis (consulta no cubierta).
+// El modelo añade [BOTON_CITA:...] cuando escala a XpertAuth (consulta no cubierta).
 function haEscalado(texto: string): boolean {
   return /\[BOTON_CITA:/.test(texto);
 }
@@ -292,10 +308,10 @@ function haEscalado(texto: string): boolean {
 // ─── Respuestas fijas y clasificador (cuando no hay ningún fragmento) ────────
 
 const RESPUESTA_SIN_RAG: Record<Idioma, string> = {
-  es: "Eso no lo tengo en mi base normativa y prefiero no responderte de memoria. Si necesitas orientación, puedes contactar con José Luis.\n\n[BOTON_CITA:Consultar con José Luis]",
-  ca: "Això no ho tinc a la meva base normativa i prefereixo no respondre't de memòria. Si necessites orientació, pots contactar amb en José Luis.\n\n[BOTON_CITA:Consultar amb José Luis]",
-  en: "That isn't in my regulatory base, and I'd rather not answer from memory. If you need guidance, you can contact José Luis.\n\n[BOTON_CITA:Consult José Luis]",
-  fr: "Cela ne figure pas dans ma base réglementaire et je préfère ne pas vous répondre de mémoire. Si vous avez besoin d'être orienté, vous pouvez contacter José Luis.\n\n[BOTON_CITA:Consulter José Luis]",
+  es: "Eso no lo tengo en mi base normativa y prefiero no responderte de memoria. Si necesitas orientación, puedes contactar con XpertAuth.\n\n[BOTON_CITA:Consultar con XpertAuth]",
+  ca: "Això no ho tinc a la meva base normativa i prefereixo no respondre't de memòria. Si necessites orientació, pots contactar amb XpertAuth.\n\n[BOTON_CITA:Consultar amb XpertAuth]",
+  en: "That isn't in my regulatory base, and I'd rather not answer from memory. If you need guidance, you can contact XpertAuth.\n\n[BOTON_CITA:Consult XpertAuth]",
+  fr: "Cela ne figure pas dans ma base réglementaire et je préfère ne pas vous répondre de mémoire. Si vous avez besoin d'être orienté, vous pouvez contacter XpertAuth.\n\n[BOTON_CITA:Consulter XpertAuth]",
 };
 
 const RESPUESTA_FUERA_DE_TEMA: Record<Idioma, string> = {
@@ -392,7 +408,7 @@ export async function responderLex(
   let fuentes = "";
   let mostrados: "usados" | "ninguno" = "ninguno";
   if (hayLinea && (frag.length > 0 || nucleo.length > 0)) {
-    fuentes = bloqueFuentes(frag.map((n) => fragmentos[n - 1]), nucleo, p.idioma);
+    fuentes = bloqueFuentes(frag.map((n) => fragmentos[n - 1]), nucleo, p.idioma, limpio);
     mostrados = "usados";
   }
   // Sin línea [FUENTES] no se lista nada: la lista de «todos los recuperados» mostraba documentos que no respaldaban la respuesta.
