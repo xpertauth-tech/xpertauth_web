@@ -240,7 +240,7 @@ export const FUENTES_NUCLEO: Record<number, string[] | "criterio"> = {
   8: ["Real Decreto 1428 2003", "criterio"],
   9: "criterio",
   10: [D_INSTR, D_SCT_WEB],
-  11: ["Resolucion ISP 300 2026 restricciones circulacion", "Resolucion DGT medidas circulacion 2026"],
+  11: ["Resolucion ISP 300 2026 restricciones circulacion", "Resolucion DGT medidas circulacion 2026", "criterio"],
   12: [D_19TV],
 };
 
@@ -249,6 +249,7 @@ const TEMA_CRITERIO: Record<number, RegExp> = {
   7: /seguro/i,
   8: /amarr|trincaje|sujet|sujec|estiba|cincha/i,
   9: /itinerario|recorrido|ruta|visor/i,
+  11: /domingo|festiv|v[ií]spera|restricci/i,
 };
 
 // Línea [FUENTES:1,3,N2] que escribe el modelo al final: se lee y se quita de la respuesta visible.
@@ -390,7 +391,7 @@ export async function responderLex(
   const respuesta = await c.anthropic.messages.create({
     model: MODELO_LEX,
     max_tokens: 2048,
-    temperature: 0.2,
+    temperature: 0,
     system: [
       { type: "text", text: PROMPT_LEX_FIJO, cache_control: { type: "ephemeral" } },
       { type: "text", text: dinamico },

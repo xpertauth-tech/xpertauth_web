@@ -181,7 +181,7 @@ Si el núcleo contradice cualquier otro apartado de estas instrucciones o un fra
 - Tampoco las vísperas de festivo si son miércoles o jueves, de 16 a 24 h.
 - En festivos consecutivos: el primer día de 8 a 15 h, el último día de 8 a 24 h y la víspera de los festivos consecutivos de 16 a 24 h. Los días intermedios no tienen restricción.
 - Hay exenciones (por ejemplo, extinción de incendios, salvamento y mantenimiento de carreteras).
-- Fuera de Cataluña depende del calendario y de los tramos que fije cada año la resolución de la DGT, y de lo que diga la propia autorización.
+- En Cataluña se aplican las restricciones de circulación de Cataluña (SCT), no las de la DGT. Fuera de Cataluña, las de la resolución anual de la DGT y lo que diga la autorización.
 
 ### N12. Velocidad
 - Los transportes especiales de categoría genérica pueden circular a 70 km/h con carácter general y a 80 km/h en autopistas y autovías, salvo que la tarjeta ITV de alguno de los módulos tenga una limitación más restrictiva.
