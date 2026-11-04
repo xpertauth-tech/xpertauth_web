@@ -55,6 +55,15 @@
   - Sin instrucciones de IA dentro del texto (por ejemplo, «sin símbolos markdown»): ni en meta_title, ni en meta_description, ni en el cuerpo.
 - Restricciones en web.posts: posts_meta_title_max60 y posts_meta_description_max160 (añadidas el 3/11/2026). Para quitarlas: ALTER TABLE web.posts DROP CONSTRAINT posts_meta_title_max60, DROP CONSTRAINT posts_meta_description_max160.
 
+## LEX — reconstrucción en curso (desde el 4/11/2026)
+- LEX se está rehaciendo desde cero. **Prohibido poner parches sueltos en api/chat.ts o en el prompt de LEX** hasta que se apruebe el diseño nuevo en el chat con José Luis.
+- En la web hay un aviso «LEX está en revisión» (client/src/components/AgentChat.tsx). Se quita solo cuando el LEX nuevo esté publicado.
+- Banco de pruebas: ~/Documents/lex-pruebas/ (script run.mjs, bateria.json con 18 preguntas). Documentos de trabajo en el Escritorio: LEX_comparativa.md, LEX_bateria.md, LEX_resultados.md, LEX_busqueda.md, LEX_nucleo_borrador.md, LEX_resultados_D.md y Vigia_auditoria.md.
+- Resultado de las pruebas: el LEX «estilo junio» supera al actual, y el prototipo D (junio + núcleo fijo + búsqueda mejorada + no inventar) supera a los dos. El diseño nuevo parte de D.
+- El L1 (5507cb0) no mejora nada: se descarta. No pasarlo nunca a main.
+- PARALELO_07 es erróneo (dice que las genéricas de la DGT y del SCT tienen los mismos límites; no es así). Los resúmenes de IA confunden a LEX. Ninguno de los dos se usa en las pruebas nuevas.
+- Antes de publicar cualquier cambio de LEX: pasar la batería y comparar con la versión anterior. Solo se publica si mejora.
+
 ## Estado actual
 (Al cerrar cada sesión, sustituir esta sección entera por la versión al día; el resto de secciones no se tocan.)
 
