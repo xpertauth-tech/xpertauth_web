@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from "react";
 import ExternalMark, { useExternalLinkProps } from "@/components/external-mark";
-import { X, Send, Loader2, Calendar } from "lucide-react";
+import { X, Send, Loader2, Calendar, AlertTriangle } from "lucide-react";
 import ContactModal from "./ContactModal";
 import { supabase } from "@/lib/supabase";
 import { useI18n } from "@/i18n/context";
@@ -60,6 +60,9 @@ export const TEXTOS: Record<Idioma, {
   placeholderLex: string;
   placeholderNova: string;
   disclaimer: (agente: Agente) => string;
+  revisionPre: string;
+  revisionLink: string;
+  revisionPost: string;
   pensando: string;
   errorConexion: string;
   limitePre: string;
@@ -80,6 +83,9 @@ export const TEXTOS: Record<Idioma, {
     placeholderLex: "Escribe tu consulta normativa…",
     placeholderNova: "Pregúntame sobre IA para tu empresa…",
     disclaimer: (a) => `${a} es IA y puede equivocarse. Verifica siempre la información antes de actuar.`,
+    revisionPre: "LEX está en revisión. Mientras lo mejoramos, sus respuestas pueden contener errores. Para casos importantes, ",
+    revisionLink: "cuéntanos tu caso",
+    revisionPost: ".",
     pensando: "Pensando…",
     errorConexion: "Lo siento, ha habido un problema al conectar. Por favor, inténtalo de nuevo en unos segundos.",
     limitePre: "Has usado tus ",
@@ -100,6 +106,9 @@ export const TEXTOS: Record<Idioma, {
     placeholderLex: "Escriu la teva consulta normativa…",
     placeholderNova: "Pregunta'm sobre IA per a la teva empresa…",
     disclaimer: (a) => `${a} és IA i es pot equivocar. Verifica sempre la informació abans d'actuar.`,
+    revisionPre: "LEX està en revisió. Mentre el millorem, les seves respostes poden contenir errors. Per a casos importants, ",
+    revisionLink: "explica'ns el teu cas",
+    revisionPost: ".",
     pensando: "Pensant…",
     errorConexion: "Ho sento, hi ha hagut un problema en connectar. Torna-ho a provar d'aquí a uns segons.",
     limitePre: "Has fet servir les teves ",
@@ -120,6 +129,9 @@ export const TEXTOS: Record<Idioma, {
     placeholderLex: "Write your regulatory question…",
     placeholderNova: "Ask me about AI for your business…",
     disclaimer: (a) => `${a} is AI and can make mistakes. Always verify the information before acting on it.`,
+    revisionPre: "LEX is under review. While we improve it, its answers may contain errors. For important cases, ",
+    revisionLink: "tell us about your case",
+    revisionPost: ".",
     pensando: "Thinking…",
     errorConexion: "Sorry, there was a problem connecting. Please try again in a few seconds.",
     limitePre: "You have used your ",
@@ -140,6 +152,9 @@ export const TEXTOS: Record<Idioma, {
     placeholderLex: "Écrivez votre question réglementaire…",
     placeholderNova: "Posez-moi vos questions sur l'IA pour votre entreprise…",
     disclaimer: (a) => `${a} est une IA et peut se tromper. Vérifiez toujours les informations avant d'agir.`,
+    revisionPre: "LEX est en cours de révision. Pendant que nous l'améliorons, ses réponses peuvent contenir des erreurs. Pour les cas importants, ",
+    revisionLink: "racontez-nous votre cas",
+    revisionPost: ".",
     pensando: "Réflexion…",
     errorConexion: "Désolé, un problème de connexion est survenu. Veuillez réessayer dans quelques secondes.",
     limitePre: "Vous avez utilisé vos ",
@@ -515,6 +530,35 @@ export default function AgentChat({
             <X size={18} />
           </button>
         </div>
+
+        {/* ── AVISO LEX EN REVISIÓN (solo LEX) ── */}
+        {agente === "LEX" && (
+          <div
+            role="note"
+            className="flex items-start gap-2.5 px-4 py-3 flex-shrink-0 text-xs leading-snug"
+            style={{
+              backgroundColor: "#0F1628",
+              borderBottom: "1px solid rgba(255,255,255,0.07)",
+              borderLeft: "3px solid #E8620A",
+              color: "rgba(255,255,255,0.85)",
+            }}
+            data-testid="aviso-lex-revision"
+          >
+            <AlertTriangle size={14} className="flex-shrink-0 mt-0.5" style={{ color: "#E8620A" }} aria-hidden="true" />
+            <p>
+              {t.revisionPre}
+              <button
+                type="button"
+                onClick={() => setContactOpen(true)}
+                className="underline underline-offset-2 hover:text-white transition-colors"
+                style={{ color: "#E8620A" }}
+              >
+                {t.revisionLink}
+              </button>
+              {t.revisionPost}
+            </p>
+          </div>
+        )}
 
         {/* ── MENSAJES ── */}
         <div className="flex-1 overflow-y-auto px-4 py-5 space-y-4">
