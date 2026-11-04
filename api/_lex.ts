@@ -244,12 +244,21 @@ export const FUENTES_NUCLEO: Record<number, string[] | "criterio"> = {
   12: [D_19TV],
 };
 
-// «Criterio de XpertAuth» solo se muestra si la respuesta trata de verdad del tema del bloque (guarda contra citas erróneas del modelo).
-const TEMA_CRITERIO: Record<number, RegExp> = {
+// Un bloque del núcleo solo aparece en «Fuentes» (y «Criterio de XpertAuth» solo se muestra) si la respuesta trata de verdad de su tema:
+// guarda contra citas erróneas del modelo.
+const TEMA_NUCLEO: Record<number, RegExp> = {
+  1: /gen[eé]rica|espec[ií]fica|excepcional|autorizaci/i,
+  2: /m[aá]xim|largo|longitud|ancho|anchura|alto|altura|masa|peso|metros/i,
+  3: /DGT|SCT|autoriza|administraci|Gobierno|Navarra|Vasco|Catalu|Cataluña/i,
+  4: /piloto|escolta/i,
+  5: /euro-?modular|duotr|megacami/i,
+  6: /pieza|indivisible|carga|unitari/i,
   7: /seguro/i,
   8: /amarr|trincaje|sujet|sujec|estiba|cincha/i,
   9: /itinerario|recorrido|ruta|visor/i,
+  10: /comunic|salida|viaje|Mossos/i,
   11: /domingo|festiv|v[ií]spera|restricci/i,
+  12: /velocidad|km\/h/i,
 };
 
 // Línea [FUENTES:1,3,N2] que escribe el modelo al final: se lee y se quita de la respuesta visible.
@@ -287,8 +296,9 @@ function bloqueFuentes(frags: Fragmento[], nucleo: number[], idioma: Idioma, tex
   for (const n of nucleo) {
     const d = FUENTES_NUCLEO[n];
     if (!d) continue;
-    const tema = TEMA_CRITERIO[n];
+    const tema = TEMA_NUCLEO[n];
     const habla = !tema || tema.test(texto);
+    if (!habla) continue;
     if (d === "criterio") {
       if (habla) lineas.add(`- ${CRITERIO_JL[idioma]}`);
     } else for (const x of d) {
