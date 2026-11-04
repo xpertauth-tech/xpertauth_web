@@ -2,7 +2,7 @@ import type { VercelRequest, VercelResponse } from "@vercel/node";
 import Anthropic from "@anthropic-ai/sdk";
 import { createClient } from "@supabase/supabase-js";
 import OpenAI from "openai";
-import { responderLex } from "./_lex";
+import { responderLex } from "./_lex.js";
 
 // ─── Clientes ────────────────────────────────────────────────────────────────
 

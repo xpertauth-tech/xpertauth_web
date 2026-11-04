@@ -3,7 +3,7 @@
 import type Anthropic from "@anthropic-ai/sdk";
 import type OpenAI from "openai";
 import type { SupabaseClient } from "@supabase/supabase-js";
-import { PROMPT_LEX_FIJO } from "./_lex_prompt";
+import { PROMPT_LEX_FIJO } from "./_lex_prompt.js";
 
 export type Idioma = "es" | "ca" | "en" | "fr";
 
