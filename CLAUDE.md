@@ -55,14 +55,18 @@
   - Sin instrucciones de IA dentro del texto (por ejemplo, «sin símbolos markdown»): ni en meta_title, ni en meta_description, ni en el cuerpo.
 - Restricciones en web.posts: posts_meta_title_max60 y posts_meta_description_max160 (añadidas el 3/11/2026). Para quitarlas: ALTER TABLE web.posts DROP CONSTRAINT posts_meta_title_max60, DROP CONSTRAINT posts_meta_description_max160.
 
-## LEX — reconstrucción en curso (desde el 4/11/2026)
-- LEX se está rehaciendo desde cero. **Prohibido poner parches sueltos en api/chat.ts o en el prompt de LEX** hasta que se apruebe el diseño nuevo en el chat con José Luis.
-- En la web hay un aviso «LEX está en revisión» (client/src/components/AgentChat.tsx). Se quita solo cuando el LEX nuevo esté publicado.
-- Banco de pruebas: ~/Documents/lex-pruebas/ (script run.mjs, bateria.json con 18 preguntas). Documentos de trabajo en el Escritorio: LEX_comparativa.md, LEX_bateria.md, LEX_resultados.md, LEX_busqueda.md, LEX_nucleo_borrador.md, LEX_resultados_D.md y Vigia_auditoria.md.
-- Resultado de las pruebas: el LEX «estilo junio» supera al actual, y el prototipo D (junio + núcleo fijo + búsqueda mejorada + no inventar) supera a los dos. El diseño nuevo parte de D.
-- El L1 (5507cb0) no mejora nada: se descarta. No pasarlo nunca a main.
-- PARALELO_07 es erróneo (dice que las genéricas de la DGT y del SCT tienen los mismos límites; no es así). Los resúmenes de IA confunden a LEX. Ninguno de los dos se usa en las pruebas nuevas.
-- Antes de publicar cualquier cambio de LEX: pasar la batería y comparar con la versión anterior. Solo se publica si mejora.
+## LEX — nuevo publicado en producción (desde el 4/11/2026)
+- El LEX nuevo está publicado desde el 4/11/2026 (main = 65c8403; punto de vuelta atrás: etiqueta antes-L15 = d7c43a3, que era la producción anterior). Código: api/_lex.ts (búsqueda y respuesta), api/_lex_prompt.ts (prompt con el núcleo fijo N1–N12) y api/chat.ts (llama a responderLex; NOVA no se tocó).
+- Cómo funciona: temperatura 0; núcleo fijo en el prompt; búsqueda combinada (pregunta original + pregunta reformulada con Haiku + palabras exactas con la función lex.match_lex_palabras), solo con documentos oficiales (sin paralelos ni resúmenes de IA: se filtran tipo paralelo, PARALELO_* y KT, sin borrarlos de la base), umbral 0,55 y 20 fragmentos; regla de no inventar; LEX no nombra a ninguna persona (la etiqueta de fuente es «Criterio de XpertAuth»).
+- En la web se mantienen los dos avisos del chat de LEX (decisión de José Luis): «LEX está en revisión» arriba y el texto fijo bajo la caja de escribir (client/src/components/AgentChat.tsx). No se quitan sin su orden.
+- **Cualquier cambio en LEX** (prompt, núcleo, búsqueda o datos de la base que lea LEX) **se prueba antes con la batería** (~/Documents/lex-pruebas: l12/run_l12.mjs, las 18 preguntas de bateria.json y la batería de control de 50 preguntas bateria_control.json) **y solo se publica si no empeora** respecto a la versión publicada. Documentos de trabajo en el Escritorio: LEX_nucleo_borrador.md, LEX_bateria.md, LEX_control.md, LEX_prompt_nuevo.txt y LEX_resultados_L14.md.
+- Los fragmentos 1411–1560 de lex.lex_documentos (páginas de la DGT y del SCT y Reglamento (CE) 561/2006) y la función lex.match_lex_palabras son parte de LEX: no tocarlos sin pasar la batería.
+- Fallos conocidos al publicar (L14): C33 (mezcla las restricciones de la DGT con las de Cataluña), y C6 y C12 incompletas.
+- El L1 (5507cb0) quedó anulado con un commit de reversión (fb0c066, en rebuild/web-nueva y main); no se borra historial.
+- PARALELO_07 es erróneo (dice que las genéricas de la DGT y del SCT tienen los mismos límites; no es así). Los resúmenes de IA confunden a LEX: no se usan.
+- La rama lex-nuevo se conserva como referencia (no borrar).
+- Marcha atrás en un paso: en Vercel, proyecto xpertauth-web, abrir el despliegue dpl_8xkqYZpMHFMauZjZ5juEK1tHYDah (main d7c43a3, el anterior al LEX nuevo) y pulsar «Promote to Production». Alternativa con git: git revert --no-commit b1c440c^..65c8403 en main, commit y push.
+- Siguiente proyecto: Vigía 2 (rehacer el Vigía de n8n; punto de partida: Vigia_auditoria.md del Escritorio).
 
 ## Estado actual
 (Al cerrar cada sesión, sustituir esta sección entera por la versión al día; el resto de secciones no se tocan.)
@@ -113,7 +117,7 @@ Pendiente (rotación):
 
 Pendiente (resto):
 - SIGUIENTE PASO DEL GEO (decidido por José Luis, otra sesión): prerenderizado en la compilación (opción A) con Deploy Hook de Vercel llamado desde n8n al publicar un artículo, para que el HTML que reciben los rastreadores sin JavaScript ya lleve textos, título y descripción de cada página (72 HTML: 32 fijas + 40 artículos). Detalles del estudio: render con react-dom/server y wouter (Router ssrPath), revisar los ~26 ficheros que usan window/document/localStorage, precargar datos del blog, mantener createRoot (sin hidratar) para no arriesgar animaciones. Interruptor PRERENDER=0 para deshacerlo. Después, en este orden: llms.txt, ard.json y JSON-LD (con el estatus «Asociación en proceso de estudio de constitución», sin actividad comercial).
-- L1 (5507cb0) descartado el 4/11/2026; ver sección LEX — reconstrucción en curso.
+- L1 (5507cb0) descartado el 4/11/2026; ver sección LEX — nuevo publicado en producción.
 - Comprobar el enlace en LinkedIn (Post Inspector) y en WhatsApp. Con la og-image nueva: refrescar con Post Inspector para que LinkedIn deje de mostrar la antigua.
 
 Modo de trabajo desde ahora: main es producción. Cada cambio se prueba en rebuild/web-nueva y luego se pasa a main en avance rápido (git merge --ff-only).
