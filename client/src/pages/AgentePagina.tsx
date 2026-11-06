@@ -37,7 +37,7 @@ function AgentePagina({ agente }: { agente: Agente }) {
           className="px-4 sm:px-6 lg:px-8 pt-[68px] sm:pt-[84px] pb-4 bg-obsidian flex flex-col"
           style={{ height: "var(--alto-pantalla, 100dvh)", minHeight: 480 }}
         >
-          <div className="w-full max-w-4xl mx-auto flex flex-col flex-1 min-h-0 gap-3 pt-3">
+          <div className="w-full max-w-5xl mx-auto flex flex-col flex-1 min-h-0 gap-3 pt-3">
             <div className="flex items-center gap-4 flex-shrink-0">
               <div
                 className="w-14 h-14 sm:w-16 sm:h-16 rounded-2xl overflow-hidden flex-shrink-0"
