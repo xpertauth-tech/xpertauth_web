@@ -71,6 +71,17 @@
 
 ## Rotación de claves
 - Tras rotar claves, hacer siempre una pregunta real a LEX y NOVA en producción. El 3/11 se pegó la anon en SUPABASE_SERVICE_KEY y el chat estuvo caído hasta el 6/11.
+- En n8n nunca se escriben claves en el código: siempre credenciales de n8n. (Revisado el 6/11/2026: 0 claves escritas en los 35 flujos. La nueva v2 del Vigía Ingestar y las llamadas a Supabase, OpenAI y Anthropic usan credenciales; para REST de Supabase, que exige las cabeceras apikey y Authorization, existe la credencial Custom Auth «Supabase Service Role (REST)».)
+
+### Qué clave se usa dónde (solo los 4 últimos caracteres; estado al 6/11/2026)
+- Supabase service_role …nqAM: Vercel xpertauth-web (SUPABASE_SERVICE_KEY), ~/Documents/xpertauth_web/.env.local, servidor de Helsinki, n8n («Supabase Service Role» para Storage y «Supabase Service Role (REST)» para REST).
+- Supabase anon …AA8g: Vercel xpertauth-web (VITE_SUPABASE_ANON_KEY), altitud y deca-app-xpertauth (DECA_SUPABASE_ANON_KEY).
+- Anthropic …CgAA: n8n («Anthropic API Key»), /opt/supabase/docker/.env de Helsinki (ANTHROPIC_API_KEY, servicio functions) y Vercel xpertauth-web. Otra clave, …BwAA, está en ~/Documents/lex-pruebas/.env (batería de LEX).
+- OpenAI …paYA: n8n («OpenAi account»), Vercel xpertauth-web y ~/Documents/xpertauth_web_supabase/.env (los 3 scripts ingestar_*.py la leen de ahí; .env está en su .gitignore). Otra clave, …wboA, está en ~/Documents/xpertauth_web/.env.local.
+- Resend: n8n («Header Auth para Resend», …aQWR) y Vercel xpertauth-web (RESEND_API_KEY, secreta). La cuenta principal solo tiene las claves «supabase-auth» y «xpertauth-web-contacto». La …moxc es de la cuenta sin uso «xpertauth.tools»: José Luis la borra allí.
+- Tokens propios, aleatorios y solo en credenciales de n8n: «Helsinki SQL Header Auth» (X-Helsinki-Token, …OHAP; webhook del SQL Proxy y todos los flujos que lo llaman) y «Vigía Ingestar Header Auth» (X-Vigia-Token, …sUJY; webhook vigia-ingestar-v2 y flujo Aprobar).
+- REVOCADAS el 6/11/2026: OpenAI …OoQA e …IzYA, Anthropic …jwAA. Tokens viejos (…2026) rechazados.
+- Vigía Ingestar v2 (n8n, id VigIngV2Helsinki01, webhook vigia-ingestar-v2): sigue generando fragmentos «paralelo» en cada ingesta (decisión del 4/11: no deberían generarse); se corrige en el Vigía 2. El Panel, Aprobar y Rechazar son enlaces públicos sin contraseña (también para el Vigía 2).
 
 ## Estado actual
 (Al cerrar cada sesión, sustituir esta sección entera por la versión al día; el resto de secciones no se tocan.)
