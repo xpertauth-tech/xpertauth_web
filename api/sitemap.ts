@@ -16,6 +16,8 @@ const RUTAS = [
   "/sobre-nosotros",
   "/mi-historia",
   "/blog",
+  "/lex",
+  "/nova",
   "/politica-de-privacidad",
   "/aviso-legal",
   "/cookies",
