@@ -179,9 +179,9 @@ function parsearBotones(texto: string): { textoLimpio: string; botones: BotonCon
   const botones: BotonContextual[] = [];
   let textoLimpio = texto;
 
-  // [BOTON_SCT:Label:URL]
+  // [BOTON_SCT:Label:URL] (el modelo a veces escribe BOTON_DGT para el botón de la DGT: se acepta igual)
   textoLimpio = textoLimpio.replace(
-    /\[BOTON_SCT:([^:]+):([^\]]+)\]/g,
+    /\[BOTON_(?:SCT|DGT):([^:\]]+):([^\]]+)\]/g,
     (_, label, url) => {
       botones.push({ tipo: "SCT", label: label.trim(), url: url.trim() });
       return "";
