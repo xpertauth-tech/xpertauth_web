@@ -89,11 +89,13 @@
 ### Próxima sesión, en este orden
 1. Verificación en dos pasos con la app Contraseñas de Apple (Vercel, GitHub, Google, OpenAI, Resend). La hace José Luis paso a paso.
 2. Cerrar al exterior los puertos 5433, 6543, 9000 y 3001 de Helsinki, comprobando antes qué los usa. (Ojo: el 3/11 un escaneo TCP completo desde el Mac ya mostraba que desde fuera solo responden 22, 80 y 443, con esos puertos publicados solo en 127.0.0.1; el primer paso es comprobar el estado real.)
-3. Rediseño de LEX y NOVA.
+3. Rediseño de LEX y NOVA, Fase 2: «Así trabaja LEX» en la portada (plan y boceto en el chat antes de escribir código). Después, Fase 3: franja de NOVA en la portada.
 4. Vigía 2.
 
-### Rediseño LEX / NOVA (decidido; falta plan y boceto en el chat antes de tocar código)
-- Página propia para cada agente (/lex y /nova) con el chat a pantalla completa.
+### Rediseño LEX / NOVA (Fase 1 HECHA el 6/11; Fases 2 y 3 sin empezar: plan y boceto en el chat antes de tocar código)
+- Fase 1 (hecha, en producción, main = e31ad0d): páginas /:idioma/lex y /:idioma/nova (client/src/pages/AgentePagina.tsx) con el chat en una sola pantalla (cabecera compacta, aviso «LEX está en revisión» fino, mensajes con scroll dentro del chat, caja siempre visible, ejemplos pulsables que rellenan la caja y desaparecen tras la primera pregunta, indicador de espera con frases que cambian a los 4 y 8 s). Sin sesión: botón «Entra con Google…» y, al volver, se regresa a /lex o /nova. El panel lateral ya no existe; los botones «Pregunta a LEX / NOVA» (abrirAgente en App.tsx) navegan a las páginas. AgentChat.tsx exporta ChatAgente (por defecto), Burbuja, TEXTOS, AGENTE_CONFIG y AvisoLexRevision; AgentModal solo sirve a «Regístrate» y exporta TEXTOS_ACCESO (consentimiento). /lex y /nova están en el sitemap. Retorno de Google permitido por ADDITIONAL_REDIRECT_URLS (https://xpertauth.com/**, www y xpertauth-*-xpertauth-tech.vercel.app/**). Pendiente de José Luis: revisar la bienvenida de los agentes y las traducciones CA/EN/FR de los textos nuevos y de los SEO de /lex y /nova.
+- Fase 2: «LEX en acción» pasa a «Así trabaja LEX» en la portada (abajo). Fase 3: franja de NOVA.
+- (Decidido desde el principio) Página propia para cada agente (/lex y /nova) con el chat a pantalla completa.
 - En la portada, ejemplo real completo sin caja de escribir ni cortes.
 - Animación de entrada única: «LEX ve cómo piensa» (pregunta → fuentes → respuesta → sello de fuentes) y «NOVA: del caos al orden».
 - NOVA con sección propia.
