@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import Navbar from "@/components/navbar";
 import Footer from "@/components/footer";
 import ChatAgente, { AGENTE_CONFIG, AvisoLexRevision, TEXTOS, type Idioma } from "@/components/AgentChat";
@@ -13,34 +14,49 @@ function AgentePagina({ agente }: { agente: Agente }) {
   const idioma: Idioma = locale === "ca" || locale === "en" || locale === "fr" ? locale : "es";
   const t = TEXTOS[idioma];
   const config = AGENTE_CONFIG[agente];
+  // En móvil el teclado reduce la pantalla visible: la página se ajusta a ella para que la caja de escribir no quede tapada.
+  useEffect(() => {
+    const vv = window.visualViewport;
+    if (!vv) return;
+    const ajustar = () => document.documentElement.style.setProperty("--alto-pantalla", `${vv.height}px`);
+    ajustar();
+    vv.addEventListener("resize", ajustar);
+    return () => {
+      vv.removeEventListener("resize", ajustar);
+      document.documentElement.style.removeProperty("--alto-pantalla");
+    };
+  }, []);
+
   const frase = agente === "LEX" ? t.fraseLex : t.fraseNova;
 
   return (
     <div className="min-h-screen bg-obsidian text-pure font-sans">
       <Navbar />
       <main>
-        <section className="cabecera-corta px-4 sm:px-6 lg:px-8 bg-obsidian">
-          <div className="max-w-4xl mx-auto flex flex-col items-center">
-            <div
-              className="w-24 h-24 sm:w-32 sm:h-32 rounded-3xl overflow-hidden mb-6"
-              style={{ backgroundColor: config.colorBg, border: `1px solid ${config.colorBorder}` }}
-            >
-              <img
-                src={config.avatarGrande}
-                alt={agente}
-                width={256}
-                height={256}
-                decoding="async"
-                className="w-full h-full object-cover"
-              />
+        <section
+          className="px-4 sm:px-6 lg:px-8 pt-[68px] sm:pt-[84px] pb-4 bg-obsidian flex flex-col"
+          style={{ height: "var(--alto-pantalla, 100dvh)", minHeight: 480 }}
+        >
+          <div className="w-full max-w-4xl mx-auto flex flex-col flex-1 min-h-0 gap-3 pt-3">
+            <div className="flex items-center gap-4 flex-shrink-0">
+              <div
+                className="w-14 h-14 sm:w-16 sm:h-16 rounded-2xl overflow-hidden flex-shrink-0"
+                style={{ backgroundColor: config.colorBg, border: `1px solid ${config.colorBorder}` }}
+              >
+                <img
+                  src={config.avatarGrande}
+                  alt={agente}
+                  width={128}
+                  height={128}
+                  decoding="async"
+                  className="w-full h-full object-cover"
+                />
+              </div>
+              <div className="min-w-0">
+                <h1 className="text-xl sm:text-2xl font-bold leading-tight grad-title">{agente}</h1>
+                <p className="text-sm sm:text-base text-white/70 leading-snug">{frase}</p>
+              </div>
             </div>
-            <h1 className="t-h1 grad-title mb-4">{agente}</h1>
-            <p className="t-lead text-white/70 max-w-2xl mx-auto">{frase}</p>
-          </div>
-        </section>
-
-        <section className="px-4 sm:px-6 lg:px-8 pb-16 sm:pb-24 bg-obsidian">
-          <div className="max-w-4xl mx-auto space-y-4">
             {agente === "LEX" && <AvisoLexRevision />}
             <ChatAgente agente={agente} />
           </div>

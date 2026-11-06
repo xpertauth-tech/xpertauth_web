@@ -399,7 +399,7 @@ export function AvisoLexRevision() {
     <>
       <div
         role="note"
-        className="flex items-start gap-2.5 px-4 py-3 text-sm leading-snug rounded-xl text-left"
+        className="flex items-start gap-2 px-3 py-1.5 text-xs leading-snug rounded-lg text-left"
         style={{
           backgroundColor: "#0F1628",
           border: "1px solid rgba(255,255,255,0.07)",
@@ -408,7 +408,7 @@ export function AvisoLexRevision() {
         }}
         data-testid="aviso-lex-revision"
       >
-        <AlertTriangle size={16} className="flex-shrink-0 mt-0.5" style={{ color: "#E8620A" }} aria-hidden="true" />
+        <AlertTriangle size={14} className="flex-shrink-0 mt-px" style={{ color: "#E8620A" }} aria-hidden="true" />
         <p>
           {t.revisionPre}
           <button
@@ -579,12 +579,10 @@ export default function ChatAgente({ agente }: ChatAgenteProps) {
   return (
     <>
       <div
-        className="flex flex-col w-full rounded-2xl overflow-hidden"
+        className="flex flex-col w-full flex-1 min-h-0 rounded-2xl overflow-hidden"
         style={{
           backgroundColor: "#0A0E1A",
           border: `1px solid ${config.colorBorder}`,
-          height: "min(72vh, 720px)",
-          minHeight: 480,
         }}
         data-testid={`chat-${agente.toLowerCase()}`}
       >
