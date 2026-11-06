@@ -69,6 +69,9 @@
 - Marcha atrás en un paso: en Vercel, proyecto xpertauth-web, abrir el despliegue dpl_8xkqYZpMHFMauZjZ5juEK1tHYDah (main d7c43a3, el anterior al LEX nuevo) y pulsar «Promote to Production». Alternativa con git: git revert --no-commit b1c440c^..25973df en main, commit y push.
 - Siguiente proyecto: Vigía 2 (rehacer el Vigía de n8n; punto de partida: Vigia_auditoria.md del Escritorio).
 
+## Rotación de claves
+- Tras rotar claves, hacer siempre una pregunta real a LEX y NOVA en producción. El 3/11 se pegó la anon en SUPABASE_SERVICE_KEY y el chat estuvo caído hasta el 6/11.
+
 ## Estado actual
 (Al cerrar cada sesión, sustituir esta sección entera por la versión al día; el resto de secciones no se tocan.)
 
