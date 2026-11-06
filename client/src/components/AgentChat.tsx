@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from "react";
 import ExternalMark, { useExternalLinkProps } from "@/components/external-mark";
-import { Send, Loader2, Calendar, AlertTriangle } from "lucide-react";
+import { Send, Calendar, AlertTriangle } from "lucide-react";
 import ContactModal from "./ContactModal";
 import { supabase, entrarConGoogle } from "@/lib/supabase";
 import { TEXTOS_ACCESO } from "./AgentModal";
@@ -75,6 +75,8 @@ export const TEXTOS: Record<Idioma, {
   ejemplosNova: [string, string];
   entrarLex: string;
   entrarNova: string;
+  esperaLex: [string, string, string];
+  esperaNova: [string, string];
 }> = {
   es: {
     taglineLex: "Normativa de transporte especial",
@@ -104,6 +106,8 @@ export const TEXTOS: Record<Idioma, {
     ejemplosNova: ["¿Cómo organizo los vencimientos de mis vehículos?", "¿Por dónde empiezo a usar la IA en mi empresa?"],
     entrarLex: "Entra con Google para preguntar a LEX",
     entrarNova: "Entra con Google para preguntar a NOVA",
+    esperaLex: ["Buscando en su base normativa…", "Eligiendo lo que aplica a tu caso…", "Preparando la respuesta…"],
+    esperaNova: ["Pensando en tu caso…", "Preparando la respuesta…"],
   },
   ca: {
     taglineLex: "Normativa de transport especial",
@@ -133,6 +137,8 @@ export const TEXTOS: Record<Idioma, {
     ejemplosNova: ["Com organitzo els venciments dels meus vehicles?", "Per on començo a fer servir la IA a la meva empresa?"],
     entrarLex: "Entra amb Google per preguntar a LEX",
     entrarNova: "Entra amb Google per preguntar a NOVA",
+    esperaLex: ["Cercant a la seva base normativa…", "Triant el que s'aplica al teu cas…", "Preparant la resposta…"],
+    esperaNova: ["Pensant en el teu cas…", "Preparant la resposta…"],
   },
   en: {
     taglineLex: "Special transport regulations",
@@ -162,6 +168,8 @@ export const TEXTOS: Record<Idioma, {
     ejemplosNova: ["How do I organise the expiry dates of my vehicles?", "Where do I start using AI in my business?"],
     entrarLex: "Sign in with Google to ask LEX",
     entrarNova: "Sign in with Google to ask NOVA",
+    esperaLex: ["Searching its regulatory database…", "Choosing what applies to your case…", "Preparing the answer…"],
+    esperaNova: ["Thinking about your case…", "Preparing the answer…"],
   },
   fr: {
     taglineLex: "Réglementation du transport spécial",
@@ -191,6 +199,8 @@ export const TEXTOS: Record<Idioma, {
     ejemplosNova: ["Comment organiser les échéances de mes véhicules ?", "Par où commencer pour utiliser l'IA dans mon entreprise ?"],
     entrarLex: "Connectez-vous avec Google pour poser une question à LEX",
     entrarNova: "Connectez-vous avec Google pour poser une question à NOVA",
+    esperaLex: ["Recherche dans sa base réglementaire…", "Choix de ce qui s'applique à votre cas…", "Préparation de la réponse…"],
+    esperaNova: ["Réflexion sur votre cas…", "Préparation de la réponse…"],
   },
 };
 
@@ -427,6 +437,41 @@ export function AvisoLexRevision() {
   );
 }
 
+// ─── Indicador de espera: avatar + burbuja con tres puntos y una frase que va cambiando ───
+
+const CAMBIO_FRASE_MS = 4000;
+
+function EsperaRespuesta({ config, frases }: { config: typeof AGENTE_CONFIG[Agente]; frases: string[] }) {
+  const [paso, setPaso] = useState(0);
+  useEffect(() => {
+    if (paso >= frases.length - 1) return;
+    const id = window.setTimeout(() => setPaso((p) => p + 1), CAMBIO_FRASE_MS);
+    return () => window.clearTimeout(id);
+  }, [paso, frases.length]);
+
+  return (
+    <div className="flex gap-3 justify-start" role="status" aria-live="polite">
+      <div
+        className="w-8 h-8 rounded-lg overflow-hidden flex-shrink-0 mt-0.5"
+        style={{ backgroundColor: config.colorBg, border: `1px solid ${config.colorBorder}` }}
+      >
+        <img src={config.avatar} alt="" width={64} height={64} decoding="async" className="w-full h-full object-cover" />
+      </div>
+      <div
+        className="px-4 py-3 rounded-2xl flex items-center gap-3"
+        style={{ backgroundColor: "rgba(255,255,255,0.06)", borderTopLeftRadius: 4 }}
+      >
+        <span className="espera-puntos flex items-center gap-1" aria-hidden="true">
+          <span style={{ backgroundColor: config.color }} />
+          <span style={{ backgroundColor: config.color }} />
+          <span style={{ backgroundColor: config.color }} />
+        </span>
+        <span className="text-white/70 text-sm">{frases[paso]}</span>
+      </div>
+    </div>
+  );
+}
+
 // ─── Chat a ancho completo (misma lógica y mismo /api/chat que el antiguo panel) ───
 
 interface ChatAgenteProps {
@@ -592,23 +637,7 @@ export default function ChatAgente({ agente }: ChatAgenteProps) {
             <Burbuja key={i} mensaje={msg} config={config} labelCita={t.botonCita} onCita={() => setContactOpen(true)} />
           ))}
 
-          {cargando && (
-            <div className="flex gap-3 justify-start">
-              <div
-                className="w-8 h-8 rounded-lg overflow-hidden flex-shrink-0"
-                style={{ backgroundColor: config.colorBg, border: `1px solid ${config.colorBorder}` }}
-              >
-                <img src={config.avatar} alt="" width={64} height={64} decoding="async" className="w-full h-full object-cover" />
-              </div>
-              <div
-                className="px-4 py-3 rounded-2xl flex items-center gap-2"
-                style={{ backgroundColor: "rgba(255,255,255,0.06)", borderTopLeftRadius: 4 }}
-              >
-                <Loader2 size={14} className="animate-spin text-white/70" />
-                <span className="text-white/70 text-sm">{t.pensando}</span>
-              </div>
-            </div>
-          )}
+          {cargando && <EsperaRespuesta config={config} frases={agente === "LEX" ? t.esperaLex : t.esperaNova} />}
 
           {limiteAlcanzado && (
             <div
