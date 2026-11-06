@@ -83,8 +83,37 @@
 - REVOCADAS el 6/11/2026: OpenAI …OoQA e …IzYA, Anthropic …jwAA. Tokens viejos (…2026) rechazados.
 - Vigía Ingestar v2 (n8n, id VigIngV2Helsinki01, webhook vigia-ingestar-v2): sigue generando fragmentos «paralelo» en cada ingesta (decisión del 4/11: no deberían generarse); se corrige en el Vigía 2. El Panel, Aprobar y Rechazar son enlaces públicos sin contraseña (también para el Vigía 2).
 
-## Estado actual
+## Estado actual / Próxima sesión
 (Al cerrar cada sesión, sustituir esta sección entera por la versión al día; el resto de secciones no se tocan.)
+
+### Próxima sesión, en este orden
+1. Verificación en dos pasos con la app Contraseñas de Apple (Vercel, GitHub, Google, OpenAI, Resend). La hace José Luis paso a paso.
+2. Cerrar al exterior los puertos 5433, 6543, 9000 y 3001 de Helsinki, comprobando antes qué los usa. (Ojo: el 3/11 un escaneo TCP completo desde el Mac ya mostraba que desde fuera solo responden 22, 80 y 443, con esos puertos publicados solo en 127.0.0.1; el primer paso es comprobar el estado real.)
+3. Rediseño de LEX y NOVA.
+4. Vigía 2.
+
+### Rediseño LEX / NOVA (decidido; falta plan y boceto en el chat antes de tocar código)
+- Página propia para cada agente (/lex y /nova) con el chat a pantalla completa.
+- En la portada, ejemplo real completo sin caja de escribir ni cortes.
+- Animación de entrada única: «LEX ve cómo piensa» (pregunta → fuentes → respuesta → sello de fuentes) y «NOVA: del caos al orden».
+- NOVA con sección propia.
+- Versión ligera en móvil y respeto a «reducir movimiento»; sin 3D ni bucles.
+- José Luis sigue primero en la portada.
+
+### Pendientes con fecha
+- 10/11: borrar el volcado de la rotación del 3/11 (ver «Pendiente (rotación)»).
+- Hacia el 13/11: quitar el aviso «LEX está en revisión» de la cabecera si no hay fallos graves. El texto fijo bajo la caja de escribir NO se quita nunca.
+
+### Vigía 2 debe
+- Quitar la generación de paralelos (la v2 del Ingestar aún los genera; la decisión del 4/11 era no generarlos).
+- Poner contraseña al Panel, a Aprobar y a Rechazar (hoy son enlaces públicos).
+
+Hecho (6/11):
+- Chat de LEX y NOVA caído del 3/11 al 6/11 («permission denied for function registrar_consulta»): la causa era SUPABASE_SERVICE_KEY de Vercel con la anon pegada en vez de la service_role (los permisos EXECUTE estaban bien). Corregida por José Luis; LEX funciona en producción desde las 12:21. Se borró la fila de prueba consulta_id 68 de web.consultas_agente. Regla nueva en «Rotación de claves».
+- Parser de botones del chat (client/src/components/AgentChat.tsx): acepta [BOTON_DGT:...] además de [BOTON_SCT:...] (5dcb144). El prompt de LEX no se tocó (el modelo a veces escribe BOTON_DGT).
+- F4-A completo (credenciales de n8n): copia de seguridad en /root/backups/n8n_F4A_20261106/ (solo Helsinki); borrados 31 flujos (Paralelos LEX, Beta, Mundial 2026 y de depuración); tokens propios nuevos y aleatorios como credenciales (Proxy SQL y Vigía Ingestar); Crawler RAG, Aprobar, Rechazar y Panel v2 pasados a credenciales; «Vigía Ingestar v2» (VigIngV2Helsinki01, 24 nodos HTTP Request y Code sin claves) sustituye a la v1, que se borró tras una ingesta real de prueba (Orden TMA/324/2020: 10 oficiales + 8 paralelos; se borraron los 18 fragmentos y su fila de historial; lex_documentos quedó en 7.845 fragmentos). Quedan 35 flujos y 17 credenciales, con 0 claves escritas a mano.
+- Claves rotadas y las viejas revocadas: Anthropic …CgAA (n8n, Helsinki y Vercel; …jwAA eliminada), OpenAI …paYA (n8n, Mac y Vercel; …OoQA e …IzYA revocadas) y Resend (clave nueva de solo envío en n8n; las de la cuenta «xpertauth.tools» borradas). Detalle en «Qué clave se usa dónde».
+- Plausible (/opt/plausible/plausible-conf.env) lleva como contraseña SMTP una clave Resend ya invalidada: sus correos no salen hasta cambiarla (usa correo.xpertauth.com como remitente; comprobar que está verificado en la cuenta principal).
 
 Web nueva publicada en producción (xpertauth.com) el 1/11/2026: main = rebuild/web-nueva. Despliegue de vuelta atrás: dpl_SczWD5fLb42TE98W5JGqKkmQiNz7 (web antigua). La web antigua también está en la etiqueta web-antigua-2026-10 (a68a083).
 
@@ -121,17 +150,17 @@ Hecho (3/11, web nueva: SEO, velocidad y newsletter), ya en producción salvo lo
 
 Pendiente (rotación):
 - URL antigua de ecografías (ultrasound-results.vercel.app, cuenta antigua de Vercel): el proyecto quedó desconectado del repo tras moverlo a xpertauth-tech y sigue con la anon vieja; reconectarlo o dejarlo.
+- Plausible: cambiar su clave SMTP (ver Hecho 6/11).
 - Kuma: la monitorización «Supabase API (Helsinki)» lleva la anon vieja; actualizarla.
-- Vigía Ingestar: pasar a credenciales de n8n sus claves (service_role, OpenAI y Anthropic, hoy escritas en sus nodos Code) y el token del webhook: se hace dentro del proyecto de fiabilidad de LEX (plan del F4-A: copia v2 con nodos HTTP Request; ojo: Kong exige la cabecera apikey en REST, pero no en Storage).
 - 10/11: borrar el dump de la rotación del 3/11 si todo sigue bien (/root/backups/pre-rotacion-20261103_085236.dump y los de _supabase y _globals, en el servidor).
-- Decidir cuándo borrar la copia de la base de n8n del 3/11 (/root/backups/n8n_database_pre-F5C_20261103.sqlite, 668 MB, con secretos): al menos hasta que el Vigía esté rehecho. Quedan además 2 filas huérfanas en webhook_entity del flujo RGPD borrado (inofensivas).
+- Decidir cuándo borrar la copia de la base de n8n del 3/11 (/root/backups/n8n_database_pre-F5C_20261103.sqlite, 668 MB, con secretos): y la del 6/11 (/root/backups/n8n_F4A_20261106/, 1,4 MB, credenciales cifradas): al menos hasta que el Vigía 2 esté hecho. Quedan además 2 filas huérfanas en webhook_entity del flujo RGPD borrado (inofensivas).
 - Registros de Claude Desktop (~/Library/Logs/Claude: mcp.log, mcp-server-supabase-postgres.log y main3.log) aún contienen la contraseña del proyecto ya borrado: se pueden eliminar (no sirve de nada); falta hacerlo.
 - Organización «App - RSS» de supabase.com (1 proyecto): sin revisar.
 - Vigía antiguo: revisar en el proyecto de fiabilidad de LEX los 7 documentos que estaban «pendiente» (fechas de publicación del 6/6 al 1/8; en Helsinki hay 0 pendientes). Están en la copia de xpertauth-db (tabla vigia_pendientes de ~/Archivo/supabase-antiguo-20261103/db_cluster-06-08-2026@10-30-33.backup.gz).
 - Historiales y transcripciones con claves viejas (zsh, ~/.claude, Antigravity, Claude): decidido no tocarlos.
 
 Pendiente (resto):
-- SIGUIENTE PASO DEL GEO (decidido por José Luis, otra sesión): prerenderizado en la compilación (opción A) con Deploy Hook de Vercel llamado desde n8n al publicar un artículo, para que el HTML que reciben los rastreadores sin JavaScript ya lleve textos, título y descripción de cada página (72 HTML: 32 fijas + 40 artículos). Detalles del estudio: render con react-dom/server y wouter (Router ssrPath), revisar los ~26 ficheros que usan window/document/localStorage, precargar datos del blog, mantener createRoot (sin hidratar) para no arriesgar animaciones. Interruptor PRERENDER=0 para deshacerlo. Después, en este orden: llms.txt, ard.json y JSON-LD (con el estatus «Asociación en proceso de estudio de constitución», sin actividad comercial).
+- GEO (decidido por José Luis, otra sesión; no entra en la lista de la próxima sesión salvo orden suya): prerenderizado en la compilación (opción A) con Deploy Hook de Vercel llamado desde n8n al publicar un artículo, para que el HTML que reciben los rastreadores sin JavaScript ya lleve textos, título y descripción de cada página (72 HTML: 32 fijas + 40 artículos). Detalles del estudio: render con react-dom/server y wouter (Router ssrPath), revisar los ~26 ficheros que usan window/document/localStorage, precargar datos del blog, mantener createRoot (sin hidratar) para no arriesgar animaciones. Interruptor PRERENDER=0 para deshacerlo. Después, en este orden: llms.txt, ard.json y JSON-LD (con el estatus «Asociación en proceso de estudio de constitución», sin actividad comercial).
 - L1 (5507cb0) descartado el 4/11/2026; ver sección LEX — nuevo publicado en producción.
 - Comprobar el enlace en LinkedIn (Post Inspector) y en WhatsApp. Con la og-image nueva: refrescar con Post Inspector para que LinkedIn deje de mostrar la antigua.
 
