@@ -399,7 +399,7 @@ export function AvisoLexRevision() {
     <>
       <div
         role="note"
-        className="flex items-start gap-2 px-3 py-1.5 text-xs leading-snug rounded-lg text-left"
+        className="flex items-start gap-2 px-2.5 py-1 text-[11px] sm:text-xs sm:px-3 sm:py-1.5 leading-tight sm:leading-snug rounded-lg text-left"
         style={{
           backgroundColor: "#0F1628",
           border: "1px solid rgba(255,255,255,0.07)",
