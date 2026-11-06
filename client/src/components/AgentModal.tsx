@@ -22,7 +22,7 @@ type Idioma = "es" | "ca" | "en" | "fr";
 
 // ─── Textos por idioma ───────────────────────────────────────────────────────
 
-const TEXTOS: Record<Idioma, {
+export const TEXTOS_ACCESO: Record<Idioma, {
   taglineLex: string;
   taglineNova: string;
   descLex: string;
@@ -123,7 +123,7 @@ export default function AgentModal({ agente, onClose }: AgentModalProps) {
   if (!agente) return null;
 
   const idioma: Idioma = locale === "ca" || locale === "en" || locale === "fr" ? locale : "es";
-  const t = TEXTOS[idioma];
+  const t = TEXTOS_ACCESO[idioma];
   const esRegistro = agente === "registro";
   const config = esRegistro ? REGISTRO_CONFIG : AGENTE_CONFIG[agente];
   const nombre = esRegistro ? "XpertAuth" : agente;

@@ -7,7 +7,7 @@ import { useI18n, LOCALES, type Locale } from "@/i18n/context";
 
 const ORIGEN = "https://www.xpertauth.com";
 
-export type PaginaSeo = "home" | "servicios" | "sobre" | "historia" | "blog" | "privacidad" | "aviso" | "cookies";
+export type PaginaSeo = "home" | "servicios" | "sobre" | "historia" | "blog" | "lex" | "nova" | "privacidad" | "aviso" | "cookies";
 
 const RUTAS: Record<PaginaSeo, string> = {
   home: "",
@@ -15,6 +15,8 @@ const RUTAS: Record<PaginaSeo, string> = {
   sobre: "/sobre-nosotros",
   historia: "/mi-historia",
   blog: "/blog",
+  lex: "/lex",
+  nova: "/nova",
   privacidad: "/politica-de-privacidad",
   aviso: "/aviso-legal",
   cookies: "/cookies",
@@ -52,6 +54,18 @@ export const SEO: Record<PaginaSeo, Record<Locale, Texto>> = {
     ca: { title: "Blog de transport especial i normativa · XpertAuth", description: "Normativa, permisos i actualitat del transport especial, explicats amb claredat i criteri per a qui va amb el temps just." },
     en: { title: "Special transport and regulations blog · XpertAuth", description: "Regulations, permits and news on special transport, explained clearly and with judgement for those short on time." },
     fr: { title: "Blog transport spécial et réglementation · XpertAuth", description: "Réglementation, permis et actualité du transport spécial, expliqués avec clarté et discernement pour ceux qui manquent de temps." },
+  },
+  lex: {
+    es: { title: "LEX: normativa de transporte especial · XpertAuth", description: "La normativa del transporte especial, explicada con claridad. Pregunta a LEX sobre normativa DGT y SCT." },
+    ca: { title: "LEX: normativa de transport especial · XpertAuth", description: "La normativa del transport especial, explicada amb claredat. Pregunta a LEX sobre normativa DGT i SCT." },
+    en: { title: "LEX: special transport regulations · XpertAuth", description: "Special transport regulations, explained clearly. Ask LEX about DGT and SCT regulations." },
+    fr: { title: "LEX : réglementation du transport spécial · XpertAuth", description: "La réglementation du transport spécial, expliquée avec clarté. Posez vos questions à LEX sur la réglementation DGT et SCT." },
+  },
+  nova: {
+    es: { title: "NOVA: IA para tu empresa de transporte · XpertAuth", description: "Pon orden en tu empresa con ayuda de la IA. Cuéntale a NOVA qué te gustaría ordenar o mejorar." },
+    ca: { title: "NOVA: IA per a la teva empresa de transport · XpertAuth", description: "Posa ordre a la teva empresa amb l'ajuda de la IA. Explica a NOVA què t'agradaria ordenar o millorar." },
+    en: { title: "NOVA: AI for your transport business · XpertAuth", description: "Bring order to your business with the help of AI. Tell NOVA what you would like to organise or improve." },
+    fr: { title: "NOVA : l'IA pour votre entreprise de transport · XpertAuth", description: "Mettez de l'ordre dans votre entreprise avec l'aide de l'IA. Dites à NOVA ce que vous aimeriez organiser ou améliorer." },
   },
   privacidad: {
     es: { title: "Política de privacidad · XpertAuth", description: "Qué datos trata XpertAuth, para qué y cómo ejercer tus derechos. Tus datos son tuyos." },

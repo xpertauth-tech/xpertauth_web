@@ -8,10 +8,9 @@ import Home from "@/pages/home";
 import CustomCursor from "@/components/CustomCursor";
 import CookieBanner from "@/components/CookieBanner";
 import AgentModal, { type ModalObjetivo } from "@/components/AgentModal";
-import AgentChat from "@/components/AgentChat";
 import { useEffect, useRef, useState, createContext, useContext, lazy, Suspense } from "react";
 import { useLocation } from "wouter";
-import { supabase, tomarAgentePendiente, type Agente } from "@/lib/supabase";
+import { supabase, type Agente } from "@/lib/supabase";
 
 // ─── Páginas (carga diferida: solo la portada va en el paquete inicial) ───────
 
@@ -19,6 +18,8 @@ const cargas = {
   SobreNosotros: () => import("@/pages/SobreNosotros"),
   MiHistoria: () => import("@/pages/MiHistoria"),
   TransporteEspecial: () => import("@/pages/TransporteEspecial"),
+  Lex: () => import("@/pages/AgentePagina").then((m) => ({ default: m.LexPagina })),
+  Nova: () => import("@/pages/AgentePagina").then((m) => ({ default: m.NovaPagina })),
   Blog: () => import("@/pages/Blog"),
   BlogPost: () => import("@/pages/BlogPost"),
   PoliticaPrivacidad: () => import("@/pages/PoliticaPrivacidad"),
@@ -30,6 +31,8 @@ const cargas = {
 const SobreNosotros = lazy(cargas.SobreNosotros);
 const MiHistoria = lazy(cargas.MiHistoria);
 const TransporteEspecial = lazy(cargas.TransporteEspecial);
+const LexPagina = lazy(cargas.Lex);
+const NovaPagina = lazy(cargas.Nova);
 const Blog = lazy(cargas.Blog);
 const BlogPost = lazy(cargas.BlogPost);
 const PoliticaPrivacidad = lazy(cargas.PoliticaPrivacidad);
@@ -115,6 +118,8 @@ function Router() {
       <Route path="/:locale/servicios/transporte-especial" component={TransporteEspecial} />
       <Route path="/:locale/sobre-nosotros" component={SobreNosotros} />
       <Route path="/:locale/mi-historia" component={MiHistoria} />
+      <Route path="/:locale/lex" component={LexPagina} />
+      <Route path="/:locale/nova" component={NovaPagina} />
       <Route path="/:locale/blog/:slug" component={BlogPost} />
       <Route path="/:locale/blog" component={Blog} />
       <Route path="/:locale/politica-de-privacidad" component={PoliticaPrivacidad} />
@@ -134,54 +139,27 @@ function Router() {
 
 function App() {
   const [agenteModal, setAgenteModal] = useState<ModalObjetivo | null>(null);
-  const [chatAbierto, setChatAbierto] = useState(false);
-  const [agenteChat, setAgenteChat] = useState<Agente>("LEX");
-  const [esAutenticado, setEsAutenticado] = useState(false);
+  const [, navigate] = useLocation();
 
   useEffect(() => {
-    // Al volver de Google se abre el chat del agente que el visitante había pedido.
-    function alHaySesion() {
-      setEsAutenticado(true);
-      setAgenteModal(null);
-      const pendiente = tomarAgentePendiente();
-      if (pendiente) {
-        setAgenteChat(pendiente);
-        setChatAbierto(true);
-      }
-    }
-
+    // Al haber sesión se cierra el modal de acceso (el chat vive en /lex y /nova).
     supabase.auth.getSession().then(({ data }) => {
-      if (data.session?.user) alHaySesion();
+      if (data.session?.user) setAgenteModal(null);
     });
-
     const { data: listener } = supabase.auth.onAuthStateChange((_event, session) => {
-      if (session?.user) {
-        alHaySesion();
-      } else {
-        setEsAutenticado(false);
-        setChatAbierto(false);
-      }
+      if (session?.user) setAgenteModal(null);
     });
-
     return () => listener.subscription.unsubscribe();
   }, []);
 
+  // Los botones «Pregunta a LEX / NOVA» llevan a la página del agente, en el idioma activo.
   function abrirAgente(agente: Agente) {
-    setAgenteChat(agente);
-    if (esAutenticado) {
-      setChatAbierto(true);
-    } else {
-      setAgenteModal(agente);
-    }
+    const m = window.location.pathname.match(/^\/(es|ca|en|fr)(?=\/|$)/);
+    navigate(`/${m ? m[1] : "es"}/${agente.toLowerCase()}`);
   }
 
   function abrirRegistro() {
     setAgenteModal("registro");
-  }
-
-  function handleSesionRequerida() {
-    setChatAbierto(false);
-    setAgenteModal(agenteChat);
   }
 
   return (
@@ -199,13 +177,6 @@ function App() {
             <AgentModal
               agente={agenteModal}
               onClose={() => setAgenteModal(null)}
-            />
-
-            <AgentChat
-              abierto={chatAbierto}
-              agente={agenteChat}
-              onClose={() => setChatAbierto(false)}
-              onSesionRequerida={handleSesionRequerida}
             />
           </AgentContext.Provider>
         </I18nProvider>

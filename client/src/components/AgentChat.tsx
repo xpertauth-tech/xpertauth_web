@@ -1,8 +1,9 @@
 import { useState, useEffect, useRef } from "react";
 import ExternalMark, { useExternalLinkProps } from "@/components/external-mark";
-import { X, Send, Loader2, Calendar, AlertTriangle } from "lucide-react";
+import { Send, Loader2, Calendar, AlertTriangle } from "lucide-react";
 import ContactModal from "./ContactModal";
-import { supabase } from "@/lib/supabase";
+import { supabase, entrarConGoogle } from "@/lib/supabase";
+import { TEXTOS_ACCESO } from "./AgentModal";
 import { useI18n } from "@/i18n/context";
 import { imagenReducida } from "@/lib/imagenes";
 
@@ -19,13 +20,6 @@ export interface Mensaje {
   agente?: Agente;
 }
 
-interface AgentChatProps {
-  abierto: boolean;
-  agente: Agente;
-  onClose: () => void;
-  onSesionRequerida: () => void;
-}
-
 export type Idioma = "es" | "ca" | "en" | "fr";
 
 // ─── Config por agente ───────────────────────────────────────────────────────
@@ -35,18 +29,21 @@ export const AGENTE_CONFIG: Record<Agente, {
   colorBg: string;
   colorBorder: string;
   avatar: string;
+  avatarGrande: string;
 }> = {
   LEX: {
     color: "#1B4FD8",
     colorBg: "rgba(27,79,216,0.10)",
     colorBorder: "rgba(27,79,216,0.25)",
     avatar: imagenReducida(`${AVATAR_BASE}/lex_avatar_v1.webp`, 96),
+    avatarGrande: imagenReducida(`${AVATAR_BASE}/lex_avatar_v1.webp`, 256),
   },
   NOVA: {
     color: "#4D9FEC",
     colorBg: "rgba(77,159,236,0.10)",
     colorBorder: "rgba(77,159,236,0.25)",
     avatar: imagenReducida(`${AVATAR_BASE}/nova_avatar_v1.webp`, 96),
+    avatarGrande: imagenReducida(`${AVATAR_BASE}/nova_avatar_v1.webp`, 256),
   },
 };
 
@@ -72,6 +69,12 @@ export const TEXTOS: Record<Idioma, {
   botonCita: string;
   cerrar: string;
   enviar: string;
+  fraseLex: string;
+  fraseNova: string;
+  ejemplosLex: [string, string];
+  ejemplosNova: [string, string];
+  entrarLex: string;
+  entrarNova: string;
 }> = {
   es: {
     taglineLex: "Normativa de transporte especial",
@@ -95,6 +98,12 @@ export const TEXTOS: Record<Idioma, {
     botonCita: "Consultar con José Luis",
     cerrar: "Cerrar chat",
     enviar: "Enviar",
+    fraseLex: "La normativa del transporte especial, explicada con claridad.",
+    fraseNova: "Pon orden en tu empresa con ayuda de la IA.",
+    ejemplosLex: ["¿Qué autorización necesito para un transporte de 22 m?", "¿Cuándo hace falta vehículo piloto?"],
+    ejemplosNova: ["¿Cómo organizo los vencimientos de mis vehículos?", "¿Por dónde empiezo a usar la IA en mi empresa?"],
+    entrarLex: "Entra con Google para preguntar a LEX",
+    entrarNova: "Entra con Google para preguntar a NOVA",
   },
   ca: {
     taglineLex: "Normativa de transport especial",
@@ -118,6 +127,12 @@ export const TEXTOS: Record<Idioma, {
     botonCita: "Consultar amb José Luis",
     cerrar: "Tanca el xat",
     enviar: "Envia",
+    fraseLex: "La normativa del transport especial, explicada amb claredat.",
+    fraseNova: "Posa ordre a la teva empresa amb l'ajuda de la IA.",
+    ejemplosLex: ["Quina autorització necessito per a un transport de 22 m?", "Quan cal vehicle pilot?"],
+    ejemplosNova: ["Com organitzo els venciments dels meus vehicles?", "Per on començo a fer servir la IA a la meva empresa?"],
+    entrarLex: "Entra amb Google per preguntar a LEX",
+    entrarNova: "Entra amb Google per preguntar a NOVA",
   },
   en: {
     taglineLex: "Special transport regulations",
@@ -141,6 +156,12 @@ export const TEXTOS: Record<Idioma, {
     botonCita: "Consult José Luis",
     cerrar: "Close chat",
     enviar: "Send",
+    fraseLex: "Special transport regulations, explained clearly.",
+    fraseNova: "Bring order to your business with the help of AI.",
+    ejemplosLex: ["What authorisation do I need for a 22 m transport?", "When is an escort vehicle required?"],
+    ejemplosNova: ["How do I organise the expiry dates of my vehicles?", "Where do I start using AI in my business?"],
+    entrarLex: "Sign in with Google to ask LEX",
+    entrarNova: "Sign in with Google to ask NOVA",
   },
   fr: {
     taglineLex: "Réglementation du transport spécial",
@@ -164,6 +185,12 @@ export const TEXTOS: Record<Idioma, {
     botonCita: "Consulter José Luis",
     cerrar: "Fermer le chat",
     enviar: "Envoyer",
+    fraseLex: "La réglementation du transport spécial, expliquée avec clarté.",
+    fraseNova: "Mettez de l'ordre dans votre entreprise avec l'aide de l'IA.",
+    ejemplosLex: ["Quelle autorisation me faut-il pour un transport de 22 m ?", "Quand un véhicule pilote est-il nécessaire ?"],
+    ejemplosNova: ["Comment organiser les échéances de mes véhicules ?", "Par où commencer pour utiliser l'IA dans mon entreprise ?"],
+    entrarLex: "Connectez-vous avec Google pour poser une question à LEX",
+    entrarNova: "Connectez-vous avec Google pour poser une question à NOVA",
   },
 };
 
@@ -361,20 +388,64 @@ export function Burbuja({
 
 // ─── Componente principal ────────────────────────────────────────────────────
 
-export default function AgentChat({
-  abierto,
-  agente,
-  onClose,
-  onSesionRequerida,
-}: AgentChatProps) {
+// ─── Aviso «LEX está en revisión» (mismo texto que tenía el panel) ───────────
+
+export function AvisoLexRevision() {
+  const { locale } = useI18n();
+  const idioma: Idioma = locale === "ca" || locale === "en" || locale === "fr" ? locale : "es";
+  const t = TEXTOS[idioma];
+  const [contactOpen, setContactOpen] = useState(false);
+  return (
+    <>
+      <div
+        role="note"
+        className="flex items-start gap-2.5 px-4 py-3 text-sm leading-snug rounded-xl text-left"
+        style={{
+          backgroundColor: "#0F1628",
+          border: "1px solid rgba(255,255,255,0.07)",
+          borderLeft: "3px solid #E8620A",
+          color: "rgba(255,255,255,0.85)",
+        }}
+        data-testid="aviso-lex-revision"
+      >
+        <AlertTriangle size={16} className="flex-shrink-0 mt-0.5" style={{ color: "#E8620A" }} aria-hidden="true" />
+        <p>
+          {t.revisionPre}
+          <button
+            type="button"
+            onClick={() => setContactOpen(true)}
+            className="underline underline-offset-2 hover:text-white transition-colors"
+            style={{ color: "#E8620A" }}
+          >
+            {t.revisionLink}
+          </button>
+          {t.revisionPost}
+        </p>
+      </div>
+      <ContactModal open={contactOpen} onClose={() => setContactOpen(false)} />
+    </>
+  );
+}
+
+// ─── Chat a ancho completo (misma lógica y mismo /api/chat que el antiguo panel) ───
+
+interface ChatAgenteProps {
+  agente: Agente;
+}
+
+export default function ChatAgente({ agente }: ChatAgenteProps) {
   const { locale } = useI18n();
   const idioma: Idioma = locale === "ca" || locale === "en" || locale === "fr" ? locale : "es";
   const t = TEXTOS[idioma];
   const config = AGENTE_CONFIG[agente];
   const bienvenida = agente === "LEX" ? t.bienvenidaLex : t.bienvenidaNova;
-  const tagline = agente === "LEX" ? t.taglineLex : t.taglineNova;
   const placeholder = agente === "LEX" ? t.placeholderLex : t.placeholderNova;
+  const ejemplos = agente === "LEX" ? t.ejemplosLex : t.ejemplosNova;
+  const textoEntrar = agente === "LEX" ? t.entrarLex : t.entrarNova;
+  const textosModal = TEXTOS_ACCESO[idioma];
 
+  // null = aún se comprueba la sesión; false = sin sesión (se ofrece entrar con Google)
+  const [haySesion, setHaySesion] = useState<boolean | null>(null);
   const [mensajes, setMensajes] = useState<Mensaje[]>([
     { role: "assistant", content: bienvenida, agente },
   ]);
@@ -384,15 +455,22 @@ export default function AgentChat({
   const [limite, setLimite] = useState<number | null>(null); // cifra que devuelve el servidor
   const [contactOpen, setContactOpen] = useState(false);
 
-  const bottomRef = useRef<HTMLDivElement>(null);
+  const mensajesRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLTextAreaElement>(null);
 
   useEffect(() => {
-    if (abierto) {
-      bottomRef.current?.scrollIntoView({ behavior: "smooth" });
-      setTimeout(() => inputRef.current?.focus(), 200);
-    }
-  }, [mensajes, abierto]);
+    supabase.auth.getSession().then(({ data }) => setHaySesion(!!data.session?.user));
+    const { data: listener } = supabase.auth.onAuthStateChange((_e, session) => {
+      setHaySesion(!!session?.user);
+    });
+    return () => listener.subscription.unsubscribe();
+  }, []);
+
+  // Se baja solo dentro de la caja de mensajes (la página no se mueve).
+  useEffect(() => {
+    const el = mensajesRef.current;
+    if (el && mensajes.length > 1) el.scrollTo({ top: el.scrollHeight, behavior: "smooth" });
+  }, [mensajes, cargando]);
 
   // Cambio de agente o de idioma: conversación nueva con la bienvenida correspondiente.
   useEffect(() => {
@@ -408,7 +486,7 @@ export default function AgentChat({
     const { data: sesion } = await supabase.auth.getSession();
     const token = sesion.session?.access_token;
     if (!token) {
-      onSesionRequerida();
+      setHaySesion(false);
       return;
     }
 
@@ -416,6 +494,7 @@ export default function AgentChat({
 
     setMensajes(nuevosMensajes);
     setInput("");
+    if (inputRef.current) inputRef.current.style.height = "auto";
     setCargando(true);
 
     try {
@@ -434,7 +513,7 @@ export default function AgentChat({
 
       if (res.status === 401) {
         setMensajes(mensajes);
-        onSesionRequerida();
+        setHaySesion(false);
         return;
       }
       if (res.status === 429) {
@@ -474,94 +553,43 @@ export default function AgentChat({
     }
   }
 
+  function ajustarAltura(el: HTMLTextAreaElement) {
+    el.style.height = "auto";
+    el.style.height = Math.min(el.scrollHeight, 120) + "px";
+  }
+
   function handleInput(e: React.ChangeEvent<HTMLTextAreaElement>) {
     setInput(e.target.value);
-    e.target.style.height = "auto";
-    e.target.style.height = Math.min(e.target.scrollHeight, 120) + "px";
+    ajustarAltura(e.target);
   }
+
+  // Una pregunta de ejemplo rellena la caja; no envía.
+  function usarEjemplo(texto: string) {
+    setInput(texto);
+    setTimeout(() => {
+      if (inputRef.current) {
+        ajustarAltura(inputRef.current);
+        inputRef.current.focus();
+      }
+    }, 0);
+  }
+
+  const mostrarEjemplos = haySesion === true && mensajes.length === 1 && !cargando;
 
   return (
     <>
-      {abierto && (
-        <div
-          className="fixed inset-0 z-40 md:hidden"
-          style={{ backgroundColor: "rgba(7,10,18,0.60)" }}
-          onClick={onClose}
-        />
-      )}
-
       <div
-        className="fixed top-0 right-0 h-full z-50 flex flex-col shadow-2xl"
+        className="flex flex-col w-full rounded-2xl overflow-hidden"
         style={{
-          width: "min(420px, 100vw)",
           backgroundColor: "#0A0E1A",
-          borderLeft: `1px solid ${config.colorBorder}`,
-          transform: abierto ? "translateX(0)" : "translateX(100%)",
-          transition: "transform 0.35s cubic-bezier(0.4,0,0.2,1)",
+          border: `1px solid ${config.colorBorder}`,
+          height: "min(72vh, 720px)",
+          minHeight: 480,
         }}
+        data-testid={`chat-${agente.toLowerCase()}`}
       >
-        {/* ── HEADER ── */}
-        <div
-          className="flex items-center gap-3 px-5 py-4 flex-shrink-0"
-          style={{
-            borderBottom: `1px solid rgba(255,255,255,0.07)`,
-            background: `linear-gradient(135deg, ${config.colorBg} 0%, transparent 100%)`,
-          }}
-        >
-          <div
-            className="w-9 h-9 rounded-xl overflow-hidden flex-shrink-0"
-            style={{ backgroundColor: config.colorBg, border: `1px solid ${config.colorBorder}` }}
-          >
-            <img src={config.avatar} alt={agente} width={64} height={64} decoding="async" className="w-full h-full object-cover" />
-          </div>
-
-          <div className="flex-1 min-w-0">
-            <p className="text-white font-bold text-sm leading-tight">{agente}</p>
-            <p className="text-xs leading-tight truncate" style={{ color: config.color }}>
-              {tagline}
-            </p>
-          </div>
-
-          <button
-            onClick={onClose}
-            className="flex-shrink-0 text-white/70 hover:text-white/80 transition-colors ml-1"
-            aria-label={t.cerrar}
-          >
-            <X size={18} />
-          </button>
-        </div>
-
-        {/* ── AVISO LEX EN REVISIÓN (solo LEX) ── */}
-        {agente === "LEX" && (
-          <div
-            role="note"
-            className="flex items-start gap-2.5 px-4 py-3 flex-shrink-0 text-xs leading-snug"
-            style={{
-              backgroundColor: "#0F1628",
-              borderBottom: "1px solid rgba(255,255,255,0.07)",
-              borderLeft: "3px solid #E8620A",
-              color: "rgba(255,255,255,0.85)",
-            }}
-            data-testid="aviso-lex-revision"
-          >
-            <AlertTriangle size={14} className="flex-shrink-0 mt-0.5" style={{ color: "#E8620A" }} aria-hidden="true" />
-            <p>
-              {t.revisionPre}
-              <button
-                type="button"
-                onClick={() => setContactOpen(true)}
-                className="underline underline-offset-2 hover:text-white transition-colors"
-                style={{ color: "#E8620A" }}
-              >
-                {t.revisionLink}
-              </button>
-              {t.revisionPost}
-            </p>
-          </div>
-        )}
-
         {/* ── MENSAJES ── */}
-        <div className="flex-1 overflow-y-auto px-4 py-5 space-y-4">
+        <div ref={mensajesRef} className="flex-1 overflow-y-auto px-4 sm:px-6 py-6 space-y-4">
           {mensajes.map((msg, i) => (
             <Burbuja key={i} mensaje={msg} config={config} labelCita={t.botonCita} onCita={() => setContactOpen(true)} />
           ))}
@@ -600,48 +628,94 @@ export default function AgentChat({
               </span>
             </div>
           )}
-
-          <div ref={bottomRef} />
         </div>
 
-        {/* ── INPUT ── */}
+        {/* ── ENTRADA ── */}
         <div
-          className="flex-shrink-0 px-4 pb-4 pt-3"
+          className="flex-shrink-0 px-4 sm:px-6 pb-4 pt-3"
           style={{ borderTop: "1px solid rgba(255,255,255,0.07)" }}
         >
-          <div
-            className="flex items-end gap-2 rounded-xl px-3 py-2"
-            style={{
-              backgroundColor: "rgba(255,255,255,0.05)",
-              border: "1px solid rgba(255,255,255,0.10)",
-            }}
-          >
-            <textarea
-              ref={inputRef}
-              rows={1}
-              value={input}
-              onChange={handleInput}
-              onKeyDown={handleKeyDown}
-              placeholder={placeholder}
-              disabled={cargando || limiteAlcanzado}
-              className="flex-1 bg-transparent text-white text-sm placeholder-white/30 outline-none resize-none leading-relaxed py-1"
-              style={{ maxHeight: 120 }}
-            />
-            <button
-              onClick={enviar}
-              disabled={!input.trim() || cargando || limiteAlcanzado}
-              className="flex-shrink-0 w-8 h-8 rounded-lg flex items-center justify-center transition-all mb-0.5"
-              style={{
-                backgroundColor: input.trim() && !cargando ? config.color : "rgba(255,255,255,0.08)",
-                opacity: input.trim() && !cargando ? 1 : 0.4,
-              }}
-              aria-label={t.enviar}
-            >
-              <Send size={14} className="text-white" style={{ transform: "translateX(1px)" }} />
-            </button>
-          </div>
+          {mostrarEjemplos && (
+            <div className="flex flex-col sm:flex-row gap-2 mb-3">
+              {ejemplos.map((ej) => (
+                <button
+                  key={ej}
+                  type="button"
+                  onClick={() => usarEjemplo(ej)}
+                  className="text-left px-4 py-2 rounded-lg text-sm text-white/70 hover:text-white transition-colors"
+                  style={{ backgroundColor: "rgba(255,255,255,0.04)", border: `1px solid ${config.colorBorder}` }}
+                >
+                  {ej}
+                </button>
+              ))}
+            </div>
+          )}
 
-          {/* Aviso IA (igual en los dos agentes) */}
+          {haySesion === false ? (
+            <div className="py-1">
+              <button
+                onClick={() => entrarConGoogle(locale, agente)}
+                className="w-full flex items-center justify-center gap-3 py-3 rounded-xl font-semibold text-sm bg-white text-[#1f1f1f] transition-opacity hover:opacity-90 active:opacity-80"
+                data-testid="button-google-chat"
+              >
+                <svg className="w-4 h-4" viewBox="0 0 24 24" aria-hidden="true">
+                  <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/>
+                  <path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/>
+                  <path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"/>
+                  <path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/>
+                </svg>
+                {textoEntrar}
+              </button>
+              <p className="mt-3 text-white/70 text-xs leading-relaxed text-left">
+                {textosModal.consentPre}
+                <a
+                  href={`/${locale}/politica-de-privacidad`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="underline hover:text-white transition-colors"
+                  style={{ color: config.color }}
+                >
+                  {textosModal.consentLink}
+                </a>
+                {textosModal.consentPost}
+              </p>
+            </div>
+          ) : (
+            <div
+              className="flex items-end gap-2 rounded-xl px-3 py-2"
+              style={{
+                backgroundColor: "rgba(255,255,255,0.05)",
+                border: "1px solid rgba(255,255,255,0.10)",
+              }}
+            >
+              <textarea
+                ref={inputRef}
+                rows={1}
+                value={input}
+                onChange={handleInput}
+                onKeyDown={handleKeyDown}
+                placeholder={placeholder}
+                disabled={cargando || limiteAlcanzado || haySesion === null}
+                aria-label={placeholder}
+                className="flex-1 bg-transparent text-white text-sm placeholder-white/30 outline-none resize-none leading-relaxed py-1"
+                style={{ maxHeight: 120 }}
+              />
+              <button
+                onClick={enviar}
+                disabled={!input.trim() || cargando || limiteAlcanzado}
+                className="flex-shrink-0 w-8 h-8 rounded-lg flex items-center justify-center transition-all mb-0.5"
+                style={{
+                  backgroundColor: input.trim() && !cargando ? config.color : "rgba(255,255,255,0.08)",
+                  opacity: input.trim() && !cargando ? 1 : 0.4,
+                }}
+                aria-label={t.enviar}
+              >
+                <Send size={14} className="text-white" style={{ transform: "translateX(1px)" }} />
+              </button>
+            </div>
+          )}
+
+          {/* Aviso IA (igual en los dos agentes, siempre visible) */}
           <p className="text-center text-white/70 text-xs mt-2 leading-snug px-1">
             {t.disclaimer(agente)}
           </p>

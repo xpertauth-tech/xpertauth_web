@@ -6,33 +6,14 @@ export const supabase = createClient(
   import.meta.env.VITE_SUPABASE_ANON_KEY
 );
 
-// Agente que el visitante quería abrir cuando se le pidió entrar con Google.
-// Sobrevive a la redirección de OAuth para abrir su chat al volver.
-const PENDING_AGENT_KEY = "xpertauth_pending_agent";
-
 export type Agente = "LEX" | "NOVA";
 
-export function guardarAgentePendiente(agente: Agente | null) {
-  try {
-    if (agente) sessionStorage.setItem(PENDING_AGENT_KEY, agente);
-    else sessionStorage.removeItem(PENDING_AGENT_KEY);
-  } catch {}
-}
-
-export function tomarAgentePendiente(): Agente | null {
-  try {
-    const v = sessionStorage.getItem(PENDING_AGENT_KEY);
-    sessionStorage.removeItem(PENDING_AGENT_KEY);
-    return v === "LEX" || v === "NOVA" ? v : null;
-  } catch {
-    return null;
-  }
-}
-
+// Entrar con Google. Con agente, se vuelve a la página de ese agente (/<idioma>/lex o /nova);
+// sin agente (botón «Regístrate»), a la portada del idioma.
 export async function entrarConGoogle(locale: string, agente: Agente | null) {
-  guardarAgentePendiente(agente);
+  const ruta = agente ? `/${locale}/${agente.toLowerCase()}` : `/${locale}`;
   await supabase.auth.signInWithOAuth({
     provider: "google",
-    options: { redirectTo: `${window.location.origin}/${locale}` },
+    options: { redirectTo: `${window.location.origin}${ruta}` },
   });
 }
