@@ -90,11 +90,26 @@
 - Las fechas de la lista de NOVA se calculan desde el día de la visita (client/src/lib/fechas.ts); no escribir fechas fijas.
 - Los colores de semáforo (Urgente, Próximo, Al día) son una excepción de paleta solo para esa lista.
 
+## Vigía 2 — vigilancia de páginas (activo desde el 8/11/2026)
+- Qué hace: cada sábado a las 10:00 (hora de Madrid) el flujo n8n «Vigía 2 — Páginas y correo semanal» (id VigiaPag2Helsinki01) lee las fuentes activas de lex.vigia_fuentes, compara por hash solo la zona a vigilar, llama al Crawler RAG (boletines: DOGC, BOE, EUR-Lex, DGT antigua y SCT antigua) y envía UN solo correo con el estado de cada fuente. «Vigía 2 — Aviso de fallo» (VigiaAviso2Helsinki1) avisa si el coordinador se rompe; «Vigía 2 — Vigilante de las 14:00» (VigiaVigil2Helsinki1) avisa si a las 14:00 no ha terminado. Copia previa de n8n: /root/backups/n8n_vigia2_20261108/ (Helsinki).
+- Todo sale de datos: activar una fuente es cambiar lex.vigia_fuentes (activa, estado_permiso='permitida', url). Un CHECK impide activar una fuente sin permiso o sin dirección. Estados de permiso: permitida / en_espera_permiso / denegada / no_accesible (transportes.gob.es: la web bloquea la lectura, incluido su robots.txt; no se intenta saltar). Tipos: pagina, boe_consolidado, boletin, eurlex_consolidado (añadido para la Directiva 96/53/CE: lee el texto consolidado de EUR-Lex por la vía SPARQL del Crawler). Configuración fina por fuente: zona_inicio, zona_fin, lineas_incluir, lineas_excluir, enlaces_regex, min_caracteres, palabra_esperada.
+- Reglas de lectura: User-Agent «XpertAuth-Vigia/2.0 (+https://xpertauth.com)»; robots.txt comprobado antes de leer (si no se puede leer, no se lee); reintentos de 5, 15 y 45 s ante 429/5xx; pausa de 1,5 s entre peticiones. Navarra: no leer /documents/*. La limpieza quita menús, pie, cookies y relojes (Navarra mostraba «20:00:20 h» y cambiaba siempre).
+- Comprobación de contenido (lex.vigia_registrar_lectura): mínimo de caracteres y palabra esperada por fuente; un texto casi vacío, una página de error o un texto menor del 30 % de la referencia cuenta como «Falló» y NO sustituye la referencia. La primera lectura es la referencia (sin aviso).
+- Un cambio crea un aviso en lex.vigia_pendientes (tipo cambio_pagina, texto_antes y texto_despues) y una versión en lex.vigia_versiones. Nada entra en LEX sin aprobar. Al aprobar, entra el texto guardado (archivo «vigia2:<fuente>:<versión>») y los fragmentos oficiales anteriores de ESA página pasan a tipo 'retirado' (función lex.vigia_cerrar_pagina; no se borran). LEX no los usa: sus dos búsquedas (significado, con p_tipo='oficial', y palabras exactas, lex.match_lex_palabras) solo leen tipo='oficial' (probado el 8/11). La función antigua lex.match_lex_documentos no filtra, pero solo la usa server/routes.ts (desarrollo), no api/. Recuperar: UPDATE lex.lex_documentos SET tipo='oficial' WHERE tipo='retirado' AND archivo LIKE 'vigia2:<fuente>:%'. El aviso de aprobación cuenta (sin tocar) los fragmentos antiguos cuyo archivo es la dirección de la página. BOE consolidado: un cambio de fecha solo genera aviso (la norma modificadora llega por el Crawler).
+- El Crawler RAG (6nuJZo6YyKjj9d8L) ya no tiene horario propio ni envía correos: lo llama el coordinador (nodo «Desde el coordinador Vigía 2»; «Sabados 10AM», «Sin Novedades» y «Correo a Info» están desactivados). La zona horaria de la instancia n8n es America/New_York (el Crawler corría a las 10:00 de allí, 16:00 de Madrid); los flujos nuevos llevan Europe/Madrid.
+- Trampas de n8n: en un nodo Code no existe `URL`; httpRequest con returnFullResponse + arraybuffer devuelve el cuerpo roto (se pide como texto y solo se repite en binario si el charset no es UTF-8, como en Euskadi). Prueba por línea de órdenes (envía el correo real): docker exec -e N8N_RUNNERS_BROKER_PORT=5690 n8n-docker-n8n-1 n8n execute --id=VigiaPag2Helsinki01 (necesita un nodo Execute Workflow Trigger).
+- Cada enero: avisar de que hay que apuntar a la resolución de restricciones del año nuevo (fuentes con renovacion_anual; el correo lo recuerda en enero).
+
+## SCT — paso pendiente de la respuesta (solicitud ID 83BLQTVD - 1)
+- Hoy: la lectura antigua del SCT son los nodos «Fuente: SCT» y «Descargar SCT» del Crawler RAG (sale como «Lectura provisional» en el correo). NO se tocan hasta que contesten. En lex.vigia_fuentes hay 6 fuentes SCT en en_espera_permiso: 3 con dirección (autoritzacions-especials-te-ve, professionals-transport/index.html y mesures-especials) y 3 sin dirección (SCT Euromodulares, SCT Exenciones, SCT Catàleg de prescripcions). El robots.txt de transit.gencat.cat dice «Disallow: /» para todos los robots (comprobado el 8/11).
+- Si dicen que SÍ: completar las direcciones que faltan; activarlas en lex.vigia_fuentes (activa=true, estado_permiso='permitida', min_caracteres y palabra_esperada); eliminar del Crawler los nodos antiguos del SCT (Fuente: SCT, Descargar SCT y sus conexiones con Merge, Switch y Merge1); y usar la lectura identificada del coordinador. OJO: el coordinador respeta robots.txt; si su robots.txt sigue con «Disallow: /» para todos, hay que pedirles que añadan un grupo «User-agent: XpertAuth-Vigia», o decidir con José Luis una excepción por escrito (hoy no existe en el código).
+- Si dicen que NO o piden parar: eliminar del Crawler los nodos antiguos del SCT, marcar sus fuentes como denegadas (estado_permiso='denegada', activa=false) y mantener DOGC, BOE y la ficha de trámites de Gencat (tramits.gencat.cat, trámite 6068).
+
 ## Estado actual / Próxima sesión
 (Al cerrar cada sesión, sustituir esta sección entera por la versión al día; el resto de secciones no se tocan.)
 
 ### Próxima sesión, en este orden
-1. Vigía 2 (ver «Vigía 2, decidido el 8/11» más abajo).
+1. Terminar el Vigía 2 (ver «Vigía 2 debe»). Primer sábado real: 14/11/2026, 10:00.
 2. Después: web social (social.xpertauth.com) para ALMA, y GEO (ver «Pendiente (resto)»).
 
 ### Rediseño LEX / NOVA (Fases 1, 2 y 3 HECHAS y en producción)
@@ -106,9 +121,14 @@
 - 10/11: borrar el volcado de la rotación del 3/11 (ver «Pendiente (rotación)»).
 - Hacia el 13/11: quitar el aviso «LEX está en revisión» de la cabecera si no hay fallos graves. El texto fijo bajo la caja de escribir NO se quita nunca.
 
-### Vigía 2 debe
-- Quitar la generación de paralelos (la v2 del Ingestar aún los genera; la decisión del 4/11 era no generarlos).
-- Poner contraseña al Panel, a Aprobar y a Rechazar (hoy son enlaces públicos).
+### Vigía 2 debe (queda por hacer)
+- Bloque 4: reintentos ante 429 en el BOE del Crawler (la lectura de páginas del coordinador ya los tiene).
+- Bloque 5: quitar la generación de paralelos de «Vigía Ingestar v2» (hoy sigue generándolos: cada aprobación mete 8 «paralelo»). No borrar los existentes.
+- Bloque 6: contraseña del Panel (página de acceso con usuario y contraseña, sesión de 30 días) y enlaces firmados con caducidad y página de confirmación en Aprobar y Rechazar (hoy son enlaces públicos y Aprobar actúa al abrir el enlace).
+- Bloque 3: BOPV y BON como fuentes de novedades.
+- Bloque 8: filtro previo de ruido (muestra de ~30 avisos de vigia_historial; esperar el OK de José Luis).
+- Bloque 9: batería de 10 preguntas cada 90 días (esperar el OK de José Luis).
+Hecho el 8/11: bloques 0, 1, 2, 7, 10 (probado: cambio de página, aprobación, segundo cambio con retirada, fuente caída = «Revisión incompleta», dirección prohibida por robots = no se lee) y 11.
 
 ### Vigía 2, decidido el 8/11
 - Sin batería tras cada ingesta; en su lugar, batería cada 90 días con 10 preguntas fijas.
