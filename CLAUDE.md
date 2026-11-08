@@ -83,24 +83,28 @@
 - REVOCADAS el 6/11/2026: OpenAI …OoQA e …IzYA, Anthropic …jwAA. Tokens viejos (…2026) rechazados.
 - Vigía Ingestar v2 (n8n, id VigIngV2Helsinki01, webhook vigia-ingestar-v2): sigue generando fragmentos «paralelo» en cada ingesta (decisión del 4/11: no deberían generarse); se corrige en el Vigía 2. El Panel, Aprobar y Rechazar son enlaces públicos sin contraseña (también para el Vigía 2).
 
+## Portada: LEX y NOVA (reglas permanentes)
+- LEX y NOVA tienen cada una su sección en la portada y el mismo peso. En ordenador deben medir casi lo mismo y caber cada una en una pantalla de 960 px de alto (hoy, desde el título hasta «Cuéntanos tu caso»: LEX 823 px y NOVA 819 px). Si se toca una, medir las dos.
+- Nunca decir que LEX consulta en directo el BOE, la DGT o el SCT: busca en su base normativa.
+- NOVA da ideas: ningún texto puede sugerir que guarda documentos o manda avisos.
+- Las fechas de la lista de NOVA se calculan desde el día de la visita (client/src/lib/fechas.ts); no escribir fechas fijas.
+- Los colores de semáforo (Urgente, Próximo, Al día) son una excepción de paleta solo para esa lista.
+
 ## Estado actual / Próxima sesión
 (Al cerrar cada sesión, sustituir esta sección entera por la versión al día; el resto de secciones no se tocan.)
 
 ### Próxima sesión, en este orden
-1. Verificación en dos pasos con la app Contraseñas de Apple (Vercel, GitHub, Google, OpenAI, Resend). La hace José Luis paso a paso.
-2. Cerrar al exterior los puertos 5433, 6543, 9000 y 3001 de Helsinki, comprobando antes qué los usa. (Ojo: el 3/11 un escaneo TCP completo desde el Mac ya mostraba que desde fuera solo responden 22, 80 y 443, con esos puertos publicados solo en 127.0.0.1; el primer paso es comprobar el estado real.)
-3. Rediseño de LEX y NOVA, Fase 2: «Así trabaja LEX» en la portada (plan y boceto en el chat antes de escribir código). Después, Fase 3: franja de NOVA en la portada.
-4. Vigía 2.
+1. Vigía 2 (ver «Vigía 2, decidido el 8/11» más abajo).
+2. Después: web social (social.xpertauth.com) para ALMA, y GEO (ver «Pendiente (resto)»).
 
-### Rediseño LEX / NOVA (Fase 1 HECHA el 6/11; Fases 2 y 3 sin empezar: plan y boceto en el chat antes de tocar código)
-- Fase 1 (hecha, en producción, main = e31ad0d): páginas /:idioma/lex y /:idioma/nova (client/src/pages/AgentePagina.tsx) con el chat en una sola pantalla (cabecera compacta, aviso «LEX está en revisión» fino, mensajes con scroll dentro del chat, caja siempre visible, ejemplos pulsables que rellenan la caja y desaparecen tras la primera pregunta, indicador de espera con frases que cambian a los 4 y 8 s). Sin sesión: botón «Entra con Google…» y, al volver, se regresa a /lex o /nova. El panel lateral ya no existe; los botones «Pregunta a LEX / NOVA» (abrirAgente en App.tsx) navegan a las páginas. AgentChat.tsx exporta ChatAgente (por defecto), Burbuja, TEXTOS, AGENTE_CONFIG y AvisoLexRevision; AgentModal solo sirve a «Regístrate» y exporta TEXTOS_ACCESO (consentimiento). /lex y /nova están en el sitemap. Retorno de Google permitido por ADDITIONAL_REDIRECT_URLS (https://xpertauth.com/**, www y xpertauth-*-xpertauth-tech.vercel.app/**). Pendiente de José Luis: revisar la bienvenida de los agentes y las traducciones CA/EN/FR de los textos nuevos y de los SEO de /lex y /nova.
-- Fase 2: «LEX en acción» pasa a «Así trabaja LEX» en la portada (abajo). Fase 3: franja de NOVA.
-- (Decidido desde el principio) Página propia para cada agente (/lex y /nova) con el chat a pantalla completa.
-- En la portada, ejemplo real completo sin caja de escribir ni cortes.
-- Animación de entrada única: «LEX ve cómo piensa» (pregunta → fuentes → respuesta → sello de fuentes) y «NOVA: del caos al orden».
-- NOVA con sección propia.
-- Versión ligera en móvil y respeto a «reducir movimiento»; sin 3D ni bucles.
-- José Luis sigue primero en la portada.
+### Pendientes sin orden asignado
+- Verificación en dos pasos con la app Contraseñas de Apple (Vercel, GitHub, Google, OpenAI, Resend). La hace José Luis paso a paso.
+- Cerrar al exterior los puertos 5433, 6543, 9000 y 3001 de Helsinki, comprobando antes qué los usa. (Ojo: el 3/11 un escaneo TCP completo desde el Mac ya mostraba que desde fuera solo responden 22, 80 y 443, con esos puertos publicados solo en 127.0.0.1; el primer paso es comprobar el estado real.)
+
+### Rediseño LEX / NOVA (Fases 1, 2 y 3 HECHAS y en producción)
+- Fase 1 (6/11): páginas /:idioma/lex y /:idioma/nova (client/src/pages/AgentePagina.tsx) con el chat en una sola pantalla (cabecera compacta, aviso «LEX está en revisión» fino, mensajes con scroll dentro del chat, caja siempre visible, ejemplos pulsables que rellenan la caja y desaparecen tras la primera pregunta, indicador de espera con frases que cambian a los 4 y 8 s). Sin sesión: botón «Entra con Google…» y, al volver, se regresa a /lex o /nova. El panel lateral ya no existe; los botones «Pregunta a LEX / NOVA» (abrirAgente en App.tsx) navegan a las páginas. AgentChat.tsx exporta ChatAgente (por defecto), Burbuja, TEXTOS, AGENTE_CONFIG y AvisoLexRevision; AgentModal solo sirve a «Regístrate» y exporta TEXTOS_ACCESO (consentimiento). /lex y /nova están en el sitemap. Retorno de Google permitido por ADDITIONAL_REDIRECT_URLS (https://xpertauth.com/**, www y xpertauth-*-xpertauth-tech.vercel.app/**). Pendiente de José Luis: revisar la bienvenida de los agentes y las traducciones CA/EN/FR de los textos nuevos y de los SEO de /lex y /nova.
+- Fase 2 (8/11): «Así trabaja LEX» (client/src/components/asi-trabaja-lex.tsx, textos lexTrabaja en messages/) sustituye a «LEX en acción»: animación plana de ≈ 11 s, una sola vez al entrar en pantalla; el paso 4 es «De lo denso a lo claro» (bloque de letra diminuta que se aplasta y la frase de la página de LEX palabra a palabra).
+- Fase 3 (8/11): «Del caos al orden» de NOVA (client/src/components/nova-caos-orden.tsx, client/src/lib/fechas.ts, textos novaCaos), justo después de la de LEX. La franja antigua de NOVA (nova-franja.tsx) se eliminó. La frase final de cada una sale de AgentChat.TEXTOS (fraseLex, fraseNova), sin duplicar. Móvil: versión ligera; «reducir movimiento»: estado final directo.
 
 ### Pendientes con fecha
 - 10/11: borrar el volcado de la rotación del 3/11 (ver «Pendiente (rotación)»).
@@ -109,6 +113,14 @@
 ### Vigía 2 debe
 - Quitar la generación de paralelos (la v2 del Ingestar aún los genera; la decisión del 4/11 era no generarlos).
 - Poner contraseña al Panel, a Aprobar y a Rechazar (hoy son enlaces públicos).
+
+### Vigía 2, decidido el 8/11
+- Sin batería tras cada ingesta; en su lugar, batería cada 90 días con 10 preguntas fijas.
+- Las páginas fijas a vigilar las propone el chat para todas las fuentes y José Luis da el OK.
+
+Hecho (8/11):
+- Portada: «Así trabaja LEX» (asi-trabaja-lex.tsx, textos lexTrabaja) y «Del caos al orden» de NOVA (nova-caos-orden.tsx, lib/fechas.ts, textos novaCaos). Franja antigua de NOVA eliminada.
+- Producción en d84c8c4 (main = rebuild/web-nueva). Las ramas asi-trabaja-lex y nova-del-caos quedan como referencia (no borrar).
 
 Hecho (6/11):
 - Chat de LEX y NOVA caído del 3/11 al 6/11 («permission denied for function registrar_consulta»): la causa era SUPABASE_SERVICE_KEY de Vercel con la anon pegada en vez de la service_role (los permisos EXECUTE estaban bien). Corregida por José Luis; LEX funciona en producción desde las 12:21. Se borró la fila de prueba consulta_id 68 de web.consultas_agente. Regla nueva en «Rotación de claves».
