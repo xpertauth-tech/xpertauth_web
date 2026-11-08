@@ -599,18 +599,18 @@
 
 /* NOVA en ordenador: huecos más cortos para que la sección no sea más alta que la de LEX (no afecta a LEX ni al móvil) */
 .nv-sub { max-width: none; }
-@media (min-width: 640px) {
+@media (min-width: 768px) {
   .nv-panel .ax-estado { margin-top: 8px; height: 22px; line-height: 22px; }
   .nv-panel .ax-boton { margin-top: 8px; }
 }
 /* NOVA «Del caos al orden» (nova-caos-orden.tsx). Comparte con LEX el panel, la burbuja, el estado, el sello, la onda,
    el botón y el indicador (clases ax-*). Papeles pálidos → lista oscura. Solo giro plano, sin 3D ni bucles. */
 .nv-escena { position: relative; height: 532px; margin-top: 12px; }
-@media (min-width: 640px) { .nv-escena { height: 266px; margin-top: 4px; } }
+@media (min-width: 768px) { .nv-escena { height: 266px; margin-top: 4px; } }
 .nv-etiqueta { position: absolute; left: 0; top: 0; height: 36px; margin: 0; font-family: "Inter", sans-serif; font-size: 13px; line-height: 18px; color: #4D9FEC; text-align: left; }
 .nv-lista { position: absolute; left: 0; right: 0; top: 44px; }
 /* En ordenador la etiqueta ocupa la línea de la frase de estado (que en ese paso está vacía) */
-@media (min-width: 640px) { .nv-etiqueta { top: -26px; height: 22px; line-height: 22px; } .nv-lista { top: 6px; } }
+@media (min-width: 768px) { .nv-etiqueta { top: -26px; height: 22px; line-height: 22px; } .nv-lista { top: 6px; } }
 .nv-hoja { position: absolute; box-sizing: border-box; border: 1px solid rgba(10,14,26,0.14); overflow: hidden; color: #0A0E1A; will-change: transform; }
 .nv-oculta { opacity: 0; }
 .nv-cae { animation: nvCae .4s cubic-bezier(.5,0,.9,.6) var(--c) backwards; }
@@ -638,10 +638,9 @@
 .nv-enciende-g { animation-delay: calc(.4s + var(--i) * .15s); }
 @keyframes nvEnciende { from { opacity: 0; transform: scale(.85); } to { opacity: 1; transform: none; } }
 /* Escritorio: vencimiento · vehículo · fecha · aviso · gestión (a la derecha del todo) */
-@media (min-width: 640px) { .nv-c-fila { grid-template-columns: minmax(0, 1.6fr) minmax(0, 1.6fr) 68px 78px 86px; column-gap: 6px; padding: 0 10px; font-size: 12px; } }
-@media (min-width: 768px) { .nv-c-fila { grid-template-columns: minmax(0, 1.5fr) minmax(0, 1.5fr) 76px 84px 92px; column-gap: 8px; padding: 0 12px; font-size: 13px; } }
+@media (min-width: 768px) { .nv-c-fila { grid-template-columns: minmax(0, 1.8fr) minmax(0, 1.2fr) 76px 84px 92px; column-gap: 8px; padding: 0 12px; font-size: 13px; } }
 /* Móvil: dos líneas por fila */
-@media (max-width: 639px) {
+@media (max-width: 767px) {
   .nv-c-fila { grid-template-columns: minmax(0, 1fr) auto; grid-template-rows: 1fr 1fr; padding: 6px 10px; row-gap: 2px; font-size: 12px; }
   .nv-venc { grid-area: 1 / 1; font-size: 13px; }
   .nv-aviso { grid-area: 1 / 2; justify-self: end; }
@@ -652,13 +651,13 @@
 }
 /* Frase final y sello */
 .nv-final { position: absolute; left: 0; right: 0; top: 388px; height: 144px; }
-@media (min-width: 640px) { .nv-final { top: 206px; height: 60px; } }
+@media (min-width: 768px) { .nv-final { top: 206px; height: 60px; } }
 .nv-frase { position: absolute; left: 0; right: 0; top: 0; height: 72px; margin: 0; display: flex; flex-wrap: wrap; align-content: center; font-family: "Sora", sans-serif; font-weight: 600; font-size: 18px; line-height: 1.25; color: #FFFFFF; text-align: left; }
-@media (min-width: 640px) { .nv-frase { width: 62%; right: auto; height: 60px; font-size: 20px; } }
+@media (min-width: 768px) { .nv-frase { width: 62%; right: auto; height: 60px; font-size: 20px; } }
 @media (min-width: 768px) { .nv-frase { font-size: 22px; width: calc(100% - 180px); } }
 .nv-pal-in { animation: axPal .35s ease-out calc(1.5s + var(--w) * 110ms) backwards; }
 .nv-sello-w { position: absolute; left: 0; right: 0; bottom: 0; display: flex; justify-content: center; }
-@media (min-width: 640px) { .nv-sello-w { left: auto; right: 4%; top: 0; bottom: 0; align-items: center; } }
+@media (min-width: 768px) { .nv-sello-w { left: auto; right: 4%; top: 0; bottom: 0; align-items: center; } }
 
 /* Indicador de espera del chat: tres puntos que laten suavemente (sin latido si se pide reducir movimiento) */
 .espera-puntos span { width: 6px; height: 6px; border-radius: 9999px; display: block; animation: espera-latido 1.2s ease-in-out infinite; }

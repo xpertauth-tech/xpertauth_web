@@ -68,7 +68,7 @@ const ca = {
     sealTitle: "Ordenat",
     avisos: { urgente: "Urgent", proximo: "Proper", aldia: "Al dia" },
     gestion: { controlado: "Controlat", pendiente: "Pendent" },
-    terms: { itv: "ITV", seguro: "Assegurança", tacografo: "Tacògraf", cap: "Targeta CAP", frenos: "Revisió de frens", medica: "Revisió mèdica", tractora: "Tractora", camion: "Camió", conductor: "Conductor" },
+    terms: { acc: "Permís genèric DGT", itv: "ITV", seguro: "Assegurança", tacografo: "Tacògraf", cap: "Targeta CAP", frenos: "Revisió de frens", medica: "Revisió mèdica", tractora: "Tractora", camion: "Camió", conductor: "Conductor" },
     cta: "Pregunta a NOVA",
     disclaimer: "NOVA és IA i es pot equivocar. Si no ho veus clar:",
   },

@@ -68,7 +68,7 @@ const es = {
     sealTitle: "Ordenado",
     avisos: { urgente: "Urgente", proximo: "Próximo", aldia: "Al día" },
     gestion: { controlado: "Controlado", pendiente: "Pendiente" },
-    terms: { itv: "ITV", seguro: "Seguro", tacografo: "Tacógrafo", cap: "Tarjeta CAP", frenos: "Revisión de frenos", medica: "Revisión médica", tractora: "Tractora", camion: "Camión", conductor: "Conductor" },
+    terms: { acc: "Permiso genérico DGT", itv: "ITV", seguro: "Seguro", tacografo: "Tacógrafo", cap: "Tarjeta CAP", frenos: "Revisión de frenos", medica: "Revisión médica", tractora: "Tractora", camion: "Camión", conductor: "Conductor" },
     cta: "Pregunta a NOVA",
     disclaimer: "NOVA es IA y puede equivocarse. Si no lo ves claro:",
   },

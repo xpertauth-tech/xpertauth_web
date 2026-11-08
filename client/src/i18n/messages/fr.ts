@@ -68,7 +68,7 @@ const fr = {
     sealTitle: "Ordonné",
     avisos: { urgente: "Urgent", proximo: "Proche", aldia: "À jour" },
     gestion: { controlado: "Contrôlé", pendiente: "En attente" },
-    terms: { itv: "Contrôle technique", seguro: "Assurance", tacografo: "Tachygraphe", cap: "Carte CAP", frenos: "Contrôle des freins", medica: "Visite médicale", tractora: "Tracteur", camion: "Camion", conductor: "Conducteur" },
+    terms: { acc: "Autorisation générique DGT", itv: "Contrôle technique", seguro: "Assurance", tacografo: "Tachygraphe", cap: "Carte CAP", frenos: "Contrôle des freins", medica: "Visite médicale", tractora: "Tracteur", camion: "Camion", conductor: "Conducteur" },
     cta: "Demandez à NOVA",
     disclaimer: "NOVA est une IA et peut se tromper. Si ce n'est pas clair pour vous :",
   },

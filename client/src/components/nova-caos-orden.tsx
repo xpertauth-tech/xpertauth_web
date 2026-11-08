@@ -22,7 +22,7 @@ type Fila = {
   gestion: Gestion;
 };
 
-// Orden por fecha. Matrículas, «ACC genérica DGT» y las siglas JEA y CPG no se traducen.
+// Orden por fecha. Matrículas y las siglas JEA, CPG y DGT no se traducen.
 const FILAS: Fila[] = [
   { venc: "itv", veh: { tipo: "tractora", n: "27" }, dias: 5, aviso: "urgente", gestion: "controlado" },
   { venc: "seguro", veh: { matricula: "R-1085-UIE" }, dias: 12, aviso: "urgente", gestion: "pendiente" },
@@ -69,7 +69,7 @@ export default function NovaCaosOrden() {
   // La frase final es la de la página de NOVA (AgentChat.TEXTOS), sin duplicar la traducción.
   const frase: string = TEXTOS[locale === "ca" || locale === "en" || locale === "fr" ? locale : "es"].fraseNova;
 
-  const [movil, setMovil] = useState(() => typeof window !== "undefined" && window.matchMedia("(max-width: 639px)").matches);
+  const [movil, setMovil] = useState(() => typeof window !== "undefined" && window.matchMedia("(max-width: 767px)").matches);
   const [etapa, setEtapa] = useState(saltar ? FINAL : -1);
   const [tecleado, setTecleado] = useState(saltar ? pregunta.length : 0);
   const panelRef = useRef<HTMLDivElement>(null);
@@ -91,7 +91,7 @@ export default function NovaCaosOrden() {
   const altoLista = n * g.fila + (n - 1) * g.hueco;
 
   useEffect(() => {
-    const mq = window.matchMedia("(max-width: 639px)");
+    const mq = window.matchMedia("(max-width: 767px)");
     const f = () => setMovil(mq.matches);
     mq.addEventListener("change", f);
     return () => mq.removeEventListener("change", f);
@@ -140,7 +140,7 @@ export default function NovaCaosOrden() {
     if (v.matricula) return v.matricula;
     return `${m.terms[v.tipo!]} ${v.n}${v.siglas ? ` · ${v.siglas}` : ""}`;
   };
-  const nombreVenc = (f: Fila) => (f.venc === "acc" ? "ACC genérica DGT" : m.terms[f.venc]);
+  const nombreVenc = (f: Fila) => (m.terms[f.venc]);
 
   return (
     <section id="nova-del-caos" className="section-y bg-obsidian border-b border-white/10" data-testid="section-nova-del-caos">

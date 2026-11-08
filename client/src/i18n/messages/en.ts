@@ -68,7 +68,7 @@ const en = {
     sealTitle: "Organised",
     avisos: { urgente: "Urgent", proximo: "Upcoming", aldia: "Up to date" },
     gestion: { controlado: "Handled", pendiente: "Pending" },
-    terms: { itv: "ITV", seguro: "Insurance", tacografo: "Tachograph", cap: "CAP card", frenos: "Brake check", medica: "Medical check", tractora: "Tractor unit", camion: "Truck", conductor: "Driver" },
+    terms: { acc: "Generic DGT permit", itv: "ITV", seguro: "Insurance", tacografo: "Tachograph", cap: "CAP card", frenos: "Brake check", medica: "Medical check", tractora: "Tractor unit", camion: "Truck", conductor: "Driver" },
     cta: "Ask NOVA",
     disclaimer: "NOVA is AI and can make mistakes. If it isn't clear to you:",
   },
