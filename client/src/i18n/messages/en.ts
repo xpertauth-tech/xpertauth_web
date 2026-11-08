@@ -61,7 +61,7 @@ const en = {
   novaCaos: {
     title: "From chaos to order",
     subtitle: "NOVA doesn't do the work for you: it suggests how to organise it with the help of AI, step by step.",
-    question: "How do I organise the expiry dates of my vehicles?",
+    question: "How do I organise the expiry dates of vehicles and drivers?",
     status: ["Thinking about your case…", "Preparing the answer…"],
     tag: "Example of how you could organise it",
     steps: ["You describe your case", "It thinks about your case", "It suggests an order", "It keeps it simple"],

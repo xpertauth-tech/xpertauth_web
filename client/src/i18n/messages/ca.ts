@@ -61,7 +61,7 @@ const ca = {
   novaCaos: {
     title: "Del caos a l'ordre",
     subtitle: "NOVA no fa la feina per tu: et proposa com ordenar-la amb l'ajuda de la IA, pas a pas.",
-    question: "Com organitzo els venciments dels meus vehicles?",
+    question: "Com organitzo els venciments de vehicles i conductors?",
     status: ["Pensant en el teu cas…", "Preparant la resposta…"],
     tag: "Exemple de com podries organitzar-ho",
     steps: ["Expliques el teu cas", "Pensa en el teu cas", "Et proposa un ordre", "Te'l deixa senzill"],

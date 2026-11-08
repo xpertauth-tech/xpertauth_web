@@ -50,7 +50,7 @@ const MODOS = {
 
 // Inicio de cada etapa (ms): 0 pregunta · 1 desorden · 2 orden · 3 sencillo · 4 sello · 5 botón (final)
 const INICIO = [0, 2500, 4800, 7000, 10000, 11000];
-const ESCRIBIR_MS = 2300;
+const ESCRIBIR_MS = 2500; // la pregunta termina de escribirse a los 2,5 s, cuando empieza el desorden
 const FINAL = 5;
 
 // Se reproduce una sola vez por carga de página (aunque se cambie de idioma y se vuelva a montar).

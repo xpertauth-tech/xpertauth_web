@@ -623,7 +623,7 @@
 /* Semáforo del aviso (excepción de paleta solo para esta lista) */
 .nv-b-urgente { background: #C8433A; color: #FFFFFF; }
 .nv-b-proximo { background: #D9951F; color: #2B1C02; }
-.nv-b-aldia { background: #3E9B62; color: #FFFFFF; }
+.nv-b-aldia { background: #2E7D4F; color: #FFFFFF; }
 .nv-gest { display: inline-flex; align-items: center; justify-content: flex-end; gap: 4px; font-size: 12px; color: rgba(244,246,250,0.6); }
 .nv-g-ok { color: rgba(244,246,250,0.85); }
 .nv-aviso { justify-self: start; }
