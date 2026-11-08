@@ -122,8 +122,10 @@
 (Al cerrar cada sesión, sustituir esta sección entera por la versión al día; el resto de secciones no se tocan.)
 
 ### Próxima sesión, en este orden
-1. Terminar el Vigía 2 (ver «Vigía 2 debe»). Primer sábado real: 14/11/2026, 10:00. Cambio de modelo de LEX entre el 10 y el 20/11 (ver «Modelos de IA y fechas límite»).
-2. Después: web social (social.xpertauth.com) para ALMA, y GEO (ver «Pendiente (resto)»).
+1. **Lunes 9/11 por la mañana (Vigía 2):** bloque 3 (BOPV y BON como fuentes de novedades, con aprobación humana; si no hay vía permitida y fiable para alguno, parar y decirlo; comprobar antes su robots.txt), muestra del bloque 8 (unos 30 avisos reales de vigia_historial con la regla propuesta para quitar el ruido; esperar el OK de José Luis antes de aplicarla) y propuesta de 10 preguntas fijas para el bloque 9 (sacadas de los bancos de pruebas de LEX; esperar el OK antes de programarla; decir el coste por ejecución).
+2. **Cambio de modelo de LEX: después del martes 10/11 a las 9:00 y antes del 20/11** (claude-sonnet-4-5-20250929 → claude-sonnet-5-5), con la batería completa antes de publicar (ver «Modelos de IA y fechas límite»). En esa batería revisar también el fallo de Els Prats y los cambios de datos del 8/11, que no pasaron batería.
+3. **Sábado 14/11 a las 10:00 (hora de Madrid): primera ejecución real del Vigía 2**; a las 14:00 el vigilante. Mirar el correo (con Gencat 6068 vigilando solo la fecha ya no debe decir «Revisión incompleta» por esa fuente) y probar de verdad el aviso de fallo (ver «Vigía 2 debe»).
+4. Después: web social (social.xpertauth.com) para ALMA, y GEO (ver «Pendiente (resto)»).
 
 ### Rediseño LEX / NOVA (Fases 1, 2 y 3 HECHAS y en producción)
 - Fase 1 (6/11): páginas /:idioma/lex y /:idioma/nova (client/src/pages/AgentePagina.tsx) con el chat en una sola pantalla (cabecera compacta, aviso «LEX está en revisión» fino, mensajes con scroll dentro del chat, caja siempre visible, ejemplos pulsables que rellenan la caja y desaparecen tras la primera pregunta, indicador de espera con frases que cambian a los 4 y 8 s). Sin sesión: botón «Entra con Google…» y, al volver, se regresa a /lex o /nova. El panel lateral ya no existe; los botones «Pregunta a LEX / NOVA» (abrirAgente en App.tsx) navegan a las páginas. AgentChat.tsx exporta ChatAgente (por defecto), Burbuja, TEXTOS, AGENTE_CONFIG y AvisoLexRevision; AgentModal solo sirve a «Regístrate» y exporta TEXTOS_ACCESO (consentimiento). /lex y /nova están en el sitemap. Retorno de Google permitido por ADDITIONAL_REDIRECT_URLS (https://xpertauth.com/**, www y xpertauth-*-xpertauth-tech.vercel.app/**). Pendiente de José Luis: revisar la bienvenida de los agentes y las traducciones CA/EN/FR de los textos nuevos y de los SEO de /lex y /nova.
@@ -133,13 +135,17 @@
 ### Pendientes con fecha
 - 10/11: borrar el volcado de la rotación del 3/11 (ver «Pendiente (rotación)»).
 - Hacia el 13/11: quitar el aviso «LEX está en revisión» de la cabecera si no hay fallos graves. El texto fijo bajo la caja de escribir NO se quita nunca.
-- Entre el 10/11 y el 20/11: cambiar el modelo de LEX a claude-sonnet-5-5 con batería completa antes de publicar (el actual se retira el 30/11/2026). Ver «Modelos de IA y fechas límite».
+- Después del martes 10/11 a las 9:00 y antes del 20/11: cambiar el modelo de LEX a claude-sonnet-5-5 con batería completa antes de publicar (el actual se retira el 30/11/2026). Ver «Modelos de IA y fechas límite».
+- Lunes 9/11 por la mañana: bloque 3, muestra del bloque 8 y propuesta del bloque 9 (ver «Próxima sesión»).
 - Antes del 14/01/2027: cambiar gpt-4.1-mini en Crawler RAG, Telegram y WhatsApp.
 
 ### Vigía 2 debe (queda por hacer)
 - Bloque 3: BOPV y BON como fuentes de novedades.
 - Bloque 8: filtro previo de ruido (muestra de ~30 avisos de vigia_historial; esperar el OK de José Luis).
 - Bloque 9: batería de 10 preguntas cada 90 días (esperar el OK de José Luis).
+- Probar de verdad «Vigía 2 — Aviso de fallo» (VigiaAviso2Helsinki1): figura inactivo en la lista, lo cual es normal en un flujo de error, y está enlazado como errorWorkflow del coordinador y del vigilante; pero no se ha provocado un fallo real del coordinador para ver llegar el correo. No tocar los nodos «Fuente: SCT» y «Descargar SCT» (siguen idénticos a la copia del 8/11).
+- Limpieza pendiente (decidir): exports temporales en /root/backups de Helsinki (crawler_b4.json, crawler_nuevo.json, e_*.json, ing_actual.json, wf_modelos/, wf_modelos.tgz, wf_estado/); la copia n8n_vigia2_20261108/ se conserva al menos hasta que el Vigía 2 lleve un mes estable. lex.vigia_intentos guarda el registro de accesos al Panel (los de pruebas del 8/11 caducan solos para el freno a los 15 min; se pueden vaciar).
+- Cifras de LEX al cierre del 8/11: 7.913 fragmentos (7.305 oficiales, 415 paralelos, 193 retirados); incluyen los 3 de la transcripción de la página 1 de MOV 2026/08. Vigía 2: 29 fuentes (22 activas, 7 inactivas), 0 pendientes, 179 filas en vigia_historial (23 aprobados, 130 rechazados, 26 error).
 Hecho el 8/11: bloques 0, 1, 2, 4, 6 (Panel con acceso, enlaces firmados y confirmación; probado el 8/11) (el nodo «Descargar BOE» del Crawler ahora es un Code con reintentos de 5/15/45 s; un fallo persistente se anota en lex.vigia_incidencias y el correo lo muestra como «Falló» en BOE; un 404 es un día sin sumario, no un fallo), 5 (Ingestar v2 ya no genera paralelos; probado con una ingesta real: 1 fragmento oficial, 0 paralelos; los 415 antiguos siguen en la base), 7, 10 (probado: cambio de página, aprobación, segundo cambio con retirada, fuente caída = «Revisión incompleta», dirección prohibida por robots = no se lee) y 11.
 
 ### Vigía 2, decidido el 8/11
