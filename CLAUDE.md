@@ -97,10 +97,6 @@
 1. Vigía 2 (ver «Vigía 2, decidido el 8/11» más abajo).
 2. Después: web social (social.xpertauth.com) para ALMA, y GEO (ver «Pendiente (resto)»).
 
-### Pendientes sin orden asignado
-- Verificación en dos pasos con la app Contraseñas de Apple (Vercel, GitHub, Google, OpenAI, Resend). La hace José Luis paso a paso.
-- Cerrar al exterior los puertos 5433, 6543, 9000 y 3001 de Helsinki, comprobando antes qué los usa. (Ojo: el 3/11 un escaneo TCP completo desde el Mac ya mostraba que desde fuera solo responden 22, 80 y 443, con esos puertos publicados solo en 127.0.0.1; el primer paso es comprobar el estado real.)
-
 ### Rediseño LEX / NOVA (Fases 1, 2 y 3 HECHAS y en producción)
 - Fase 1 (6/11): páginas /:idioma/lex y /:idioma/nova (client/src/pages/AgentePagina.tsx) con el chat en una sola pantalla (cabecera compacta, aviso «LEX está en revisión» fino, mensajes con scroll dentro del chat, caja siempre visible, ejemplos pulsables que rellenan la caja y desaparecen tras la primera pregunta, indicador de espera con frases que cambian a los 4 y 8 s). Sin sesión: botón «Entra con Google…» y, al volver, se regresa a /lex o /nova. El panel lateral ya no existe; los botones «Pregunta a LEX / NOVA» (abrirAgente en App.tsx) navegan a las páginas. AgentChat.tsx exporta ChatAgente (por defecto), Burbuja, TEXTOS, AGENTE_CONFIG y AvisoLexRevision; AgentModal solo sirve a «Regístrate» y exporta TEXTOS_ACCESO (consentimiento). /lex y /nova están en el sitemap. Retorno de Google permitido por ADDITIONAL_REDIRECT_URLS (https://xpertauth.com/**, www y xpertauth-*-xpertauth-tech.vercel.app/**). Pendiente de José Luis: revisar la bienvenida de los agentes y las traducciones CA/EN/FR de los textos nuevos y de los SEO de /lex y /nova.
 - Fase 2 (8/11): «Así trabaja LEX» (client/src/components/asi-trabaja-lex.tsx, textos lexTrabaja en messages/) sustituye a «LEX en acción»: animación plana de ≈ 11 s, una sola vez al entrar en pantalla; el paso 4 es «De lo denso a lo claro» (bloque de letra diminuta que se aplasta y la frase de la página de LEX palabra a palabra).
