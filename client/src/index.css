@@ -592,6 +592,67 @@
   .ax-denso-w { display: none; }
 }
 
+/* Indicador de 4 pasos (NOVA): mismas piezas que el de 5 de LEX, con 4 columnas */
+.ax-pasos-4 { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+.ax-pasos-4 .ax-pasos-linea, .ax-pasos-4 .ax-pasos-relleno { left: 12.5%; }
+.ax-pasos-4 .ax-pasos-linea { right: 12.5%; }
+
+/* NOVA «Del caos al orden» (nova-caos-orden.tsx). Comparte con LEX el panel, la burbuja, el estado, el sello, la onda,
+   el botón y el indicador (clases ax-*). Papeles pálidos → lista oscura. Solo giro plano, sin 3D ni bucles. */
+.nv-escena { position: relative; height: 532px; margin-top: 12px; }
+@media (min-width: 640px) { .nv-escena { height: 420px; } }
+.nv-etiqueta { position: absolute; left: 0; top: 0; height: 36px; margin: 0; font-family: "Inter", sans-serif; font-size: 13px; line-height: 18px; color: #4D9FEC; text-align: left; }
+.nv-lista { position: absolute; left: 0; right: 0; top: 44px; }
+@media (min-width: 640px) { .nv-etiqueta { height: 24px; line-height: 24px; } .nv-lista { top: 32px; } }
+.nv-hoja { position: absolute; box-sizing: border-box; border: 1px solid rgba(10,14,26,0.14); overflow: hidden; color: #0A0E1A; will-change: transform; }
+.nv-oculta { opacity: 0; }
+.nv-cae { animation: nvCae .4s cubic-bezier(.5,0,.9,.6) var(--c) backwards; }
+@keyframes nvCae { from { opacity: 0; transform: translateY(-70px) rotate(var(--r)); } to { opacity: 1; transform: rotate(var(--r)); } }
+.nv-orden { transition: left .55s cubic-bezier(.3,.7,.2,1) var(--o), top .55s cubic-bezier(.3,.7,.2,1) var(--o), width .55s cubic-bezier(.3,.7,.2,1) var(--o), height .55s cubic-bezier(.3,.7,.2,1) var(--o), transform .55s cubic-bezier(.3,.7,.2,1) var(--o), background-color .4s ease var(--o), border-color .4s ease var(--o), border-radius .4s ease var(--o); }
+.nv-c-papel { position: absolute; inset: 0; display: flex; flex-direction: column; justify-content: center; gap: 1px; padding: 6px 12px; font-family: "Inter", sans-serif; font-size: 12px; line-height: 1.3; color: rgba(10,14,26,0.75); text-align: left; white-space: nowrap; transition: opacity .25s ease var(--o); }
+.nv-p-venc { font-family: "Sora", sans-serif; font-weight: 600; font-size: 13px; color: #0A0E1A; }
+.nv-c-papel-off { opacity: 0; }
+.nv-c-fila { position: absolute; inset: 0; display: grid; align-items: center; column-gap: 8px; padding: 0 12px; font-family: "Inter", sans-serif; font-size: 13px; line-height: 1.3; color: rgba(244,246,250,0.8); text-align: left; white-space: nowrap; opacity: 0; transition: opacity .3s ease calc(var(--o) + .25s); }
+.nv-c-fila-on { opacity: 1; }
+.nv-c-fila > span { min-width: 0; }
+.nv-venc { font-family: "Sora", sans-serif; font-weight: 600; color: #FFFFFF; }
+.nv-vf { display: contents; }
+.nv-veh, .nv-venc { overflow: hidden; text-overflow: ellipsis; }
+.nv-fecha { color: rgba(244,246,250,0.65); }
+.nv-badge { display: inline-block; padding: 2px 8px; border-radius: 9999px; font-family: "Inter", sans-serif; font-size: 11px; font-weight: 600; line-height: 1.5; }
+/* Semáforo del aviso (excepción de paleta solo para esta lista) */
+.nv-b-urgente { background: #C8433A; color: #FFFFFF; }
+.nv-b-proximo { background: #D9951F; color: #2B1C02; }
+.nv-b-aldia { background: #3E9B62; color: #FFFFFF; }
+.nv-gest { display: inline-flex; align-items: center; justify-content: flex-end; gap: 4px; font-size: 12px; color: rgba(244,246,250,0.6); }
+.nv-g-ok { color: rgba(244,246,250,0.85); }
+.nv-aviso { justify-self: start; }
+.nv-enciende { animation: nvEnciende .3s ease-out calc(.3s + var(--i) * .15s) backwards; }
+.nv-enciende-g { animation-delay: calc(.4s + var(--i) * .15s); }
+@keyframes nvEnciende { from { opacity: 0; transform: scale(.85); } to { opacity: 1; transform: none; } }
+/* Escritorio: vencimiento · vehículo · fecha · aviso · gestión (a la derecha del todo) */
+@media (min-width: 640px) { .nv-c-fila { grid-template-columns: minmax(0, 1.6fr) minmax(0, 1.6fr) 68px 78px 86px; column-gap: 6px; padding: 0 10px; font-size: 12px; } }
+@media (min-width: 768px) { .nv-c-fila { grid-template-columns: minmax(0, 1.5fr) minmax(0, 1.5fr) 76px 84px 92px; column-gap: 8px; padding: 0 12px; font-size: 13px; } }
+/* Móvil: dos líneas por fila */
+@media (max-width: 639px) {
+  .nv-c-fila { grid-template-columns: minmax(0, 1fr) auto; grid-template-rows: 1fr 1fr; padding: 6px 10px; row-gap: 2px; font-size: 12px; }
+  .nv-venc { grid-area: 1 / 1; font-size: 13px; }
+  .nv-aviso { grid-area: 1 / 2; justify-self: end; }
+  .nv-vf { display: flex; gap: 8px; grid-area: 2 / 1; min-width: 0; }
+  .nv-gest { grid-area: 2 / 2; justify-self: end; }
+  .nv-c-papel { font-size: 11px; padding: 6px 8px; }
+  .nv-p-venc { font-size: 12px; }
+}
+/* Frase final y sello */
+.nv-final { position: absolute; left: 0; right: 0; top: 388px; height: 144px; }
+@media (min-width: 640px) { .nv-final { top: 332px; height: 88px; } }
+.nv-frase { position: absolute; left: 0; right: 0; top: 0; height: 72px; margin: 0; display: flex; flex-wrap: wrap; align-content: center; font-family: "Sora", sans-serif; font-weight: 600; font-size: 18px; line-height: 1.25; color: #FFFFFF; text-align: left; }
+@media (min-width: 640px) { .nv-frase { width: 62%; right: auto; height: 88px; font-size: 20px; } }
+@media (min-width: 768px) { .nv-frase { font-size: 22px; } }
+.nv-pal-in { animation: axPal .35s ease-out calc(1.5s + var(--w) * 110ms) backwards; }
+.nv-sello-w { position: absolute; left: 0; right: 0; bottom: 0; display: flex; justify-content: center; }
+@media (min-width: 640px) { .nv-sello-w { left: auto; right: 4%; top: 0; bottom: 0; align-items: center; } }
+
 /* Indicador de espera del chat: tres puntos que laten suavemente (sin latido si se pide reducir movimiento) */
 .espera-puntos span { width: 6px; height: 6px; border-radius: 9999px; display: block; animation: espera-latido 1.2s ease-in-out infinite; }
 .espera-puntos span:nth-child(2) { animation-delay: 0.2s; }

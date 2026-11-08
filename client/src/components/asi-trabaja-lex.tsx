@@ -3,7 +3,6 @@ import { useTranslations } from "@/i18n/context";
 import { useAgent } from "@/App";
 import ContactModal from "./ContactModal";
 import { TEXTOS } from "./AgentChat";
-import NovaFranja from "./nova-franja";
 
 // Sección «Así trabaja LEX»: animación plana que se reproduce una sola vez, cuando entra en pantalla,
 // y se queda en el estado final (≈ 9 s). Con «reducir movimiento» se muestra directamente el estado final.
@@ -272,8 +271,6 @@ export default function AsiTrabajaLex() {
             </button>
           </div>
         </div>
-
-        <NovaFranja />
       </div>
 
       <ContactModal open={contactOpen} onClose={() => setContactOpen(false)} />

@@ -2,6 +2,7 @@ import { useEffect } from "react";
 import Navbar from "@/components/navbar";
 import Hero from "@/components/hero";
 import AsiTrabajaLex from "@/components/asi-trabaja-lex";
+import NovaCaosOrden from "@/components/nova-caos-orden";
 import TeamSection from "@/components/TeamSection";
 import HowItWorks from "@/components/how-it-works";
 import SocialProof from "@/components/social-proof";
@@ -30,6 +31,7 @@ export default function Home() {
         <Hero />
         <TeamSection />
         <AsiTrabajaLex />
+        <NovaCaosOrden />
         <HowItWorks />
         <SocialProof />
         <BlogSection />
