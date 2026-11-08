@@ -110,11 +110,19 @@
 - Si dicen que SÍ: completar las direcciones que faltan; activarlas en lex.vigia_fuentes (activa=true, estado_permiso='permitida', min_caracteres y palabra_esperada); eliminar del Crawler los nodos antiguos del SCT (Fuente: SCT, Descargar SCT y sus conexiones con Merge, Switch y Merge1); y usar la lectura identificada del coordinador. OJO: el coordinador respeta robots.txt; si su robots.txt sigue con «Disallow: /» para todos, hay que pedirles que añadan un grupo «User-agent: XpertAuth-Vigia», o decidir con José Luis una excepción por escrito (hoy no existe en el código).
 - Si dicen que NO o piden parar: eliminar del Crawler los nodos antiguos del SCT, marcar sus fuentes como denegadas (estado_permiso='denegada', activa=false) y mantener DOGC, BOE y la ficha de trámites de Gencat (tramits.gencat.cat, trámite 6068).
 
+## Modelos de IA y fechas límite (anotado el 8/11/2026)
+- **LEX usa claude-sonnet-4-5-20250929, que se retira el 30/11/2026** (api/_lex.ts:61, MODELO_LEX). Cambio previsto a **claude-sonnet-5-5 después del martes 10/11 y antes del 20/11**, con la **batería completa (las 18 preguntas y la de control de 50) antes de publicar**; solo se publica si no empeora (regla de la sección LEX). NO se ha cambiado ningún modelo ni pasado la batería hasta ahora; no hacerlo antes del cambio de modelo (decisión de José Luis, 8/11).
+- **gpt-4.1-mini se apaga el 14/01/2027: sus flujos deben cambiarse antes.** Lo usan: «1. Crawler RAG» (nodo «Message a model», credencial «OpenAi account»), «Conexión Telegram - Temas Genericos» (GuokHCybSSrjriaf, nodo «OpenAI Chat Model») y «Conexión Whatsapp - Temas Genericos» (nwpHHqslUFH0T9Ih, nodo «OpenAI Chat Model»).
+- Inventario (8/11/2026). Web: LEX respuesta claude-sonnet-4-5-20250929 (_lex.ts:61); LEX auxiliar (reformular la pregunta y clasificar sin fragmentos) claude-haiku-4-5-20251001 (_lex.ts:62, 83 y 344); embeddings text-embedding-3-small de OpenAI (_lex.ts:152); NOVA claude-haiku-4-5-20251001 sin RAG (chat.ts:264, temperatura 0,5). n8n del Vigía: Crawler RAG «Evaluar con Anthropic» claude-haiku-4-5-20251001 (cuerpo de la petición; credencial «Anthropic API Key»); Ingestar v2 «Embeddings oficiales» text-embedding-3-small. Fuera del Vigía: flujos de Carla LinkedIn con claude-sonnet-5-5, claude-haiku-4-5-20251001 y gemini-3.1-flash-image-preview; función analizar de Helsinki con claude-sonnet-5. server/routes.ts (solo desarrollo) lleva claude-sonnet-4-5-20251001, un identificador que parece incorrecto.
+- LEX y datos (8/11, sin batería): ingestadas la ISP/1933/2026 (BOE-A-2026-16758) y la ISP/300/2026 consolidada del BOE (BOE-A-2026-6095, act. 01/08/2026); las tres copias antiguas de la ISP/300 (PDF en castellano, PDF en catalán y DOGC 1036479: 183 fragmentos) están en tipo 'retirado' (ids en /root/backups/isp300_retiradas_20261108.txt en Helsinki; recuperar con UPDATE ... SET tipo='oficial'). También retirados 10 fragmentos que eran solo sellos de firma de «Directriz MOV_2026-08 DGT.pdf» (ids 51942-51951; /root/backups/sellos_retirados_20261108.txt); quedan 135 fragmentos oficiales con sellos mezclados con contenido real, sin tocar. Ingestada la página 1 de MOV 2026/08 como transcripción de PDF escaneado (3 fragmentos, archivo «DGT Escrito Directriz MOV 2026-08 (transcripcion de PDF escaneado, solo pagina 1)»; sin anexos). MOV 2026/20 NO se ingesta (no afecta al transporte especial; transcripción en ~/Archivo/vigia2-transcripciones-20261108/). Descartadas: MOV 2025/21, VEH 2026/05, RD 182/2026 (el ROTT consolidado ya lo incorpora) y la Resolución SCT de 29/07/2026 (no localizada; el DOGC 1036479 de ese registro es la ISP/300). Los otros 20 de los 24 «error» del historial sin fragmentos bajo su dirección no se han tocado.
+- Fallo abierto de LEX (8/11): a «salgo de una empresa del vial de Els Prats hacia empresas de la C-31B» responde con la ruta inversa (C-31B > vial de Els Prats). Los fragmentos con la línea A.5 correcta (ids 1610 y 1656) no entran entre los 20 recuperados; entran otros con la C.4. No es un dato antiguo: es recuperación y lectura. Revisar con la batería completa tras el cambio de modelo. Las preguntas sobre el horario de euromodulares (T→D de la ISP/1933) sí dan el dato nuevo.
+- Ingestar v2: el nodo «Descargar» extrae ahora solo el cuerpo de las páginas txt.php del BOE (div textoxslt), sin menús ni pie.
+
 ## Estado actual / Próxima sesión
 (Al cerrar cada sesión, sustituir esta sección entera por la versión al día; el resto de secciones no se tocan.)
 
 ### Próxima sesión, en este orden
-1. Terminar el Vigía 2 (ver «Vigía 2 debe»). Primer sábado real: 14/11/2026, 10:00.
+1. Terminar el Vigía 2 (ver «Vigía 2 debe»). Primer sábado real: 14/11/2026, 10:00. Cambio de modelo de LEX entre el 10 y el 20/11 (ver «Modelos de IA y fechas límite»).
 2. Después: web social (social.xpertauth.com) para ALMA, y GEO (ver «Pendiente (resto)»).
 
 ### Rediseño LEX / NOVA (Fases 1, 2 y 3 HECHAS y en producción)
@@ -125,6 +133,8 @@
 ### Pendientes con fecha
 - 10/11: borrar el volcado de la rotación del 3/11 (ver «Pendiente (rotación)»).
 - Hacia el 13/11: quitar el aviso «LEX está en revisión» de la cabecera si no hay fallos graves. El texto fijo bajo la caja de escribir NO se quita nunca.
+- Entre el 10/11 y el 20/11: cambiar el modelo de LEX a claude-sonnet-5-5 con batería completa antes de publicar (el actual se retira el 30/11/2026). Ver «Modelos de IA y fechas límite».
+- Antes del 14/01/2027: cambiar gpt-4.1-mini en Crawler RAG, Telegram y WhatsApp.
 
 ### Vigía 2 debe (queda por hacer)
 - Bloque 3: BOPV y BON como fuentes de novedades.
