@@ -511,17 +511,75 @@
   .cabecera-pantalla { padding-top: 80px; padding-bottom: 0; }
 }
 
-/* LEX en acción (lex-en-accion.tsx): cursor al escribir, aparición de los mensajes */
-.lex-caret {
-  display: inline-block; width: 1.5px; height: 1em; margin-left: 1px; vertical-align: text-bottom;
-  background: #4D9FEC; animation: lexBlink 1s steps(1) infinite;
+/* Así trabaja LEX (asi-trabaja-lex.tsx): animación plana, una sola vez. Solo colores de la paleta:
+   Obsidian #0A0E1A / #0F1628 / #070A12, XpertBlue #1B4FD8, Arctic #4D9FEC, Ember #E8620A, Mist #F4F6FA. */
+.ax-sub { font-family: "Inter", sans-serif; font-size: 17px; line-height: 1.6; color: rgba(255,255,255,0.7); text-align: center; max-width: 42rem; margin-left: auto; margin-right: auto; }
+.ax-panel { position: relative; overflow: hidden; border-radius: 16px; background: #070A12; border: 1px solid rgba(244,246,250,0.12); padding: 20px 16px 16px; }
+@media (min-width: 640px) { .ax-panel { padding: 28px 28px 24px; } }
+.ax-off { opacity: 0; }
+.ax-burbuja { max-width: 86%; border-radius: 16px; border-bottom-right-radius: 4px; background: #1B4FD8; color: #FFFFFF; padding: 10px 16px; font-family: "Inter", sans-serif; font-size: 16px; line-height: 1.45; transition: opacity .2s ease; }
+.ax-caret { display: inline-block; width: 0; height: 1.1em; vertical-align: text-bottom; position: relative; }
+.ax-caret::after { content: ""; position: absolute; left: 1px; top: 0; bottom: 0; width: 2px; background: #FFFFFF; }
+.ax-estado { height: 24px; margin-top: 16px; font-family: "Inter", sans-serif; font-size: 14px; line-height: 24px; color: #4D9FEC; }
+.ax-fade { display: inline-block; animation: axFade .35s ease-out both; }
+@keyframes axFade { from { opacity: 0; transform: translateY(4px); } to { opacity: 1; transform: none; } }
+/* Escena: altura reservada desde el principio (rejilla de fichas, líneas y sello se colocan dentro) */
+.ax-escena { position: relative; height: 268px; margin-top: 12px; }
+@media (min-width: 640px) { .ax-escena { height: 216px; } }
+.ax-rejilla { position: relative; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 8px; }
+@media (min-width: 640px) { .ax-rejilla { grid-template-columns: repeat(6, minmax(0, 1fr)); } }
+.ax-w { height: 52px; }
+@media (min-width: 640px) { .ax-w { height: 44px; } }
+.ax-w { transition: transform .5s cubic-bezier(.4,0,.2,1) var(--ax-d, 0s), opacity .5s ease var(--ax-d, 0s); }
+.ax-w-fuera { transform: translateY(34px) scale(.6); opacity: 0; }
+.ax-w-sel { position: relative; z-index: 2; transition: transform .8s cubic-bezier(.3,.7,.2,1) .45s; }
+.ax-ficha { display: flex; align-items: center; justify-content: center; width: 100%; height: 100%; border-radius: 8px; border: 1px solid rgba(244,246,250,0.16); background: #0F1628; color: rgba(244,246,250,0.85); font-family: "Sora", sans-serif; font-weight: 600; font-size: 12px; letter-spacing: .04em; transition: border-color .15s ease var(--ax-borde-d, 0s), background-color .3s ease, color .3s ease; }
+.ax-ficha-oculta { opacity: 0; }
+.ax-ficha-in { animation: axIn .28s ease-out calc(var(--i) * 28ms) backwards, axLit .7s ease-out var(--lit) none; }
+@keyframes axIn { from { opacity: 0; transform: scale(.85); } to { opacity: 1; transform: none; } }
+@keyframes axLit { 0%, 100% { border-color: rgba(244,246,250,0.16); background-color: #0F1628; } 25% { border-color: #4D9FEC; background-color: rgba(77,159,236,0.22); color: #FFFFFF; } }
+.ax-ficha-sel { border-color: #4D9FEC; background-color: rgba(77,159,236,0.12); color: #FFFFFF; }
+.ax-ficha-ember { border-color: #E8620A; --ax-borde-d: .2s; }
+.ax-barrido { position: absolute; top: -4px; bottom: -4px; left: 0; width: 2px; border-radius: 2px; background: #4D9FEC; box-shadow: 0 0 14px 2px rgba(77,159,236,0.65); opacity: 0; z-index: 3; pointer-events: none; animation: axBarrido 1.2s linear .8s both; }
+@keyframes axBarrido { 0% { left: 0; opacity: 0; } 4% { opacity: 1; } 96% { opacity: 1; } 100% { left: 100%; opacity: 0; } }
+/* Líneas provisionales de la explicación */
+.ax-zona-lineas { position: absolute; left: 0; right: 0; top: 92px; }
+@media (min-width: 640px) { .ax-zona-lineas { right: auto; width: 58%; top: 100px; } }
+.ax-line { display: block; height: 8px; border-radius: 4px; background: rgba(244,246,250,0.22); transform-origin: left center; }
+.ax-line-draw { animation: axDraw .45s ease-out calc(var(--n) * .25s) backwards; }
+@keyframes axDraw { from { transform: scaleX(0); } to { transform: none; } }
+/* Sello */
+.ax-zona-sello { position: absolute; left: 0; right: 0; top: 176px; display: flex; justify-content: center; }
+@media (min-width: 640px) { .ax-zona-sello { left: auto; right: 4%; top: 92px; } }
+.ax-sello { position: relative; transform: rotate(-6deg); }
+.ax-sello-in { animation: axSello .2s cubic-bezier(.55,0,.9,.4) both; }
+@keyframes axSello { 0% { opacity: 0; transform: rotate(-6deg) scale(3); } 35% { opacity: 1; } 100% { opacity: 1; transform: rotate(-6deg) scale(1); } }
+.ax-sello-caja { display: flex; flex-direction: column; align-items: center; gap: 2px; padding: 10px 18px; border-radius: 10px; border: 2px solid #E8620A; background: #070A12; box-shadow: inset 0 0 0 3px #070A12, inset 0 0 0 4px rgba(232,98,10,0.55); color: #E8620A; font-family: "Sora", sans-serif; text-align: center; }
+.ax-sello-t { font-size: 12px; font-weight: 600; line-height: 1.3; }
+.ax-sello-f { font-size: 16px; font-weight: 700; line-height: 1.3; letter-spacing: .04em; white-space: nowrap; }
+.ax-onda { position: absolute; left: 50%; top: 50%; width: 110px; height: 110px; margin: -55px 0 0 -55px; border-radius: 9999px; border: 2px solid #E8620A; opacity: 0; pointer-events: none; animation: axOnda .7s ease-out .2s none; }
+@keyframes axOnda { from { opacity: .7; transform: scale(.5); } to { opacity: 0; transform: scale(2.6); } }
+/* Botón: aparece al final; su sitio queda reservado */
+.ax-boton { display: flex; justify-content: center; margin-top: 16px; opacity: 0; visibility: hidden; }
+.ax-boton-on { opacity: 1; visibility: visible; transition: opacity .4s ease; }
+/* Indicador de 5 pasos */
+.ax-pasos { position: relative; display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); margin-top: 24px; list-style: none; padding: 0; }
+.ax-pasos-linea, .ax-pasos-relleno { position: absolute; top: 13px; left: 10%; height: 2px; border-radius: 2px; }
+.ax-pasos-linea { right: 10%; background: rgba(244,246,250,0.15); }
+.ax-pasos-relleno { background: #1B4FD8; transition: width .5s ease; }
+.ax-paso { position: relative; z-index: 1; display: flex; flex-direction: column; align-items: center; text-align: center; }
+.ax-paso-n { display: flex; align-items: center; justify-content: center; width: 28px; height: 28px; border-radius: 9999px; border: 2px solid rgba(244,246,250,0.25); background: #0A0E1A; color: rgba(244,246,250,0.6); font-family: "Sora", sans-serif; font-weight: 600; font-size: 13px; transition: background-color .3s ease, border-color .3s ease, color .3s ease; }
+.ax-paso-on .ax-paso-n { background: #1B4FD8; border-color: #1B4FD8; color: #FFFFFF; }
+.ax-paso-t { margin-top: 8px; padding: 0 4px; font-family: "Inter", sans-serif; font-size: 12px; line-height: 1.35; color: rgba(244,246,250,0.6); transition: color .3s ease; }
+@media (min-width: 640px) { .ax-pasos { min-height: 72px; } }
+.ax-paso-on .ax-paso-t { color: #F4F6FA; }
+.ax-paso-movil { height: 20px; margin-top: 10px; text-align: center; font-family: "Inter", sans-serif; font-size: 13px; line-height: 20px; color: #F4F6FA; }
+@media (min-width: 640px) { .ax-paso-movil { display: none; } }
+.ax-aviso { font-family: "Inter", sans-serif; font-size: 14px; line-height: 1.5; color: rgba(255,255,255,0.6); text-align: center; }
+/* Reducir movimiento: estado final directo, sin animaciones ni transiciones */
+@media (prefers-reduced-motion: reduce) {
+  .ax-panel *, .ax-pasos *, .ax-panel, .ax-pasos { animation: none !important; transition: none !important; }
 }
-@keyframes lexBlink { 50% { opacity: 0; } }
-.lex-pop { animation: lexPop .45s ease-out both; }
-@keyframes lexPop { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: none; } }
-@media (prefers-reduced-motion: reduce) { .lex-pop, .lex-caret { animation: none; } }
-.lex-demo-plegado { height: 330px; overflow: hidden; }
-@media (max-width: 767px) { .lex-demo-plegado { height: 440px; } }
 
 /* Indicador de espera del chat: tres puntos que laten suavemente (sin latido si se pide reducir movimiento) */
 .espera-puntos span { width: 6px; height: 6px; border-radius: 9999px; display: block; animation: espera-latido 1.2s ease-in-out infinite; }
