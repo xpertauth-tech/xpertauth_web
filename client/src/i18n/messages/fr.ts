@@ -47,6 +47,17 @@ const fr = {
     ],
     subtitle: "Quatre étapes, sans petits caractères. L'IA répond tout de suite ; une personne, quand il le faut.",
   },
+  lexTrabaja: {
+    title: "Comment travaille LEX",
+    subtitle: "Il ne cherche pas sur internet : il cherche dans sa base réglementaire, constituée de documents issus de sources officielles comme le BOE, la DGT ou le SCT.",
+    question: "Quand faut-il un véhicule pilote ?",
+    status: ["Recherche dans sa base réglementaire…", "Choix de ce qui s'applique à votre cas…", "Préparation de la réponse…"],
+    steps: ["Question", "Cherche dans sa base", "Retient l'essentiel", "Explique clairement", "Cite ses sources"],
+    sealTitle: "Sources citées",
+    cta: "Demandez à LEX",
+    disclaimer: "LEX est une IA et peut se tromper. Si ce n'est pas clair pour vous :",
+    contactBtn: "Racontez-nous votre cas",
+  },
   socialProof: {
     label: "Confiance",
     title: "Des cas que nous avons vécus.",

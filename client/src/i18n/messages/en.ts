@@ -47,6 +47,17 @@ const en = {
     ],
     subtitle: "Four steps, no small print. AI answers instantly; a person, when needed.",
   },
+  lexTrabaja: {
+    title: "How LEX works",
+    subtitle: "It doesn't search the internet: it searches its own regulatory base, built from official sources such as the BOE, the DGT or the SCT.",
+    question: "When is an escort vehicle required?",
+    status: ["Searching its regulatory base…", "Choosing what applies to your case…", "Preparing the answer…"],
+    steps: ["Question", "Searches its base", "Keeps what matters", "Explains it clearly", "Cites its sources"],
+    sealTitle: "Sources cited",
+    cta: "Ask LEX",
+    disclaimer: "LEX is AI and can make mistakes. If it isn't clear to you:",
+    contactBtn: "Tell us about your case",
+  },
   socialProof: {
     label: "Trust",
     title: "Cases we've lived through.",

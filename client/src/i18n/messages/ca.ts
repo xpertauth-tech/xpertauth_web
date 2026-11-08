@@ -47,6 +47,17 @@ const ca = {
     ],
     subtitle: "Quatre passos, sense lletra petita. La IA respon a l'instant; una persona, quan cal.",
   },
+  lexTrabaja: {
+    title: "Així treballa LEX",
+    subtitle: "No busca a internet: busca a la seva base normativa, feta amb documents de fonts oficials com el BOE, la DGT o el SCT.",
+    question: "Quan cal vehicle pilot?",
+    status: ["Cercant a la seva base normativa…", "Triant el que s'aplica al teu cas…", "Preparant la resposta…"],
+    steps: ["Pregunta", "Cerca a la seva base", "Es queda amb el que importa", "Ho explica clar", "Cita les seves fonts"],
+    sealTitle: "Fonts citades",
+    cta: "Pregunta a LEX",
+    disclaimer: "LEX és IA i es pot equivocar. Si no ho veus clar:",
+    contactBtn: "Explica'ns el teu cas",
+  },
   socialProof: {
     label: "Confiança",
     title: "Casos que hem viscut.",
