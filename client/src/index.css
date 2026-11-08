@@ -542,12 +542,22 @@
 .ax-ficha-ember { border-color: #E8620A; --ax-borde-d: .2s; }
 .ax-barrido { position: absolute; top: -4px; bottom: -4px; left: 0; width: 2px; border-radius: 2px; background: #4D9FEC; box-shadow: 0 0 14px 2px rgba(77,159,236,0.65); opacity: 0; z-index: 3; pointer-events: none; animation: axBarrido 1.2s linear .8s both; }
 @keyframes axBarrido { 0% { left: 0; opacity: 0; } 4% { opacity: 1; } 96% { opacity: 1; } 100% { left: 100%; opacity: 0; } }
-/* Líneas provisionales de la explicación */
-.ax-zona-lineas { position: absolute; left: 0; right: 0; top: 92px; }
-@media (min-width: 640px) { .ax-zona-lineas { right: auto; width: 58%; top: 100px; } }
-.ax-line { display: block; height: 8px; border-radius: 4px; background: rgba(244,246,250,0.22); transform-origin: left center; }
-.ax-line-draw { animation: axDraw .45s ease-out calc(var(--n) * .25s) backwards; }
-@keyframes axDraw { from { transform: scaleX(0); } to { transform: none; } }
+/* Paso 4: de lo denso a lo claro (bloque de letra diminuta → frase palabra a palabra) */
+.ax-zona-texto { position: absolute; left: 0; right: 0; top: 90px; height: 80px; }
+@media (min-width: 640px) { .ax-zona-texto { right: auto; width: 62%; top: 94px; height: 112px; } }
+.ax-denso-w { position: absolute; inset: 0; display: flex; align-items: center; }
+.ax-denso { width: 100%; display: flex; flex-direction: column; gap: 4px; transform-origin: center; animation: axAplasta .5s ease-in 1.5s forwards; }
+@media (min-width: 640px) { .ax-denso { gap: 3px; } }
+.ax-fila { display: flex; gap: 3px; height: 3px; animation: axFila .12s ease-out calc(var(--r) * 54ms) backwards; transform-origin: left center; }
+.ax-fila span { height: 3px; flex-basis: 0; border-radius: 2px; background: rgba(244,246,250,0.2); }
+@keyframes axFila { from { opacity: 0; transform: scaleX(.4); } to { opacity: 1; transform: none; } }
+@keyframes axAplasta { to { transform: scaleY(0); opacity: 0; } }
+.ax-frase { position: absolute; inset: 0; display: flex; flex-wrap: wrap; align-content: center; column-gap: 0; font-family: "Sora", sans-serif; font-weight: 600; font-size: 18px; line-height: 1.25; color: #FFFFFF; text-align: left; }
+@media (min-width: 640px) { .ax-frase { font-size: 20px; } }
+@media (min-width: 768px) { .ax-frase { font-size: 22px; } }
+.ax-pal { display: inline-block; white-space: pre; }
+.ax-pal-in { animation: axPal .35s ease-out calc(2s + var(--w) * 110ms) backwards; }
+@keyframes axPal { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
 /* Sello */
 .ax-zona-sello { position: absolute; left: 0; right: 0; top: 176px; display: flex; justify-content: center; }
 @media (min-width: 640px) { .ax-zona-sello { left: auto; right: 4%; top: 92px; } }
@@ -579,6 +589,7 @@
 /* Reducir movimiento: estado final directo, sin animaciones ni transiciones */
 @media (prefers-reduced-motion: reduce) {
   .ax-panel *, .ax-pasos *, .ax-panel, .ax-pasos { animation: none !important; transition: none !important; }
+  .ax-denso-w { display: none; }
 }
 
 /* Indicador de espera del chat: tres puntos que laten suavemente (sin latido si se pide reducir movimiento) */

@@ -2,6 +2,7 @@ import { useCallback, useEffect, useLayoutEffect, useRef, useState } from "react
 import { useTranslations } from "@/i18n/context";
 import { useAgent } from "@/App";
 import ContactModal from "./ContactModal";
+import { TEXTOS } from "./AgentChat";
 import NovaFranja from "./nova-franja";
 
 // Sección «Así trabaja LEX»: animación plana que se reproduce una sola vez, cuando entra en pantalla,
@@ -19,8 +20,8 @@ const COLUMNAS = { escritorio: 6, movil: 4 };
 const CENTRO_FILA_Y = { escritorio: 40, movil: 38 };
 const HUECO = 12;
 
-// Inicio de cada etapa (ms): 0 pregunta · 1 busca · 2 selecciona · 3 explica · 4 sello · 5 botón (final)
-const INICIO = [0, 2000, 4400, 6200, 8000, 9000];
+// Inicio de cada etapa (ms): 0 pregunta · 1 busca · 2 selecciona · 3 explica (denso → frase, ≈ 3,8 s) · 4 sello · 5 botón (final)
+const INICIO = [0, 2000, 4400, 6200, 10000, 11000];
 const ESCRIBIR_MS = 1900;
 const FINAL = 5;
 
@@ -29,18 +30,41 @@ let yaReproducida = false;
 
 type Pos = { tx: number; ty: number; s: number };
 
-// ─── Provisional: las cuatro líneas de «Lo explica claro». Aislado para sustituirlo fácil. ───
-function LineasProvisionales({ etapa }: { etapa: number }) {
-  const anchos = ["100%", "93%", "97%", "58%"];
+// ─── «De lo denso a lo claro» (paso 4): un bloque apretado de letra diminuta ilegible se aplasta y deja
+// paso a la frase de la página de LEX, palabra a palabra. ───
+// Filas de barritas: segmentos de ancho variable, deterministas (sin azar) para que no cambien entre renders.
+const FILAS_DENSAS: { fin: number; seg: number[] }[] = Array.from({ length: 13 }, (_, r) => {
+  let x = 7 + r * 13;
+  const rnd = () => ((x = (x * 73 + 41) % 997) / 997);
+  const n = 6 + Math.floor(rnd() * 4);
+  return { fin: r === 12 ? 46 : 90 + Math.floor(rnd() * 11), seg: Array.from({ length: n }, () => 2 + Math.floor(rnd() * 9)) };
+});
+
+function DeLoDensoAClaro({ etapa, frase, filas, animar }: { etapa: number; frase: string; filas: number; animar: boolean }) {
+  const palabras = frase.split(" ");
+  const visibles = filas >= 13 ? FILAS_DENSAS : [...FILAS_DENSAS.slice(0, filas - 1), FILAS_DENSAS[12]];
   return (
-    <div className={`space-y-3 ${etapa < 3 ? "ax-off" : ""}`} aria-hidden="true">
-      {anchos.map((w, i) => (
-        <span
-          key={i}
-          className={`ax-line ${etapa >= 3 ? "ax-line-draw" : ""}`}
-          style={{ width: w, ["--n" as string]: i } as React.CSSProperties}
-        />
-      ))}
+    <div className="ax-zona-texto">
+      {animar && etapa >= 3 && (
+        <div className="ax-denso-w" aria-hidden="true">
+          <div className="ax-denso">
+            {visibles.map((f, r) => (
+              <div key={r} className="ax-fila" style={{ width: `${f.fin}%`, ["--r" as string]: r } as React.CSSProperties}>
+                {f.seg.map((w, i) => (
+                  <span key={i} style={{ flexGrow: w }} />
+                ))}
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
+      <p className={`ax-frase ${etapa < 3 ? "ax-off" : ""}`}>
+        {palabras.map((w, i) => (
+          <span key={i} className={`ax-pal ${animar && etapa >= 3 ? "ax-pal-in" : ""}`} style={{ ["--w" as string]: i } as React.CSSProperties}>
+            {w}{" "}
+          </span>
+        ))}
+      </p>
     </div>
   );
 }
@@ -54,6 +78,8 @@ export default function AsiTrabajaLex() {
   const reducir = useRef(typeof window !== "undefined" && window.matchMedia("(prefers-reduced-motion: reduce)").matches).current;
   const saltar = reducir || yaReproducida;
   const pregunta: string = m.question;
+  // La frase es la de la página de LEX (AgentChat.TEXTOS), sin duplicar la traducción.
+  const frase: string = TEXTOS[locale === "ca" || locale === "en" || locale === "fr" ? locale : "es"].fraseLex;
 
   const [movil, setMovil] = useState(() => typeof window !== "undefined" && window.matchMedia("(max-width: 639px)").matches);
   const [etapa, setEtapa] = useState(saltar ? FINAL : -1);
@@ -205,9 +231,7 @@ export default function AsiTrabajaLex() {
                   })}
                 </div>
 
-                <div className="ax-zona-lineas">
-                  <LineasProvisionales etapa={etapa} />
-                </div>
+                <DeLoDensoAClaro etapa={etapa} frase={frase} filas={movil ? 8 : 13} animar={!saltar} />
 
                 <div className="ax-zona-sello">
                   <div className={`ax-sello ${sellado ? "ax-sello-in" : "ax-off"}`}>
