@@ -119,6 +119,7 @@ Hecho (8/11):
 - Producción en d84c8c4 (main = rebuild/web-nueva). Las ramas asi-trabaja-lex y nova-del-caos quedan como referencia (no borrar).
 
 Hecho (6/11):
+- 2FA hecha el 6/11.
 - Chat de LEX y NOVA caído del 3/11 al 6/11 («permission denied for function registrar_consulta»): la causa era SUPABASE_SERVICE_KEY de Vercel con la anon pegada en vez de la service_role (los permisos EXECUTE estaban bien). Corregida por José Luis; LEX funciona en producción desde las 12:21. Se borró la fila de prueba consulta_id 68 de web.consultas_agente. Regla nueva en «Rotación de claves».
 - Parser de botones del chat (client/src/components/AgentChat.tsx): acepta [BOTON_DGT:...] además de [BOTON_SCT:...] (5dcb144). El prompt de LEX no se tocó (el modelo a veces escribe BOTON_DGT).
 - F4-A completo (credenciales de n8n): copia de seguridad en /root/backups/n8n_F4A_20261106/ (solo Helsinki); borrados 31 flujos (Paralelos LEX, Beta, Mundial 2026 y de depuración); tokens propios nuevos y aleatorios como credenciales (Proxy SQL y Vigía Ingestar); Crawler RAG, Aprobar, Rechazar y Panel v2 pasados a credenciales; «Vigía Ingestar v2» (VigIngV2Helsinki01, 24 nodos HTTP Request y Code sin claves) sustituye a la v1, que se borró tras una ingesta real de prueba (Orden TMA/324/2020: 10 oficiales + 8 paralelos; se borraron los 18 fragmentos y su fila de historial; lex_documentos quedó en 7.845 fragmentos). Quedan 35 flujos y 17 credenciales, con 0 claves escritas a mano.
