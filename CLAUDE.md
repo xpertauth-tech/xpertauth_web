@@ -81,7 +81,7 @@
 - Resend (cuenta principal «xpertauth», dominio verificado mail.xpertauth.com): n8n («Header Auth para Resend», re_Kf…vvwK, solo envío, creada el 6/11; la usa el nodo «Aviso Email Blog» del flujo Newsletter — Publicación a Borrador Listmonk), supabase-auth (re_a7dn…tGE3, servicio auth de Helsinki) y Vercel xpertauth-web (RESEND_API_KEY, secreta; clave «xpertauth-web-contacto»). La cuenta «xpertauth.tools» se vació el 6/11 (re_Wwy, re_Dcs2 y re_ekeL borradas). Plausible (/opt/plausible/plausible-conf.env) aún lleva una re_Ec8J…EZES inválida como contraseña SMTP: sus correos no salen hasta que se cambie.
 - Tokens propios, aleatorios y solo en credenciales de n8n: «Helsinki SQL Header Auth» (X-Helsinki-Token, …OHAP; webhook del SQL Proxy y todos los flujos que lo llaman) y «Vigía Ingestar Header Auth» (X-Vigia-Token, …sUJY; webhook vigia-ingestar-v2 y flujo Aprobar).
 - REVOCADAS el 6/11/2026: OpenAI …OoQA e …IzYA, Anthropic …jwAA. Tokens viejos (…2026) rechazados.
-- Vigía Ingestar v2 (n8n, id VigIngV2Helsinki01, webhook vigia-ingestar-v2): sigue generando fragmentos «paralelo» en cada ingesta (decisión del 4/11: no deberían generarse); se corrige en el Vigía 2. El Panel, Aprobar y Rechazar son enlaces públicos sin contraseña (también para el Vigía 2).
+- Vigía Ingestar v2 (n8n, id VigIngV2Helsinki01, webhook vigia-ingestar-v2): desde el 8/11 ya no genera fragmentos «paralelo» (solo texto oficial). El Panel, Aprobar y Rechazar son enlaces públicos sin contraseña (también para el Vigía 2).
 
 ## Portada: LEX y NOVA (reglas permanentes)
 - LEX y NOVA tienen cada una su sección en la portada y el mismo peso. En ordenador deben medir casi lo mismo y caber cada una en una pantalla de 960 px de alto (hoy, desde el título hasta «Cuéntanos tu caso»: LEX 823 px y NOVA 819 px). Si se toca una, medir las dos.
@@ -123,12 +123,11 @@
 
 ### Vigía 2 debe (queda por hacer)
 - Bloque 4: reintentos ante 429 en el BOE del Crawler (la lectura de páginas del coordinador ya los tiene).
-- Bloque 5: quitar la generación de paralelos de «Vigía Ingestar v2» (hoy sigue generándolos: cada aprobación mete 8 «paralelo»). No borrar los existentes.
 - Bloque 6: contraseña del Panel (página de acceso con usuario y contraseña, sesión de 30 días) y enlaces firmados con caducidad y página de confirmación en Aprobar y Rechazar (hoy son enlaces públicos y Aprobar actúa al abrir el enlace).
 - Bloque 3: BOPV y BON como fuentes de novedades.
 - Bloque 8: filtro previo de ruido (muestra de ~30 avisos de vigia_historial; esperar el OK de José Luis).
 - Bloque 9: batería de 10 preguntas cada 90 días (esperar el OK de José Luis).
-Hecho el 8/11: bloques 0, 1, 2, 7, 10 (probado: cambio de página, aprobación, segundo cambio con retirada, fuente caída = «Revisión incompleta», dirección prohibida por robots = no se lee) y 11.
+Hecho el 8/11: bloques 0, 1, 2, 5 (Ingestar v2 ya no genera paralelos; probado con una ingesta real: 1 fragmento oficial, 0 paralelos; los 415 antiguos siguen en la base), 7, 10 (probado: cambio de página, aprobación, segundo cambio con retirada, fuente caída = «Revisión incompleta», dirección prohibida por robots = no se lee) y 11.
 
 ### Vigía 2, decidido el 8/11
 - Sin batería tras cada ingesta; en su lugar, batería cada 90 días con 10 preguntas fijas.
