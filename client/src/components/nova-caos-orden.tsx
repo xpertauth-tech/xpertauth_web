@@ -44,7 +44,7 @@ const DESORDEN = [
   { l: 14, t: 12, r: 5 }, { l: 46, t: 34, r: -4 }, { l: 92, t: 30, r: 9 }, { l: 52, t: 88, r: -9 },
 ];
 const MODOS = {
-  escritorio: { fila: 32, hueco: 4, papelAncho: 34, papelAlto: 64 },
+  escritorio: { fila: 28, hueco: 4, papelAncho: 34, papelAlto: 60 },
   movil: { fila: 50, hueco: 6, papelAncho: 54, papelAlto: 64 },
 };
 
@@ -86,7 +86,7 @@ export default function NovaCaosOrden() {
 
   const modo = movil ? "movil" : "escritorio";
   const g = MODOS[modo];
-  const filas = movil ? FILAS_MOVIL : FILAS;
+  const filas = FILAS_MOVIL; // 6 filas también en ordenador, para que la sección no sea más alta que la de LEX
   const n = filas.length;
   const altoLista = n * g.fila + (n - 1) * g.hueco;
 
@@ -146,10 +146,10 @@ export default function NovaCaosOrden() {
     <section id="nova-del-caos" className="section-y bg-obsidian border-b border-white/10" data-testid="section-nova-del-caos">
       <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
         <h2 className="t-h2 text-pure text-center mb-4">{m.title}</h2>
-        <p className="ax-sub head-gap">{m.subtitle}</p>
+        <p className="ax-sub nv-sub head-gap">{m.subtitle}</p>
 
         <div className="max-w-3xl mx-auto">
-          <div ref={panelRef} className="ax-panel" key={locale}>
+          <div ref={panelRef} className="ax-panel nv-panel" key={locale}>
             <p className="sr-only">{m.question} {frase}</p>
             <div aria-hidden="true">
               {/* 1 · Pregunta */}

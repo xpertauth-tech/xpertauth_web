@@ -60,7 +60,7 @@ const es = {
   },
   novaCaos: {
     title: "Del caos al orden",
-    subtitle: "NOVA no hace el trabajo por ti: te propone cómo ordenarlo con ayuda de la IA, paso a paso.",
+    subtitle: "NOVA no hace el trabajo por ti: te propone cómo ordenarlo con ayuda de la IA.",
     question: "¿Cómo organizo los vencimientos de vehículos y conductores?",
     status: ["Pensando en tu caso…", "Preparando la respuesta…"],
     tag: "Ejemplo de cómo podrías organizarlo",

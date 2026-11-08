@@ -60,7 +60,7 @@ const fr = {
   },
   novaCaos: {
     title: "Du chaos à l'ordre",
-    subtitle: "NOVA ne fait pas le travail à votre place : elle vous propose comment l'organiser avec l'aide de l'IA, pas à pas.",
+    subtitle: "NOVA ne fait pas le travail à votre place : elle vous propose comment l'organiser avec l'aide de l'IA.",
     question: "Comment organiser les échéances des véhicules et des conducteurs ?",
     status: ["Réflexion sur votre cas…", "Préparation de la réponse…"],
     tag: "Exemple de la façon dont vous pourriez l'organiser",
