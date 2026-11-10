@@ -37,6 +37,7 @@
   PNG, <300 KB) sí se puede crear, y es la única. Va en client/public,
   no en Supabase Storage.
 - Nunca inventes texto de la web. Si falta, pídelo.
+- Ninguna batería de preguntas (18, 50 o cualquier otra) sin el OK explícito de José Luis en ese momento, aunque venga en un encargo. Si un encargo la pide, pregunta antes de lanzarla. Tras una ingesta no se hacen baterías (decisión del 8/11/2026).
 
 ## Textos legales
 - Textos legales: si un cambio altera lo que la web guarda en el
