@@ -12,7 +12,7 @@ const anthropic = new Anthropic({ apiKey: process.env.ANTHROPIC_API_KEY });
 const openai = new OpenAI({ apiKey: process.env.OPENAI_API_KEY });
 
 // ---------- Modelos ----------
-const MODEL_LEX  = "claude-sonnet-4-5-20251001";
+const MODEL_LEX  = "claude-sonnet-5-5";
 const MODEL_NOVA = "claude-haiku-4-5-20251001";
 
 // ---------- Detección de agente ----------
@@ -416,7 +416,7 @@ export async function registerRoutes(
       });
 
       const respuestaTexto =
-        response.content[0].type === "text" ? response.content[0].text : "";
+        response.content.map((b) => (b.type === "text" ? b.text : "")).join("");
 
       return res.status(200).json({
         agente,

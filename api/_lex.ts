@@ -58,7 +58,7 @@ export interface ResultadoLex {
 
 // ─── Modelos y parámetros de búsqueda ────────────────────────────────────────
 
-const MODELO_LEX = "claude-sonnet-4-5-20250929";
+const MODELO_LEX = "claude-sonnet-5-5"; // Sonnet 5.5 no admite `temperature` (400): no se envía. Piensa en modo adaptativo por defecto.
 const MODELO_AUX = "claude-haiku-4-5-20251001"; // reformular la pregunta y clasificar sin fragmentos
 export const RAG_UMBRAL = 0.55;
 export const RAG_FRAGMENTOS = 20;
@@ -401,7 +401,6 @@ export async function responderLex(
   const respuesta = await c.anthropic.messages.create({
     model: MODELO_LEX,
     max_tokens: 2048,
-    temperature: 0,
     system: [
       { type: "text", text: PROMPT_LEX_FIJO, cache_control: { type: "ephemeral" } },
       { type: "text", text: dinamico },
@@ -409,7 +408,8 @@ export async function responderLex(
     messages: p.mensajes.map((m) => ({ role: m.role, content: m.content })),
   });
 
-  const texto = respuesta.content[0].type === "text" ? respuesta.content[0].text : "";
+  // Con Sonnet 5.5 el primer bloque puede ser de razonamiento (thinking): se toma el texto de los bloques "text".
+  const texto = respuesta.content.map((b) => (b.type === "text" ? b.text : "")).join("");
   const u = respuesta.usage;
   const inputTotal = u.input_tokens + (u.cache_creation_input_tokens ?? 0) + (u.cache_read_input_tokens ?? 0);
 
